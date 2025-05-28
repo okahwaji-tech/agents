@@ -1,36 +1,23 @@
 # agents
-This is a repository for learning LLM and agentic workflows
-
+This is a repository for learning LLM and agentic workflows.
 
 ## Development Setup with uv
 
-Install uv if it is not already available:
 ```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh
+curl -Ls https://astral.sh/uv/install.sh | sh
+uv venv .venv
+source .venv/bin/activate
+uv pip install -e .
 ```
 
-Install project dependencies:
+Run automated checks and clean caches with Poe:
+
 ```bash
-uv pip install -r requirements.txt
+uv run poe check_all
+uv run poe clean_cache
 ```
 
-Add a new package:
-```bash
-uv pip install <package>
-```
 
-Remove a package:
-```bash
-uv pip uninstall <package>
-```
-
-Run development checks:
-```bash
-ruff check .
-ruff format .
-mypy .
-pytest
-```
 ## Study Plan
 
 | Week   | Focus & Objectives                       | Key Resources                                                                                                                  | Hands-On Deliverable                                                                    |

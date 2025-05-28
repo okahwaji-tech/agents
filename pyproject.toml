@@ -1,6 +1,7 @@
 [project]
 name = "agents"
 version = "0.1.0"
+
 requires-python = ">=3.11"
 dependencies = [
     "torch",
@@ -9,6 +10,15 @@ dependencies = [
     "openai",
     "deepseek",
     "google-generativeai",
+    "jupyterlab",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff",
+    "mypy",
+    "pytest",
+    "poethepoet",
     "jupyterlab"
 ]
 
@@ -16,8 +26,27 @@ dependencies = [
 line-length = 88
 
 [tool.mypy]
-python_version = "3.11"
-ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+addopts = "-q"
+
+[tool.poe.tasks.format]
+cmd = "ruff format ."
+
+[tool.poe.tasks.lint]
+cmd = "ruff check ."
+
+[tool.poe.tasks.typecheck]
+cmd = "mypy ."
+
+[tool.poe.tasks.test]
+cmd = "pytest"
+
+[tool.poe.tasks.clean_cache]
+script = "scripts/clean_cache.py"
+
+[tool.poe.tasks.check_all]
+sequence = ["format", "lint", "typecheck", "test"]
 
 [tool.pytest.ini_options]
 addopts = "-q"
