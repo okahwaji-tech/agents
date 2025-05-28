@@ -1,0 +1,26 @@
+[project]
+name = "agents"
+version = "0.1.0"
+requires-python = ">=3.9"
+description = "Repository for learning LLM and agentic workflows"
+readme = "README.md"
+
+# Runtime packages
+# Add packages as needed for development
+# e.g. torch, scikit-learn, langchain
+
+[project.optional-dependencies.dev]
+dev = [
+    "ruff",
+    "mypy",
+    "pytest",
+    "poethepoet",
+]
+
+[tool.poe.tasks]
+format = "ruff format ."
+lint = "ruff check ."
+typecheck = "mypy ."
+test = "pytest"
+check_all.sequence = ["format", "lint", "typecheck", "test"]
+clean_cache = "bash -c 'find . -name __pycache__ -type d -exec rm -r {} +'"
