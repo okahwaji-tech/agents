@@ -112,17 +112,7 @@ Set up your comprehensive development environment and create your first LLM appl
    - Create a function that takes a text prompt and generates completions
    - Implement temperature and top-k sampling to control generation randomness
    - Test with general prompts first: "The future of artificial intelligence is..."
-   - Example code structure:
-   ```python
-   from transformers import GPT2LMHeadModel, GPT2Tokenizer
-   
-   def generate_text(prompt, max_length=100, temperature=0.7):
-       # Load model and tokenizer
-       # Encode prompt
-       # Generate with specified parameters
-       # Decode and return result
-   ```
-
+     
 3. **Healthcare Application Testing** (1 hour):
    - Test the model with medical prompts: "The patient presents with chest pain and..."
    - Document the model's responses to medical terminology
