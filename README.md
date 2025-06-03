@@ -251,19 +251,7 @@ Implement and analyze attention mechanisms with a focus on medical text understa
    - Implement the scaled dot-product attention formula: Attention(Q,K,V) = softmax(QK^T/√d_k)V
    - Start with small matrices (e.g., 4x4) to verify your implementation by hand
    - Test with simple examples where you can predict the attention patterns
-   - Example implementation structure:
-   ```python
-   import torch
-   import torch.nn.functional as F
    
-   def scaled_dot_product_attention(Q, K, V, mask=None):
-       # Calculate attention scores
-       # Apply scaling
-       # Apply softmax
-       # Apply to values
-       # Return attention output and weights
-   ```
-
 2. **Attention Visualization** (1 hour):
    - Create visualizations of attention weights using matplotlib or seaborn
    - Use heatmaps to show which positions attend to which other positions
