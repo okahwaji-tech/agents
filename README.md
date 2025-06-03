@@ -26,27 +26,6 @@ uv run poe clean_cache
 
 **Topic Overview:** This foundational week introduces you to Large Language Models and their revolutionary impact on AI, with particular emphasis on healthcare applications. You'll explore what LLMs are, how they've evolved from early language models to today's sophisticated systems like GPT-4 and Claude, and understand the key concepts in natural language processing that are pertinent to LLMs (tokens, embeddings, probability of text sequences). We'll introduce the main paradigms of machine learning (supervised, unsupervised, and reinforcement learning) to frame where LLM training fits, setting the stage for the RL integration throughout this curriculum. The mathematical foundations will focus on probability theory and information theory concepts that underpin language modeling. Healthcare applications will introduce you to the unique challenges and opportunities of applying LLMs in medical contexts, including regulatory considerations and safety requirements that are crucial for your work at Allergan Data Labs.
 
-#### Progress Status Table - Week 1
-
-| Lesson Name | Subject | Learning Source | Status | Notes |
-|-------------|---------|----------------|--------|-------|
-| Probability Theory Fundamentals | Mathematical Foundations | Textbooks + Practice | ⏳ Pending | Discrete/continuous distributions, Bayes' theorem |
-| Information Theory Basics | Mathematical Foundations | Textbooks + Practice | ⏳ Pending | Entropy, cross-entropy, perplexity |
-| Linear Algebra Review | Mathematical Foundations | Textbooks + Practice | ⏳ Pending | Vector spaces, matrix operations |
-| CS234 Mathematical Foundations | Mathematical Foundations | Stanford CS234 | ⏳ Pending | MDPs, state/action spaces |
-| Understanding Large Language Models | Key Readings | Blog Post | ⏳ Pending | LLM capabilities and history |
-| NLP with Deep Learning Introduction | Key Readings | Stanford CS224n | ⏳ Pending | Language modeling basics |
-| Reinforcement Learning Introduction | Key Readings | Sutton & Barto Ch. 1 | ⏳ Pending | RL vs supervised learning |
-| CS234 Lecture 1 | Key Readings | Stanford CS234 | ⏳ Pending | RL mathematical formulation |
-| Medical Text Processing Fundamentals | Healthcare Applications | Research + Practice | ⏳ Pending | Clinical notes, terminology |
-| Healthcare Data Privacy and Ethics | Healthcare Applications | Research + Practice | ⏳ Pending | HIPAA compliance, ethics |
-| Clinical Decision Support Introduction | Healthcare Applications | Research + Practice | ⏳ Pending | AI-assisted diagnosis |
-| Environment Setup | Hands-On Deliverable | Implementation | ⏳ Pending | Python, PyTorch, Hugging Face |
-| First LLM Program | Hands-On Deliverable | Implementation | ⏳ Pending | GPT-2 implementation |
-| Healthcare Application Testing | Hands-On Deliverable | Implementation | ⏳ Pending | Medical prompts testing |
-| Mathematical Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Perplexity calculations |
-| Documentation and Reflection | Hands-On Deliverable | Implementation | ⏳ Pending | Report writing |
-
 **Mathematical Foundations (3-4 hours):**
 Understanding the mathematical concepts that power language modeling is crucial for mastering LLMs. This week focuses on:
 
@@ -175,34 +154,33 @@ While this week centers on understanding LLMs through supervised learning princi
 
 Understanding these connections now will make the RL integration in later weeks much more intuitive and help you see how modern LLM techniques are fundamentally about learning better decision-making policies.
 
+#### Progress Status Table - Week 1
+
+| Lesson Name | Subject | Learning Source | Status | Notes |
+|-------------|---------|----------------|--------|-------|
+| Probability Theory Fundamentals | Mathematical Foundations | Textbooks + Practice | ⏳ Pending | Discrete/continuous distributions, Bayes' theorem |
+| Information Theory Basics | Mathematical Foundations | Textbooks + Practice | ⏳ Pending | Entropy, cross-entropy, perplexity |
+| Linear Algebra Review | Mathematical Foundations | Textbooks + Practice | ⏳ Pending | Vector spaces, matrix operations |
+| CS234 Mathematical Foundations | Mathematical Foundations | Stanford CS234 | ⏳ Pending | MDPs, state/action spaces |
+| Understanding Large Language Models | Key Readings | Blog Post | ⏳ Pending | LLM capabilities and history |
+| NLP with Deep Learning Introduction | Key Readings | Stanford CS224n | ⏳ Pending | Language modeling basics |
+| Reinforcement Learning Introduction | Key Readings | Sutton & Barto Ch. 1 | ⏳ Pending | RL vs supervised learning |
+| CS234 Lecture 1 | Key Readings | Stanford CS234 | ⏳ Pending | RL mathematical formulation |
+| Medical Text Processing Fundamentals | Healthcare Applications | Research + Practice | ⏳ Pending | Clinical notes, terminology |
+| Healthcare Data Privacy and Ethics | Healthcare Applications | Research + Practice | ⏳ Pending | HIPAA compliance, ethics |
+| Clinical Decision Support Introduction | Healthcare Applications | Research + Practice | ⏳ Pending | AI-assisted diagnosis |
+| Environment Setup | Hands-On Deliverable | Implementation | ⏳ Pending | Python, PyTorch, Hugging Face |
+| First LLM Program | Hands-On Deliverable | Implementation | ⏳ Pending | GPT-2 implementation |
+| Healthcare Application Testing | Hands-On Deliverable | Implementation | ⏳ Pending | Medical prompts testing |
+| Mathematical Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Perplexity calculations |
+| Documentation and Reflection | Hands-On Deliverable | Implementation | ⏳ Pending | Report writing |
+
 ---
 
 
 ### Week 2: Transformer Architecture – Attention Mechanism Deep Dive
 
 **Topic Overview:** This week dives deep into the architecture that underpins virtually all modern LLMs: the Transformer. Building on Week 1's probability foundations, you'll understand why Transformers replaced RNNs for language tasks and how the revolutionary self-attention mechanism works to encode language context. The mathematical focus shifts to the linear algebra and signal processing concepts that power attention mechanisms, while healthcare applications explore how attention patterns can be interpreted for medical AI explainability. You'll study the key components: tokenization, positional embeddings, self-attention layers, feed-forward networks, and output logits. Understanding the forward pass of a Transformer and how attention allows the model to focus on relevant parts of input sequences is crucial for everything that follows. The RL connection introduces the concept of attention as a form of "soft" action selection, where the model learns to attend to relevant information rather than making hard decisions about what to process.
-
-#### Progress Status Table - Week 2
-
-| Lesson Name | Subject | Learning Source | Status | Notes |
-|-------------|---------|----------------|--------|-------|
-| Attention Mathematics Deep Dive | Mathematical Foundations | Theory + Practice | ⏳ Pending | Scaled dot-product attention formula |
-| Softmax Function Properties | Mathematical Foundations | Theory + Practice | ⏳ Pending | Gradient analysis, numerical stability |
-| Positional Encoding Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | Sinusoidal encodings, frequency analysis |
-| Signal Processing Foundations | Mathematical Foundations | Theory + Practice | ⏳ Pending | Fourier transforms, convolution vs attention |
-| Attention Is All You Need Paper | Key Readings | Research Paper | ⏳ Pending | Transformer architecture, multi-head attention |
-| Illustrated Transformers Guide | Key Readings | Blog/Video | ⏳ Pending | Visual explanation of architecture |
-| CS234 Lectures 2-3 | Key Readings | Stanford CS234 | ⏳ Pending | MDP planning, policy evaluation |
-| The Annotated Transformer | Key Readings | Technical Blog | ⏳ Pending | Line-by-line implementation |
-| Medical Entity Recognition with Attention | Healthcare Applications | Research + Practice | ⏳ Pending | Attention visualization for explainability |
-| Clinical Note Analysis | Healthcare Applications | Research + Practice | ⏳ Pending | Attention patterns in medical text |
-| Multi-modal Medical Data | Healthcare Applications | Research + Practice | ⏳ Pending | Cross-attention for text and images |
-| Implement Basic Attention | Hands-On Deliverable | Implementation | ⏳ Pending | From-scratch attention mechanism |
-| Attention Visualization | Hands-On Deliverable | Implementation | ⏳ Pending | Heatmaps and pattern analysis |
-| Medical Text Attention Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | BERT on medical text |
-| Multi-Head Attention Experiment | Hands-On Deliverable | Implementation | ⏳ Pending | Head specialization analysis |
-| Mathematical Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Computational complexity |
-| Healthcare Safety Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Bias and safety evaluation |
 
 **Mathematical Foundations (3-4 hours):**
 
@@ -341,35 +319,34 @@ The attention mechanism has fascinating connections to reinforcement learning co
 
 This perspective on attention as a learned information selection mechanism will be crucial when we cover RLHF in Week 8, where models learn to attend to information that leads to human-preferred outputs, and when we discuss LLM agents in Phase 4, where attention patterns can be viewed as part of the agent's decision-making process.
 
+#### Progress Status Table - Week 2
+
+| Lesson Name | Subject | Learning Source | Status | Notes |
+|-------------|---------|----------------|--------|-------|
+| Attention Mathematics Deep Dive | Mathematical Foundations | Theory + Practice | ⏳ Pending | Scaled dot-product attention formula |
+| Softmax Function Properties | Mathematical Foundations | Theory + Practice | ⏳ Pending | Gradient analysis, numerical stability |
+| Positional Encoding Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | Sinusoidal encodings, frequency analysis |
+| Signal Processing Foundations | Mathematical Foundations | Theory + Practice | ⏳ Pending | Fourier transforms, convolution vs attention |
+| Attention Is All You Need Paper | Key Readings | Research Paper | ⏳ Pending | Transformer architecture, multi-head attention |
+| Illustrated Transformers Guide | Key Readings | Blog/Video | ⏳ Pending | Visual explanation of architecture |
+| CS234 Lectures 2-3 | Key Readings | Stanford CS234 | ⏳ Pending | MDP planning, policy evaluation |
+| The Annotated Transformer | Key Readings | Technical Blog | ⏳ Pending | Line-by-line implementation |
+| Medical Entity Recognition with Attention | Healthcare Applications | Research + Practice | ⏳ Pending | Attention visualization for explainability |
+| Clinical Note Analysis | Healthcare Applications | Research + Practice | ⏳ Pending | Attention patterns in medical text |
+| Multi-modal Medical Data | Healthcare Applications | Research + Practice | ⏳ Pending | Cross-attention for text and images |
+| Implement Basic Attention | Hands-On Deliverable | Implementation | ⏳ Pending | From-scratch attention mechanism |
+| Attention Visualization | Hands-On Deliverable | Implementation | ⏳ Pending | Heatmaps and pattern analysis |
+| Medical Text Attention Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | BERT on medical text |
+| Multi-Head Attention Experiment | Hands-On Deliverable | Implementation | ⏳ Pending | Head specialization analysis |
+| Mathematical Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Computational complexity |
+| Healthcare Safety Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Bias and safety evaluation |
+
 ---
 
 
 ### Week 3: Pre-Training LLMs – Objectives, Data, and Scaling Laws
 
 **Topic Overview:** This week focuses on understanding how LLMs are pre-trained on massive text corpora using self-supervised objectives, building directly on the mathematical foundations from Weeks 1-2. You'll learn about the *language modeling objective* (predicting the next token) and variants like masked language modeling, understanding why this simple objective leads to such powerful capabilities. We'll explore the concept of *emergent abilities* as model size increases, introducing the mathematical framework of scaling laws that predict how model performance improves with scale. The healthcare focus examines medical text corpora and the unique challenges of training on medical data, including privacy considerations and domain-specific evaluation metrics. Mathematical foundations will cover optimization theory, statistical analysis of scaling relationships, and information theory concepts that explain why language modeling works. The RL connection introduces the exploration-exploitation framework that will become crucial for understanding how models balance between likely and diverse outputs during training and inference.
-
-#### Progress Status Table - Week 3
-
-| Lesson Name | Subject | Learning Source | Status | Notes |
-|-------------|---------|----------------|--------|-------|
-| Scaling Laws Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | Power-law relationships, log-linear scaling |
-| Optimization Theory for Large-Scale Training | Mathematical Foundations | Theory + Practice | ⏳ Pending | SGD, Adam, learning rate scheduling |
-| Information Theory and Language Modeling | Mathematical Foundations | Theory + Practice | ⏳ Pending | Cross-entropy loss, perplexity |
-| Statistical Analysis of Emergent Abilities | Mathematical Foundations | Theory + Practice | ⏳ Pending | Phase transitions, threshold effects |
-| GPT-3 Paper (Language Models are Few-Shot Learners) | Key Readings | Research Paper | ⏳ Pending | Training setup and scale |
-| Scaling Laws for Neural Language Models | Key Readings | Research Paper | ⏳ Pending | Mathematical relationships |
-| Emergent Abilities of Large Language Models | Key Readings | Research Paper | ⏳ Pending | Qualitative capabilities emergence |
-| Chinchilla Paper (Training Compute-Optimal LLMs) | Key Readings | Research Paper | ⏳ Pending | Optimal model size vs data |
-| Multi-Armed Bandits | Key Readings | Sutton & Barto Ch. 2 | ⏳ Pending | Exploration vs exploitation |
-| Medical Text Corpora and Data Challenges | Healthcare Applications | Research + Practice | ⏳ Pending | HIPAA compliance, bias issues |
-| Healthcare-Specific Pre-training Objectives | Healthcare Applications | Research + Practice | ⏳ Pending | Medical masked language modeling |
-| Emergent Medical Capabilities | Healthcare Applications | Research + Practice | ⏳ Pending | Medical evaluation benchmarks |
-| Dataset Preparation | Hands-On Deliverable | Implementation | ⏳ Pending | Medical text tokenization |
-| Model Architecture Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Small Transformer from scratch |
-| Training and Scaling Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Multiple model sizes |
-| Medical Capability Evaluation | Hands-On Deliverable | Implementation | ⏳ Pending | Medical knowledge emergence |
-| Scaling Laws Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Power-law curve fitting |
-| Healthcare Safety and Bias Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Medical bias evaluation |
 
 **Mathematical Foundations (3-4 hours):**
 
@@ -517,35 +494,35 @@ Pre-training connects to RL concepts in several important ways that will become 
 
 This perspective on pre-training as a form of policy learning with dense rewards will be essential when we transition to explicit RL techniques for alignment and when we discuss LLM agents that must learn to interact with environments beyond just text prediction.
 
+#### Progress Status Table - Week 3
+
+| Lesson Name | Subject | Learning Source | Status | Notes |
+|-------------|---------|----------------|--------|-------|
+| Scaling Laws Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | Power-law relationships, log-linear scaling |
+| Optimization Theory for Large-Scale Training | Mathematical Foundations | Theory + Practice | ⏳ Pending | SGD, Adam, learning rate scheduling |
+| Information Theory and Language Modeling | Mathematical Foundations | Theory + Practice | ⏳ Pending | Cross-entropy loss, perplexity |
+| Statistical Analysis of Emergent Abilities | Mathematical Foundations | Theory + Practice | ⏳ Pending | Phase transitions, threshold effects |
+| GPT-3 Paper (Language Models are Few-Shot Learners) | Key Readings | Research Paper | ⏳ Pending | Training setup and scale |
+| Scaling Laws for Neural Language Models | Key Readings | Research Paper | ⏳ Pending | Mathematical relationships |
+| Emergent Abilities of Large Language Models | Key Readings | Research Paper | ⏳ Pending | Qualitative capabilities emergence |
+| Chinchilla Paper (Training Compute-Optimal LLMs) | Key Readings | Research Paper | ⏳ Pending | Optimal model size vs data |
+| Multi-Armed Bandits | Key Readings | Sutton & Barto Ch. 2 | ⏳ Pending | Exploration vs exploitation |
+| Medical Text Corpora and Data Challenges | Healthcare Applications | Research + Practice | ⏳ Pending | HIPAA compliance, bias issues |
+| Healthcare-Specific Pre-training Objectives | Healthcare Applications | Research + Practice | ⏳ Pending | Medical masked language modeling |
+| Emergent Medical Capabilities | Healthcare Applications | Research + Practice | ⏳ Pending | Medical evaluation benchmarks |
+| Dataset Preparation | Hands-On Deliverable | Implementation | ⏳ Pending | Medical text tokenization |
+| Model Architecture Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Small Transformer from scratch |
+| Training and Scaling Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Multiple model sizes |
+| Medical Capability Evaluation | Hands-On Deliverable | Implementation | ⏳ Pending | Medical knowledge emergence |
+| Scaling Laws Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Power-law curve fitting |
+| Healthcare Safety and Bias Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Medical bias evaluation |
+
 ---
 
 
 ### Week 4: Embeddings and Tokenization in LLMs
 
 **Topic Overview:** This week explores the fundamental question of how text is represented for input to LLMs, building on the mathematical foundations of vector spaces from previous weeks. You'll study subword tokenization methods (BPE, WordPiece, SentencePiece) and understand why they're essential for LLMs to handle the vast vocabulary of natural language efficiently. The mathematical focus covers vector space mathematics, dimensionality reduction techniques, and metric learning concepts that govern how embeddings capture semantic relationships. Healthcare applications examine the unique challenges of tokenizing medical text, including handling medical abbreviations, drug names, and multilingual medical terminology. You'll understand embedding layers that convert token IDs to vectors, the crucial role of positional embeddings in Transformers, and how LLMs encode semantic information in high-dimensional embedding spaces. The RL connection introduces the concept of representation learning as a form of state abstraction, where embeddings serve as compressed representations of the input space that enable efficient learning and generalization.
-
-#### Progress Status Table - Week 4
-
-| Lesson Name | Subject | Learning Source | Status | Notes |
-|-------------|---------|----------------|--------|-------|
-| Vector Space Mathematics and Embeddings | Mathematical Foundations | Theory + Practice | ⏳ Pending | Distance metrics, vector operations |
-| Positional Encoding Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | Sinusoidal functions, frequency analysis |
-| Dimensionality Reduction and Visualization | Mathematical Foundations | Theory + Practice | ⏳ Pending | PCA, t-SNE, UMAP |
-| Metric Learning and Similarity Functions | Mathematical Foundations | Theory + Practice | ⏳ Pending | Contrastive learning, triplet loss |
-| Word2Vec Paper | Key Readings | Research Paper | ⏳ Pending | Skip-gram model, vector arithmetic |
-| BPE Paper (Neural Machine Translation) | Key Readings | Research Paper | ⏳ Pending | Subword tokenization algorithm |
-| Attention Is All You Need (Positional Encoding) | Key Readings | Research Paper | ⏳ Pending | Sinusoidal positional encodings |
-| The Illustrated Word2vec | Key Readings | Technical Blog | ⏳ Pending | Visual explanation of embeddings |
-| SentencePiece Paper | Key Readings | Research Paper | ⏳ Pending | Language-independent tokenization |
-| Medical Tokenization Challenges | Healthcare Applications | Research + Practice | ⏳ Pending | Medical abbreviations, drug names |
-| Clinical Embeddings and Medical Knowledge | Healthcare Applications | Research + Practice | ⏳ Pending | UMLS integration, medical concepts |
-| Privacy and Security in Medical Embeddings | Healthcare Applications | Research + Practice | ⏳ Pending | De-identification, differential privacy |
-| Tokenization Implementation and Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | BPE from scratch |
-| Medical Embedding Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Medical analogies, clustering |
-| Positional Encoding Experiments | Hands-On Deliverable | Implementation | ⏳ Pending | Sinusoidal encodings implementation |
-| Medical Vocabulary Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Vocabulary distribution, Zipf's law |
-| Embedding Quality Evaluation | Hands-On Deliverable | Implementation | ⏳ Pending | Mathematical metrics, similarity tasks |
-| Healthcare Privacy Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Privacy leak analysis |
 
 **Mathematical Foundations (3-4 hours):**
 
@@ -691,33 +668,35 @@ Embeddings and tokenization connect to RL concepts in several important ways:
 
 This perspective on embeddings as learned state representations that enable effective learning and transfer will be crucial when we discuss LLM agents and alignment techniques that rely on good representations of both text and human preferences.
 
+#### Progress Status Table - Week 4
+
+| Lesson Name | Subject | Learning Source | Status | Notes |
+|-------------|---------|----------------|--------|-------|
+| Vector Space Mathematics and Embeddings | Mathematical Foundations | Theory + Practice | ⏳ Pending | Distance metrics, vector operations |
+| Positional Encoding Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | Sinusoidal functions, frequency analysis |
+| Dimensionality Reduction and Visualization | Mathematical Foundations | Theory + Practice | ⏳ Pending | PCA, t-SNE, UMAP |
+| Metric Learning and Similarity Functions | Mathematical Foundations | Theory + Practice | ⏳ Pending | Contrastive learning, triplet loss |
+| Word2Vec Paper | Key Readings | Research Paper | ⏳ Pending | Skip-gram model, vector arithmetic |
+| BPE Paper (Neural Machine Translation) | Key Readings | Research Paper | ⏳ Pending | Subword tokenization algorithm |
+| Attention Is All You Need (Positional Encoding) | Key Readings | Research Paper | ⏳ Pending | Sinusoidal positional encodings |
+| The Illustrated Word2vec | Key Readings | Technical Blog | ⏳ Pending | Visual explanation of embeddings |
+| SentencePiece Paper | Key Readings | Research Paper | ⏳ Pending | Language-independent tokenization |
+| Medical Tokenization Challenges | Healthcare Applications | Research + Practice | ⏳ Pending | Medical abbreviations, drug names |
+| Clinical Embeddings and Medical Knowledge | Healthcare Applications | Research + Practice | ⏳ Pending | UMLS integration, medical concepts |
+| Privacy and Security in Medical Embeddings | Healthcare Applications | Research + Practice | ⏳ Pending | De-identification, differential privacy |
+| Tokenization Implementation and Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | BPE from scratch |
+| Medical Embedding Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Medical analogies, clustering |
+| Positional Encoding Experiments | Hands-On Deliverable | Implementation | ⏳ Pending | Sinusoidal encodings implementation |
+| Medical Vocabulary Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Vocabulary distribution, Zipf's law |
+| Embedding Quality Evaluation | Hands-On Deliverable | Implementation | ⏳ Pending | Mathematical metrics, similarity tasks |
+| Healthcare Privacy Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Privacy leak analysis |
+
 ---
 
 
 ### Week 5: Using Pre-trained LLMs and Prompt Engineering Basics
 
 **Topic Overview:** Now that you understand the architecture, training, and representation foundations from Weeks 1-4, this week focuses on how to effectively *use* LLMs through the art and science of prompt engineering. You'll learn how to formulate inputs to get desired outputs, covering zero-shot, one-shot, and few-shot prompting with mathematical analysis of why these approaches work. The mathematical foundations explore decision theory, Bayesian inference, and optimization in discrete spaces that underlie effective prompting strategies. Healthcare applications focus on crafting prompts for clinical tasks while maintaining safety and accuracy standards crucial for medical AI. You'll explore best practices for prompts, common failure modes, and the emerging field of prompt optimization. The RL connection introduces the concept of prompting as a form of policy specification, where prompts serve as instructions that guide the model's decision-making process, setting the stage for more sophisticated agent-based approaches in later phases.
-
-#### Progress Status Table - Week 5
-
-| Lesson Name | Subject | Learning Source | Status | Notes |
-|-------------|---------|----------------|--------|-------|
-| Decision Theory and Prompt Optimization | Mathematical Foundations | Theory + Practice | ⏳ Pending | Bayesian inference, discrete optimization |
-| Information Theory in Prompting | Mathematical Foundations | Theory + Practice | ⏳ Pending | Mutual information, prompt efficiency |
-| Bayesian Inference for Few-Shot Learning | Mathematical Foundations | Theory + Practice | ⏳ Pending | Prior beliefs, posterior updates |
-| Optimization in Discrete Spaces | Mathematical Foundations | Theory + Practice | ⏳ Pending | Prompt search, combinatorial optimization |
-| GPT-3 Paper (Few-Shot Learning) | Key Readings | Research Paper | ⏳ Pending | In-context learning capabilities |
-| Chain-of-Thought Prompting Paper | Key Readings | Research Paper | ⏳ Pending | Step-by-step reasoning |
-| Prompt Engineering Guide | Key Readings | Technical Guide | ⏳ Pending | Best practices and techniques |
-| In-Context Learning Theory | Key Readings | Research Paper | ⏳ Pending | Mathematical foundations |
-| Medical Prompt Engineering | Healthcare Applications | Research + Practice | ⏳ Pending | Clinical task prompting |
-| Healthcare Safety in Prompting | Healthcare Applications | Research + Practice | ⏳ Pending | Avoiding harmful medical advice |
-| Clinical Decision Support Prompting | Healthcare Applications | Research + Practice | ⏳ Pending | Diagnostic assistance prompts |
-| Basic Prompt Engineering Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Zero/few-shot prompting |
-| Medical Prompt Development | Hands-On Deliverable | Implementation | ⏳ Pending | Clinical task prompts |
-| Prompt Optimization Experiments | Hands-On Deliverable | Implementation | ⏳ Pending | Systematic prompt improvement |
-| Few-Shot Learning Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | In-context learning evaluation |
-| Healthcare Safety Evaluation | Hands-On Deliverable | Implementation | ⏳ Pending | Medical prompt safety testing |
 
 **Mathematical Foundations (3-4 hours):**
 
@@ -876,33 +855,33 @@ Prompt engineering connects to RL concepts in several fundamental ways that prep
 
 This perspective on prompting as a form of policy guidance and interactive learning will be essential when we cover RLHF in Week 8, where explicit reward signals replace implicit prompt-based guidance, and when we discuss LLM agents in Phase 4, where prompts evolve into more sophisticated forms of agent instruction and goal specification.
 
+#### Progress Status Table - Week 5
+
+| Lesson Name | Subject | Learning Source | Status | Notes |
+|-------------|---------|----------------|--------|-------|
+| Decision Theory and Prompt Optimization | Mathematical Foundations | Theory + Practice | ⏳ Pending | Bayesian inference, discrete optimization |
+| Information Theory in Prompting | Mathematical Foundations | Theory + Practice | ⏳ Pending | Mutual information, prompt efficiency |
+| Bayesian Inference for Few-Shot Learning | Mathematical Foundations | Theory + Practice | ⏳ Pending | Prior beliefs, posterior updates |
+| Optimization in Discrete Spaces | Mathematical Foundations | Theory + Practice | ⏳ Pending | Prompt search, combinatorial optimization |
+| GPT-3 Paper (Few-Shot Learning) | Key Readings | Research Paper | ⏳ Pending | In-context learning capabilities |
+| Chain-of-Thought Prompting Paper | Key Readings | Research Paper | ⏳ Pending | Step-by-step reasoning |
+| Prompt Engineering Guide | Key Readings | Technical Guide | ⏳ Pending | Best practices and techniques |
+| In-Context Learning Theory | Key Readings | Research Paper | ⏳ Pending | Mathematical foundations |
+| Medical Prompt Engineering | Healthcare Applications | Research + Practice | ⏳ Pending | Clinical task prompting |
+| Healthcare Safety in Prompting | Healthcare Applications | Research + Practice | ⏳ Pending | Avoiding harmful medical advice |
+| Clinical Decision Support Prompting | Healthcare Applications | Research + Practice | ⏳ Pending | Diagnostic assistance prompts |
+| Basic Prompt Engineering Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Zero/few-shot prompting |
+| Medical Prompt Development | Hands-On Deliverable | Implementation | ⏳ Pending | Clinical task prompts |
+| Prompt Optimization Experiments | Hands-On Deliverable | Implementation | ⏳ Pending | Systematic prompt improvement |
+| Few-Shot Learning Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | In-context learning evaluation |
+| Healthcare Safety Evaluation | Hands-On Deliverable | Implementation | ⏳ Pending | Medical prompt safety testing |
+
 ---
 
 
 ### Week 6: Constitutional AI and Advanced Safety Techniques
 
 **Topic Overview:** This week introduces cutting-edge safety and alignment techniques that are crucial for deploying LLMs in healthcare and other high-stakes domains. You'll study Constitutional AI (CAI), a revolutionary approach developed by Anthropic that uses AI systems to critique and revise their own outputs according to a set of principles or "constitution." Building on the prompt engineering foundations from Week 5, you'll understand how constitutional principles can be embedded into model behavior through self-critique and revision processes. The mathematical foundations cover game theory, multi-objective optimization, and constraint satisfaction problems that underlie safety-aligned AI systems. Healthcare applications focus on implementing medical ethics and safety constraints in AI systems, ensuring compliance with medical standards and patient safety requirements. You'll explore techniques like self-critique, constitutional training, and harmlessness vs. helpfulness trade-offs. The RL connection introduces the concept of constrained optimization and safe exploration, where agents must learn to achieve objectives while satisfying safety constraints - a crucial foundation for the RLHF techniques you'll study in Week 8.
-
-#### Progress Status Table - Week 6
-
-| Lesson Name | Subject | Learning Source | Status | Notes |
-|-------------|---------|----------------|--------|-------|
-| Game Theory and Multi-Agent Safety | Mathematical Foundations | Theory + Practice | ⏳ Pending | Nash equilibria, cooperative games |
-| Multi-Objective Optimization | Mathematical Foundations | Theory + Practice | ⏳ Pending | Pareto optimality, constraint satisfaction |
-| Constraint Satisfaction Problems | Mathematical Foundations | Theory + Practice | ⏳ Pending | Safety constraints, feasibility |
-| Mechanism Design for AI Safety | Mathematical Foundations | Theory + Practice | ⏳ Pending | Incentive alignment, truthfulness |
-| Constitutional AI Paper | Key Readings | Research Paper | ⏳ Pending | Self-critique and revision |
-| AI Safety via Debate | Key Readings | Research Paper | ⏳ Pending | Adversarial safety evaluation |
-| Alignment Research Overview | Key Readings | Research Survey | ⏳ Pending | Current safety techniques |
-| Safe Exploration in RL | Key Readings | Research Paper | ⏳ Pending | Constrained policy learning |
-| Medical Ethics in AI Systems | Healthcare Applications | Research + Practice | ⏳ Pending | Hippocratic oath for AI |
-| Healthcare Safety Standards | Healthcare Applications | Research + Practice | ⏳ Pending | FDA guidelines, clinical safety |
-| Patient Safety and AI Transparency | Healthcare Applications | Research + Practice | ⏳ Pending | Explainable medical AI |
-| Constitutional AI Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Self-critique systems |
-| Medical Safety Constitution | Hands-On Deliverable | Implementation | ⏳ Pending | Healthcare-specific principles |
-| Safety Evaluation Framework | Hands-On Deliverable | Implementation | ⏳ Pending | Automated safety testing |
-| Multi-Objective Safety Optimization | Hands-On Deliverable | Implementation | ⏳ Pending | Balancing safety and utility |
-| Healthcare Compliance Testing | Hands-On Deliverable | Implementation | ⏳ Pending | Regulatory compliance verification |
 
 **Mathematical Foundations (3-4 hours):**
 
@@ -1052,6 +1031,27 @@ Constitutional AI connects deeply to reinforcement learning concepts, particular
 
 This perspective on Constitutional AI as a form of constrained, multi-objective learning with safety guarantees provides crucial foundation for understanding RLHF in Week 8, where explicit reward signals replace constitutional principles, and for the advanced agent techniques in Phase 4, where safety and alignment become critical for autonomous systems operating in complex environments.
 
+#### Progress Status Table - Week 6
+
+| Lesson Name | Subject | Learning Source | Status | Notes |
+|-------------|---------|----------------|--------|-------|
+| Game Theory and Multi-Agent Safety | Mathematical Foundations | Theory + Practice | ⏳ Pending | Nash equilibria, cooperative games |
+| Multi-Objective Optimization | Mathematical Foundations | Theory + Practice | ⏳ Pending | Pareto optimality, constraint satisfaction |
+| Constraint Satisfaction Problems | Mathematical Foundations | Theory + Practice | ⏳ Pending | Safety constraints, feasibility |
+| Mechanism Design for AI Safety | Mathematical Foundations | Theory + Practice | ⏳ Pending | Incentive alignment, truthfulness |
+| Constitutional AI Paper | Key Readings | Research Paper | ⏳ Pending | Self-critique and revision |
+| AI Safety via Debate | Key Readings | Research Paper | ⏳ Pending | Adversarial safety evaluation |
+| Alignment Research Overview | Key Readings | Research Survey | ⏳ Pending | Current safety techniques |
+| Safe Exploration in RL | Key Readings | Research Paper | ⏳ Pending | Constrained policy learning |
+| Medical Ethics in AI Systems | Healthcare Applications | Research + Practice | ⏳ Pending | Hippocratic oath for AI |
+| Healthcare Safety Standards | Healthcare Applications | Research + Practice | ⏳ Pending | FDA guidelines, clinical safety |
+| Patient Safety and AI Transparency | Healthcare Applications | Research + Practice | ⏳ Pending | Explainable medical AI |
+| Constitutional AI Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Self-critique systems |
+| Medical Safety Constitution | Hands-On Deliverable | Implementation | ⏳ Pending | Healthcare-specific principles |
+| Safety Evaluation Framework | Hands-On Deliverable | Implementation | ⏳ Pending | Automated safety testing |
+| Multi-Objective Safety Optimization | Hands-On Deliverable | Implementation | ⏳ Pending | Balancing safety and utility |
+| Healthcare Compliance Testing | Hands-On Deliverable | Implementation | ⏳ Pending | Regulatory compliance verification |
+
 ---
 
 ## Phase 2: Advanced LLM Techniques (Weeks 7–12)
@@ -1064,27 +1064,6 @@ This perspective on Constitutional AI as a form of constrained, multi-objective 
 ### Week 7: Fine-Tuning LLMs for Specific Tasks
 
 **Topic Overview:** This week marks the transition from understanding pre-trained models to adapting them for specific applications, particularly healthcare use cases. You'll learn the mathematical and practical foundations of fine-tuning, including supervised fine-tuning (SFT), task-specific adaptation, and domain adaptation techniques. Building on the optimization theory from Week 3, you'll understand how to effectively transfer knowledge from general pre-trained models to specialized tasks while avoiding catastrophic forgetting. The mathematical foundations cover transfer learning theory, optimization landscapes in fine-tuning, and regularization techniques that preserve pre-trained knowledge while acquiring new capabilities. Healthcare applications focus on adapting LLMs for clinical tasks like medical summarization, clinical note analysis, and medical question answering while maintaining safety and accuracy standards. You'll explore different fine-tuning strategies, from full model fine-tuning to more efficient approaches, setting the stage for parameter-efficient methods in Week 9. The RL connection introduces the concept of curriculum learning and progressive task difficulty, where models learn complex tasks through carefully designed learning sequences - a principle that becomes crucial for understanding RLHF in Week 8.
-
-#### Progress Status Table - Week 7
-
-| Lesson Name | Subject | Learning Source | Status | Notes |
-|-------------|---------|----------------|--------|-------|
-| Transfer Learning Theory | Mathematical Foundations | Theory + Practice | ⏳ Pending | Domain adaptation, knowledge transfer |
-| Optimization Landscapes in Fine-Tuning | Mathematical Foundations | Theory + Practice | ⏳ Pending | Loss surfaces, local minima |
-| Regularization for Knowledge Preservation | Mathematical Foundations | Theory + Practice | ⏳ Pending | Elastic weight consolidation |
-| Continual Learning Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | Catastrophic forgetting prevention |
-| Fine-Tuning Best Practices | Key Readings | Technical Guide | ⏳ Pending | Learning rates, data preparation |
-| Domain Adaptation for NLP | Key Readings | Research Paper | ⏳ Pending | Cross-domain transfer |
-| Medical Domain Adaptation | Key Readings | Research Paper | ⏳ Pending | Clinical text adaptation |
-| Curriculum Learning Paper | Key Readings | Research Paper | ⏳ Pending | Progressive difficulty |
-| Clinical Task Fine-Tuning | Healthcare Applications | Research + Practice | ⏳ Pending | Medical summarization, QA |
-| Medical Safety in Fine-Tuning | Healthcare Applications | Research + Practice | ⏳ Pending | Preserving safety during adaptation |
-| Healthcare Domain Adaptation | Healthcare Applications | Research + Practice | ⏳ Pending | Clinical vs research text |
-| Medical Fine-Tuning Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Clinical task adaptation |
-| Transfer Learning Experiments | Hands-On Deliverable | Implementation | ⏳ Pending | Knowledge transfer analysis |
-| Catastrophic Forgetting Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Knowledge preservation testing |
-| Medical Domain Evaluation | Hands-On Deliverable | Implementation | ⏳ Pending | Clinical performance metrics |
-| Safety Preservation Testing | Hands-On Deliverable | Implementation | ⏳ Pending | Post-fine-tuning safety |
 
 **Mathematical Foundations (3-4 hours):**
 
@@ -1234,33 +1213,33 @@ Fine-tuning connects to several important RL concepts that become more prominent
 
 This perspective on fine-tuning as policy adaptation with curriculum learning and continual learning considerations provides essential foundation for understanding RLHF in Week 8, where explicit human feedback replaces supervised fine-tuning objectives, and for the advanced agent techniques in Phase 4, where fine-tuned models must adapt to dynamic environments and tasks.
 
+#### Progress Status Table - Week 7
+
+| Lesson Name | Subject | Learning Source | Status | Notes |
+|-------------|---------|----------------|--------|-------|
+| Transfer Learning Theory | Mathematical Foundations | Theory + Practice | ⏳ Pending | Domain adaptation, knowledge transfer |
+| Optimization Landscapes in Fine-Tuning | Mathematical Foundations | Theory + Practice | ⏳ Pending | Loss surfaces, local minima |
+| Regularization for Knowledge Preservation | Mathematical Foundations | Theory + Practice | ⏳ Pending | Elastic weight consolidation |
+| Continual Learning Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | Catastrophic forgetting prevention |
+| Fine-Tuning Best Practices | Key Readings | Technical Guide | ⏳ Pending | Learning rates, data preparation |
+| Domain Adaptation for NLP | Key Readings | Research Paper | ⏳ Pending | Cross-domain transfer |
+| Medical Domain Adaptation | Key Readings | Research Paper | ⏳ Pending | Clinical text adaptation |
+| Curriculum Learning Paper | Key Readings | Research Paper | ⏳ Pending | Progressive difficulty |
+| Clinical Task Fine-Tuning | Healthcare Applications | Research + Practice | ⏳ Pending | Medical summarization, QA |
+| Medical Safety in Fine-Tuning | Healthcare Applications | Research + Practice | ⏳ Pending | Preserving safety during adaptation |
+| Healthcare Domain Adaptation | Healthcare Applications | Research + Practice | ⏳ Pending | Clinical vs research text |
+| Medical Fine-Tuning Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Clinical task adaptation |
+| Transfer Learning Experiments | Hands-On Deliverable | Implementation | ⏳ Pending | Knowledge transfer analysis |
+| Catastrophic Forgetting Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Knowledge preservation testing |
+| Medical Domain Evaluation | Hands-On Deliverable | Implementation | ⏳ Pending | Clinical performance metrics |
+| Safety Preservation Testing | Hands-On Deliverable | Implementation | ⏳ Pending | Post-fine-tuning safety |
+
 ---
 
 
 ### Week 8: Reinforcement Learning from Human Feedback (RLHF) and Direct Preference Optimization (DPO)
 
 **Topic Overview:** This week covers one of the most important breakthroughs in modern LLM development: Reinforcement Learning from Human Feedback (RLHF) and the newer Direct Preference Optimization (DPO) technique. Building on the fine-tuning foundations from Week 7 and the RL mathematical frameworks from previous weeks, you'll understand how human preferences can be used to align LLMs with human values and intentions. You'll study the three-stage RLHF process: supervised fine-tuning, reward model training, and RL optimization using PPO (Proximal Policy Optimization). The mathematical foundations cover policy gradient methods, preference learning theory, and the cutting-edge DPO algorithm that eliminates the need for explicit reward models. Healthcare applications focus on aligning medical AI systems with clinical best practices and patient safety requirements. You'll explore how human feedback can improve medical AI accuracy, safety, and trustworthiness while maintaining clinical utility. This week heavily integrates Stanford CS234 content, particularly the DPO guest lecture and policy gradient methods, providing deep mathematical understanding of how RL techniques enable AI alignment.
-
-#### Progress Status Table - Week 8
-
-| Lesson Name | Subject | Learning Source | Status | Notes |
-|-------------|---------|----------------|--------|-------|
-| Policy Gradient Methods | Mathematical Foundations | Stanford CS234 | ⏳ Pending | REINFORCE, PPO mathematics |
-| Preference Learning Theory | Mathematical Foundations | Theory + Practice | ⏳ Pending | Bradley-Terry model, ranking |
-| Direct Preference Optimization (DPO) | Mathematical Foundations | Stanford CS234 Guest Lecture | ⏳ Pending | DPO algorithm derivation |
-| Reward Model Training | Mathematical Foundations | Theory + Practice | ⏳ Pending | Preference-based rewards |
-| RLHF Paper (InstructGPT) | Key Readings | Research Paper | ⏳ Pending | Three-stage RLHF process |
-| DPO Paper | Key Readings | Research Paper | ⏳ Pending | Direct preference optimization |
-| PPO Algorithm Paper | Key Readings | Research Paper | ⏳ Pending | Proximal policy optimization |
-| Constitutional AI and RLHF | Key Readings | Research Paper | ⏳ Pending | Combining safety techniques |
-| Medical RLHF Applications | Healthcare Applications | Research + Practice | ⏳ Pending | Clinical preference alignment |
-| Healthcare Safety in RLHF | Healthcare Applications | Research + Practice | ⏳ Pending | Medical ethics alignment |
-| Clinical Preference Collection | Healthcare Applications | Research + Practice | ⏳ Pending | Medical expert feedback |
-| RLHF Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Three-stage process |
-| DPO Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Direct optimization |
-| Medical Preference Training | Hands-On Deliverable | Implementation | ⏳ Pending | Healthcare-specific RLHF |
-| Reward Model Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Preference model evaluation |
-| Safety Alignment Evaluation | Hands-On Deliverable | Implementation | ⏳ Pending | Medical safety metrics |
 
 **Mathematical Foundations (4 hours):**
 
@@ -1410,33 +1389,33 @@ This week represents the culmination of RL integration in LLM training, connecti
 
 The mathematical frameworks and practical techniques learned this week provide the foundation for understanding how RL principles can be applied to align AI systems with human values, a crucial capability for deploying LLMs in high-stakes domains like healthcare. This knowledge will be essential for the advanced agent techniques in Phase 4, where aligned models must operate autonomously in complex environments.
 
+#### Progress Status Table - Week 8
+
+| Lesson Name | Subject | Learning Source | Status | Notes |
+|-------------|---------|----------------|--------|-------|
+| Policy Gradient Methods | Mathematical Foundations | Stanford CS234 | ⏳ Pending | REINFORCE, PPO mathematics |
+| Preference Learning Theory | Mathematical Foundations | Theory + Practice | ⏳ Pending | Bradley-Terry model, ranking |
+| Direct Preference Optimization (DPO) | Mathematical Foundations | Stanford CS234 Guest Lecture | ⏳ Pending | DPO algorithm derivation |
+| Reward Model Training | Mathematical Foundations | Theory + Practice | ⏳ Pending | Preference-based rewards |
+| RLHF Paper (InstructGPT) | Key Readings | Research Paper | ⏳ Pending | Three-stage RLHF process |
+| DPO Paper | Key Readings | Research Paper | ⏳ Pending | Direct preference optimization |
+| PPO Algorithm Paper | Key Readings | Research Paper | ⏳ Pending | Proximal policy optimization |
+| Constitutional AI and RLHF | Key Readings | Research Paper | ⏳ Pending | Combining safety techniques |
+| Medical RLHF Applications | Healthcare Applications | Research + Practice | ⏳ Pending | Clinical preference alignment |
+| Healthcare Safety in RLHF | Healthcare Applications | Research + Practice | ⏳ Pending | Medical ethics alignment |
+| Clinical Preference Collection | Healthcare Applications | Research + Practice | ⏳ Pending | Medical expert feedback |
+| RLHF Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Three-stage process |
+| DPO Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Direct optimization |
+| Medical Preference Training | Hands-On Deliverable | Implementation | ⏳ Pending | Healthcare-specific RLHF |
+| Reward Model Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Preference model evaluation |
+| Safety Alignment Evaluation | Hands-On Deliverable | Implementation | ⏳ Pending | Medical safety metrics |
+
 ---
 
 
 ### Week 9: Parameter-Efficient Fine-Tuning and Mixture of Experts (MoE)
 
 **Topic Overview:** This week explores cutting-edge techniques for efficiently adapting large language models without the computational overhead of full fine-tuning. You'll study parameter-efficient fine-tuning (PEFT) methods including LoRA (Low-Rank Adaptation), adapters, prefix tuning, and prompt tuning, understanding the mathematical principles that make these approaches effective. Building on the linear algebra foundations from earlier weeks, you'll understand how low-rank matrix decompositions can capture task-specific adaptations with minimal parameters. The week also introduces Mixture of Experts (MoE) architectures, a revolutionary approach to scaling model capacity while maintaining computational efficiency. Mathematical foundations cover matrix factorization theory, sparse expert routing, and load balancing algorithms. Healthcare applications focus on efficiently adapting models for multiple medical specialties and tasks while maintaining computational feasibility for clinical deployment. The RL connection explores how parameter-efficient methods relate to modular policy learning and how expert routing can be viewed as a form of learned attention or action selection.
-
-#### Progress Status Table - Week 9
-
-| Lesson Name | Subject | Learning Source | Status | Notes |
-|-------------|---------|----------------|--------|-------|
-| Low-Rank Matrix Decomposition | Mathematical Foundations | Theory + Practice | ⏳ Pending | SVD, matrix factorization |
-| Sparse Expert Routing | Mathematical Foundations | Theory + Practice | ⏳ Pending | Gating networks, load balancing |
-| Parameter Efficiency Theory | Mathematical Foundations | Theory + Practice | ⏳ Pending | Intrinsic dimensionality |
-| Modular Learning Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | Compositional adaptation |
-| LoRA Paper | Key Readings | Research Paper | ⏳ Pending | Low-rank adaptation |
-| Mixture of Experts Paper | Key Readings | Research Paper | ⏳ Pending | Sparse expert models |
-| Adapters Paper | Key Readings | Research Paper | ⏳ Pending | Modular fine-tuning |
-| Prefix Tuning Paper | Key Readings | Research Paper | ⏳ Pending | Prompt-based adaptation |
-| Medical Specialty Adaptation | Healthcare Applications | Research + Practice | ⏳ Pending | Multi-specialty models |
-| Efficient Clinical Deployment | Healthcare Applications | Research + Practice | ⏳ Pending | Resource-constrained environments |
-| Medical Expert Routing | Healthcare Applications | Research + Practice | ⏳ Pending | Specialty-specific experts |
-| LoRA Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Low-rank fine-tuning |
-| MoE Architecture Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Expert routing system |
-| Medical Specialty Experiments | Hands-On Deliverable | Implementation | ⏳ Pending | Multi-domain adaptation |
-| Parameter Efficiency Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Efficiency vs performance |
-| Clinical Deployment Testing | Hands-On Deliverable | Implementation | ⏳ Pending | Resource usage evaluation |
 
 **Mathematical Foundations (3-4 hours):**
 
@@ -1586,33 +1565,33 @@ Parameter-efficient methods and MoE architectures connect to several important R
 
 Understanding these connections prepares you for advanced agent architectures in Phase 4, where modular and efficient learning becomes crucial for agents operating in complex, multi-task environments. The mathematical frameworks for parameter efficiency and expert routing will be essential for building scalable and adaptable AI agents.
 
+#### Progress Status Table - Week 9
+
+| Lesson Name | Subject | Learning Source | Status | Notes |
+|-------------|---------|----------------|--------|-------|
+| Low-Rank Matrix Decomposition | Mathematical Foundations | Theory + Practice | ⏳ Pending | SVD, matrix factorization |
+| Sparse Expert Routing | Mathematical Foundations | Theory + Practice | ⏳ Pending | Gating networks, load balancing |
+| Parameter Efficiency Theory | Mathematical Foundations | Theory + Practice | ⏳ Pending | Intrinsic dimensionality |
+| Modular Learning Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | Compositional adaptation |
+| LoRA Paper | Key Readings | Research Paper | ⏳ Pending | Low-rank adaptation |
+| Mixture of Experts Paper | Key Readings | Research Paper | ⏳ Pending | Sparse expert models |
+| Adapters Paper | Key Readings | Research Paper | ⏳ Pending | Modular fine-tuning |
+| Prefix Tuning Paper | Key Readings | Research Paper | ⏳ Pending | Prompt-based adaptation |
+| Medical Specialty Adaptation | Healthcare Applications | Research + Practice | ⏳ Pending | Multi-specialty models |
+| Efficient Clinical Deployment | Healthcare Applications | Research + Practice | ⏳ Pending | Resource-constrained environments |
+| Medical Expert Routing | Healthcare Applications | Research + Practice | ⏳ Pending | Specialty-specific experts |
+| LoRA Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Low-rank fine-tuning |
+| MoE Architecture Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Expert routing system |
+| Medical Specialty Experiments | Hands-On Deliverable | Implementation | ⏳ Pending | Multi-domain adaptation |
+| Parameter Efficiency Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Efficiency vs performance |
+| Clinical Deployment Testing | Hands-On Deliverable | Implementation | ⏳ Pending | Resource usage evaluation |
+
 ---
 
 
 ### Week 10: Advanced Training Techniques and Data-Efficient Learning
 
 **Topic Overview:** This week explores sophisticated training methodologies that go beyond standard supervised learning, focusing on techniques that maximize learning efficiency and model performance with limited data. You'll study advanced optimization techniques, data augmentation strategies, active learning, and meta-learning approaches that are particularly valuable for healthcare AI where labeled data is often scarce and expensive. Building on the optimization foundations from previous weeks, you'll understand curriculum learning, self-supervised learning objectives, and bandit-based approaches to hyperparameter optimization. The mathematical foundations cover online learning theory, bandit algorithms, and meta-learning frameworks that enable rapid adaptation to new tasks. Healthcare applications focus on learning from limited clinical data, handling data imbalance in medical datasets, and efficiently adapting to new medical domains. The RL connection integrates Stanford CS234's bandit algorithms (Lectures 11-13) to understand how exploration-exploitation principles can optimize training procedures and hyperparameter selection, providing a bridge to the advanced reasoning techniques in later weeks.
-
-#### Progress Status Table - Week 10
-
-| Lesson Name | Subject | Learning Source | Status | Notes |
-|-------------|---------|----------------|--------|-------|
-| Online Learning Theory | Mathematical Foundations | Stanford CS234 | ⏳ Pending | Regret bounds, convergence |
-| Bandit Algorithms | Mathematical Foundations | Stanford CS234 Lectures 11-13 | ⏳ Pending | UCB, Thompson sampling |
-| Meta-Learning Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | MAML, gradient-based meta-learning |
-| Active Learning Theory | Mathematical Foundations | Theory + Practice | ⏳ Pending | Uncertainty sampling, query strategies |
-| Curriculum Learning Paper | Key Readings | Research Paper | ⏳ Pending | Progressive difficulty |
-| Meta-Learning Survey | Key Readings | Research Survey | ⏳ Pending | Few-shot learning approaches |
-| Active Learning for NLP | Key Readings | Research Paper | ⏳ Pending | Text-specific strategies |
-| Data Augmentation Techniques | Key Readings | Research Paper | ⏳ Pending | Text augmentation methods |
-| Medical Data Scarcity | Healthcare Applications | Research + Practice | ⏳ Pending | Limited clinical data |
-| Healthcare Data Imbalance | Healthcare Applications | Research + Practice | ⏳ Pending | Rare disease modeling |
-| Clinical Active Learning | Healthcare Applications | Research + Practice | ⏳ Pending | Expert annotation strategies |
-| Bandit-Based Hyperparameter Optimization | Hands-On Deliverable | Implementation | ⏳ Pending | Automated tuning |
-| Medical Meta-Learning | Hands-On Deliverable | Implementation | ⏳ Pending | Few-shot medical tasks |
-| Active Learning for Medical Text | Hands-On Deliverable | Implementation | ⏳ Pending | Efficient annotation |
-| Data Augmentation Experiments | Hands-On Deliverable | Implementation | ⏳ Pending | Medical text augmentation |
-| Curriculum Learning Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Progressive medical training |
 
 **Mathematical Foundations (3-4 hours):**
 
@@ -1762,33 +1741,33 @@ This week heavily integrates RL concepts, particularly from the bandit literatur
 
 These connections demonstrate how RL principles extend beyond traditional agent-environment interactions to optimize learning procedures themselves. This perspective will be crucial for understanding advanced reasoning techniques in Phase 3 and agent architectures in Phase 4, where adaptive learning and efficient exploration become essential for complex problem-solving.
 
+#### Progress Status Table - Week 10
+
+| Lesson Name | Subject | Learning Source | Status | Notes |
+|-------------|---------|----------------|--------|-------|
+| Online Learning Theory | Mathematical Foundations | Stanford CS234 | ⏳ Pending | Regret bounds, convergence |
+| Bandit Algorithms | Mathematical Foundations | Stanford CS234 Lectures 11-13 | ⏳ Pending | UCB, Thompson sampling |
+| Meta-Learning Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | MAML, gradient-based meta-learning |
+| Active Learning Theory | Mathematical Foundations | Theory + Practice | ⏳ Pending | Uncertainty sampling, query strategies |
+| Curriculum Learning Paper | Key Readings | Research Paper | ⏳ Pending | Progressive difficulty |
+| Meta-Learning Survey | Key Readings | Research Survey | ⏳ Pending | Few-shot learning approaches |
+| Active Learning for NLP | Key Readings | Research Paper | ⏳ Pending | Text-specific strategies |
+| Data Augmentation Techniques | Key Readings | Research Paper | ⏳ Pending | Text augmentation methods |
+| Medical Data Scarcity | Healthcare Applications | Research + Practice | ⏳ Pending | Limited clinical data |
+| Healthcare Data Imbalance | Healthcare Applications | Research + Practice | ⏳ Pending | Rare disease modeling |
+| Clinical Active Learning | Healthcare Applications | Research + Practice | ⏳ Pending | Expert annotation strategies |
+| Bandit-Based Hyperparameter Optimization | Hands-On Deliverable | Implementation | ⏳ Pending | Automated tuning |
+| Medical Meta-Learning | Hands-On Deliverable | Implementation | ⏳ Pending | Few-shot medical tasks |
+| Active Learning for Medical Text | Hands-On Deliverable | Implementation | ⏳ Pending | Efficient annotation |
+| Data Augmentation Experiments | Hands-On Deliverable | Implementation | ⏳ Pending | Medical text augmentation |
+| Curriculum Learning Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Progressive medical training |
+
 ---
 
 
 ### Week 11: Retrieval-Augmented Generation and Constitutional AI Integration
 
 **Topic Overview:** This week explores how LLMs can be augmented with external knowledge sources to overcome their static training limitations while maintaining constitutional principles and safety constraints. You'll study Retrieval-Augmented Generation (RAG) systems that combine the generative capabilities of LLMs with the dynamic knowledge access of retrieval systems, creating more accurate and up-to-date AI systems. Building on the constitutional AI foundations from Week 6, you'll understand how to integrate retrieval systems while maintaining safety and alignment principles. The mathematical foundations cover information retrieval theory, vector databases, and optimization of retrieval-generation pipelines. Healthcare applications focus on creating medical RAG systems that can access current medical literature, clinical guidelines, and patient data while maintaining strict privacy and safety standards. You'll explore advanced RAG architectures, including self-RAG, corrective RAG, and multi-hop reasoning systems. The RL connection introduces the concept of information-seeking as a form of action selection, where models learn to query external knowledge sources effectively - a crucial foundation for the agent-based approaches in Phase 4.
-
-#### Progress Status Table - Week 11
-
-| Lesson Name | Subject | Learning Source | Status | Notes |
-|-------------|---------|----------------|--------|-------|
-| Information Retrieval Theory | Mathematical Foundations | Theory + Practice | ⏳ Pending | TF-IDF, BM25, vector similarity |
-| Vector Database Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | Approximate nearest neighbors |
-| Retrieval-Generation Optimization | Mathematical Foundations | Theory + Practice | ⏳ Pending | End-to-end optimization |
-| Multi-Hop Reasoning Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | Iterative information gathering |
-| RAG Paper (Original) | Key Readings | Research Paper | ⏳ Pending | Retrieval-augmented generation |
-| Self-RAG Paper | Key Readings | Research Paper | ⏳ Pending | Self-reflective retrieval |
-| Corrective RAG Paper | Key Readings | Research Paper | ⏳ Pending | Error correction in RAG |
-| Constitutional AI Integration | Key Readings | Research Paper | ⏳ Pending | Safe retrieval systems |
-| Medical RAG Systems | Healthcare Applications | Research + Practice | ⏳ Pending | Clinical knowledge retrieval |
-| Healthcare Privacy in RAG | Healthcare Applications | Research + Practice | ⏳ Pending | HIPAA-compliant retrieval |
-| Clinical Guidelines Integration | Healthcare Applications | Research + Practice | ⏳ Pending | Dynamic medical knowledge |
-| Basic RAG Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Vector database + generation |
-| Medical RAG System | Hands-On Deliverable | Implementation | ⏳ Pending | Healthcare-specific RAG |
-| Self-RAG Experiments | Hands-On Deliverable | Implementation | ⏳ Pending | Self-reflective retrieval |
-| Multi-Hop Medical Reasoning | Hands-On Deliverable | Implementation | ⏳ Pending | Complex medical queries |
-| Privacy-Preserving RAG | Hands-On Deliverable | Implementation | ⏳ Pending | Secure medical retrieval |
 
 **Mathematical Foundations (3-4 hours):**
 
@@ -1938,33 +1917,33 @@ RAG systems connect to RL concepts in several important ways that prepare you fo
 
 This perspective on RAG as information-seeking with learned retrieval policies provides crucial foundation for understanding the agent-based approaches in Phase 4, where models must actively gather information from their environment to solve complex tasks. The mathematical frameworks for optimizing retrieval-generation pipelines will be essential for building agents that can effectively use external tools and knowledge sources.
 
+#### Progress Status Table - Week 11
+
+| Lesson Name | Subject | Learning Source | Status | Notes |
+|-------------|---------|----------------|--------|-------|
+| Information Retrieval Theory | Mathematical Foundations | Theory + Practice | ⏳ Pending | TF-IDF, BM25, vector similarity |
+| Vector Database Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | Approximate nearest neighbors |
+| Retrieval-Generation Optimization | Mathematical Foundations | Theory + Practice | ⏳ Pending | End-to-end optimization |
+| Multi-Hop Reasoning Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | Iterative information gathering |
+| RAG Paper (Original) | Key Readings | Research Paper | ⏳ Pending | Retrieval-augmented generation |
+| Self-RAG Paper | Key Readings | Research Paper | ⏳ Pending | Self-reflective retrieval |
+| Corrective RAG Paper | Key Readings | Research Paper | ⏳ Pending | Error correction in RAG |
+| Constitutional AI Integration | Key Readings | Research Paper | ⏳ Pending | Safe retrieval systems |
+| Medical RAG Systems | Healthcare Applications | Research + Practice | ⏳ Pending | Clinical knowledge retrieval |
+| Healthcare Privacy in RAG | Healthcare Applications | Research + Practice | ⏳ Pending | HIPAA-compliant retrieval |
+| Clinical Guidelines Integration | Healthcare Applications | Research + Practice | ⏳ Pending | Dynamic medical knowledge |
+| Basic RAG Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Vector database + generation |
+| Medical RAG System | Hands-On Deliverable | Implementation | ⏳ Pending | Healthcare-specific RAG |
+| Self-RAG Experiments | Hands-On Deliverable | Implementation | ⏳ Pending | Self-reflective retrieval |
+| Multi-Hop Medical Reasoning | Hands-On Deliverable | Implementation | ⏳ Pending | Complex medical queries |
+| Privacy-Preserving RAG | Hands-On Deliverable | Implementation | ⏳ Pending | Secure medical retrieval |
+
 ---
 
 
 ### Week 12: LLM Evaluation, Scaling Laws, and Emerging Capabilities
 
 **Topic Overview:** This capstone week for Phase 2 focuses on comprehensive evaluation methodologies for LLMs and understanding the mathematical principles that govern their scaling behavior and emergent capabilities. Building on all previous weeks' foundations, you'll study both intrinsic evaluation methods (perplexity, accuracy on benchmarks) and extrinsic evaluation approaches (human evaluation, application-specific tests, constitutional compliance). You'll explore the mathematical frameworks behind scaling laws that predict how model performance improves with scale, and investigate the phenomenon of emergent abilities that appear suddenly at certain model sizes. The mathematical foundations cover statistical evaluation theory, power-law analysis, and phase transition mathematics. Healthcare applications focus on developing robust evaluation frameworks for medical AI systems that consider accuracy, safety, bias, and regulatory compliance. You'll understand how to design evaluation protocols that can predict real-world performance and ensure safe deployment. The RL connection explores how evaluation in LLMs relates to reward design and performance measurement in RL, preparing you for the advanced reasoning and agent techniques in Phase 3 where evaluation becomes even more complex.
-
-#### Progress Status Table - Week 12
-
-| Lesson Name | Subject | Learning Source | Status | Notes |
-|-------------|---------|----------------|--------|-------|
-| Statistical Evaluation Theory | Mathematical Foundations | Theory + Practice | ⏳ Pending | Confidence intervals, significance testing |
-| Power-Law Analysis | Mathematical Foundations | Theory + Practice | ⏳ Pending | Scaling law mathematics |
-| Phase Transition Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | Emergent capability modeling |
-| Evaluation Metrics Theory | Mathematical Foundations | Theory + Practice | ⏳ Pending | Metric design and validation |
-| Emergent Abilities Paper | Key Readings | Research Paper | ⏳ Pending | Sudden capability emergence |
-| LLM Evaluation Survey | Key Readings | Research Survey | ⏳ Pending | Comprehensive evaluation methods |
-| Scaling Laws Revisited | Key Readings | Research Paper | ⏳ Pending | Updated scaling relationships |
-| Constitutional Evaluation | Key Readings | Research Paper | ⏳ Pending | Safety and alignment metrics |
-| Medical AI Evaluation Frameworks | Healthcare Applications | Research + Practice | ⏳ Pending | Clinical validation protocols |
-| Healthcare Bias Evaluation | Healthcare Applications | Research + Practice | ⏳ Pending | Fairness in medical AI |
-| Regulatory Compliance Testing | Healthcare Applications | Research + Practice | ⏳ Pending | FDA approval processes |
-| Comprehensive Evaluation Suite | Hands-On Deliverable | Implementation | ⏳ Pending | Multi-metric evaluation |
-| Medical Benchmark Development | Hands-On Deliverable | Implementation | ⏳ Pending | Healthcare-specific tests |
-| Scaling Law Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Performance prediction |
-| Emergent Capability Detection | Hands-On Deliverable | Implementation | ⏳ Pending | Capability emergence tracking |
-| Clinical Validation Protocol | Hands-On Deliverable | Implementation | ⏳ Pending | Real-world evaluation |
 
 **Mathematical Foundations (3-4 hours):**
 
@@ -2114,6 +2093,27 @@ Evaluation in LLMs connects to several important RL concepts that become crucial
 
 This comprehensive understanding of evaluation provides crucial foundation for Phase 3, where you'll work with multimodal systems and advanced reasoning techniques that require even more sophisticated evaluation approaches. The mathematical frameworks for scaling analysis and emergent capability detection will be essential for understanding and predicting the behavior of advanced AI systems.
 
+#### Progress Status Table - Week 12
+
+| Lesson Name | Subject | Learning Source | Status | Notes |
+|-------------|---------|----------------|--------|-------|
+| Statistical Evaluation Theory | Mathematical Foundations | Theory + Practice | ⏳ Pending | Confidence intervals, significance testing |
+| Power-Law Analysis | Mathematical Foundations | Theory + Practice | ⏳ Pending | Scaling law mathematics |
+| Phase Transition Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | Emergent capability modeling |
+| Evaluation Metrics Theory | Mathematical Foundations | Theory + Practice | ⏳ Pending | Metric design and validation |
+| Emergent Abilities Paper | Key Readings | Research Paper | ⏳ Pending | Sudden capability emergence |
+| LLM Evaluation Survey | Key Readings | Research Survey | ⏳ Pending | Comprehensive evaluation methods |
+| Scaling Laws Revisited | Key Readings | Research Paper | ⏳ Pending | Updated scaling relationships |
+| Constitutional Evaluation | Key Readings | Research Paper | ⏳ Pending | Safety and alignment metrics |
+| Medical AI Evaluation Frameworks | Healthcare Applications | Research + Practice | ⏳ Pending | Clinical validation protocols |
+| Healthcare Bias Evaluation | Healthcare Applications | Research + Practice | ⏳ Pending | Fairness in medical AI |
+| Regulatory Compliance Testing | Healthcare Applications | Research + Practice | ⏳ Pending | FDA approval processes |
+| Comprehensive Evaluation Suite | Hands-On Deliverable | Implementation | ⏳ Pending | Multi-metric evaluation |
+| Medical Benchmark Development | Hands-On Deliverable | Implementation | ⏳ Pending | Healthcare-specific tests |
+| Scaling Law Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Performance prediction |
+| Emergent Capability Detection | Hands-On Deliverable | Implementation | ⏳ Pending | Capability emergence tracking |
+| Clinical Validation Protocol | Hands-On Deliverable | Implementation | ⏳ Pending | Real-world evaluation |
+
 ---
 
 ## Phase 3: Multimodal and Reasoning Systems (Weeks 13–18)
@@ -2126,27 +2126,6 @@ This comprehensive understanding of evaluation provides crucial foundation for P
 ### Week 13: Multimodal LLMs and Vision-Language Integration
 
 **Topic Overview:** This week begins Phase 3 by exploring how language models can be extended to understand and generate content across multiple modalities, particularly vision and language. You'll study cutting-edge multimodal architectures like GPT-4V, DALL-E, and CLIP that can process images, text, and their relationships simultaneously. Building on the transformer foundations from earlier weeks, you'll understand how attention mechanisms can be extended across modalities and how different types of data can be unified in shared representation spaces. The mathematical foundations cover cross-modal attention, contrastive learning, and multimodal fusion techniques. Healthcare applications focus on medical imaging analysis, radiology report generation, and clinical decision support systems that integrate visual and textual medical data. You'll explore how multimodal AI can revolutionize medical diagnosis by combining imaging data with clinical notes and patient history. The RL connection introduces the concept of multimodal environments where agents must process and act on information from multiple sensory modalities, preparing you for advanced agent architectures that can handle complex, real-world environments.
-
-#### Progress Status Table - Week 13
-
-| Lesson Name | Subject | Learning Source | Status | Notes |
-|-------------|---------|----------------|--------|-------|
-| Cross-Modal Attention Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | Attention across modalities |
-| Contrastive Learning Theory | Mathematical Foundations | Theory + Practice | ⏳ Pending | CLIP-style training |
-| Multimodal Fusion Techniques | Mathematical Foundations | Theory + Practice | ⏳ Pending | Early vs late fusion |
-| Vision Transformer Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | ViT architecture |
-| CLIP Paper | Key Readings | Research Paper | ⏳ Pending | Contrastive language-image pre-training |
-| GPT-4V Technical Report | Key Readings | Technical Report | ⏳ Pending | Vision-language capabilities |
-| DALL-E Paper | Key Readings | Research Paper | ⏳ Pending | Text-to-image generation |
-| Multimodal Survey | Key Readings | Research Survey | ⏳ Pending | Vision-language models overview |
-| Medical Imaging Analysis | Healthcare Applications | Research + Practice | ⏳ Pending | Radiology AI systems |
-| Radiology Report Generation | Healthcare Applications | Research + Practice | ⏳ Pending | Automated medical reporting |
-| Clinical Multimodal Integration | Healthcare Applications | Research + Practice | ⏳ Pending | Images + clinical notes |
-| CLIP Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Contrastive learning |
-| Medical Vision-Language Model | Hands-On Deliverable | Implementation | ⏳ Pending | Healthcare multimodal AI |
-| Radiology Report System | Hands-On Deliverable | Implementation | ⏳ Pending | Image-to-text generation |
-| Cross-Modal Attention Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Attention visualization |
-| Medical Multimodal Evaluation | Hands-On Deliverable | Implementation | ⏳ Pending | Performance on medical tasks |
 
 **Mathematical Foundations (3-4 hours):**
 
@@ -2296,33 +2275,33 @@ Multimodal learning connects to RL in several important ways that prepare you fo
 
 This foundation in multimodal learning will be crucial for the advanced reasoning and agent techniques in the remaining weeks of Phase 3 and Phase 4, where systems must integrate information from multiple sources and modalities to solve complex problems and interact with rich environments.
 
+#### Progress Status Table - Week 13
+
+| Lesson Name | Subject | Learning Source | Status | Notes |
+|-------------|---------|----------------|--------|-------|
+| Cross-Modal Attention Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | Attention across modalities |
+| Contrastive Learning Theory | Mathematical Foundations | Theory + Practice | ⏳ Pending | CLIP-style training |
+| Multimodal Fusion Techniques | Mathematical Foundations | Theory + Practice | ⏳ Pending | Early vs late fusion |
+| Vision Transformer Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | ViT architecture |
+| CLIP Paper | Key Readings | Research Paper | ⏳ Pending | Contrastive language-image pre-training |
+| GPT-4V Technical Report | Key Readings | Technical Report | ⏳ Pending | Vision-language capabilities |
+| DALL-E Paper | Key Readings | Research Paper | ⏳ Pending | Text-to-image generation |
+| Multimodal Survey | Key Readings | Research Survey | ⏳ Pending | Vision-language models overview |
+| Medical Imaging Analysis | Healthcare Applications | Research + Practice | ⏳ Pending | Radiology AI systems |
+| Radiology Report Generation | Healthcare Applications | Research + Practice | ⏳ Pending | Automated medical reporting |
+| Clinical Multimodal Integration | Healthcare Applications | Research + Practice | ⏳ Pending | Images + clinical notes |
+| CLIP Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Contrastive learning |
+| Medical Vision-Language Model | Hands-On Deliverable | Implementation | ⏳ Pending | Healthcare multimodal AI |
+| Radiology Report System | Hands-On Deliverable | Implementation | ⏳ Pending | Image-to-text generation |
+| Cross-Modal Attention Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Attention visualization |
+| Medical Multimodal Evaluation | Hands-On Deliverable | Implementation | ⏳ Pending | Performance on medical tasks |
+
 ---
 
 
 ### Week 14: Advanced Multimodal Architectures and Audio Integration
 
 **Topic Overview:** This week expands multimodal capabilities beyond vision-language to include audio processing and more sophisticated multimodal architectures. You'll study state-of-the-art systems like GPT-4o that can seamlessly integrate text, images, and audio in real-time conversations, and explore the mathematical principles behind unified multimodal transformers. Building on the cross-modal attention foundations from Week 13, you'll understand how temporal audio data can be integrated with static visual and textual information. The mathematical foundations cover audio signal processing, temporal modeling, and advanced fusion architectures that can handle multiple modalities simultaneously. Healthcare applications focus on medical audio analysis (heart sounds, lung sounds, speech pathology), integration of audio data with medical imaging and clinical notes, and development of comprehensive multimodal medical AI systems. You'll explore how audio biomarkers can enhance medical diagnosis and how conversational medical AI can provide more natural patient interactions. The RL connection explores temporal decision making in multimodal environments and how agents can learn to process and respond to dynamic, multi-sensory information streams.
-
-#### Progress Status Table - Week 14
-
-| Lesson Name | Subject | Learning Source | Status | Notes |
-|-------------|---------|----------------|--------|-------|
-| Audio Signal Processing | Mathematical Foundations | Theory + Practice | ⏳ Pending | Fourier transforms, spectrograms |
-| Temporal Modeling Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | RNNs, temporal attention |
-| Advanced Fusion Architectures | Mathematical Foundations | Theory + Practice | ⏳ Pending | Multi-stream processing |
-| Real-Time Multimodal Processing | Mathematical Foundations | Theory + Practice | ⏳ Pending | Streaming architectures |
-| GPT-4o Technical Report | Key Readings | Technical Report | ⏳ Pending | Omni-modal capabilities |
-| Audio-Visual Speech Recognition | Key Readings | Research Paper | ⏳ Pending | Lip-reading + audio |
-| Multimodal Transformers Survey | Key Readings | Research Survey | ⏳ Pending | Advanced architectures |
-| Temporal Fusion Networks | Key Readings | Research Paper | ⏳ Pending | Time-series integration |
-| Medical Audio Analysis | Healthcare Applications | Research + Practice | ⏳ Pending | Heart/lung sounds |
-| Speech Pathology AI | Healthcare Applications | Research + Practice | ⏳ Pending | Voice disorder detection |
-| Conversational Medical AI | Healthcare Applications | Research + Practice | ⏳ Pending | Natural patient interaction |
-| Audio Processing Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Speech recognition system |
-| Medical Audio Classifier | Hands-On Deliverable | Implementation | ⏳ Pending | Heart sound analysis |
-| Multimodal Medical Assistant | Hands-On Deliverable | Implementation | ⏳ Pending | Text + image + audio |
-| Real-Time Processing System | Hands-On Deliverable | Implementation | ⏳ Pending | Streaming multimodal AI |
-| Clinical Audio Integration | Hands-On Deliverable | Implementation | ⏳ Pending | Audio biomarkers |
 
 **Mathematical Foundations (3-4 hours):**
 
@@ -2472,33 +2451,33 @@ Advanced multimodal systems connect to sophisticated RL concepts that are crucia
 
 These advanced multimodal capabilities will be essential for the reasoning and tool-using systems in the remaining weeks of Phase 3, where models must integrate information from multiple sources and modalities to solve complex problems and interact with sophisticated environments.
 
+#### Progress Status Table - Week 14
+
+| Lesson Name | Subject | Learning Source | Status | Notes |
+|-------------|---------|----------------|--------|-------|
+| Audio Signal Processing | Mathematical Foundations | Theory + Practice | ⏳ Pending | Fourier transforms, spectrograms |
+| Temporal Modeling Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | RNNs, temporal attention |
+| Advanced Fusion Architectures | Mathematical Foundations | Theory + Practice | ⏳ Pending | Multi-stream processing |
+| Real-Time Multimodal Processing | Mathematical Foundations | Theory + Practice | ⏳ Pending | Streaming architectures |
+| GPT-4o Technical Report | Key Readings | Technical Report | ⏳ Pending | Omni-modal capabilities |
+| Audio-Visual Speech Recognition | Key Readings | Research Paper | ⏳ Pending | Lip-reading + audio |
+| Multimodal Transformers Survey | Key Readings | Research Survey | ⏳ Pending | Advanced architectures |
+| Temporal Fusion Networks | Key Readings | Research Paper | ⏳ Pending | Time-series integration |
+| Medical Audio Analysis | Healthcare Applications | Research + Practice | ⏳ Pending | Heart/lung sounds |
+| Speech Pathology AI | Healthcare Applications | Research + Practice | ⏳ Pending | Voice disorder detection |
+| Conversational Medical AI | Healthcare Applications | Research + Practice | ⏳ Pending | Natural patient interaction |
+| Audio Processing Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Speech recognition system |
+| Medical Audio Classifier | Hands-On Deliverable | Implementation | ⏳ Pending | Heart sound analysis |
+| Multimodal Medical Assistant | Hands-On Deliverable | Implementation | ⏳ Pending | Text + image + audio |
+| Real-Time Processing System | Hands-On Deliverable | Implementation | ⏳ Pending | Streaming multimodal AI |
+| Clinical Audio Integration | Hands-On Deliverable | Implementation | ⏳ Pending | Audio biomarkers |
+
 ---
 
 
 ### Week 15: Chain-of-Thought Reasoning and Advanced Prompting Techniques
 
 **Topic Overview:** This week focuses on one of the most important breakthroughs in LLM capabilities: chain-of-thought (CoT) reasoning and advanced prompting techniques that enable models to solve complex problems through step-by-step reasoning. Building on the prompt engineering foundations from Week 5, you'll study how structured prompting can elicit sophisticated reasoning behaviors from LLMs, including mathematical problem solving, logical reasoning, and complex multi-step analysis. You'll explore various CoT techniques including few-shot CoT, zero-shot CoT, tree-of-thought, and self-consistency methods. The mathematical foundations cover reasoning as search, probabilistic inference in reasoning chains, and optimization of reasoning processes. Healthcare applications focus on clinical reasoning, differential diagnosis, and medical decision-making processes that mirror human clinical thinking. You'll understand how CoT can make medical AI more transparent and trustworthy by providing explicit reasoning steps. The RL connection introduces reasoning as a form of sequential decision making where each reasoning step is an action that affects the problem-solving trajectory, preparing you for more advanced agent-based reasoning in later weeks.
-
-#### Progress Status Table - Week 15
-
-| Lesson Name | Subject | Learning Source | Status | Notes |
-|-------------|---------|----------------|--------|-------|
-| Reasoning as Search | Mathematical Foundations | Theory + Practice | ⏳ Pending | Search spaces, heuristics |
-| Probabilistic Inference in Reasoning | Mathematical Foundations | Theory + Practice | ⏳ Pending | Bayesian reasoning chains |
-| Tree-of-Thought Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | Branching reasoning paths |
-| Self-Consistency Theory | Mathematical Foundations | Theory + Practice | ⏳ Pending | Ensemble reasoning |
-| Chain-of-Thought Prompting Paper | Key Readings | Research Paper | ⏳ Pending | Step-by-step reasoning |
-| Tree-of-Thought Paper | Key Readings | Research Paper | ⏳ Pending | Deliberate problem solving |
-| Self-Consistency Paper | Key Readings | Research Paper | ⏳ Pending | Multiple reasoning paths |
-| Zero-Shot CoT Paper | Key Readings | Research Paper | ⏳ Pending | "Let's think step by step" |
-| Clinical Reasoning with CoT | Healthcare Applications | Research + Practice | ⏳ Pending | Medical diagnosis reasoning |
-| Differential Diagnosis Systems | Healthcare Applications | Research + Practice | ⏳ Pending | Systematic medical reasoning |
-| Medical Decision Support | Healthcare Applications | Research + Practice | ⏳ Pending | Transparent AI reasoning |
-| CoT Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Step-by-step prompting |
-| Medical Reasoning System | Hands-On Deliverable | Implementation | ⏳ Pending | Clinical CoT application |
-| Tree-of-Thought Experiments | Hands-On Deliverable | Implementation | ⏳ Pending | Branching reasoning |
-| Self-Consistency Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Reasoning reliability |
-| Clinical Reasoning Evaluation | Hands-On Deliverable | Implementation | ⏳ Pending | Medical reasoning quality |
 
 **Mathematical Foundations (3-4 hours):**
 
@@ -2648,33 +2627,33 @@ Chain-of-thought reasoning connects deeply to RL concepts, particularly in the a
 
 This deep connection between reasoning and RL provides crucial foundation for the agent-based approaches in Phase 4, where models must use reasoning and planning to solve complex tasks in dynamic environments. The mathematical frameworks for optimizing reasoning processes will be essential for building intelligent agents that can think and plan effectively.
 
+#### Progress Status Table - Week 15
+
+| Lesson Name | Subject | Learning Source | Status | Notes |
+|-------------|---------|----------------|--------|-------|
+| Reasoning as Search | Mathematical Foundations | Theory + Practice | ⏳ Pending | Search spaces, heuristics |
+| Probabilistic Inference in Reasoning | Mathematical Foundations | Theory + Practice | ⏳ Pending | Bayesian reasoning chains |
+| Tree-of-Thought Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | Branching reasoning paths |
+| Self-Consistency Theory | Mathematical Foundations | Theory + Practice | ⏳ Pending | Ensemble reasoning |
+| Chain-of-Thought Prompting Paper | Key Readings | Research Paper | ⏳ Pending | Step-by-step reasoning |
+| Tree-of-Thought Paper | Key Readings | Research Paper | ⏳ Pending | Deliberate problem solving |
+| Self-Consistency Paper | Key Readings | Research Paper | ⏳ Pending | Multiple reasoning paths |
+| Zero-Shot CoT Paper | Key Readings | Research Paper | ⏳ Pending | "Let's think step by step" |
+| Clinical Reasoning with CoT | Healthcare Applications | Research + Practice | ⏳ Pending | Medical diagnosis reasoning |
+| Differential Diagnosis Systems | Healthcare Applications | Research + Practice | ⏳ Pending | Systematic medical reasoning |
+| Medical Decision Support | Healthcare Applications | Research + Practice | ⏳ Pending | Transparent AI reasoning |
+| CoT Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Step-by-step prompting |
+| Medical Reasoning System | Hands-On Deliverable | Implementation | ⏳ Pending | Clinical CoT application |
+| Tree-of-Thought Experiments | Hands-On Deliverable | Implementation | ⏳ Pending | Branching reasoning |
+| Self-Consistency Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Reasoning reliability |
+| Clinical Reasoning Evaluation | Hands-On Deliverable | Implementation | ⏳ Pending | Medical reasoning quality |
+
 ---
 
 
 ### Week 16: Tool Use and Function Calling in LLMs
 
 **Topic Overview:** This week explores how LLMs can be extended beyond text generation to interact with external tools, APIs, and systems through function calling and tool use capabilities. Building on the reasoning foundations from Week 15, you'll understand how models can learn to select appropriate tools, formulate correct API calls, and integrate tool outputs into their reasoning processes. You'll study cutting-edge systems like GPT-4 with function calling, ReAct (Reasoning and Acting), and Toolformer that demonstrate how language models can become general-purpose agents capable of solving complex tasks through tool use. The mathematical foundations cover action selection theory, tool selection optimization, and integration of external information into language model reasoning. Healthcare applications focus on medical tool integration, clinical system APIs, and building AI assistants that can interact with electronic health records, medical databases, and diagnostic tools. You'll explore how tool-using medical AI can access real-time information, perform calculations, and integrate with existing clinical workflows. The RL connection introduces the concept of action spaces that include both language generation and tool use, preparing you for the full agent architectures in Phase 4.
-
-#### Progress Status Table - Week 16
-
-| Lesson Name | Subject | Learning Source | Status | Notes |
-|-------------|---------|----------------|--------|-------|
-| Action Selection Theory | Mathematical Foundations | Theory + Practice | ⏳ Pending | Tool choice optimization |
-| Tool Selection Optimization | Mathematical Foundations | Theory + Practice | ⏳ Pending | API selection strategies |
-| External Information Integration | Mathematical Foundations | Theory + Practice | ⏳ Pending | Tool output processing |
-| Function Calling Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | Parameter generation |
-| ReAct Paper | Key Readings | Research Paper | ⏳ Pending | Reasoning and acting |
-| Toolformer Paper | Key Readings | Research Paper | ⏳ Pending | Self-supervised tool use |
-| GPT-4 Function Calling | Key Readings | Technical Documentation | ⏳ Pending | API integration |
-| Tool Use Survey | Key Readings | Research Survey | ⏳ Pending | Tool-using AI systems |
-| Medical Tool Integration | Healthcare Applications | Research + Practice | ⏳ Pending | Clinical system APIs |
-| EHR Integration | Healthcare Applications | Research + Practice | ⏳ Pending | Electronic health records |
-| Medical Database Access | Healthcare Applications | Research + Practice | ⏳ Pending | Real-time medical data |
-| Function Calling Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | API integration system |
-| Medical Tool Assistant | Hands-On Deliverable | Implementation | ⏳ Pending | Healthcare tool use |
-| EHR Integration System | Hands-On Deliverable | Implementation | ⏳ Pending | Clinical data access |
-| Tool Selection Experiments | Hands-On Deliverable | Implementation | ⏳ Pending | Optimal tool choice |
-| Clinical Workflow Integration | Hands-On Deliverable | Implementation | ⏳ Pending | Healthcare process automation |
 
 **Mathematical Foundations (3-4 hours):**
 
@@ -2824,33 +2803,33 @@ Tool use in LLMs connects directly to fundamental RL concepts about action selec
 
 This foundation in tool use provides crucial preparation for Phase 4, where you'll study full agent architectures that must autonomously select and use tools to accomplish complex goals in dynamic environments. The mathematical frameworks for tool selection and integration will be essential for building intelligent agents that can effectively leverage external resources and capabilities.
 
+#### Progress Status Table - Week 16
+
+| Lesson Name | Subject | Learning Source | Status | Notes |
+|-------------|---------|----------------|--------|-------|
+| Action Selection Theory | Mathematical Foundations | Theory + Practice | ⏳ Pending | Tool choice optimization |
+| Tool Selection Optimization | Mathematical Foundations | Theory + Practice | ⏳ Pending | API selection strategies |
+| External Information Integration | Mathematical Foundations | Theory + Practice | ⏳ Pending | Tool output processing |
+| Function Calling Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | Parameter generation |
+| ReAct Paper | Key Readings | Research Paper | ⏳ Pending | Reasoning and acting |
+| Toolformer Paper | Key Readings | Research Paper | ⏳ Pending | Self-supervised tool use |
+| GPT-4 Function Calling | Key Readings | Technical Documentation | ⏳ Pending | API integration |
+| Tool Use Survey | Key Readings | Research Survey | ⏳ Pending | Tool-using AI systems |
+| Medical Tool Integration | Healthcare Applications | Research + Practice | ⏳ Pending | Clinical system APIs |
+| EHR Integration | Healthcare Applications | Research + Practice | ⏳ Pending | Electronic health records |
+| Medical Database Access | Healthcare Applications | Research + Practice | ⏳ Pending | Real-time medical data |
+| Function Calling Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | API integration system |
+| Medical Tool Assistant | Hands-On Deliverable | Implementation | ⏳ Pending | Healthcare tool use |
+| EHR Integration System | Hands-On Deliverable | Implementation | ⏳ Pending | Clinical data access |
+| Tool Selection Experiments | Hands-On Deliverable | Implementation | ⏳ Pending | Optimal tool choice |
+| Clinical Workflow Integration | Hands-On Deliverable | Implementation | ⏳ Pending | Healthcare process automation |
+
 ---
 
 
 ### Week 17: Code Generation and Mathematical Reasoning
 
 **Topic Overview:** This week explores how LLMs can generate, execute, and reason about code to solve complex mathematical and computational problems. Building on the tool use foundations from Week 16, you'll study how code generation serves as a powerful tool for precise reasoning, calculation, and problem solving. You'll explore cutting-edge systems like Codex, CodeT5, and AlphaCode that demonstrate sophisticated programming capabilities, and understand how code execution can be integrated into reasoning workflows. The mathematical foundations cover program synthesis, formal verification, and the relationship between natural language reasoning and computational thinking. Healthcare applications focus on medical calculation automation, clinical data analysis, and building AI systems that can write and execute code for medical research and clinical decision support. You'll explore how code generation can enable precise medical calculations, statistical analysis, and integration with medical software systems. The RL connection introduces the concept of program synthesis as a form of compositional action selection, where complex behaviors are constructed by combining simpler programming primitives.
-
-#### Progress Status Table - Week 17
-
-| Lesson Name | Subject | Learning Source | Status | Notes |
-|-------------|---------|----------------|--------|-------|
-| Program Synthesis Theory | Mathematical Foundations | Theory + Practice | ⏳ Pending | Automatic code generation |
-| Formal Verification Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | Code correctness proofs |
-| Computational Thinking | Mathematical Foundations | Theory + Practice | ⏳ Pending | Algorithm design |
-| Code Execution Integration | Mathematical Foundations | Theory + Practice | ⏳ Pending | Runtime environments |
-| Codex Paper | Key Readings | Research Paper | ⏳ Pending | Code generation capabilities |
-| AlphaCode Paper | Key Readings | Research Paper | ⏳ Pending | Competitive programming |
-| CodeT5 Paper | Key Readings | Research Paper | ⏳ Pending | Code understanding and generation |
-| Program Synthesis Survey | Key Readings | Research Survey | ⏳ Pending | Automatic programming |
-| Medical Calculation Automation | Healthcare Applications | Research + Practice | ⏳ Pending | Clinical computation |
-| Clinical Data Analysis | Healthcare Applications | Research + Practice | ⏳ Pending | Statistical analysis automation |
-| Medical Software Integration | Healthcare Applications | Research + Practice | ⏳ Pending | Healthcare system APIs |
-| Code Generation Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Programming assistant |
-| Medical Calculator System | Hands-On Deliverable | Implementation | ⏳ Pending | Clinical computation tool |
-| Statistical Analysis Automation | Hands-On Deliverable | Implementation | ⏳ Pending | Medical data analysis |
-| Code Verification System | Hands-On Deliverable | Implementation | ⏳ Pending | Automated testing |
-| Clinical Software Integration | Hands-On Deliverable | Implementation | ⏳ Pending | Healthcare code generation |
 
 **Mathematical Foundations (3-4 hours):**
 
@@ -2999,6 +2978,27 @@ Code generation connects to RL in several important ways that prepare you for ad
 
 This foundation in code generation and mathematical reasoning provides crucial preparation for Phase 4, where you'll study agent architectures that must autonomously write and execute code to solve complex tasks. The ability to generate, execute, and reason about code will be essential for building intelligent agents that can handle sophisticated computational problems and integrate with complex software environments.
 
+#### Progress Status Table - Week 17
+
+| Lesson Name | Subject | Learning Source | Status | Notes |
+|-------------|---------|----------------|--------|-------|
+| Program Synthesis Theory | Mathematical Foundations | Theory + Practice | ⏳ Pending | Automatic code generation |
+| Formal Verification Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | Code correctness proofs |
+| Computational Thinking | Mathematical Foundations | Theory + Practice | ⏳ Pending | Algorithm design |
+| Code Execution Integration | Mathematical Foundations | Theory + Practice | ⏳ Pending | Runtime environments |
+| Codex Paper | Key Readings | Research Paper | ⏳ Pending | Code generation capabilities |
+| AlphaCode Paper | Key Readings | Research Paper | ⏳ Pending | Competitive programming |
+| CodeT5 Paper | Key Readings | Research Paper | ⏳ Pending | Code understanding and generation |
+| Program Synthesis Survey | Key Readings | Research Survey | ⏳ Pending | Automatic programming |
+| Medical Calculation Automation | Healthcare Applications | Research + Practice | ⏳ Pending | Clinical computation |
+| Clinical Data Analysis | Healthcare Applications | Research + Practice | ⏳ Pending | Statistical analysis automation |
+| Medical Software Integration | Healthcare Applications | Research + Practice | ⏳ Pending | Healthcare system APIs |
+| Code Generation Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Programming assistant |
+| Medical Calculator System | Hands-On Deliverable | Implementation | ⏳ Pending | Clinical computation tool |
+| Statistical Analysis Automation | Hands-On Deliverable | Implementation | ⏳ Pending | Medical data analysis |
+| Code Verification System | Hands-On Deliverable | Implementation | ⏳ Pending | Automated testing |
+| Clinical Software Integration | Hands-On Deliverable | Implementation | ⏳ Pending | Healthcare code generation |
+
 ---
 
 
@@ -3006,26 +3006,9 @@ This foundation in code generation and mathematical reasoning provides crucial p
 
 **Topic Overview:** This capstone week for Phase 3 integrates all previous reasoning, multimodal, and tool-use capabilities into sophisticated planning and reasoning systems that can solve complex, multi-step problems requiring long-term planning and coordination. Building on the chain-of-thought reasoning from Week 15, tool use from Week 16, and code generation from Week 17, you'll study advanced reasoning architectures that can plan, execute, and adapt their strategies based on feedback. You'll explore cutting-edge systems like GPT-4's advanced reasoning capabilities, planning-based AI systems, and the emerging field of AI systems that can engage in scientific reasoning and discovery. The mathematical foundations cover automated planning, constraint satisfaction, and optimization of reasoning strategies. Healthcare applications focus on comprehensive medical planning systems that can coordinate complex treatment plans, research protocols, and clinical decision-making processes. You'll understand how advanced reasoning can enable AI systems to handle the complexity and uncertainty inherent in medical practice. The RL connection culminates with planning as the bridge between reasoning and action, preparing you for the full agent architectures in Phase 4 where planning, reasoning, and action execution are seamlessly integrated.
 
-#### Progress Status Table - Week 18
+**Mathematical Foundations (4 hours):**
 
-| Lesson Name | Subject | Learning Source | Status | Notes |
-|-------------|---------|----------------|--------|-------|
-| Automated Planning Theory | Mathematical Foundations | Theory + Practice | ⏳ Pending | STRIPS, PDDL, planning algorithms |
-| Constraint Satisfaction Problems | Mathematical Foundations | Theory + Practice | ⏳ Pending | CSP solving, optimization |
-| Reasoning Strategy Optimization | Mathematical Foundations | Theory + Practice | ⏳ Pending | Meta-reasoning, strategy selection |
-| Planning Under Uncertainty | Mathematical Foundations | Theory + Practice | ⏳ Pending | Probabilistic planning |
-| GPT-4 Advanced Reasoning | Key Readings | Technical Report | ⏳ Pending | Complex problem solving |
-| Planning-Based AI Systems | Key Readings | Research Paper | ⏳ Pending | Automated planning |
-| Scientific Reasoning AI | Key Readings | Research Paper | ⏳ Pending | AI for scientific discovery |
-| Reasoning and Planning Survey | Key Readings | Research Survey | ⏳ Pending | Advanced reasoning systems |
-| Medical Treatment Planning | Healthcare Applications | Research + Practice | ⏳ Pending | Complex treatment coordination |
-| Clinical Research Protocols | Healthcare Applications | Research + Practice | ⏳ Pending | Research planning automation |
-| Medical Decision Support Systems | Healthcare Applications | Research + Practice | ⏳ Pending | Comprehensive clinical planning |
-| Planning System Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Automated planning engine |
-| Medical Planning Assistant | Hands-On Deliverable | Implementation | ⏳ Pending | Treatment plan coordination |
-| Research Protocol Generator | Hands-On Deliverable | Implementation | ⏳ Pending | Clinical research automation |
-| Reasoning Strategy Optimizer | Hands-On Deliverable | Implementation | ⏳ Pending | Meta-reasoning system |
-| Clinical Decision Integration | Hands-On Deliverable | Implementation | ⏳ Pending | Comprehensive medical AI |
+Understanding the mathematics of planning and advanced reasoning is crucial for building sophisticated AI systems:
 
 **Mathematical Foundations (3-4 hours):**
 
@@ -3175,6 +3158,27 @@ This week represents the culmination of RL integration in reasoning systems, con
 
 This comprehensive integration of reasoning, planning, and RL concepts provides the perfect foundation for Phase 4, where you'll study full agent architectures that must autonomously plan, reason, and act in complex environments. The mathematical frameworks and practical techniques learned throughout Phase 3 will be essential for building intelligent agents that can handle sophisticated real-world tasks.
 
+#### Progress Status Table - Week 18
+
+| Lesson Name | Subject | Learning Source | Status | Notes |
+|-------------|---------|----------------|--------|-------|
+| Automated Planning Theory | Mathematical Foundations | Theory + Practice | ⏳ Pending | STRIPS, PDDL, planning algorithms |
+| Constraint Satisfaction Problems | Mathematical Foundations | Theory + Practice | ⏳ Pending | CSP solving, optimization |
+| Reasoning Strategy Optimization | Mathematical Foundations | Theory + Practice | ⏳ Pending | Meta-reasoning, strategy selection |
+| Planning Under Uncertainty | Mathematical Foundations | Theory + Practice | ⏳ Pending | Probabilistic planning |
+| GPT-4 Advanced Reasoning | Key Readings | Technical Report | ⏳ Pending | Complex problem solving |
+| Planning-Based AI Systems | Key Readings | Research Paper | ⏳ Pending | Automated planning |
+| Scientific Reasoning AI | Key Readings | Research Paper | ⏳ Pending | AI for scientific discovery |
+| Reasoning and Planning Survey | Key Readings | Research Survey | ⏳ Pending | Advanced reasoning systems |
+| Medical Treatment Planning | Healthcare Applications | Research + Practice | ⏳ Pending | Complex treatment coordination |
+| Clinical Research Protocols | Healthcare Applications | Research + Practice | ⏳ Pending | Research planning automation |
+| Medical Decision Support Systems | Healthcare Applications | Research + Practice | ⏳ Pending | Comprehensive clinical planning |
+| Planning System Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Automated planning engine |
+| Medical Planning Assistant | Hands-On Deliverable | Implementation | ⏳ Pending | Treatment plan coordination |
+| Research Protocol Generator | Hands-On Deliverable | Implementation | ⏳ Pending | Clinical research automation |
+| Reasoning Strategy Optimizer | Hands-On Deliverable | Implementation | ⏳ Pending | Meta-reasoning system |
+| Clinical Decision Integration | Hands-On Deliverable | Implementation | ⏳ Pending | Comprehensive medical AI |
+
 ---
 
 ## Phase 4: Agentic AI and Deployment (Weeks 19–24)
@@ -3188,26 +3192,9 @@ This comprehensive integration of reasoning, planning, and RL concepts provides 
 
 **Topic Overview:** This week begins Phase 4 by integrating all previous capabilities into autonomous agent architectures that can operate independently in complex environments. Building on the reasoning, multimodal processing, tool use, and planning foundations from Phase 3, you'll study how to construct agents that can perceive their environment, make decisions, take actions, and learn from experience. You'll explore cutting-edge agent architectures like AutoGPT, LangChain agents, and research systems that demonstrate autonomous problem-solving capabilities. The mathematical foundations heavily integrate Stanford CS234 content on policy gradient methods (Lectures 5-6), providing deep understanding of how agents learn optimal behaviors through experience. Healthcare applications focus on autonomous medical AI systems that can independently manage patient monitoring, clinical decision support, and medical research tasks while maintaining safety and regulatory compliance. You'll understand how to build agents that can operate in clinical environments with minimal human supervision while ensuring patient safety and care quality. The RL connection reaches full expression as you implement complete agent architectures that learn, plan, and act autonomously using policy gradient methods and other advanced RL techniques.
 
-#### Progress Status Table - Week 19
+**Mathematical Foundations (4 hours):**
 
-| Lesson Name | Subject | Learning Source | Status | Notes |
-|-------------|---------|----------------|--------|-------|
-| Policy Gradient Methods Deep Dive | Mathematical Foundations | Stanford CS234 Lectures 5-6 | ⏳ Pending | REINFORCE, actor-critic |
-| Agent Architecture Design | Mathematical Foundations | Theory + Practice | ⏳ Pending | Perception-action loops |
-| Autonomous Decision Making | Mathematical Foundations | Theory + Practice | ⏳ Pending | Real-time planning |
-| Learning from Experience | Mathematical Foundations | Theory + Practice | ⏳ Pending | Online policy updates |
-| AutoGPT Architecture | Key Readings | Technical Documentation | ⏳ Pending | Autonomous task execution |
-| LangChain Agents | Key Readings | Technical Documentation | ⏳ Pending | Tool-using agents |
-| ReAct Paper | Key Readings | Research Paper | ⏳ Pending | Reasoning and acting |
-| Agent Safety Research | Key Readings | Research Paper | ⏳ Pending | Safe autonomous systems |
-| Autonomous Medical Monitoring | Healthcare Applications | Research + Practice | ⏳ Pending | Patient monitoring agents |
-| Clinical Decision Support Agents | Healthcare Applications | Research + Practice | ⏳ Pending | Autonomous diagnosis aid |
-| Medical Research Automation | Healthcare Applications | Research + Practice | ⏳ Pending | Research task agents |
-| Agent Architecture Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Complete agent system |
-| Medical Monitoring Agent | Hands-On Deliverable | Implementation | ⏳ Pending | Healthcare-specific agent |
-| Policy Learning Experiments | Hands-On Deliverable | Implementation | ⏳ Pending | Experience-based learning |
-| Autonomous Safety Testing | Hands-On Deliverable | Implementation | ⏳ Pending | Safety in autonomy |
-| Clinical Integration Testing | Hands-On Deliverable | Implementation | ⏳ Pending | Healthcare workflow integration |
+Understanding the mathematics of autonomous agents requires deep integration of RL theory with practical agent design:
 
 **Mathematical Foundations (4 hours):**
 
@@ -3357,6 +3344,27 @@ This week represents the full realization of RL concepts in autonomous agent arc
 
 This comprehensive implementation of autonomous agent architectures using policy gradient methods provides the perfect foundation for the remaining weeks, where you'll extend these concepts to multi-agent systems, advanced memory architectures, and production deployment scenarios. The practical experience with policy learning and autonomous operation will be essential for understanding the most advanced AI agent architectures.
 
+#### Progress Status Table - Week 19
+
+| Lesson Name | Subject | Learning Source | Status | Notes |
+|-------------|---------|----------------|--------|-------|
+| Policy Gradient Methods Deep Dive | Mathematical Foundations | Stanford CS234 Lectures 5-6 | ⏳ Pending | REINFORCE, actor-critic |
+| Agent Architecture Design | Mathematical Foundations | Theory + Practice | ⏳ Pending | Perception-action loops |
+| Autonomous Decision Making | Mathematical Foundations | Theory + Practice | ⏳ Pending | Real-time planning |
+| Learning from Experience | Mathematical Foundations | Theory + Practice | ⏳ Pending | Online policy updates |
+| AutoGPT Architecture | Key Readings | Technical Documentation | ⏳ Pending | Autonomous task execution |
+| LangChain Agents | Key Readings | Technical Documentation | ⏳ Pending | Tool-using agents |
+| ReAct Paper | Key Readings | Research Paper | ⏳ Pending | Reasoning and acting |
+| Agent Safety Research | Key Readings | Research Paper | ⏳ Pending | Safe autonomous systems |
+| Autonomous Medical Monitoring | Healthcare Applications | Research + Practice | ⏳ Pending | Patient monitoring agents |
+| Clinical Decision Support Agents | Healthcare Applications | Research + Practice | ⏳ Pending | Autonomous diagnosis aid |
+| Medical Research Automation | Healthcare Applications | Research + Practice | ⏳ Pending | Research task agents |
+| Agent Architecture Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Complete agent system |
+| Medical Monitoring Agent | Hands-On Deliverable | Implementation | ⏳ Pending | Healthcare-specific agent |
+| Policy Learning Experiments | Hands-On Deliverable | Implementation | ⏳ Pending | Experience-based learning |
+| Autonomous Safety Testing | Hands-On Deliverable | Implementation | ⏳ Pending | Safety in autonomy |
+| Clinical Integration Testing | Hands-On Deliverable | Implementation | ⏳ Pending | Healthcare workflow integration |
+
 ---
 
 
@@ -3364,26 +3372,9 @@ This comprehensive implementation of autonomous agent architectures using policy
 
 **Topic Overview:** This week extends single agent architectures to multi-agent systems where multiple AI agents must coordinate, communicate, and collaborate to solve complex problems. Building on the autonomous agent foundations from Week 19, you'll study how agents can work together effectively, handle conflicts, and achieve shared objectives. You'll explore cutting-edge multi-agent systems in AI research, including collaborative reasoning systems, distributed problem solving, and emergent coordination behaviors. The mathematical foundations integrate advanced CS234 content on multi-agent RL, game theory, and coordination mechanisms. Healthcare applications focus on multi-agent medical systems where different AI agents specialize in different aspects of patient care, creating comprehensive healthcare teams that can provide coordinated, personalized medical services. You'll understand how multi-agent systems can handle the complexity of modern healthcare by distributing expertise and enabling specialized agents to collaborate effectively. The RL connection explores multi-agent learning, where agents must learn not only optimal individual policies but also how to coordinate with other learning agents in dynamic environments.
 
-#### Progress Status Table - Week 20
+**Mathematical Foundations (4 hours):**
 
-| Lesson Name | Subject | Learning Source | Status | Notes |
-|-------------|---------|----------------|--------|-------|
-| Multi-Agent RL Theory | Mathematical Foundations | Stanford CS234 | ⏳ Pending | MARL algorithms, Nash equilibria |
-| Game Theory for AI | Mathematical Foundations | Theory + Practice | ⏳ Pending | Cooperative and competitive games |
-| Coordination Mechanisms | Mathematical Foundations | Theory + Practice | ⏳ Pending | Communication protocols |
-| Emergent Behavior Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | Collective intelligence |
-| Multi-Agent RL Survey | Key Readings | Research Survey | ⏳ Pending | MARL algorithms and applications |
-| Cooperative AI Paper | Key Readings | Research Paper | ⏳ Pending | Collaborative agent systems |
-| Multi-Agent Communication | Key Readings | Research Paper | ⏳ Pending | Agent communication protocols |
-| Emergent Coordination | Key Readings | Research Paper | ⏳ Pending | Self-organizing systems |
-| Multi-Agent Medical Teams | Healthcare Applications | Research + Practice | ⏳ Pending | Specialized medical agents |
-| Distributed Healthcare Systems | Healthcare Applications | Research + Practice | ⏳ Pending | Coordinated patient care |
-| Medical Agent Coordination | Healthcare Applications | Research + Practice | ⏳ Pending | Healthcare workflow coordination |
-| Multi-Agent System Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Coordinated agent framework |
-| Medical Agent Team | Hands-On Deliverable | Implementation | ⏳ Pending | Healthcare multi-agent system |
-| Coordination Protocol Development | Hands-On Deliverable | Implementation | ⏳ Pending | Agent communication system |
-| Emergent Behavior Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Collective intelligence study |
-| Clinical Coordination Testing | Hands-On Deliverable | Implementation | ⏳ Pending | Healthcare team simulation |
+Understanding the mathematics of multi-agent coordination requires advanced game theory and distributed learning:
 
 **Mathematical Foundations (4 hours):**
 
@@ -3526,6 +3517,27 @@ This week extends RL concepts to the challenging domain of multi-agent learning 
 
 This deep understanding of multi-agent RL provides crucial preparation for the remaining weeks, where you'll study advanced memory architectures and production deployment scenarios. The ability to coordinate multiple agents effectively will be essential for building sophisticated AI systems that can handle complex real-world tasks requiring distributed expertise and coordination.
 
+#### Progress Status Table - Week 20
+
+| Lesson Name | Subject | Learning Source | Status | Notes |
+|-------------|---------|----------------|--------|-------|
+| Multi-Agent RL Theory | Mathematical Foundations | Stanford CS234 | ⏳ Pending | MARL algorithms, Nash equilibria |
+| Game Theory for AI | Mathematical Foundations | Theory + Practice | ⏳ Pending | Cooperative and competitive games |
+| Coordination Mechanisms | Mathematical Foundations | Theory + Practice | ⏳ Pending | Communication protocols |
+| Emergent Behavior Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | Collective intelligence |
+| Multi-Agent RL Survey | Key Readings | Research Survey | ⏳ Pending | MARL algorithms and applications |
+| Cooperative AI Paper | Key Readings | Research Paper | ⏳ Pending | Collaborative agent systems |
+| Multi-Agent Communication | Key Readings | Research Paper | ⏳ Pending | Agent communication protocols |
+| Emergent Coordination | Key Readings | Research Paper | ⏳ Pending | Self-organizing systems |
+| Multi-Agent Medical Teams | Healthcare Applications | Research + Practice | ⏳ Pending | Specialized medical agents |
+| Distributed Healthcare Systems | Healthcare Applications | Research + Practice | ⏳ Pending | Coordinated patient care |
+| Medical Agent Coordination | Healthcare Applications | Research + Practice | ⏳ Pending | Healthcare workflow coordination |
+| Multi-Agent System Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Coordinated agent framework |
+| Medical Agent Team | Hands-On Deliverable | Implementation | ⏳ Pending | Healthcare multi-agent system |
+| Coordination Protocol Development | Hands-On Deliverable | Implementation | ⏳ Pending | Agent communication system |
+| Emergent Behavior Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Collective intelligence study |
+| Clinical Coordination Testing | Hands-On Deliverable | Implementation | ⏳ Pending | Healthcare team simulation |
+
 ---
 
 
@@ -3533,7 +3545,7 @@ This deep understanding of multi-agent RL provides crucial preparation for the r
 
 **Topic Overview:** This week focuses on advanced memory architectures that enable AI agents to maintain long-term context, learn from experience, and reason over extended time horizons. Building on the multi-agent coordination from Week 20, you'll study how sophisticated memory systems can enable agents to handle complex, long-duration tasks that require maintaining state and context over time. You'll explore cutting-edge memory architectures like MemGPT, retrieval-augmented generation with long-term memory, and neural memory networks that can store and retrieve relevant information efficiently. The mathematical foundations heavily integrate Stanford CS234 Lecture 14 on Monte Carlo Tree Search (MCTS), showing how tree-based reasoning can be combined with memory systems for sophisticated long-term planning and decision making. Healthcare applications focus on longitudinal patient care systems that can maintain comprehensive patient histories, track treatment outcomes over time, and provide continuity of care across extended periods. You'll understand how advanced memory enables AI systems to provide personalized, context-aware medical care that improves over time. The RL connection explores how memory enables agents to learn from long-term consequences and maintain policies that optimize for extended time horizons.
 
-#### Progress Status Table - Week 21
+**Mathematical Foundations (4 hours):**
 
 | Lesson Name | Subject | Learning Source | Status | Notes |
 |-------------|---------|----------------|--------|-------|
@@ -3695,6 +3707,27 @@ This week represents the culmination of sophisticated RL techniques for long-ter
 
 This deep understanding of memory-augmented RL provides crucial preparation for the final weeks, where you'll study AI safety, value alignment, and production deployment. The ability to maintain long-term context and learn from extended experience will be essential for building trustworthy AI systems that can operate safely and effectively in complex real-world environments.
 
+#### Progress Status Table - Week 21
+
+| Lesson Name | Subject | Learning Source | Status | Notes |
+|-------------|---------|----------------|--------|-------|
+| Monte Carlo Tree Search (MCTS) | Mathematical Foundations | Stanford CS234 Lecture 14 | ⏳ Pending | Tree-based planning |
+| Memory Architecture Design | Mathematical Foundations | Theory + Practice | ⏳ Pending | Long-term context systems |
+| Neural Memory Networks | Mathematical Foundations | Theory + Practice | ⏳ Pending | Differentiable memory |
+| Long-Term Planning Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | Extended horizon optimization |
+| MemGPT Paper | Key Readings | Research Paper | ⏳ Pending | Memory-augmented LLMs |
+| Neural Memory Networks | Key Readings | Research Paper | ⏳ Pending | Differentiable memory systems |
+| Long-Term Memory Survey | Key Readings | Research Survey | ⏳ Pending | Memory architectures overview |
+| MCTS Applications | Key Readings | Research Paper | ⏳ Pending | Tree search in AI |
+| Longitudinal Patient Care | Healthcare Applications | Research + Practice | ⏳ Pending | Long-term medical tracking |
+| Medical History Systems | Healthcare Applications | Research + Practice | ⏳ Pending | Comprehensive patient records |
+| Treatment Outcome Tracking | Healthcare Applications | Research + Practice | ⏳ Pending | Long-term care monitoring |
+| Memory System Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Advanced memory architecture |
+| Medical Memory System | Hands-On Deliverable | Implementation | ⏳ Pending | Healthcare-specific memory |
+| MCTS Planning System | Hands-On Deliverable | Implementation | ⏳ Pending | Tree-based reasoning |
+| Long-Term Care Tracker | Hands-On Deliverable | Implementation | ⏳ Pending | Longitudinal patient system |
+| Memory-Augmented Agent | Hands-On Deliverable | Implementation | ⏳ Pending | Complete memory-enabled agent |
+
 ---
 
 
@@ -3702,7 +3735,7 @@ This deep understanding of memory-augmented RL provides crucial preparation for 
 
 **Topic Overview:** This critical week focuses on ensuring that advanced AI systems operate safely and in alignment with human values, particularly in high-stakes domains like healthcare. Building on the sophisticated agent architectures from previous weeks, you'll study how to design AI systems that remain safe, beneficial, and aligned with human intentions even as they become more autonomous and capable. You'll explore cutting-edge research in AI safety, including reward modeling, constitutional AI, AI alignment techniques, and safety verification methods. The mathematical foundations heavily integrate Stanford CS234 Lecture 15 on reward design and value alignment, providing deep understanding of how to design reward systems that incentivize desired behaviors while avoiding harmful optimization. Healthcare applications focus on medical AI safety, ensuring that autonomous medical systems prioritize patient welfare, maintain ethical standards, and operate within appropriate bounds even when facing novel situations. You'll understand how to build medical AI systems that can be trusted with critical healthcare decisions while maintaining transparency and accountability. The RL connection explores the fundamental challenge of reward specification and how to ensure that agents optimize for intended objectives rather than exploiting reward function loopholes.
 
-#### Progress Status Table - Week 22
+**Mathematical Foundations (4 hours):**
 
 | Lesson Name | Subject | Learning Source | Status | Notes |
 |-------------|---------|----------------|--------|-------|
@@ -3871,6 +3904,27 @@ This week addresses the most fundamental challenges in RL: ensuring that agents 
 
 This comprehensive understanding of AI safety in RL provides essential preparation for the final weeks, where you'll study production deployment and MLOps. The safety techniques learned this week will be crucial for responsibly deploying RL agents and other AI systems in real-world applications where safety and reliability are paramount.
 
+#### Progress Status Table - Week 22
+
+| Lesson Name | Subject | Learning Source | Status | Notes |
+|-------------|---------|----------------|--------|-------|
+| Reward Design and Value Alignment | Mathematical Foundations | Stanford CS234 Lecture 15 | ⏳ Pending | Safe reward specification |
+| AI Safety Theory | Mathematical Foundations | Theory + Practice | ⏳ Pending | Safety verification methods |
+| Value Alignment Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | Human value modeling |
+| Safety Verification | Mathematical Foundations | Theory + Practice | ⏳ Pending | Formal safety guarantees |
+| AI Alignment Survey | Key Readings | Research Survey | ⏳ Pending | Alignment techniques overview |
+| Constitutional AI Revisited | Key Readings | Research Paper | ⏳ Pending | Advanced safety techniques |
+| Reward Modeling Paper | Key Readings | Research Paper | ⏳ Pending | Learning human preferences |
+| AI Safety Research | Key Readings | Research Paper | ⏳ Pending | Current safety approaches |
+| Medical AI Safety | Healthcare Applications | Research + Practice | ⏳ Pending | Healthcare-specific safety |
+| Clinical Ethics in AI | Healthcare Applications | Research + Practice | ⏳ Pending | Medical ethics compliance |
+| Patient Safety Systems | Healthcare Applications | Research + Practice | ⏳ Pending | Safety in medical AI |
+| Safety System Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | AI safety framework |
+| Medical Safety Protocol | Hands-On Deliverable | Implementation | ⏳ Pending | Healthcare safety system |
+| Value Alignment Testing | Hands-On Deliverable | Implementation | ⏳ Pending | Alignment verification |
+| Safety Monitoring System | Hands-On Deliverable | Implementation | ⏳ Pending | Continuous safety monitoring |
+| Clinical Safety Integration | Hands-On Deliverable | Implementation | ⏳ Pending | Medical safety deployment |
+
 ---
 
 
@@ -3878,7 +3932,7 @@ This comprehensive understanding of AI safety in RL provides essential preparati
 
 **Topic Overview:** This week focuses on the critical transition from research and development to production deployment of LLM and agent systems. Building on the safety foundations from Week 22, you'll study the engineering practices, infrastructure, and operational considerations necessary for deploying sophisticated AI systems in real-world environments. You'll explore cutting-edge MLOps practices specifically adapted for large language models and autonomous agents, including model serving, monitoring, continuous integration/deployment, and infrastructure scaling. The mathematical foundations cover optimization for production environments, performance modeling, and reliability engineering. Healthcare applications focus on deploying medical AI systems in clinical environments, meeting regulatory requirements, and ensuring reliable operation in critical healthcare settings. You'll understand the unique challenges of deploying AI in healthcare, including HIPAA compliance, FDA regulations, and integration with existing clinical workflows. The RL connection explores how to deploy and maintain learning agents in production, including online learning, policy updates, and maintaining performance in dynamic environments.
 
-#### Progress Status Table - Week 23
+**Mathematical Foundations (3-4 hours):**
 
 | Lesson Name | Subject | Learning Source | Status | Notes |
 |-------------|---------|----------------|--------|-------|
@@ -4047,33 +4101,33 @@ Deploying RL agents in production presents unique challenges that extend beyond 
 
 This comprehensive understanding of production deployment for RL and other AI systems provides essential preparation for the final week, where you'll integrate all learning into a capstone project. The deployment skills learned this week will be crucial for building AI systems that can operate reliably and safely in real-world healthcare environments.
 
+#### Progress Status Table - Week 23
+
+| Lesson Name | Subject | Learning Source | Status | Notes |
+|-------------|---------|----------------|--------|-------|
+| Production Optimization | Mathematical Foundations | Theory + Practice | ⏳ Pending | Performance optimization |
+| Performance Modeling | Mathematical Foundations | Theory + Practice | ⏳ Pending | System performance analysis |
+| Reliability Engineering | Mathematical Foundations | Theory + Practice | ⏳ Pending | System reliability design |
+| Scalability Mathematics | Mathematical Foundations | Theory + Practice | ⏳ Pending | Infrastructure scaling |
+| MLOps Best Practices | Key Readings | Technical Guide | ⏳ Pending | Production ML workflows |
+| LLM Deployment Guide | Key Readings | Technical Documentation | ⏳ Pending | Large model serving |
+| Agent Deployment Paper | Key Readings | Research Paper | ⏳ Pending | Production agent systems |
+| Healthcare MLOps | Key Readings | Technical Guide | ⏳ Pending | Medical AI deployment |
+| Clinical AI Deployment | Healthcare Applications | Research + Practice | ⏳ Pending | Healthcare system integration |
+| HIPAA Compliance | Healthcare Applications | Research + Practice | ⏳ Pending | Healthcare data privacy |
+| FDA Regulatory Requirements | Healthcare Applications | Research + Practice | ⏳ Pending | Medical AI regulations |
+| Production System Implementation | Hands-On Deliverable | Implementation | ⏳ Pending | Complete MLOps pipeline |
+| Medical AI Deployment | Hands-On Deliverable | Implementation | ⏳ Pending | Healthcare-specific deployment |
+| Monitoring and Alerting | Hands-On Deliverable | Implementation | ⏳ Pending | Production monitoring |
+| Compliance Testing | Hands-On Deliverable | Implementation | ⏳ Pending | Regulatory compliance |
+| Clinical Integration | Hands-On Deliverable | Implementation | ⏳ Pending | Healthcare workflow integration |
+
 ---
 
 
 ### Week 24: Capstone Project - Comprehensive Healthcare AI System
 
 **Topic Overview:** This capstone week integrates all learning from the previous 23 weeks into a comprehensive healthcare AI system that demonstrates mastery of LLM technologies, agentic AI, and production deployment. You'll design and build a complete medical AI platform that incorporates multimodal processing, advanced reasoning, tool use, memory systems, multi-agent coordination, safety mechanisms, and production-ready deployment. This project serves as both a culmination of your learning journey and a portfolio piece that demonstrates your expertise in cutting-edge healthcare AI. The mathematical foundations integrate all previous concepts into a coherent system design, demonstrating how different mathematical frameworks work together in practice. Healthcare applications represent the full spectrum of medical AI capabilities, from patient monitoring and diagnosis to treatment planning and research support. The RL connection demonstrates the complete agent lifecycle from learning and adaptation to safe deployment and continuous improvement in healthcare environments.
-
-#### Progress Status Table - Week 24
-
-| Lesson Name | Subject | Learning Source | Status | Notes |
-|-------------|---------|----------------|--------|-------|
-| System Architecture Integration | Mathematical Foundations | Theory + Practice | ⏳ Pending | Comprehensive system design |
-| End-to-End Optimization | Mathematical Foundations | Theory + Practice | ⏳ Pending | Full system optimization |
-| Multi-Component Coordination | Mathematical Foundations | Theory + Practice | ⏳ Pending | Component integration |
-| Performance Evaluation Framework | Mathematical Foundations | Theory + Practice | ⏳ Pending | System-wide metrics |
-| Healthcare AI System Design | Key Readings | Design Documentation | ⏳ Pending | Medical AI architecture |
-| Production AI Case Studies | Key Readings | Case Studies | ⏳ Pending | Real-world deployments |
-| Medical AI Ethics Guidelines | Key Readings | Ethics Guidelines | ⏳ Pending | Responsible AI development |
-| Portfolio Development Guide | Key Readings | Career Guide | ⏳ Pending | Professional presentation |
-| Comprehensive Medical Platform | Healthcare Applications | Capstone Project | ⏳ Pending | Full healthcare AI system |
-| Clinical Workflow Integration | Healthcare Applications | Capstone Project | ⏳ Pending | Healthcare process integration |
-| Patient Safety Framework | Healthcare Applications | Capstone Project | ⏳ Pending | Safety-first design |
-| System Architecture Design | Hands-On Deliverable | Capstone Project | ⏳ Pending | Complete system design |
-| Multi-Agent Medical Platform | Hands-On Deliverable | Capstone Project | ⏳ Pending | Coordinated AI agents |
-| Production Deployment | Hands-On Deliverable | Capstone Project | ⏳ Pending | Live system deployment |
-| Safety and Compliance Testing | Hands-On Deliverable | Capstone Project | ⏳ Pending | Comprehensive safety validation |
-| Portfolio Presentation | Hands-On Deliverable | Capstone Project | ⏳ Pending | Professional portfolio |
 
 **Mathematical Foundations (4 hours):**
 
@@ -4218,5 +4272,25 @@ This capstone project demonstrates the complete RL agent lifecycle and integrati
 
 6. **Real-World Impact**: The complete system should demonstrate how RL and other AI techniques can be integrated to create systems that have meaningful positive impact in healthcare.
 
----
+#### Progress Status Table - Week 24
 
+| Lesson Name | Subject | Learning Source | Status | Notes |
+|-------------|---------|----------------|--------|-------|
+| System Architecture Integration | Mathematical Foundations | Theory + Practice | ⏳ Pending | Comprehensive system design |
+| End-to-End Optimization | Mathematical Foundations | Theory + Practice | ⏳ Pending | System-wide optimization |
+| Performance Analysis | Mathematical Foundations | Theory + Practice | ⏳ Pending | Complete system evaluation |
+| Integration Testing | Mathematical Foundations | Theory + Practice | ⏳ Pending | Component integration |
+| Healthcare AI System Design | Project Planning | Design + Implementation | ⏳ Pending | Complete system architecture |
+| Multimodal Medical Interface | Project Planning | Design + Implementation | ⏳ Pending | Vision, text, audio integration |
+| Agent Coordination Framework | Project Planning | Design + Implementation | ⏳ Pending | Multi-agent medical team |
+| Safety and Compliance System | Project Planning | Design + Implementation | ⏳ Pending | Medical safety framework |
+| Patient Monitoring Agent | Healthcare Applications | Implementation | ⏳ Pending | Autonomous monitoring system |
+| Diagnostic Support Agent | Healthcare Applications | Implementation | ⏳ Pending | AI-assisted diagnosis |
+| Treatment Planning Agent | Healthcare Applications | Implementation | ⏳ Pending | Personalized treatment plans |
+| Comprehensive Healthcare Platform | Capstone Deliverable | Implementation | ⏳ Pending | Complete medical AI system |
+| Multi-Agent Medical Team | Capstone Deliverable | Implementation | ⏳ Pending | Coordinated AI specialists |
+| Production Deployment | Capstone Deliverable | Implementation | ⏳ Pending | Clinical-ready deployment |
+| Safety and Monitoring System | Capstone Deliverable | Implementation | ⏳ Pending | Comprehensive safety framework |
+| Portfolio Documentation | Capstone Deliverable | Documentation | ⏳ Pending | Complete project portfolio |
+
+---
