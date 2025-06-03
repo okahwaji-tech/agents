@@ -1,4 +1,4 @@
-# Vector Spaces and Subspaces: A Comprehensive Study Guide
+# Vector Spaces and Subspaces
 
 ## Axioms and Properties of Vector Spaces
 
