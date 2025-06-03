@@ -69,7 +69,7 @@ Understanding the mathematical concepts that power language modeling is crucial 
    - *Deep Learning* Ch. 1: Mathematical notation and basic concepts
    - *AI Engineering* Ch. 1: Overview of AI systems and engineering considerations
 
-6. **Stanford Stats 116 (web.stanford.edu/class/stats116/syllabus.html)** – Review Lectures 1-2 on probability fundamentals. This will reinforce the mathematical foundations and provide additional practice problems for probability concepts essential to understanding language modeling.
+6. **Stanford Stats 116 ([web.stanford.edu/class/stats116/syllabus.html](https://web.stanford.edu/class/stats116/syllabus.html))** – Review Lectures 1-2 on probability fundamentals. This will reinforce the mathematical foundations and provide additional practice problems for probability concepts essential to understanding language modeling.
 
 **Healthcare Applications (2 hours):**
 
