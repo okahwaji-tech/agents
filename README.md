@@ -254,17 +254,7 @@ Implement and analyze attention mechanisms with a focus on medical text understa
    - Extract and visualize attention weights for medical entity recognition tasks
    - Analyze which words the model attends to when processing medical terminology
    - Compare attention patterns for medical vs. general text
-   - Example workflow:
-   ```python
-   from transformers import BertModel, BertTokenizer
    
-   # Load pre-trained BERT
-   # Process medical text
-   # Extract attention weights
-   # Visualize attention patterns
-   # Analyze medical entity focus
-   ```
-
 4. **Multi-Head Attention Experiment** (1.5 hours):
    - Implement multi-head attention with 2-4 heads
    - Analyze how different heads focus on different aspects of medical text
