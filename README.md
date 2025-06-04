@@ -3,12 +3,37 @@ This is a repository for learning LLM and agentic workflows.
 
 ## Development Setup with uv
 
+### Prerequisites
+- Python 3.11+
+- Apple Silicon Mac (M1/M2/M3) for optimal performance
+
+### Installation
+
+1. **Install uv (if not already installed):**
 ```bash
-curl -Ls https://astral.sh/uv/install.sh | sh
-uv venv .venv
-source .venv/bin/activate
-uv pip install -e .
+curl -LsSf https://astral.sh/uv/install.sh | sh
+source $HOME/.local/bin/env  # Add uv to PATH
 ```
+
+2. **Create and activate virtual environment:**
+```bash
+# Create virtual environment named 'agents'
+uv venv agents
+
+# Activate the virtual environment
+source agents/bin/activate
+
+# Install all dependencies (optimized for Apple Silicon)
+UV_PROJECT_ENVIRONMENT=agents uv sync
+```
+
+3. **Verify installation:**
+```bash
+# Run comprehensive test suite for Apple Silicon optimization
+python test_apple_silicon.py
+```
+
+### Development Commands
 
 Run automated checks and clean caches with Poe:
 
@@ -16,6 +41,41 @@ Run automated checks and clean caches with Poe:
 uv run poe check_all
 uv run poe clean_cache
 ```
+
+### Apple Silicon M3 Ultra Optimization
+
+This setup is specifically optimized for Apple Silicon M3 Ultra processors and includes:
+
+**🚀 GPU Acceleration:**
+- PyTorch with Metal Performance Shaders (MPS) support
+- Hugging Face Accelerate for distributed training
+- Optimized matrix operations using Apple's Neural Engine
+
+**📦 Optimized Libraries:**
+- `torch` - Latest PyTorch with MPS backend
+- `accelerate` - Hugging Face acceleration library
+- `transformers` - Latest Transformers with Apple Silicon optimizations
+- All data science libraries compiled for ARM64
+
+**💡 Usage Example:**
+```python
+import torch
+from accelerate import Accelerator
+
+# Automatic device selection (MPS for M3 Ultra)
+accelerator = Accelerator()
+device = accelerator.device  # Will use 'mps' on Apple Silicon
+
+# Manual device selection
+device = torch.device('mps' if torch.backends.mps.is_available() else 'cpu')
+model = model.to(device)
+data = data.to(device)
+```
+
+**🔥 Performance Benefits:**
+- Up to 20x faster training compared to CPU-only
+- Efficient memory usage with unified memory architecture
+- Optimized for large language model inference and fine-tuning
 
 
 ## Phase 1: Foundation LLM Architecture (Weeks 1–6)
@@ -159,7 +219,7 @@ Understanding these connections now will make the RL integration in later weeks 
 | Lesson Name | Subject | Learning Source | Status | Notes |
 |-------------|---------|----------------|--------|-------|
 | Probability Theory Fundamentals | Mathematical Foundations | Textbooks + Practice | ⏳ Pending | Discrete/continuous distributions, Bayes' theorem |
-| Information Theory Basics | Mathematical Foundations | Textbooks + Practice | ⏳ Pending | Entropy, cross-entropy, perplexity |
+| Information Theory Basics | Mathematical Foundations | Textbooks + Practice | ⏳ Pending | [Entropy, cross-entropy, perplexity](materials/weeks-1/information_theory.md) |
 | Linear Algebra Review | Mathematical Foundations | Textbooks + Practice | ⏳ in Progress | [Vector spaces](materials/weeks-1/vector_spaces.md), [matrix operations](materials/weeks-1/matrix_multiplication.md) [eigenvalues and eigenvectors](materials/weeks-1/eigenvalues_eigenvectors.md) |
 | CS234 Mathematical Foundations | Mathematical Foundations | Stanford CS234 | ⏳ Pending | MDPs, state/action spaces |
 | Understanding Large Language Models | Key Readings | Blog Post | ⏳ Pending | LLM capabilities and history |
