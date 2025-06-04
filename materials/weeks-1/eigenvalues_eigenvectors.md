@@ -1,11 +1,5 @@
 # Eigenvalues & Eigenvectors: A Comprehensive Study Guide for Machine Learning Engineers
 
-**Author:** Manus AI  
-**Date:** January 2025  
-**Target Audience:** Machine Learning Engineers, Data Scientists, and AI Practitioners
-
----
-
 ## Table of Contents
 
 1. [Introduction and Motivation](#1-introduction-and-motivation)
