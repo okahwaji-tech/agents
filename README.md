@@ -220,10 +220,10 @@ Understanding these connections now will make the RL integration in later weeks 
 
 | Lesson Name | Subject | Learning Source | Status | Notes |
 |-------------|---------|----------------|--------|-------|
-| Probability Theory Fundamentals | Mathematical Foundations | Textbooks + Practice | ⏳ Pending | Discrete/continuous distributions, Bayes' theorem |
+| Probability Theory Fundamentals | Mathematical Foundations | Textbooks + Practice | ⏳ Pending | [Discrete/continuous distributions, Bayes' theorem](materials/weeks-1/probability_theory.md) |
 | Information Theory Basics | Mathematical Foundations | Textbooks + Practice | ⏳ Pending | [Entropy, cross-entropy, perplexity](materials/weeks-1/information_theory.md) |
 | Linear Algebra Review | Mathematical Foundations | Textbooks + Practice | ⏳ in Progress | [Vector spaces](materials/weeks-1/vector_spaces.md), [matrix operations](materials/weeks-1/matrix_multiplication.md) [eigenvalues and eigenvectors](materials/weeks-1/eigenvalues_eigenvectors.md) |
-| CS234 Mathematical Foundations | Mathematical Foundations | Stanford CS234 | ⏳ Pending | MDPs, state/action spaces |
+| CS234 Mathematical Foundations | Mathematical Foundations | Stanford CS234 | ⏳ Pending | [MDPs, state/action spaces](materials/weeks-1/rl_llm_foundation.md) |
 | Understanding Large Language Models | Key Readings | Blog Post | ⏳ Pending | LLM capabilities and history |
 | NLP with Deep Learning Introduction | Key Readings | Stanford CS224n | ⏳ Pending | Language modeling basics |
 | Reinforcement Learning Introduction | Key Readings | Sutton & Barto Ch. 1 | ⏳ Pending | RL vs supervised learning |
