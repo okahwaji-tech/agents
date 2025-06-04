@@ -76,7 +76,9 @@ data = data.to(device)
 - Up to 20x faster training compared to CPU-only
 - Efficient memory usage with unified memory architecture
 - Optimized for large language model inference and fine-tuning
+---
 
+# Study Guide
 
 ## Phase 1: Foundation LLM Architecture (Weeks 1–6)
 
