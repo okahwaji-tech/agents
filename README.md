@@ -199,9 +199,9 @@ Understanding these connections now will make the RL integration in later weeks 
 | NLP with Deep Learning Introduction | Key Readings | Stanford CS224n | ⏳ Pending |[ Language modeling basics](materials/weeks-1/word_embeddings_and_llm.md#introduction-to-language-representation) |
 | Reinforcement Learning Introduction | Key Readings | Sutton & Barto Ch. 1 | ⏳ Pending | RL vs supervised learning |
 | CS234 Lecture 1 | Key Readings | Stanford CS234 | ⏳ Pending | [RL mathematical formulation](materials/weeks-1/rl_llm_foundation.md#introduction-to-reinforcement-learning) |
-| Environment Setup | Hands-On Deliverable | Implementation | ⏳ Pending | Python, PyTorch, Hugging Face |
 | First LLM Program | Hands-On Deliverable | Implementation | ⏳ Pending | GPT-2 implementation |
 | Mathematical Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Perplexity calculations |
+| Code  | Hands-On Deliverable | Implementation | ⏳ Pending | [PyTorch implementation](code/week-1/) |
 
 ---
 
