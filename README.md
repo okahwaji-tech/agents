@@ -126,34 +126,11 @@ Understanding the mathematical concepts that power language modeling is crucial 
 
 4. **Stanford CS234 (2024) – Lecture 1: Introduction to Reinforcement Learning** – Watch the first 30 minutes focusing on the mathematical formulation of RL problems. Understand the concepts of states, actions, rewards, and policies. While this might seem unrelated to language modeling now, these concepts become crucial when we discuss LLM agents and alignment. The mathematical rigor of CS234 will prepare you for the advanced RL techniques used in modern LLM training.
 
-5. **Your Books Integration**:
+5. **Books**:
    - *Hands-On Large Language Models* Ch. 1-2: Practical introduction to working with LLMs
    - *Deep Learning* Ch. 1: Mathematical notation and basic concepts
    - *AI Engineering* Ch. 1: Overview of AI systems and engineering considerations
 
-6. **Stanford Stats 116 ([STAT116](https://web.stanford.edu/class/stats116/syllabus.html))** – Review Lectures 1-2 on probability fundamentals. This will reinforce the mathematical foundations and provide additional practice problems for probability concepts essential to understanding language modeling.
-
-**Healthcare Applications (2 hours):**
-
-Understanding how LLMs apply to healthcare is crucial for your role at Allergan Data Labs. This week introduces the unique challenges and opportunities:
-
-1. **Medical Text Processing Fundamentals** (1 hour):
-   - Understanding clinical notes, medical terminology, and healthcare documentation
-   - Challenges in medical language: abbreviations, domain-specific terms, multilingual medical text
-   - Privacy and security considerations: HIPAA compliance, patient data protection
-   - Regulatory landscape: FDA guidelines for AI in healthcare, clinical validation requirements
-
-2. **Healthcare Data Privacy and Ethics** (0.5 hours):
-   - HIPAA compliance requirements for LLM applications
-   - De-identification techniques and their limitations
-   - Ethical considerations in medical AI: bias, fairness, transparency
-   - Patient consent and data governance in healthcare AI systems
-
-3. **Introduction to Clinical Decision Support** (0.5 hours):
-   - Overview of AI-assisted diagnosis and treatment recommendation systems
-   - Understanding the difference between diagnostic aid and diagnostic replacement
-   - Safety considerations: when AI should and shouldn't be used in medical decisions
-   - Case studies of successful medical AI implementations and their limitations
 
 **Hands-On Deliverable:**
 
@@ -174,21 +151,15 @@ Set up your comprehensive development environment and create your first LLM appl
    - Create a function that takes a text prompt and generates completions
    - Implement temperature and top-k sampling to control generation randomness
    - Test with general prompts first: "The future of artificial intelligence is..."
-     
-3. **Healthcare Application Testing** (1 hour):
-   - Test the model with medical prompts: "The patient presents with chest pain and..."
-   - Document the model's responses to medical terminology
-   - Identify concerning outputs: medical advice, diagnostic claims, treatment recommendations
-   - Create a list of "red flag" outputs that would be problematic in healthcare settings
-   - Test with different medical specialties: cardiology, oncology, psychiatry
 
-4. **Mathematical Analysis** (0.5 hours):
+
+34. **Mathematical Analysis** (0.5 hours):
    - Calculate the perplexity of the model on a small medical text sample
    - Analyze the probability distributions of the model's predictions
    - Compare the model's confidence (probability scores) on medical vs. general text
    - Document how the model's uncertainty changes with different types of medical content
 
-5. **Documentation and Reflection** (1 hour):
+4. **Documentation and Reflection** (1 hour):
    - Create a detailed report documenting your setup process and any challenges
    - Analyze the model's performance on medical vs. general text
    - Identify specific areas where the model shows limitations in medical contexts
@@ -222,20 +193,15 @@ Understanding these connections now will make the RL integration in later weeks 
 |-------------|---------|----------------|--------|-------|
 | Probability Theory Fundamentals | Mathematical Foundations | Textbooks + Practice | ⏳ Pending | [Discrete/continuous distributions, Bayes' theorem](materials/weeks-1/probability_theory.md) |
 | Information Theory Basics | Mathematical Foundations | Textbooks + Practice | ⏳ Pending | [Entropy, cross-entropy, perplexity](materials/weeks-1/information_theory.md) |
-| Linear Algebra Review | Mathematical Foundations | Textbooks + Practice | ⏳ in Progress | [Vector spaces](materials/weeks-1/vector_spaces.md), [matrix operations](materials/weeks-1/matrix_multiplication.md) [eigenvalues and eigenvectors](materials/weeks-1/eigenvalues_eigenvectors.md) |
+| Linear Algebra Review | Mathematical Foundations | Textbooks + Practice | ⏳ in Progress | [Vector spaces](materials/weeks-1/vector_spaces.md), [Matrix Operations](materials/weeks-1/matrix_multiplication.md) [Eigenvalues & Eigenvectors](materials/weeks-1/eigenvalues_eigenvectors.md) [Singular Value Decomposition](materials/weeks-1/svd.md) [Gradient Descent](materials/weeks-1/gradient_descent.md) |
 | CS234 Mathematical Foundations | Mathematical Foundations | Stanford CS234 | ⏳ Pending | [MDPs, state/action spaces](materials/weeks-1/rl_llm_foundation.md) |
 | Understanding Large Language Models | Key Readings | Blog Post | ⏳ Pending | LLM capabilities and history |
 | NLP with Deep Learning Introduction | Key Readings | Stanford CS224n | ⏳ Pending |[ Language modeling basics](materials/weeks-1/word_embeddings_and_llm.md#introduction-to-language-representation) |
 | Reinforcement Learning Introduction | Key Readings | Sutton & Barto Ch. 1 | ⏳ Pending | RL vs supervised learning |
 | CS234 Lecture 1 | Key Readings | Stanford CS234 | ⏳ Pending | [RL mathematical formulation](materials/weeks-1/rl_llm_foundation.md#introduction-to-reinforcement-learning) |
-| Medical Text Processing Fundamentals | Healthcare Applications | Research + Practice | ⏳ Pending | Clinical notes, terminology |
-| Healthcare Data Privacy and Ethics | Healthcare Applications | Research + Practice | ⏳ Pending | HIPAA compliance, ethics |
-| Clinical Decision Support Introduction | Healthcare Applications | Research + Practice | ⏳ Pending | AI-assisted diagnosis |
 | Environment Setup | Hands-On Deliverable | Implementation | ⏳ Pending | Python, PyTorch, Hugging Face |
 | First LLM Program | Hands-On Deliverable | Implementation | ⏳ Pending | GPT-2 implementation |
-| Healthcare Application Testing | Hands-On Deliverable | Implementation | ⏳ Pending | Medical prompts testing |
 | Mathematical Analysis | Hands-On Deliverable | Implementation | ⏳ Pending | Perplexity calculations |
-| Documentation and Reflection | Hands-On Deliverable | Implementation | ⏳ Pending | Report writing |
 
 ---
 
