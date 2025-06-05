@@ -227,7 +227,7 @@ Understanding these connections now will make the RL integration in later weeks 
 | Understanding Large Language Models | Key Readings | Blog Post | ⏳ Pending | LLM capabilities and history |
 | NLP with Deep Learning Introduction | Key Readings | Stanford CS224n | ⏳ Pending | Language modeling basics |
 | Reinforcement Learning Introduction | Key Readings | Sutton & Barto Ch. 1 | ⏳ Pending | RL vs supervised learning |
-| CS234 Lecture 1 | Key Readings | Stanford CS234 | ⏳ Pending | RL mathematical formulation |
+| CS234 Lecture 1 | Key Readings | Stanford CS234 | ⏳ Pending | [RL mathematical formulation](materials/weeks-1/rl_llm_foundation.md#introduction-to-reinforcement-learning) |
 | Medical Text Processing Fundamentals | Healthcare Applications | Research + Practice | ⏳ Pending | Clinical notes, terminology |
 | Healthcare Data Privacy and Ethics | Healthcare Applications | Research + Practice | ⏳ Pending | HIPAA compliance, ethics |
 | Clinical Decision Support Introduction | Healthcare Applications | Research + Practice | ⏳ Pending | AI-assisted diagnosis |
