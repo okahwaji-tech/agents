@@ -176,3 +176,5 @@ cython_debug/
 
 # Test scripts (optional - can be committed if desired)
 # test_apple_silicon.py
+.DS_Store
+/.DS_Store
