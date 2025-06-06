@@ -195,7 +195,7 @@ Understanding these connections now will make the RL integration in later weeks 
 | Information Theory Basics | Mathematical Foundations | Textbooks + Practice | ⏳ Pending | [Entropy, cross-entropy, perplexity](materials/weeks-1/information_theory.md) |
 | Linear Algebra Review | Mathematical Foundations | Textbooks + Practice | ⏳ in Progress | [Vector spaces](materials/weeks-1/vector_spaces.md), [Matrix Operations](materials/weeks-1/matrix_multiplication.md) [Eigenvalues & Eigenvectors](materials/weeks-1/eigenvalues_eigenvectors.md) [Singular Value Decomposition](materials/weeks-1/svd.md) [Gradient Descent](materials/weeks-1/gradient_descent.md) |
 |  Reinforcement Learning Introduction | Mathematical Foundations | Stanford CS234 | ⏳ Pending | [MDPs, state/action spaces](materials/weeks-1/rl_llm_foundation.md) [RL mathematical formulation](materials/weeks-1/rl_llm_foundation.md#introduction-to-reinforcement-learning) [Markov Decision Processes](materials/weeks-1/mdp.md#markov-decision-processes) |
-| Understanding Large Language Models | Key Readings | Blog Post | ⏳ Pending | LLM capabilities and history |
+| Understanding Large Language Models | Key Readings | Blog Post | ⏳ Pending | [LLM capabilities and history](materials/weeks-1/llm.md) |
 | NLP with Deep Learning Introduction | Key Readings | Stanford CS224n | ⏳ Pending |[ Language modeling basics](materials/weeks-1/word_embeddings_and_llm.md#introduction-to-language-representation) |
 | First LLM Program | Hands-On Deliverable | Implementation | ⏳ Pending | GPT-2 implementation |
 |LLM Evaluation | Hands-On Deliverable | Key Readings +Implementation | ⏳ Pending | [LLM evaluation ](materials/weeks-1/ll_evaluation.md) |
