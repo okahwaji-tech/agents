@@ -1,0 +1,329 @@
+/* Custom styles for LLM & Agentic Workflows documentation */
+
+/* Progress tracking tables */
+.progress-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+}
+
+.progress-table th,
+.progress-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.progress-table th {
+    background-color: var(--md-primary-fg-color--light);
+    color: var(--md-primary-bg-color);
+    font-weight: 600;
+}
+
+.progress-table tr:hover {
+    background-color: var(--md-default-fg-color--lightest);
+}
+
+/* Status indicators */
+.status-pending {
+    color: #ff9800;
+    font-weight: 600;
+}
+
+.status-in-progress {
+    color: #2196f3;
+    font-weight: 600;
+}
+
+.status-completed {
+    color: #4caf50;
+    font-weight: 600;
+}
+
+.status-not-started {
+    color: #757575;
+    font-weight: 600;
+}
+
+/* Progress bars */
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: var(--md-default-fg-color--lightest);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 0.5rem 0;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4caf50, #8bc34a);
+    transition: width 0.3s ease;
+}
+
+/* Code blocks with healthcare focus */
+.healthcare-code {
+    border-left: 4px solid #e91e63;
+    background-color: var(--md-code-bg-color);
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.healthcare-code::before {
+    content: "🏥 Healthcare Application";
+    display: block;
+    font-weight: 600;
+    color: #e91e63;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* Mathematical content styling */
+.math-content {
+    border-left: 4px solid #3f51b5;
+    background-color: var(--md-code-bg-color);
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.math-content::before {
+    content: "🧮 Mathematical Foundation";
+    display: block;
+    font-weight: 600;
+    color: #3f51b5;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* Apple Silicon optimization callouts */
+.apple-silicon {
+    border: 2px solid #007aff;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    background: linear-gradient(135deg, #f5f5f7, #ffffff);
+}
+
+.apple-silicon::before {
+    content: "🍎 Apple Silicon M3 Ultra Optimization";
+    display: block;
+    font-weight: 600;
+    color: #007aff;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* Week navigation cards */
+.week-card {
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+    background-color: var(--md-default-bg-color);
+}
+
+.week-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.week-card h3 {
+    margin-top: 0;
+    color: var(--md-primary-fg-color);
+}
+
+.week-card .week-meta {
+    display: flex;
+    gap: 1rem;
+    margin: 0.5rem 0;
+    font-size: 0.85rem;
+    color: var(--md-default-fg-color--light);
+}
+
+.week-card .week-progress {
+    margin-top: 1rem;
+}
+
+/* Learning objectives styling */
+.learning-objectives {
+    background: linear-gradient(135deg, #e3f2fd, #f3e5f5);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+}
+
+.learning-objectives h4 {
+    margin-top: 0;
+    color: var(--md-primary-fg-color);
+}
+
+.learning-objectives ul {
+    margin-bottom: 0;
+}
+
+.learning-objectives li {
+    margin: 0.5rem 0;
+}
+
+/* Time investment indicators */
+.time-indicator {
+    display: inline-block;
+    background-color: var(--md-accent-fg-color);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-left: 0.5rem;
+}
+
+/* Difficulty indicators */
+.difficulty-easy {
+    color: #4caf50;
+    font-weight: 600;
+}
+
+.difficulty-medium {
+    color: #ff9800;
+    font-weight: 600;
+}
+
+.difficulty-hard {
+    color: #f44336;
+    font-weight: 600;
+}
+
+/* Healthcare safety warnings */
+.medical-disclaimer {
+    background-color: #fff3e0;
+    border: 2px solid #ff9800;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.medical-disclaimer::before {
+    content: "⚠️ Medical Disclaimer";
+    display: block;
+    font-weight: 600;
+    color: #ff9800;
+    margin-bottom: 0.5rem;
+}
+
+/* Code example navigation */
+.code-nav {
+    display: flex;
+    gap: 0.5rem;
+    margin: 1rem 0;
+    flex-wrap: wrap;
+}
+
+.code-nav-item {
+    background-color: var(--md-default-fg-color--lightest);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    text-decoration: none;
+    color: var(--md-default-fg-color);
+    font-size: 0.85rem;
+    transition: background-color 0.3s ease;
+}
+
+.code-nav-item:hover {
+    background-color: var(--md-primary-fg-color--light);
+    color: var(--md-primary-bg-color);
+}
+
+.code-nav-item.active {
+    background-color: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color);
+}
+
+/* Responsive design improvements */
+@media (max-width: 768px) {
+    .progress-table {
+        font-size: 0.8rem;
+    }
+    
+    .progress-table th,
+    .progress-table td {
+        padding: 0.5rem;
+    }
+    
+    .week-card {
+        padding: 1rem;
+    }
+    
+    .week-card .week-meta {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    
+    .code-nav {
+        justify-content: center;
+    }
+}
+
+/* Dark mode adjustments */
+[data-md-color-scheme="slate"] .apple-silicon {
+    background: linear-gradient(135deg, #1e1e1e, #2d2d2d);
+    border-color: #007aff;
+}
+
+[data-md-color-scheme="slate"] .learning-objectives {
+    background: linear-gradient(135deg, #1a237e, #4a148c);
+}
+
+[data-md-color-scheme="slate"] .medical-disclaimer {
+    background-color: #3e2723;
+    border-color: #ff9800;
+}
+
+/* Animation for progress updates */
+@keyframes progressUpdate {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.progress-updated {
+    animation: progressUpdate 0.5s ease;
+}
+
+/* Syntax highlighting improvements for healthcare code */
+.highlight .c1 { /* Comments */
+    color: #6a9955;
+    font-style: italic;
+}
+
+.highlight .s { /* Strings */
+    color: #ce9178;
+}
+
+.highlight .k { /* Keywords */
+    color: #569cd6;
+    font-weight: bold;
+}
+
+.highlight .nf { /* Function names */
+    color: #dcdcaa;
+}
+
+/* Custom scrollbar for better UX */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--md-default-bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--md-default-fg-color--lighter);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--md-default-fg-color--light);
+}

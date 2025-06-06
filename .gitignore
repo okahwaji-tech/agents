@@ -146,6 +146,7 @@ agents/
 
 # mkdocs documentation
 /site
+.mkdocs/
 
 # mypy
 .mypy_cache/

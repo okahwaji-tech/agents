@@ -30,6 +30,14 @@ dev = [
     "poethepoet",
     "jupyterlab"
 ]
+docs = [
+    "mkdocs>=1.5.0",
+    "mkdocs-material>=9.4.0",
+    "mkdocs-jupyter>=0.24.0",
+    "pymdown-extensions>=10.0.0",
+    "mkdocs-git-revision-date-localized-plugin>=1.2.0",
+    "mkdocs-awesome-pages-plugin>=2.9.0"
+]
 
 [tool.ruff]
 line-length = 88
@@ -56,3 +64,15 @@ script = "scripts/clean_cache.py"
 
 [tool.poe.tasks.check_all]
 sequence = ["format", "lint", "typecheck", "test"]
+
+[tool.poe.tasks.docs-serve]
+cmd = "mkdocs serve"
+help = "Serve documentation locally for development"
+
+[tool.poe.tasks.docs-build]
+cmd = "mkdocs build"
+help = "Build documentation for production"
+
+[tool.poe.tasks.docs-deploy]
+cmd = "mkdocs gh-deploy"
+help = "Deploy documentation to GitHub Pages"
