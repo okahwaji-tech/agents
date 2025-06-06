@@ -42,26 +42,6 @@ uv run poe check_all
 uv run poe clean_cache
 ```
 
-### Documentation Site
-
-Browse the study guide as a website using [MkDocs](https://www.mkdocs.org/).
-
-1. **Install MkDocs:**
-   ```bash
-   pip install mkdocs
-   ```
-
-2. **Start the local server:**
-   ```bash
-   mkdocs serve
-   ```
-   Then open <http://127.0.0.1:8000> in your browser.
-
-3. **Build static site (optional):**
-   ```bash
-   mkdocs build
-   ```
-
 ### Apple Silicon M3 Ultra Optimization
 
 This setup is specifically optimized for Apple Silicon M3 Ultra processors and includes:

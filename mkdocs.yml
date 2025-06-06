@@ -1,0 +1,13 @@
+site_name: Study Guide
+nav:
+  - Home: index.md
+  - Week 1:
+      - "Eigenvalues & Eigenvectors": materials/weeks-1/eigenvalues_eigenvectors.md
+      - "Probability Theory": materials/weeks-1/probability_theory.md
+      - "Information Theory": materials/weeks-1/information_theory.md
+      - "Matrix Multiplication": materials/weeks-1/matrix_multiplication.md
+      - "Gradient Descent": materials/weeks-1/gradiend_descent.md
+      - "SVD": materials/weeks-1/svd.md
+      - "Vector Spaces": materials/weeks-1/vector_spaces.md
+      - "Word Embeddings and LLM": materials/weeks-1/word_embeddings_and_llm.md
+      - "RL LLM Foundation": materials/weeks-1/rl_llm_foundation.md
