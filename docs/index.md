@@ -75,15 +75,15 @@ Track your learning progress with detailed tables for each week covering:
     - [More weeks...](study-guide/index.md)
 
 === "Materials"
-    - [Mathematical Foundations](materials/week-1/mathematical-foundations.md)
-    - [Probability Theory](materials/week-1/probability-theory.md)
-    - [Information Theory](materials/week-1/information-theory.md)
-    - [Linear Algebra](materials/week-1/linear-algebra.md)
+    - [Mathematical Foundations](materials/math/index.md)
+    - [Probability Theory](materials/math/probability-theory.md)
+    - [Information Theory](materials/math/information-theory.md)
+    - [Linear Algebra](materials/math/linear-algebra.md)
 
 === "Code Examples"
-    - [Week 1 Implementations](code-examples/week-1/index.md)
-    - [PyTorch Examples](code-examples/week-1/index.md)
-    - [Healthcare Applications](code-examples/week-1/index.md)
+    - [Practical Implementations](code-examples/index.md)
+    - [PyTorch Examples](code-examples/index.md)
+    - [Healthcare Applications](code-examples/index.md)
 
 === "Progress"
     - [Overall Progress](progress/index.md)

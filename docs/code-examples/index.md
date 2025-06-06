@@ -1,4 +1,6 @@
-# Week 1 Code Examples
+# Code Examples
+
+Practical implementations demonstrating the concepts covered in the materials.
 
 This page showcases the practical implementations for Week 1, demonstrating the mathematical concepts and healthcare applications covered in the study materials.
 

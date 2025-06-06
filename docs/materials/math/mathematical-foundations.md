@@ -53,7 +53,7 @@ This is the mathematical foundation of autoregressive language modeling.
 - **Clinical outcomes**: P(outcome|treatment, patient_history)
 
 ### Resources
-- [Detailed Probability Theory Guide](probability-theory.md)
+- [Detailed Probability Theory Guide](../math/probability-theory.md)
 - Interactive probability calculators
 - Practice problems with medical examples
 
@@ -93,7 +93,7 @@ Lower perplexity = better model performance.
 - **Compression**: Efficient representation of medical knowledge
 
 ### Resources
-- [Detailed Information Theory Guide](information-theory.md)
+- [Detailed Information Theory Guide](../math/information-theory.md)
 - Entropy calculation examples
 - Perplexity computation tools
 
@@ -131,9 +131,9 @@ output = attention_weights @ V
 - **Clinical note analysis**: Semantic similarity of medical text
 
 ### Resources
-- [Vector Spaces Guide](vector-spaces.md)
-- [Matrix Operations Tutorial](matrix-multiplication.md)
-- [Eigenvalues & Eigenvectors](eigenvalues-eigenvectors.md)
+- [Vector Spaces Guide](../math/vector-spaces.md)
+- [Matrix Operations Tutorial](../math/matrix-multiplication.md)
+- [Eigenvalues & Eigenvectors](../math/eigenvalues-eigenvectors.md)
 
 ## 🎮 Reinforcement Learning Foundations
 
@@ -164,8 +164,8 @@ The mathematical framework for sequential decision-making:
 - **Patient interaction**: Adaptive conversation strategies
 
 ### Resources
-- [RL-LLM Foundations](rl-llm-foundation.md)
-- [Markov Decision Processes](mdp.md)
+- [RL-LLM Foundations](../ml/rl-llm-foundation.md)
+- [Markov Decision Processes](../ml/mdp.md)
 - Stanford CS234 lecture notes
 
 ## 🔗 Connections Between Topics

@@ -134,23 +134,24 @@ nav:
     - Apple Silicon Optimization: getting-started/apple-silicon.md
   - Study Guide:
     - Overview: study-guide/index.md
-    - Phase 1 - Foundation LLM Architecture:
-      - Week 1 - Introduction to LLMs: study-guide/week-1/index.md
-      - Week 2 - Transformer Architecture: study-guide/week-2/index.md
-      - Week 3 - Pre-Training LLMs: study-guide/week-3/index.md
-      - Week 4 - Embeddings and Tokenization: study-guide/week-4/index.md
-      - Week 5 - Fine-tuning and Prompting: study-guide/week-5/index.md
-      - Week 6 - Evaluation and Benchmarks: study-guide/week-6/index.md
+    - Week 1 - Introduction to LLMs: study-guide/week-1/index.md
   - Materials:
-    - Week 1:
-      - Mathematical Foundations: materials/week-1/mathematical-foundations.md
-      - Probability Theory: materials/week-1/probability-theory.md
-      - Information Theory: materials/week-1/information-theory.md
-      - Linear Algebra: materials/week-1/linear-algebra.md
-      - Reinforcement Learning: materials/week-1/reinforcement-learning.md
-      - LLM Fundamentals: materials/week-1/llm-fundamentals.md
-      - Evaluation: materials/week-1/evaluation.md
-  - Code Examples:
-    - Week 1: code-examples/week-1/index.md
+    - Mathematical Foundations:
+      - Overview: materials/math/index.md
+      - Probability Theory: materials/math/probability-theory.md
+      - Information Theory: materials/math/information-theory.md
+      - Linear Algebra: materials/math/linear-algebra.md
+      - Vector Spaces: materials/math/vector-spaces.md
+      - Matrix Operations: materials/math/matrix-multiplication.md
+      - Eigenvalues & Eigenvectors: materials/math/eigenvalues-eigenvectors.md
+    - Machine Learning:
+      - Reinforcement Learning: materials/ml/reinforcement-learning.md
+      - Markov Decision Processes: materials/ml/mdp.md
+      - RL-LLM Connections: materials/ml/rl-llm-foundation.md
+    - LLM Fundamentals:
+      - Introduction to LLMs: materials/llm/llm-fundamentals.md
+      - Word Embeddings: materials/llm/word-embeddings.md
+      - Evaluation Methods: materials/llm/evaluation.md
+  - Code Examples: code-examples/index.md
   - Progress Tracking: progress/index.md
   - Resources: resources/index.md

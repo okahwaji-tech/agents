@@ -29,7 +29,7 @@ Understanding the mathematical concepts that power language modeling is crucial 
 - **Practice**: Calculate P(word|context) to understand language modeling objective
 
 **Resources:**
-- [Probability Theory Materials](../../materials/week-1/probability-theory.md)
+- [Probability Theory Materials](../../materials/math/probability-theory.md)
 - Practice problems and examples
 
 ### 2. Information Theory Basics (1 hour)
@@ -43,7 +43,7 @@ Understanding the mathematical concepts that power language modeling is crucial 
 - **Practice**: Calculate entropy for simple text sequences
 
 **Resources:**
-- [Information Theory Materials](../../materials/week-1/information-theory.md)
+- [Information Theory Materials](../../materials/math/information-theory.md)
 - Interactive examples and calculations
 
 ### 3. Linear Algebra Review (1 hour)
@@ -57,9 +57,9 @@ Understanding the mathematical concepts that power language modeling is crucial 
 - **Practice**: Vector similarity measures (cosine similarity, dot products)
 
 **Resources:**
-- [Linear Algebra Materials](../../materials/week-1/linear-algebra.md)
-- [Vector Spaces](../../materials/week-1/vector-spaces.md)
-- [Matrix Operations](../../materials/week-1/matrix-multiplication.md)
+- [Linear Algebra Materials](../../materials/math/linear-algebra.md)
+- [Vector Spaces](../../materials/math/vector-spaces.md)
+- [Matrix Operations](../../materials/math/matrix-multiplication.md)
 
 ### 4. Reinforcement Learning Foundations (0.5 hours)
 
@@ -71,8 +71,8 @@ Understanding the mathematical concepts that power language modeling is crucial 
 - **Connection between sequential decision making in RL and token prediction**
 
 **Resources:**
-- [RL-LLM Foundations](../../materials/week-1/rl-llm-foundation.md)
-- [Markov Decision Processes](../../materials/week-1/mdp.md)
+- [RL-LLM Foundations](../../materials/ml/rl-llm-foundation.md)
+- [Markov Decision Processes](../../materials/ml/mdp.md)
 
 ## 📚 Key Readings
 
@@ -250,22 +250,22 @@ Track your learning progress with this comprehensive table:
 
 | Lesson Name | Subject | Learning Source | Status | Notes |
 |-------------|---------|----------------|--------|-------|
-| Probability Theory Fundamentals | Mathematical Foundations | Textbooks + Practice | ⏳ Pending | [Materials](../../materials/week-1/probability-theory.md) |
-| Information Theory Basics | Mathematical Foundations | Textbooks + Practice | ⏳ Pending | [Materials](../../materials/week-1/information-theory.md) |
-| Linear Algebra Review | Mathematical Foundations | Textbooks + Practice | ⏳ Pending | [Materials](../../materials/week-1/linear-algebra.md) |
-| Reinforcement Learning Introduction | Mathematical Foundations | Stanford CS234 | ⏳ Pending | [Materials](../../materials/week-1/rl-llm-foundation.md) |
-| Understanding Large Language Models | Key Readings | Blog Post | ⏳ Pending | [Materials](../../materials/week-1/llm-fundamentals.md) |
-| NLP with Deep Learning Introduction | Key Readings | Stanford CS224n | ⏳ Pending | [Materials](../../materials/week-1/word-embeddings.md) |
-| First LLM Program | Hands-On Deliverable | Implementation | ⏳ Pending | [Code Examples](../../code-examples/week-1/index.md) |
-| LLM Evaluation | Hands-On Deliverable | Implementation | ⏳ Pending | [Materials](../../materials/week-1/evaluation.md) |
+| Probability Theory Fundamentals | Mathematical Foundations | Textbooks + Practice | ⏳ Pending | [Materials](../../materials/math/probability-theory.md) |
+| Information Theory Basics | Mathematical Foundations | Textbooks + Practice | ⏳ Pending | [Materials](../../materials/math/information-theory.md) |
+| Linear Algebra Review | Mathematical Foundations | Textbooks + Practice | ⏳ Pending | [Materials](../../materials/math/linear-algebra.md) |
+| Reinforcement Learning Introduction | Mathematical Foundations | Stanford CS234 | ⏳ Pending | [Materials](../../materials/ml/rl-llm-foundation.md) |
+| Understanding Large Language Models | Key Readings | Blog Post | ⏳ Pending | [Materials](../../materials/llm/llm-fundamentals.md) |
+| NLP with Deep Learning Introduction | Key Readings | Stanford CS224n | ⏳ Pending | [Materials](../../materials/llm/word-embeddings.md) |
+| First LLM Program | Hands-On Deliverable | Implementation | ⏳ Pending | [Code Examples](../../code-examples/index.md) |
+| LLM Evaluation | Hands-On Deliverable | Implementation | ⏳ Pending | [Materials](../../materials/llm/evaluation.md) |
 
 ## 🚀 Next Steps
 
 After completing Week 1:
 
-1. **[Week 2: Transformer Architecture](../week-2/index.md)** - Deep dive into attention mechanisms
-2. **[Review Materials](../../materials/week-1/mathematical-foundations.md)** - Reinforce mathematical concepts
-3. **[Explore Code Examples](../../code-examples/week-1/index.md)** - See practical implementations
+1. **Continue with advanced topics** - Transformer architecture and beyond
+2. **[Review Mathematical Foundations](../../materials/math/index.md)** - Reinforce core concepts
+3. **[Explore Code Examples](../../code-examples/index.md)** - See practical implementations
 
 ---
 
