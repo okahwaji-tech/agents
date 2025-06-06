@@ -5,3 +5,4 @@ openai
 deepseek
 google-generativeai
 jupyterlab
+pytorch-lightning

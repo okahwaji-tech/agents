@@ -19,6 +19,7 @@ dependencies = [
     "matplotlib>=3.10.3",
     "seaborn>=0.13.2",
     "accelerate",  # Hugging Face acceleration library for Apple Silicon
+    "pytorch-lightning",
 ]
 
 [project.optional-dependencies]
