@@ -1,6 +1,25 @@
 # agents
 This is a repository for learning LLM and agentic workflows.
 
+## 📋 Table of Contents
+
+- [Development Setup with uv](#development-setup-with-uv)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Development Commands](#development-commands)
+  - [Apple Silicon M3 Ultra Optimization](#apple-silicon-m3-ultra-optimization)
+- [Study Guide](#study-guide)
+  - [Phase 1: Foundation LLM Architecture (Weeks 1–6)](#phase-1-foundation-llm-architecture-weeks-16)
+    - [Week 1: Introduction to LLMs and Language Modeling](#week-1-introduction-to-llms-and-language-modeling)
+    - [Week 2: Transformer Architecture – Attention Mechanism Deep Dive](#week-2-transformer-architecture--attention-mechanism-deep-dive)
+    - [Week 3: Pre-Training LLMs – Objectives, Data, and Scaling Laws](#week-3-pre-training-llms--objectives-data-and-scaling-laws)
+    - [Week 4: Fine-Tuning and Transfer Learning](#week-4-fine-tuning-and-transfer-learning)
+    - [Week 5: Evaluation Metrics and Benchmarks](#week-5-evaluation-metrics-and-benchmarks)
+    - [Week 6: Prompt Engineering and In-Context Learning](#week-6-prompt-engineering-and-in-context-learning)
+  - [Phase 2: Advanced Training and Alignment (Weeks 7–12)](#phase-2-advanced-training-and-alignment-weeks-712)
+  - [Phase 3: Specialized Applications and Deployment (Weeks 13–18)](#phase-3-specialized-applications-and-deployment-weeks-1318)
+  - [Phase 4: Agentic Workflows and Advanced Applications (Weeks 19–24)](#phase-4-agentic-workflows-and-advanced-applications-weeks-1924)
+
 ## Development Setup with uv
 
 ### Prerequisites
@@ -2722,7 +2741,7 @@ Understanding the mathematics of tool use and action selection is crucial for bu
 
 4. **Nakano et al. (2021), *"WebGPT: Browser-assisted question-answering with human feedback"*** – Understand how language models can learn to use web browsing tools effectively. Focus on the mathematical frameworks for learning tool use policies and integrating web information.
 
-5. **Research Paper: *"HuggingGPT: Solving AI Tasks with ChatGPT and its Friends in Hugging Face"*** – Understand how language models can orchestrate multiple AI tools and models to solve complex tasks. Focus on the mathematical principles of task decomposition and tool coordination.
+5. **Research Paper: *"HuggingGPT: Solving AI Tasks with ChatGPT and its Friends in Hugging Face"*** – Understand how language models can orchestrate multiple models and systems to solve complex tasks. Focus on the mathematical principles of task decomposition and coordination.
 
 6. **Your Books Integration**:
    - *AI Engineering* Ch. 15-16: System integration and API design for AI applications

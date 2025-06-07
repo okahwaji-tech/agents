@@ -1,4 +1,4 @@
-# Matrix Multiplication: Foundations, Code, and Deep Learning Applications
+# Matrix Multiplication
 
 ## Mathematical Foundations
 

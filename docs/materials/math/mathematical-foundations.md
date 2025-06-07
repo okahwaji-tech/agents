@@ -1,6 +1,19 @@
-# Mathematical Foundations - Week 1
+# Mathematical Foundations
 
 This page provides an overview of the mathematical concepts essential for understanding Large Language Models. These foundations will be built upon throughout the entire curriculum.
+
+## 📋 Table of Contents
+
+- [🎯 Overview](#-overview)
+- [📊 Time Investment](#-time-investment)
+- [🧮 Probability Theory Fundamentals](#-probability-theory-fundamentals)
+- [📈 Information Theory Basics](#-information-theory-basics)
+- [🔢 Linear Algebra Review](#-linear-algebra-review)
+- [🎮 Reinforcement Learning Foundations](#-reinforcement-learning-foundations)
+- [🔗 Connections Between Topics](#-connections-between-topics)
+- [📝 Study Strategy](#-study-strategy)
+- [🎯 Learning Objectives Checklist](#-learning-objectives-checklist)
+- [🚀 Next Steps](#-next-steps)
 
 ## 🎯 Overview
 

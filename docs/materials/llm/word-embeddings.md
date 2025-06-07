@@ -1,4 +1,4 @@
-# Comprehensive Study Guide: Word Embeddings and Their Applications in Large Language Models
+# Word Embeddings and Large Language Models
 
 
 ## Table of Contents
