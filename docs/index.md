@@ -1,4 +1,4 @@
-# LLM & Agentic Workflows Learning Guide
+# LLM & Agentic Workflows
 
 Welcome to the comprehensive learning repository for **Large Language Models (LLMs)** and **agentic workflows** with a focus on healthcare applications.
 

@@ -1,4 +1,4 @@
-# Comprehensive Study Guide: Singular Value Decomposition (SVD)
+# Singular Value Decomposition (SVD)
 
 ## Table of Contents
 

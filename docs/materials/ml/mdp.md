@@ -1,9 +1,4 @@
-# Markov Decision Processes: From Fundamentals to Advanced Applications
-
-**A Comprehensive Guide to Decision-Making Under Uncertainty**
-
-*Author: Manus AI*  
-*Date: June 2025*
+# Markov Decision Processes
 
 ---
 

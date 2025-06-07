@@ -1,4 +1,4 @@
-# Eigenvalues & Eigenvectors: A Comprehensive Study Guide for Machine Learning Engineers
+# Eigenvalues & Eigenvectors
 
 ## Table of Contents
 

@@ -1,4 +1,4 @@
-# Probability Theory Fundamentals for Large Language Models
+# Probability Theory
 
 ---
 

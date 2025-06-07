@@ -1,4 +1,4 @@
-# Installation Guide
+# Installation
 
 This guide will help you set up your development environment for the LLM & Agentic Workflows learning repository.
 

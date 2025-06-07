@@ -1,4 +1,4 @@
-# Reinforcement Learning and Large Language Models: A CS234 Perspective
+# Reinforcement Learning and Large Language Models
 
 
 ## Table of Contents

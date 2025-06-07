@@ -1,4 +1,13 @@
-# Matrix Multiplication: Foundations, Code, and Deep Learning Applications
+# Matrix Multiplication
+
+## 📋 Table of Contents
+
+- [Mathematical Foundations](#mathematical-foundations)
+- [Code Examples: Matrix Multiplication in NumPy and PyTorch](#code-examples-matrix-multiplication-in-numpy-and-pytorch)
+  - [Using NumPy (Python)](#using-numpy-python)
+  - [Using PyTorch (CPU and GPU Tensors)](#using-pytorch-cpu-and-gpu-tensors)
+- [Applications in Data Science and Deep Learning](#applications-in-data-science-and-deep-learning)
+- [Computational Optimizations and Best Practices](#computational-optimizations-and-best-practices)
 
 ## Mathematical Foundations
 
