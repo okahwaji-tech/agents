@@ -9,6 +9,7 @@ edit_uri: edit/main/docs/
 
 theme:
   name: material
+  custom_dir: docs/overrides
   palette:
     # Palette toggle for light mode
     - scheme: default
@@ -31,6 +32,10 @@ theme:
     - navigation.expand
     - navigation.path
     - navigation.top
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.tracking
     - search.highlight
     - search.share
     - search.suggest
@@ -38,12 +43,22 @@ theme:
     - content.code.select
     - content.code.annotate
     - content.tabs.link
+    - content.action.edit
+    - content.action.view
+    - content.tooltips
     - toc.follow
     - toc.integrate
+    - announce.dismiss
   icon:
     repo: fontawesome/brands/github
     edit: material/pencil
     view: material/eye
+    tag:
+      default: fontawesome/solid/tag
+      math: fontawesome/solid/calculator
+      code: fontawesome/solid/code
+      healthcare: fontawesome/solid/heart-pulse
+      progress: fontawesome/solid/chart-line
 
 markdown_extensions:
   - abbr
@@ -107,6 +122,26 @@ plugins:
       enable_creation_date: true
       type: timeago
   - awesome-pages
+  # - macros:
+  #     module_name: docs.macros
+  - glightbox:
+      touchNavigation: true
+      loop: false
+      effect: zoom
+      slide_effect: slide
+      width: 100%
+      height: auto
+      zoomable: true
+      draggable: true
+      auto_caption: false
+      caption_position: bottom
+  - minify:
+      minify_html: true
+      minify_js: true
+      minify_css: true
+      htmlmin_opts:
+        remove_comments: true
+      cache_safe: true
 
 extra:
   social:
@@ -116,10 +151,28 @@ extra:
       link: https://linkedin.com/in/omarkahwaji
   analytics:
     provider: google
-    property: !ENV GOOGLE_ANALYTICS_KEY
+    property: G-XXXXXXXXXX  # Replace with your Google Analytics ID
+  study_progress:
+    total_weeks: 24
+    current_phase: 1
+    phases:
+      - name: "Foundation LLM Architecture"
+        weeks: [1, 2, 3, 4, 5, 6]
+        color: "#2196f3"
+      - name: "Advanced LLM Techniques"
+        weeks: [7, 8, 9, 10, 11, 12]
+        color: "#4caf50"
+      - name: "LLM Agents and Tool Use"
+        weeks: [13, 14, 15, 16, 17, 18]
+        color: "#ff9800"
+      - name: "Advanced Agent Architectures"
+        weeks: [19, 20, 21, 22, 23, 24]
+        color: "#9c27b0"
 
 extra_javascript:
   - javascripts/mathjax.js
+  - javascripts/progress-tracker.js
+  - javascripts/study-components.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
@@ -127,31 +180,93 @@ extra_css:
   - stylesheets/extra.css
 
 nav:
-  - Home: index.md
-  - Getting Started:
+  - Home:
+    - Welcome: index.md
+    - Study Roadmap: roadmap.md
+    - Quick Start: quick-start.md
+  - 📊 Progress Dashboard:
+    - Overview: progress/index.md
+    - Phase 1 Progress: progress/phase-1.md
+    - Phase 2 Progress: progress/phase-2.md
+    - Phase 3 Progress: progress/phase-3.md
+    - Phase 4 Progress: progress/phase-4.md
+    - Study Analytics: progress/analytics.md
+    - Achievement Gallery: progress/achievements.md
+  - 📚 Study Guide:
+    - Overview: study-guide/index.md
+    - Phase 1 - Foundation LLM Architecture:
+      - Week 1 - Introduction to LLMs: study-guide/week-1/index.md
+      - Week 2 - Transformer Architecture: study-guide/week-2/index.md
+      - Week 3 - Pre-Training LLMs: study-guide/week-3/index.md
+      - Week 4 - Fine-Tuning Techniques: study-guide/week-4/index.md
+      - Week 5 - Evaluation & Benchmarking: study-guide/week-5/index.md
+      - Week 6 - Safety & Alignment: study-guide/week-6/index.md
+    - Phase 2 - Advanced LLM Techniques:
+      - Week 7 - Advanced Training: study-guide/week-7/index.md
+      - Week 8 - Multimodal LLMs: study-guide/week-8/index.md
+      - Week 9 - Retrieval-Augmented Generation: study-guide/week-9/index.md
+      - Week 10 - Tool Use & Function Calling: study-guide/week-10/index.md
+      - Week 11 - Chain-of-Thought Reasoning: study-guide/week-11/index.md
+      - Week 12 - Advanced Prompting: study-guide/week-12/index.md
+    - Phase 3 - LLM Agents and Tool Use:
+      - Week 13 - Agent Foundations: study-guide/week-13/index.md
+      - Week 14 - Planning & Reasoning: study-guide/week-14/index.md
+      - Week 15 - Multi-Agent Systems: study-guide/week-15/index.md
+      - Week 16 - Tool Integration: study-guide/week-16/index.md
+      - Week 17 - Memory & Context: study-guide/week-17/index.md
+      - Week 18 - Agent Evaluation: study-guide/week-18/index.md
+    - Phase 4 - Advanced Agent Architectures:
+      - Week 19 - Hierarchical Agents: study-guide/week-19/index.md
+      - Week 20 - Collaborative Agents: study-guide/week-20/index.md
+      - Week 21 - Self-Improving Agents: study-guide/week-21/index.md
+      - Week 22 - Production Deployment: study-guide/week-22/index.md
+      - Week 23 - Monitoring & Maintenance: study-guide/week-23/index.md
+      - Week 24 - Future Directions: study-guide/week-24/index.md
+  - 🧮 Mathematical Foundations:
+    - Overview: materials/math/index.md
+    - Probability Theory: materials/math/probability-theory.md
+    - Information Theory: materials/math/information-theory.md
+    - Linear Algebra: materials/math/linear-algebra.md
+    - Vector Spaces: materials/math/vector-spaces.md
+    - Matrix Operations: materials/math/matrix-multiplication.md
+    - Eigenvalues & Eigenvectors: materials/math/eigenvalues-eigenvectors.md
+    - Optimization Theory: materials/math/optimization.md
+    - Statistical Learning: materials/math/statistical-learning.md
+  - 🤖 Machine Learning:
+    - Reinforcement Learning: materials/ml/reinforcement-learning.md
+    - Markov Decision Processes: materials/ml/mdp.md
+    - RL-LLM Connections: materials/ml/rl-llm-foundation.md
+    - Deep Learning Fundamentals: materials/ml/deep-learning.md
+    - Neural Network Architectures: materials/ml/architectures.md
+  - 🧠 LLM Fundamentals:
+    - Introduction to LLMs: materials/llm/llm-fundamentals.md
+    - Word Embeddings: materials/llm/word-embeddings.md
+    - Evaluation Methods: materials/llm/evaluation.md
+    - Scaling Laws: materials/llm/scaling-laws.md
+    - Emergent Abilities: materials/llm/emergent-abilities.md
+  - 🏥 Healthcare Applications:
+    - Medical AI Overview: materials/healthcare/overview.md
+    - Clinical Decision Support: materials/healthcare/clinical-decision.md
+    - Medical Text Processing: materials/healthcare/text-processing.md
+    - Safety & Compliance: materials/healthcare/safety-compliance.md
+    - Case Studies: materials/healthcare/case-studies.md
+  - 💻 Code Examples:
+    - Overview: code-examples/index.md
+    - PyTorch Fundamentals: code-examples/pytorch/index.md
+    - Transformer Implementation: code-examples/transformers/index.md
+    - Healthcare Applications: code-examples/healthcare/index.md
+    - Apple Silicon Optimization: code-examples/apple-silicon/index.md
+    - Evaluation & Testing: code-examples/evaluation/index.md
+  - 🔧 Getting Started:
     - Installation: getting-started/installation.md
     - Development Setup: getting-started/development-setup.md
     - Apple Silicon Optimization: getting-started/apple-silicon.md
-  - Study Guide:
-    - Overview: study-guide/index.md
-    - Week 1 - Introduction to LLMs: study-guide/week-1/index.md
-  - Materials:
-    - Mathematical Foundations:
-      - Overview: materials/math/index.md
-      - Probability Theory: materials/math/probability-theory.md
-      - Information Theory: materials/math/information-theory.md
-      - Linear Algebra: materials/math/linear-algebra.md
-      - Vector Spaces: materials/math/vector-spaces.md
-      - Matrix Operations: materials/math/matrix-multiplication.md
-      - Eigenvalues & Eigenvectors: materials/math/eigenvalues-eigenvectors.md
-    - Machine Learning:
-      - Reinforcement Learning: materials/ml/reinforcement-learning.md
-      - Markov Decision Processes: materials/ml/mdp.md
-      - RL-LLM Connections: materials/ml/rl-llm-foundation.md
-    - LLM Fundamentals:
-      - Introduction to LLMs: materials/llm/llm-fundamentals.md
-      - Word Embeddings: materials/llm/word-embeddings.md
-      - Evaluation Methods: materials/llm/evaluation.md
-  - Code Examples: code-examples/index.md
-  - Progress Tracking: progress/index.md
-  - Resources: resources/index.md
+    - Environment Configuration: getting-started/environment.md
+  - 📖 Resources:
+    - Overview: resources/index.md
+    - Research Papers: resources/papers.md
+    - Books & Courses: resources/books-courses.md
+    - Tools & Libraries: resources/tools.md
+    - Community & Forums: resources/community.md
+    - Glossary: resources/glossary.md
+  - Tags: tags.md

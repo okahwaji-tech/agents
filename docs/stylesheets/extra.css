@@ -327,3 +327,533 @@
 ::-webkit-scrollbar-thumb:hover {
     background: var(--md-default-fg-color--light);
 }
+
+/* Achievement Notification Styles */
+.achievement-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #4caf50, #8bc34a);
+    color: white;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    z-index: 1001;
+    max-width: 300px;
+    transform: translateX(100%);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.achievement-notification.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.achievement-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.achievement-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.achievement-text {
+    flex: 1;
+}
+
+.achievement-title {
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+}
+
+.achievement-name {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.achievement-desc {
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+
+/* Interactive Study Elements */
+.study-checkpoint {
+    background: var(--md-code-bg-color);
+    border-left: 4px solid var(--md-primary-fg-color);
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+    position: relative;
+}
+
+.study-checkpoint::before {
+    content: "📍 Study Checkpoint";
+    display: block;
+    font-weight: 600;
+    color: var(--md-primary-fg-color);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.checkpoint-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.checkpoint-btn {
+    background: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.checkpoint-btn:hover {
+    background: var(--md-primary-fg-color--dark);
+    transform: translateY(-1px);
+}
+
+.checkpoint-btn.completed {
+    background: #4caf50;
+}
+
+/* Study Session Cards */
+.study-session-card {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.study-session-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #2196f3, #4caf50, #ff9800, #9c27b0);
+}
+
+.session-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.session-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--md-default-fg-color);
+    margin: 0;
+}
+
+.session-duration {
+    background: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color);
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.session-objectives {
+    margin-bottom: 1rem;
+}
+
+.session-objectives h4 {
+    margin: 0 0 0.5rem 0;
+    color: var(--md-default-fg-color);
+    font-size: 0.9rem;
+}
+
+.session-objectives ul {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+.session-objectives li {
+    margin: 0.25rem 0;
+    color: var(--md-default-fg-color--light);
+}
+
+/* Interactive Progress Bars */
+.interactive-progress {
+    background: var(--md-default-fg-color--lightest);
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.interactive-progress:hover {
+    background: var(--md-default-fg-color--lighter);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.progress-label {
+    font-weight: 600;
+    color: var(--md-default-fg-color);
+}
+
+.progress-percentage {
+    font-size: 0.9rem;
+    color: var(--md-default-fg-color--light);
+}
+
+.progress-bar-interactive {
+    width: 100%;
+    height: 12px;
+    background: var(--md-default-fg-color--lightest);
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-fill-interactive {
+    height: 100%;
+    background: linear-gradient(90deg, #4caf50, #8bc34a);
+    border-radius: 6px;
+    transition: width 0.5s ease;
+    position: relative;
+}
+
+.progress-fill-interactive::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Study Notes Integration */
+.study-notes-widget {
+    background: var(--md-code-bg-color);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.notes-header {
+    display: flex;
+    justify-content: between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.notes-title {
+    font-weight: 600;
+    color: var(--md-default-fg-color);
+    margin: 0;
+}
+
+.notes-toggle {
+    background: none;
+    border: none;
+    color: var(--md-primary-fg-color);
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.notes-content {
+    display: none;
+}
+
+.notes-content.expanded {
+    display: block;
+}
+
+.notes-textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 0.75rem;
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-radius: 6px;
+    background: var(--md-default-bg-color);
+    color: var(--md-default-fg-color);
+    font-family: inherit;
+    resize: vertical;
+}
+
+/* Mobile Responsiveness for New Elements */
+@media (max-width: 768px) {
+    .achievement-notification {
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+
+    .study-session-card {
+        padding: 1rem;
+    }
+
+    .session-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+    }
+
+    .checkpoint-actions {
+        flex-direction: column;
+    }
+
+    .checkpoint-btn {
+        text-align: center;
+    }
+}
+
+/* Dark Mode Adjustments for New Elements */
+[data-md-color-scheme="slate"] .study-session-card {
+    background: linear-gradient(135deg, #2d2d2d, #1e1e1e);
+}
+
+[data-md-color-scheme="slate"] .interactive-progress {
+    background: var(--md-code-bg-color);
+}
+
+[data-md-color-scheme="slate"] .interactive-progress:hover {
+    background: var(--md-default-fg-color--lightest);
+}
+
+/* Hero Section Styles */
+.hero-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 3rem 2rem;
+    margin: -1rem -1rem 2rem -1rem;
+    border-radius: 0 0 20px 20px;
+    text-align: center;
+}
+
+.hero-content h2 {
+    font-size: 2.5rem;
+    margin: 0 0 1rem 0;
+    font-weight: 700;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin: 0 0 2rem 0;
+    opacity: 0.9;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Learning Path Overview */
+.learning-path {
+    margin: 2rem 0;
+}
+
+.phase-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.phase-card {
+    background: var(--md-default-bg-color);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.phase-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #2196f3, #4caf50, #ff9800, #9c27b0);
+}
+
+.phase-card.phase-1::before { background: #2196f3; }
+.phase-card.phase-2::before { background: #4caf50; }
+.phase-card.phase-3::before { background: #ff9800; }
+.phase-card.phase-4::before { background: #9c27b0; }
+
+.phase-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+}
+
+.phase-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.phase-card h3 {
+    margin: 0 0 1rem 0;
+    color: var(--md-primary-fg-color);
+    font-size: 1.3rem;
+}
+
+.phase-card p {
+    margin: 0 0 1.5rem 0;
+    color: var(--md-default-fg-color--light);
+    line-height: 1.6;
+}
+
+.phase-weeks {
+    background: var(--md-code-bg-color);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: var(--md-default-fg-color);
+    margin-bottom: 1.5rem;
+    display: inline-block;
+}
+
+.phase-link {
+    background: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color);
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.phase-link:hover {
+    background: var(--md-primary-fg-color--dark);
+    transform: translateY(-2px);
+    text-decoration: none;
+    color: var(--md-primary-bg-color);
+}
+
+/* Healthcare Focus Section */
+.healthcare-focus {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.focus-item {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.focus-item:hover {
+    transform: translateY(-4px);
+}
+
+.focus-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.focus-item h4 {
+    margin: 0 0 1rem 0;
+    color: var(--md-default-fg-color);
+    font-size: 1.1rem;
+}
+
+.focus-item p {
+    margin: 0;
+    color: var(--md-default-fg-color--light);
+    line-height: 1.5;
+    font-size: 0.9rem;
+}
+
+/* Apple Silicon Section */
+.apple-silicon-section {
+    background: linear-gradient(135deg, #f5f5f7, #ffffff);
+    border: 2px solid #007aff;
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.optimization-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.feature-item {
+    text-align: center;
+    padding: 1rem;
+}
+
+.feature-item h4 {
+    margin: 0 0 0.5rem 0;
+    color: #007aff;
+    font-size: 1rem;
+}
+
+.feature-item p {
+    margin: 0;
+    color: var(--md-default-fg-color--light);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}

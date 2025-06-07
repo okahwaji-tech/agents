@@ -1,0 +1,409 @@
+<!-- Progress Tracker Component -->
+<div class="progress-tracker" id="progress-tracker">
+  <div class="progress-header">
+    <h3>📊 Study Progress</h3>
+    <div class="progress-summary">
+      <span class="progress-text" id="overall-progress">0% Complete</span>
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="overall-progress-bar">
+          <div class="progress-fill" style="width: 0%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="progress-phases">
+    <div class="phase-card" data-phase="1">
+      <div class="phase-header">
+        <h4>Phase 1: Foundation LLM Architecture</h4>
+        <span class="phase-weeks">Weeks 1-6</span>
+      </div>
+      <div class="phase-progress">
+        <div class="progress-bar">
+          <div class="progress-fill phase-1" style="width: 0%"></div>
+        </div>
+        <span class="phase-percentage">0/6 weeks</span>
+      </div>
+    </div>
+    
+    <div class="phase-card" data-phase="2">
+      <div class="phase-header">
+        <h4>Phase 2: Advanced LLM Techniques</h4>
+        <span class="phase-weeks">Weeks 7-12</span>
+      </div>
+      <div class="phase-progress">
+        <div class="progress-bar">
+          <div class="progress-fill phase-2" style="width: 0%"></div>
+        </div>
+        <span class="phase-percentage">0/6 weeks</span>
+      </div>
+    </div>
+    
+    <div class="phase-card" data-phase="3">
+      <div class="phase-header">
+        <h4>Phase 3: LLM Agents and Tool Use</h4>
+        <span class="phase-weeks">Weeks 13-18</span>
+      </div>
+      <div class="phase-progress">
+        <div class="progress-bar">
+          <div class="progress-fill phase-3" style="width: 0%"></div>
+        </div>
+        <span class="phase-percentage">0/6 weeks</span>
+      </div>
+    </div>
+    
+    <div class="phase-card" data-phase="4">
+      <div class="phase-header">
+        <h4>Phase 4: Advanced Agent Architectures</h4>
+        <span class="phase-weeks">Weeks 19-24</span>
+      </div>
+      <div class="phase-progress">
+        <div class="progress-bar">
+          <div class="progress-fill phase-4" style="width: 0%"></div>
+        </div>
+        <span class="phase-percentage">0/6 weeks</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="quick-actions">
+    <button class="action-btn" onclick="openStudyTimer()">
+      ⏱️ Start Study Session
+    </button>
+    <button class="action-btn" onclick="openNotepad()">
+      📝 Quick Notes
+    </button>
+    <button class="action-btn" onclick="viewAchievements()">
+      🏆 Achievements
+    </button>
+  </div>
+</div>
+
+<!-- Study Timer Modal -->
+<div id="study-timer-modal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>⏱️ Study Timer</h3>
+      <span class="close" onclick="closeStudyTimer()">&times;</span>
+    </div>
+    <div class="timer-display">
+      <div class="time-display" id="timer-display">00:00:00</div>
+      <div class="timer-controls">
+        <button id="start-timer" onclick="startTimer()">Start</button>
+        <button id="pause-timer" onclick="pauseTimer()" disabled>Pause</button>
+        <button id="stop-timer" onclick="stopTimer()" disabled>Stop</button>
+      </div>
+    </div>
+    <div class="session-info">
+      <label for="study-topic">Study Topic:</label>
+      <input type="text" id="study-topic" placeholder="e.g., Week 1 - Probability Theory">
+      <label for="study-goal">Session Goal:</label>
+      <textarea id="study-goal" placeholder="What do you want to accomplish in this session?"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- Quick Notes Modal -->
+<div id="notes-modal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>📝 Quick Notes</h3>
+      <span class="close" onclick="closeNotepad()">&times;</span>
+    </div>
+    <div class="notes-content">
+      <textarea id="quick-notes" placeholder="Jot down your thoughts, questions, or insights..."></textarea>
+      <div class="notes-actions">
+        <button onclick="saveNotes()">Save Notes</button>
+        <button onclick="clearNotes()">Clear</button>
+        <button onclick="exportNotes()">Export</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.progress-tracker {
+  background: var(--md-default-bg-color);
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.progress-header {
+  margin-bottom: 1.5rem;
+}
+
+.progress-header h3 {
+  margin: 0 0 1rem 0;
+  color: var(--md-primary-fg-color);
+}
+
+.progress-summary {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.progress-text {
+  font-weight: 600;
+  color: var(--md-default-fg-color);
+  min-width: 100px;
+}
+
+.progress-bar-container {
+  flex: 1;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background-color: var(--md-default-fg-color--lightest);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4caf50, #8bc34a);
+  transition: width 0.5s ease;
+}
+
+.phase-1 { background: linear-gradient(90deg, #2196f3, #64b5f6); }
+.phase-2 { background: linear-gradient(90deg, #4caf50, #81c784); }
+.phase-3 { background: linear-gradient(90deg, #ff9800, #ffb74d); }
+.phase-4 { background: linear-gradient(90deg, #9c27b0, #ba68c8); }
+
+.progress-phases {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.phase-card {
+  background: var(--md-code-bg-color);
+  border-radius: 8px;
+  padding: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.phase-card:hover {
+  transform: translateY(-2px);
+}
+
+.phase-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.phase-header h4 {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--md-default-fg-color);
+}
+
+.phase-weeks {
+  font-size: 0.8rem;
+  color: var(--md-default-fg-color--light);
+}
+
+.phase-progress {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.phase-progress .progress-bar {
+  flex: 1;
+  height: 6px;
+}
+
+.phase-percentage {
+  font-size: 0.8rem;
+  color: var(--md-default-fg-color--light);
+  min-width: 60px;
+}
+
+.quick-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  background: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background-color 0.3s ease;
+}
+
+.action-btn:hover {
+  background: var(--md-primary-fg-color--dark);
+}
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background-color: var(--md-default-bg-color);
+  margin: 5% auto;
+  padding: 0;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.modal-header h3 {
+  margin: 0;
+  color: var(--md-primary-fg-color);
+}
+
+.close {
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  color: var(--md-default-fg-color--light);
+}
+
+.close:hover {
+  color: var(--md-default-fg-color);
+}
+
+.timer-display {
+  text-align: center;
+  padding: 2rem;
+}
+
+.time-display {
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--md-primary-fg-color);
+  margin-bottom: 1rem;
+  font-family: 'Courier New', monospace;
+}
+
+.timer-controls {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.timer-controls button {
+  background: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.timer-controls button:disabled {
+  background: var(--md-default-fg-color--lightest);
+  cursor: not-allowed;
+}
+
+.session-info {
+  padding: 1.5rem;
+}
+
+.session-info label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--md-default-fg-color);
+}
+
+.session-info input,
+.session-info textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+}
+
+.notes-content {
+  padding: 1.5rem;
+}
+
+.notes-content textarea {
+  width: 100%;
+  height: 200px;
+  padding: 1rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 8px;
+  resize: vertical;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  font-family: inherit;
+}
+
+.notes-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.notes-actions button {
+  background: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .progress-summary {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  
+  .progress-phases {
+    grid-template-columns: 1fr;
+  }
+  
+  .quick-actions {
+    justify-content: center;
+  }
+  
+  .modal-content {
+    width: 95%;
+    margin: 10% auto;
+  }
+  
+  .time-display {
+    font-size: 2rem;
+  }
+}
+</style>

@@ -1,10 +1,34 @@
-# LLM & Agentic Workflows Learning Guide
+# 🧠 LLM & Agentic Workflows Learning Guide
 
-Welcome to the comprehensive learning repository for **Large Language Models (LLMs)** and **agentic workflows** with a focus on healthcare applications.
+<div class="hero-section">
+  <div class="hero-content">
+    <h2>Master Large Language Models & Agentic AI</h2>
+    <p>A comprehensive 24-week journey through LLMs and autonomous AI systems, optimized for healthcare applications and Apple Silicon performance.</p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-number">24</span>
+        <span class="stat-label">Weeks</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">360+</span>
+        <span class="stat-label">Hours</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">4</span>
+        <span class="stat-label">Phases</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">100+</span>
+        <span class="stat-label">Projects</span>
+      </div>
+    </div>
+  </div>
+</div>
 
-## 🎯 Overview
+<!-- Progress Tracker Component -->
+{% include "partials/progress-tracker.html" %}
 
-This repository is designed as a structured learning path for mastering LLMs and building agentic AI systems, with particular emphasis on healthcare applications at Allergan Data Labs. The curriculum integrates mathematical foundations, practical implementations, and real-world healthcare use cases.
+## 🎯 Learning Path Overview
 
 ## 🚀 Key Features
 

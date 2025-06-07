@@ -1,7 +1,12 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "agents"
 version = "0.1.0"
-
+description = "LLM & Agentic Workflows Learning Guide"
+readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "torch",
@@ -36,7 +41,10 @@ docs = [
     "mkdocs-jupyter>=0.24.0",
     "pymdown-extensions>=10.0.0",
     "mkdocs-git-revision-date-localized-plugin>=1.2.0",
-    "mkdocs-awesome-pages-plugin>=2.9.0"
+    "mkdocs-awesome-pages-plugin>=2.9.0",
+    "mkdocs-macros-plugin>=1.0.0",
+    "mkdocs-glightbox>=0.3.0",
+    "mkdocs-minify-plugin>=0.7.0"
 ]
 
 [tool.ruff]
@@ -76,3 +84,11 @@ help = "Build documentation for production"
 [tool.poe.tasks.docs-deploy]
 cmd = "mkdocs gh-deploy"
 help = "Deploy documentation to GitHub Pages"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["agents*"]
+exclude = ["docs*", "materials*", "code*", "scripts*"]
+
+[tool.setuptools.package-data]
+"*" = ["*.md", "*.txt", "*.yml", "*.yaml"]
