@@ -4,7 +4,7 @@ A comprehensive 24-week curriculum for mastering Large Language Models and agent
 
 ## 🌐 Online Documentation
 
-**📖 [View the Complete Learning Hub](https://okahwaji-tech.github.io/llm-learning-guide/)**
+**📖 [View the Complete Learning Hub](https://agents.ai/)**
 
 Explore our comprehensive online documentation featuring:
 

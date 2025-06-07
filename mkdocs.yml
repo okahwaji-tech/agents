@@ -1,7 +1,7 @@
 site_name: LLM & Agentic Workflows Learning Guide
 site_description: A comprehensive repository for learning Large Language Models and agentic workflows with healthcare applications
 site_author: Omar Kahwaji
-site_url: https://okahwaji-tech.github.io/llm-learning-guide/
+site_url: https://agents.ai/
 
 repo_name: okahwaji-tech/llm-learning-guide
 repo_url: https://github.com/okahwaji-tech/llm-learning-guide
@@ -9,7 +9,6 @@ edit_uri: edit/main/docs/
 
 theme:
   name: material
-  custom_dir: docs/overrides
   palette:
     # Palette toggle for light mode
     - scheme: default
