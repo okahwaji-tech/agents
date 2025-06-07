@@ -1,11 +1,6 @@
 """
 Comprehensive PyTorch Implementation of LLM Evaluation Metrics
-Author: Manus AI
-Date: June 6, 2025
-
-This module provides production-ready implementations of key evaluation metrics
-for Large Language Models, with a focus on perplexity and related metrics.
-Designed for use in healthcare and other mission-critical applications.
+=============================================================
 """
 
 import torch

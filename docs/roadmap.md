@@ -1,268 +1,251 @@
 # 🗺️ LLM & Agentic AI Learning Roadmap
 
-<div class="roadmap-hero">
-  <h2>Your 24-Week Journey to LLM Mastery</h2>
-  <p>A comprehensive, structured path from fundamentals to advanced agentic AI systems</p>
-</div>
+!!! info "🎯 Your 24-Week Journey to LLM Mastery"
+    A comprehensive, structured path from fundamentals to advanced agentic AI systems with healthcare applications and Apple Silicon optimization.
 
 ## 📊 Learning Path Overview
 
-{{ phase_overview(1, "Foundation LLM Architecture", [1,2,3,4,5,6], "Master the fundamentals of Large Language Models, Transformer architecture, and core mathematical concepts") }}
+!!! example "Phase 1: Foundation LLM Architecture (Weeks 1-6)"
+    **Master the fundamentals** of Large Language Models, Transformer architecture, and core mathematical concepts
 
-{{ phase_overview(2, "Advanced LLM Techniques", [7,8,9,10,11,12], "Explore advanced training methods, multimodal systems, and retrieval-augmented generation") }}
+    - Probability Theory & Information Theory
+    - Linear Algebra & Mathematical Foundations
+    - Transformer Architecture Deep Dive
+    - Pre-training and Fine-tuning Techniques
+    - Evaluation and Safety Considerations
 
-{{ phase_overview(3, "LLM Agents and Tool Use", [13,14,15,16,17,18], "Build autonomous agents that can use tools and interact with complex environments") }}
+!!! example "Phase 2: Advanced LLM Techniques (Weeks 7-12)"
+    **Explore advanced training methods**, multimodal systems, and retrieval-augmented generation
 
-{{ phase_overview(4, "Advanced Agent Architectures", [19,20,21,22,23,24], "Deploy production systems and explore cutting-edge research frontiers") }}
+    - Reinforcement Learning from Human Feedback
+    - Multimodal Large Language Models
+    - Retrieval-Augmented Generation (RAG)
+    - Tool Use and Function Calling
+    - Advanced Reasoning and Prompting
+
+!!! example "Phase 3: LLM Agents and Tool Use (Weeks 13-18)"
+    **Build autonomous agents** that can use tools and interact with complex environments
+
+    - Agent Foundations and Planning
+    - Multi-Agent Systems
+    - Tool Integration and API Interactions
+    - Memory Systems and Context Management
+    - Agent Evaluation and Benchmarking
+
+!!! example "Phase 4: Advanced Agent Architectures (Weeks 19-24)"
+    **Deploy production systems** and explore cutting-edge research frontiers
+
+    - Hierarchical and Modular Agent Designs
+    - Collaborative and Swarm Intelligence
+    - Self-Improving and Meta-Learning Agents
+    - Production Deployment and Monitoring
+    - Future Directions and Research Frontiers
 
 ## 🎯 Phase 1: Foundation LLM Architecture (Weeks 1-6)
 
-<div class="phase-detail">
-
 ### Week 1: Introduction to LLMs and Language Modeling
-{{ week_card(1, "Introduction to LLMs", "15-19 hours", [
-    "Probability Theory Fundamentals",
-    "Information Theory Basics", 
-    "Linear Algebra Review",
-    "First LLM Implementation"
-]) }}
+!!! note "15-19 hours | Introduction to LLMs"
+    - **Probability Theory Fundamentals** - Discrete and continuous distributions
+    - **Information Theory Basics** - Entropy, cross-entropy, and perplexity
+    - **Linear Algebra Review** - Vector spaces, matrices, and eigenvalues
+    - **First LLM Implementation** - Build your first language model
 
 ### Week 2: Transformer Architecture Deep Dive
-{{ week_card(2, "Transformer Architecture", "15-19 hours", [
-    "Attention Mechanisms",
-    "Multi-Head Attention",
-    "Positional Encoding",
-    "From-Scratch Implementation"
-]) }}
+!!! note "15-19 hours | Transformer Architecture"
+    - **Attention Mechanisms** - Self-attention and scaled dot-product attention
+    - **Multi-Head Attention** - Parallel attention heads and concatenation
+    - **Positional Encoding** - Sinusoidal and learned position embeddings
+    - **From-Scratch Implementation** - Complete transformer implementation
 
 ### Week 3: Pre-Training Large Language Models
-{{ week_card(3, "Pre-Training LLMs", "15-19 hours", [
-    "Scaling Laws Mathematics",
-    "Training Objectives",
-    "Emergent Abilities",
-    "Medical Text Pre-training"
-]) }}
+!!! note "15-19 hours | Pre-Training LLMs"
+    - **Scaling Laws Mathematics** - Understanding model scaling relationships
+    - **Training Objectives** - Autoregressive and masked language modeling
+    - **Emergent Abilities** - Capabilities that emerge with scale
+    - **Medical Text Pre-training** - Healthcare domain pre-training
 
 ### Week 4: Fine-Tuning and Adaptation Techniques
-{{ week_card(4, "Fine-Tuning Techniques", "15-19 hours", [
-    "Supervised Fine-Tuning",
-    "Parameter-Efficient Methods",
-    "Healthcare Domain Adaptation",
-    "Evaluation Frameworks"
-]) }}
+!!! note "15-19 hours | Fine-Tuning Techniques"
+    - **Supervised Fine-Tuning** - Task-specific model adaptation
+    - **Parameter-Efficient Methods** - LoRA, adapters, and prompt tuning
+    - **Healthcare Domain Adaptation** - Medical domain fine-tuning
+    - **Evaluation Frameworks** - Metrics and benchmarking
 
 ### Week 5: Evaluation and Benchmarking
-{{ week_card(5, "Evaluation & Benchmarking", "15-19 hours", [
-    "Evaluation Metrics",
-    "Healthcare Benchmarks",
-    "Bias Detection",
-    "Performance Analysis"
-]) }}
+!!! note "15-19 hours | Evaluation & Benchmarking"
+    - **Evaluation Metrics** - Perplexity, BLEU, ROUGE, and custom metrics
+    - **Healthcare Benchmarks** - Medical domain evaluation datasets
+    - **Bias Detection** - Identifying and measuring model biases
+    - **Performance Analysis** - Statistical significance and error analysis
 
 ### Week 6: Safety, Alignment, and Healthcare Considerations
-{{ week_card(6, "Safety & Alignment", "15-19 hours", [
-    "AI Safety Principles",
-    "HIPAA Compliance",
-    "Bias Mitigation",
-    "Clinical Validation"
-]) }}
-
-</div>
+!!! note "15-19 hours | Safety & Alignment"
+    - **AI Safety Principles** - Alignment, robustness, and interpretability
+    - **HIPAA Compliance** - Healthcare privacy and security requirements
+    - **Bias Mitigation** - Techniques for reducing harmful biases
+    - **Clinical Validation** - Medical AI validation and testing
 
 ## 🚀 Phase 2: Advanced LLM Techniques (Weeks 7-12)
 
-<div class="phase-detail">
-
 ### Week 7: Advanced Training Techniques
-{{ week_card(7, "Advanced Training", "15-19 hours", [
-    "Reinforcement Learning from Human Feedback",
-    "Constitutional AI",
-    "Advanced Optimization",
-    "Distributed Training"
-]) }}
+!!! note "15-19 hours | Advanced Training"
+    - **Reinforcement Learning from Human Feedback** - RLHF implementation
+    - **Constitutional AI** - Self-supervised alignment techniques
+    - **Advanced Optimization** - AdamW, learning rate scheduling
+    - **Distributed Training** - Multi-GPU and multi-node training
 
 ### Week 8: Multimodal Large Language Models
-{{ week_card(8, "Multimodal LLMs", "15-19 hours", [
-    "Vision-Language Models",
-    "Medical Imaging Integration",
-    "Cross-Modal Attention",
-    "Healthcare Multimodal Applications"
-]) }}
+!!! note "15-19 hours | Multimodal LLMs"
+    - **Vision-Language Models** - CLIP, DALL-E, and multimodal transformers
+    - **Medical Imaging Integration** - Radiology and pathology image analysis
+    - **Cross-Modal Attention** - Attention mechanisms across modalities
+    - **Healthcare Multimodal Applications** - Clinical image-text understanding
 
 ### Week 9: Retrieval-Augmented Generation (RAG)
-{{ week_card(9, "RAG Systems", "15-19 hours", [
-    "Dense Retrieval",
-    "Medical Knowledge Bases",
-    "RAG Architectures",
-    "Clinical Decision Support"
-]) }}
+!!! note "15-19 hours | RAG Systems"
+    - **Dense Retrieval** - Vector databases and semantic search
+    - **Medical Knowledge Bases** - PubMed, clinical guidelines integration
+    - **RAG Architectures** - Retrieval-augmented generation systems
+    - **Clinical Decision Support** - Evidence-based AI recommendations
 
 ### Week 10: Tool Use and Function Calling
-{{ week_card(10, "Tool Use", "15-19 hours", [
-    "Function Calling",
-    "API Integration",
-    "Medical Tool Integration",
-    "Safety Considerations"
-]) }}
+!!! note "15-19 hours | Tool Use"
+    - **Function Calling** - Structured output and API interactions
+    - **API Integration** - External service integration patterns
+    - **Medical Tool Integration** - EHR systems and medical databases
+    - **Safety Considerations** - Secure tool use and validation
 
 ### Week 11: Chain-of-Thought and Advanced Reasoning
-{{ week_card(11, "Advanced Reasoning", "15-19 hours", [
-    "Chain-of-Thought Prompting",
-    "Tree of Thoughts",
-    "Medical Reasoning",
-    "Diagnostic Workflows"
-]) }}
+!!! note "15-19 hours | Advanced Reasoning"
+    - **Chain-of-Thought Prompting** - Step-by-step reasoning
+    - **Tree of Thoughts** - Branching reasoning strategies
+    - **Medical Reasoning** - Clinical decision-making processes
+    - **Diagnostic Workflows** - Structured diagnostic reasoning
 
 ### Week 12: Advanced Prompting and In-Context Learning
-{{ week_card(12, "Advanced Prompting", "15-19 hours", [
-    "Few-Shot Learning",
-    "Prompt Engineering",
-    "Medical Prompt Design",
-    "Context Optimization"
-]) }}
-
-</div>
+!!! note "15-19 hours | Advanced Prompting"
+    - **Few-Shot Learning** - In-context learning techniques
+    - **Prompt Engineering** - Effective prompt design strategies
+    - **Medical Prompt Design** - Healthcare-specific prompting
+    - **Context Optimization** - Managing context windows effectively
 
 ## 🤖 Phase 3: LLM Agents and Tool Use (Weeks 13-18)
 
-<div class="phase-detail">
-
 ### Week 13: Agent Foundations and Planning
-{{ week_card(13, "Agent Foundations", "15-19 hours", [
-    "Agent Architectures",
-    "Planning Algorithms",
-    "Goal-Oriented Behavior",
-    "Medical Agent Design"
-]) }}
+!!! note "15-19 hours | Agent Foundations"
+    - **Agent Architectures** - ReAct, Plan-and-Execute, and hybrid approaches
+    - **Planning Algorithms** - Search-based and learning-based planning
+    - **Goal-Oriented Behavior** - Task decomposition and execution
+    - **Medical Agent Design** - Healthcare-specific agent architectures
 
 ### Week 14: Advanced Planning and Reasoning
-{{ week_card(14, "Planning & Reasoning", "15-19 hours", [
-    "Hierarchical Planning",
-    "Temporal Reasoning",
-    "Medical Workflow Planning",
-    "Decision Trees"
-]) }}
+!!! note "15-19 hours | Planning & Reasoning"
+    - **Hierarchical Planning** - Multi-level task decomposition
+    - **Temporal Reasoning** - Time-aware planning and scheduling
+    - **Medical Workflow Planning** - Clinical pathway optimization
+    - **Decision Trees** - Structured decision-making processes
 
 ### Week 15: Multi-Agent Systems
-{{ week_card(15, "Multi-Agent Systems", "15-19 hours", [
-    "Agent Communication",
-    "Coordination Mechanisms",
-    "Healthcare Team Simulation",
-    "Collaborative Diagnosis"
-]) }}
+!!! note "15-19 hours | Multi-Agent Systems"
+    - **Agent Communication** - Inter-agent messaging and protocols
+    - **Coordination Mechanisms** - Consensus and coordination algorithms
+    - **Healthcare Team Simulation** - Multi-disciplinary team modeling
+    - **Collaborative Diagnosis** - Distributed diagnostic systems
 
 ### Week 16: Tool Integration and API Interactions
-{{ week_card(16, "Tool Integration", "15-19 hours", [
-    "External Tool Use",
-    "API Design",
-    "Medical System Integration",
-    "EHR Interactions"
-]) }}
+!!! note "15-19 hours | Tool Integration"
+    - **External Tool Use** - Calculator, search, and API tools
+    - **API Design** - RESTful APIs and GraphQL integration
+    - **Medical System Integration** - FHIR and HL7 standards
+    - **EHR Interactions** - Electronic health record integration
 
 ### Week 17: Memory Systems and Context Management
-{{ week_card(17, "Memory & Context", "15-19 hours", [
-    "Long-Term Memory",
-    "Context Windows",
-    "Patient History Management",
-    "Knowledge Graphs"
-]) }}
+!!! note "15-19 hours | Memory & Context"
+    - **Long-Term Memory** - Persistent memory architectures
+    - **Context Windows** - Managing large context efficiently
+    - **Patient History Management** - Longitudinal patient data
+    - **Knowledge Graphs** - Structured knowledge representation
 
 ### Week 18: Agent Evaluation and Benchmarking
-{{ week_card(18, "Agent Evaluation", "15-19 hours", [
-    "Agent Benchmarks",
-    "Performance Metrics",
-    "Healthcare Agent Validation",
-    "Safety Assessment"
-]) }}
-
-</div>
+!!! note "15-19 hours | Agent Evaluation"
+    - **Agent Benchmarks** - Standard evaluation frameworks
+    - **Performance Metrics** - Success rate, efficiency, and safety
+    - **Healthcare Agent Validation** - Clinical validation methods
+    - **Safety Assessment** - Risk evaluation and mitigation
 
 ## 🌟 Phase 4: Advanced Agent Architectures (Weeks 19-24)
 
-<div class="phase-detail">
-
 ### Week 19: Hierarchical and Modular Agent Designs
-{{ week_card(19, "Hierarchical Agents", "15-19 hours", [
-    "Modular Architectures",
-    "Hierarchical Control",
-    "Medical Specialist Agents",
-    "System Integration"
-]) }}
+!!! note "15-19 hours | Hierarchical Agents"
+    - **Modular Architectures** - Component-based agent design
+    - **Hierarchical Control** - Multi-level agent control systems
+    - **Medical Specialist Agents** - Domain-specific agent specialization
+    - **System Integration** - Integrating multiple agent components
 
 ### Week 20: Collaborative and Swarm Intelligence
-{{ week_card(20, "Collaborative Agents", "15-19 hours", [
-    "Swarm Intelligence",
-    "Collective Decision Making",
-    "Medical Team Coordination",
-    "Consensus Mechanisms"
-]) }}
+!!! note "15-19 hours | Collaborative Agents"
+    - **Swarm Intelligence** - Collective behavior and emergence
+    - **Collective Decision Making** - Group consensus algorithms
+    - **Medical Team Coordination** - Healthcare team collaboration
+    - **Consensus Mechanisms** - Agreement protocols and voting
 
 ### Week 21: Self-Improving and Meta-Learning Agents
-{{ week_card(21, "Self-Improving Agents", "15-19 hours", [
-    "Meta-Learning",
-    "Self-Modification",
-    "Continuous Learning",
-    "Adaptive Medical Systems"
-]) }}
+!!! note "15-19 hours | Self-Improving Agents"
+    - **Meta-Learning** - Learning to learn algorithms
+    - **Self-Modification** - Adaptive agent architectures
+    - **Continuous Learning** - Online learning and adaptation
+    - **Adaptive Medical Systems** - Self-improving healthcare AI
 
 ### Week 22: Production Deployment and Monitoring
-{{ week_card(22, "Production Deployment", "15-19 hours", [
-    "Deployment Strategies",
-    "Monitoring Systems",
-    "Healthcare Production",
-    "Regulatory Compliance"
-]) }}
+!!! note "15-19 hours | Production Deployment"
+    - **Deployment Strategies** - CI/CD for AI systems
+    - **Monitoring Systems** - Performance and health monitoring
+    - **Healthcare Production** - Clinical deployment considerations
+    - **Regulatory Compliance** - FDA and healthcare regulations
 
 ### Week 23: Monitoring, Maintenance, and Updates
-{{ week_card(23, "Monitoring & Maintenance", "15-19 hours", [
-    "System Monitoring",
-    "Performance Tracking",
-    "Medical System Updates",
-    "Incident Response"
-]) }}
+!!! note "15-19 hours | Monitoring & Maintenance"
+    - **System Monitoring** - Real-time system health tracking
+    - **Performance Tracking** - KPI monitoring and alerting
+    - **Medical System Updates** - Safe model updates in healthcare
+    - **Incident Response** - Handling system failures and errors
 
 ### Week 24: Future Directions and Research Frontiers
-{{ week_card(24, "Future Directions", "15-19 hours", [
-    "Emerging Research",
-    "Future Technologies",
-    "Healthcare AI Trends",
-    "Research Contributions"
-]) }}
-
-</div>
+!!! note "15-19 hours | Future Directions"
+    - **Emerging Research** - Latest developments in AI research
+    - **Future Technologies** - Next-generation AI architectures
+    - **Healthcare AI Trends** - Future of medical AI
+    - **Research Contributions** - Contributing to the field
 
 ## 🏥 Healthcare AI Specialization Track
 
 Throughout all 24 weeks, you'll develop expertise in:
 
-{{ healthcare_callout("Clinical Decision Support", "Build AI systems that assist healthcare professionals in diagnosis, treatment planning, and clinical decision-making while maintaining safety and accuracy.", "clinical") }}
+!!! tip "Clinical Decision Support"
+    Build AI systems that assist healthcare professionals in diagnosis, treatment planning, and clinical decision-making while maintaining safety and accuracy.
 
-{{ healthcare_callout("Medical Text Processing", "Master natural language processing techniques specifically designed for clinical notes, medical literature, and healthcare documentation.", "info") }}
+!!! info "Medical Text Processing"
+    Master natural language processing techniques specifically designed for clinical notes, medical literature, and healthcare documentation.
 
-{{ healthcare_callout("Safety & Compliance", "Navigate HIPAA regulations, FDA requirements, and healthcare AI safety standards to ensure compliant and ethical AI systems.", "compliance") }}
+!!! warning "Safety & Compliance"
+    Navigate HIPAA regulations, FDA requirements, and healthcare AI safety standards to ensure compliant and ethical AI systems.
 
-{{ healthcare_callout("Regulatory Considerations", "Understand the regulatory landscape for medical AI, including validation requirements, clinical trials, and approval processes.", "safety") }}
+!!! note "Regulatory Considerations"
+    Understand the regulatory landscape for medical AI, including validation requirements, clinical trials, and approval processes.
 
 ## 🍎 Apple Silicon Optimization Track
 
-Maximize performance on Apple Silicon M3 Ultra:
+!!! tip "M3 Ultra Performance Optimization"
+    Leverage Metal Performance Shaders (MPS) for GPU acceleration, optimize memory usage with unified architecture, and implement energy-efficient training strategies for maximum performance on Apple Silicon.
 
-{{ apple_silicon_tip("Leverage Metal Performance Shaders (MPS) for GPU acceleration, optimize memory usage with unified architecture, and implement energy-efficient training strategies.") }}
+## 📈 Learning Milestones
 
-## 📈 Progress Tracking & Milestones
-
-### Achievement System
-- **🎯 Week Warrior**: Complete 7 consecutive weeks
-- **🏗️ Foundation Master**: Complete Phase 1
-- **🚀 Advanced Practitioner**: Complete Phase 2  
-- **🤖 Agent Architect**: Complete Phase 3
-- **🌟 AI Master**: Complete all 24 weeks
-
-### Study Analytics
-- Track daily study time and consistency
-- Monitor learning velocity and retention
-- Analyze strengths and areas for improvement
-- Celebrate milestones and achievements
+!!! success "Achievement System"
+    - **🎯 Week Warrior**: Complete 7 consecutive weeks
+    - **🏗️ Foundation Master**: Complete Phase 1 (Weeks 1-6)
+    - **🚀 Advanced Practitioner**: Complete Phase 2 (Weeks 7-12)
+    - **🤖 Agent Architect**: Complete Phase 3 (Weeks 13-18)
+    - **🌟 AI Master**: Complete all 24 weeks
 
 ## 🚀 Getting Started
 
@@ -270,107 +253,12 @@ Ready to begin your journey? Here's how to start:
 
 1. **[Set up your environment](getting-started/installation.md)** - Install Python, PyTorch, and dependencies
 2. **[Optimize for Apple Silicon](getting-started/apple-silicon.md)** - Configure for M3 Ultra performance
-3. **[Begin Week 1](study-guide/week-1/)** - Start with LLM fundamentals
-4. **[Track your progress](progress/)** - Monitor advancement and celebrate achievements
+3. **[Begin Week 1](study-guide/week-1/index.md)** - Start with LLM fundamentals
+4. **[Follow the study guide](study-guide/index.md)** - Structured learning path and objectives
 
 ---
 
-<div class="roadmap-cta">
-  <h3>🎯 Ready to Master LLMs and Agentic AI?</h3>
-  <p>This comprehensive roadmap will take you from beginner to expert in 24 structured weeks.</p>
-  <div class="cta-buttons">
-    <a href="study-guide/week-1/" class="cta-primary">Start Week 1 →</a>
-    <a href="progress/" class="cta-secondary">View Progress Dashboard</a>
-  </div>
-</div>
+!!! tip "🎯 Ready to Master LLMs and Agentic AI?"
+    This comprehensive roadmap will take you from beginner to expert in 24 structured weeks.
 
-<style>
-.roadmap-hero {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 2rem;
-  border-radius: 12px;
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.roadmap-hero h2 {
-  margin: 0 0 0.5rem 0;
-  font-size: 2rem;
-}
-
-.roadmap-hero p {
-  margin: 0;
-  opacity: 0.9;
-  font-size: 1.1rem;
-}
-
-.phase-detail {
-  margin: 2rem 0;
-  padding: 1.5rem;
-  background: var(--md-code-bg-color);
-  border-radius: 12px;
-  border-left: 4px solid var(--md-primary-fg-color);
-}
-
-.roadmap-cta {
-  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-  padding: 2rem;
-  border-radius: 12px;
-  text-align: center;
-  margin-top: 3rem;
-}
-
-.roadmap-cta h3 {
-  margin: 0 0 1rem 0;
-  color: var(--md-primary-fg-color);
-}
-
-.roadmap-cta p {
-  margin: 0 0 1.5rem 0;
-  color: var(--md-default-fg-color--light);
-}
-
-.cta-buttons {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.cta-primary, .cta-secondary {
-  padding: 0.75rem 1.5rem;
-  border-radius: 25px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
-
-.cta-primary {
-  background: var(--md-primary-fg-color);
-  color: var(--md-primary-bg-color);
-}
-
-.cta-secondary {
-  background: transparent;
-  color: var(--md-primary-fg-color);
-  border: 2px solid var(--md-primary-fg-color);
-}
-
-.cta-primary:hover, .cta-secondary:hover {
-  transform: translateY(-2px);
-  text-decoration: none;
-}
-
-@media (max-width: 768px) {
-  .cta-buttons {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .cta-primary, .cta-secondary {
-    width: 200px;
-    text-align: center;
-  }
-}
-</style>
+    **[Start Week 1 →](study-guide/week-1/index.md)** | **[View Study Guide](study-guide/index.md)**

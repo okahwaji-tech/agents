@@ -1,5 +1,12 @@
 # Reinforcement Learning and Large Language Models: A CS234 Perspective
 
+!!! abstract "📚 Learning Objectives"
+    By the end of this document, you should be able to:
+    - Understand the fundamental linear algebra concepts underpinning RL and LLMs.
+    - Explain how vector spaces and matrix operations are used in state representations and value function computations.
+    - Describe the connection between MDPs and sequential decision-making in LLMs.
+    - Recognize potential healthcare applications of combined RL and LLM techniques.
+
 
 ## Table of Contents
 
@@ -34,7 +41,9 @@ The dimensionality of these vector spaces presents both opportunities and challe
 
 Value functions in reinforcement learning are fundamentally linear algebraic objects that can be computed and updated using matrix operations. The Bellman equation, which forms the core of dynamic programming approaches in RL, can be expressed as a system of linear equations when dealing with finite state spaces. This mathematical structure provides a direct connection to the optimization procedures used in training large language models.
 
-The state value function V^π(s) represents the expected cumulative reward from state s under policy π. When we discretize the state space, this function becomes a vector where each element corresponds to the value of a particular state. The Bellman equation then becomes a matrix equation of the form V = R + γPV, where R is the reward vector, P is the transition probability matrix, and γ is the discount factor.
+The state value function $V^\pi(s)$ represents the expected cumulative reward from state $s$ under policy $\pi$. When we discretize the state space, this function becomes a vector where each element corresponds to the value of a particular state. The Bellman equation then becomes a matrix equation of the form:
+$$V = R + \gamma PV$$
+where $R$ is the reward vector, $P$ is the transition probability matrix, and $\gamma$ is the discount factor.
 
 This matrix formulation reveals the linear algebraic structure underlying reinforcement learning algorithms. The solution to this system of equations can be found using standard linear algebra techniques, including matrix inversion, iterative methods, and eigenvalue decomposition. These same mathematical tools are employed in various forms throughout the training and inference processes of large language models.
 

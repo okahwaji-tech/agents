@@ -269,4 +269,4 @@ After completing Week 1:
 
 ---
 
-**Ready to begin?** Start with the [mathematical foundations](../../materials/week-1/mathematical-foundations.md) and work through each section systematically. Remember to track your progress and ask questions in the community discussions!
+**Ready to begin?** Start with the [mathematical foundations](../../materials/math/index.md) and work through each section systematically. Remember to track your progress and ask questions in the community discussions!

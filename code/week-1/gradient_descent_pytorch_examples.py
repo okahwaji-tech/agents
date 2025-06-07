@@ -1,5 +1,4 @@
 # Comprehensive PyTorch Implementation Examples for Gradient Descent
-# From Basic Implementation to Advanced Healthcare Applications
 
 import torch
 import torch.nn as nn

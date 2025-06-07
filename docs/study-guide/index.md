@@ -21,11 +21,11 @@ The study guide is organized into four progressive phases:
 **Focus:** Build fundamental understanding of LLMs, including the Transformer architecture, training process, and basic usage of pre-trained models.
 
 - **Week 1:** [Introduction to LLMs and Language Modeling](week-1/index.md)
-- **Week 2:** [Transformer Architecture – Attention Mechanism Deep Dive](week-2/index.md)
-- **Week 3:** [Pre-Training LLMs – Objectives, Data, and Scaling Laws](week-3/index.md)
-- **Week 4:** [Embeddings and Tokenization in LLMs](week-4/index.md)
-- **Week 5:** [Fine-tuning and Prompting Techniques](week-5/index.md)
-- **Week 6:** [Evaluation and Benchmarks for LLMs](week-6/index.md)
+- **Week 2:** Transformer Architecture – Attention Mechanism Deep Dive *(Coming Soon)*
+- **Week 3:** Pre-Training LLMs – Objectives, Data, and Scaling Laws *(Coming Soon)*
+- **Week 4:** Embeddings and Tokenization in LLMs *(Coming Soon)*
+- **Week 5:** Fine-tuning and Prompting Techniques *(Coming Soon)*
+- **Week 6:** Evaluation and Benchmarks for LLMs *(Coming Soon)*
 
 ### Phase 2: Advanced LLM Techniques (Weeks 7-12)
 **Focus:** Master advanced techniques including alignment, retrieval-augmented generation, and multimodal systems.
@@ -178,7 +178,7 @@ Track your progress with these metrics:
 1. **Complete installation** following the [Installation Guide](../getting-started/installation.md)
 2. **Set up development environment** with [Development Setup](../getting-started/development-setup.md)
 3. **Optimize for Apple Silicon** using [Apple Silicon Guide](../getting-started/apple-silicon.md)
-4. **Review mathematical prerequisites** in [Mathematical Foundations](../materials/week-1/mathematical-foundations.md)
+4. **Review mathematical prerequisites** in [Mathematical Foundations](../materials/math/index.md)
 
 ### Study Schedule Recommendations
 
@@ -216,8 +216,8 @@ Track your progress with these metrics:
 Ready to begin your LLM and agentic AI journey?
 
 1. **[Start with Week 1](week-1/index.md)** - Introduction to LLMs and Language Modeling
-2. **[Review Prerequisites](../materials/week-1/mathematical-foundations.md)** - Mathematical foundations
-3. **[Set up Progress Tracking](../progress/index.md)** - Monitor your learning journey
+2. **[Review Prerequisites](../materials/math/index.md)** - Mathematical foundations
+3. **[Browse Learning Materials](../materials/index.md)** - Explore comprehensive study materials
 
 ---
 

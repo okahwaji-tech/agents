@@ -5,9 +5,6 @@ Value Iteration Algorithm Implementation
 This module implements the Value Iteration algorithm for solving Markov Decision Processes.
 Value Iteration is a dynamic programming algorithm that iteratively updates state values
 until convergence to the optimal value function.
-
-Author: Manus AI
-Date: June 2025
 """
 
 import torch

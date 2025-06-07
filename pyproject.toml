@@ -23,8 +23,15 @@ dependencies = [
     "tokenizers>=0.21.1",
     "matplotlib>=3.10.3",
     "seaborn>=0.13.2",
-    "accelerate",  # Hugging Face acceleration library for Apple Silicon
+    "accelerate", # Hugging Face acceleration library for Apple Silicon
     "pytorch-lightning",
+    "mkdocs>=1.6.1",
+    "mkdocs-material>=9.6.14",
+    "mkdocs-glightbox>=0.4.0",
+    "mkdocs-jupyter>=0.25.1",
+    "mkdocs-git-revision-date-localized-plugin>=1.4.7",
+    "mkdocs-awesome-pages-plugin>=2.10.1",
+    "mkdocs-minify-plugin>=0.8.0",
 ]
 
 [project.optional-dependencies]

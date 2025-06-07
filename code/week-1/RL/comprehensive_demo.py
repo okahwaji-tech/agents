@@ -5,9 +5,6 @@ Comprehensive MDP Demonstration
 This script provides a comprehensive demonstration of all MDP algorithms
 and examples implemented in this package. It showcases the theoretical
 concepts from the enhanced MDP guide through practical PyTorch implementations.
-
-Author: Manus AI
-Date: June 2025
 """
 
 import torch

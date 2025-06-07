@@ -7,8 +7,6 @@ Policy Iteration alternates between policy evaluation (computing the value funct
 fixed policy) and policy improvement (updating the policy to be greedy with respect to
 the current value function).
 
-Author: Manus AI
-Date: June 2025
 """
 
 import torch

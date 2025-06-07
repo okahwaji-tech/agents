@@ -407,5 +407,5 @@ os.environ['PYTORCH_ENABLE_MPS_FALLBACK'] = '1'
 ## Next Steps
 
 - **[Study Guide](../study-guide/index.md)** - Begin your learning journey
-- **[Week 1 Materials](../materials/week-1/mathematical-foundations.md)** - Mathematical foundations
-- **[Code Examples](../code-examples/week-1/index.md)** - Hands-on implementations
+- **[Mathematical Foundations](../materials/math/index.md)** - Mathematical foundations
+- **[Code Examples](../code-examples/index.md)** - Hands-on implementations

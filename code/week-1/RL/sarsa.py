@@ -5,9 +5,6 @@ SARSA Algorithm Implementation
 This module implements the SARSA (State-Action-Reward-State-Action) algorithm,
 an on-policy temporal difference learning method that learns the value of the
 policy being followed rather than the optimal policy.
-
-Author: Manus AI
-Date: June 2025
 """
 
 import torch

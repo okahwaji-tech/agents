@@ -379,4 +379,4 @@ def cleanup_memory():
 
 - **[Apple Silicon Optimization](apple-silicon.md)** - Optimize for M3 Ultra
 - **[Study Guide](../study-guide/index.md)** - Begin learning with Week 1
-- **[Materials](../materials/week-1/mathematical-foundations.md)** - Dive into mathematical foundations
+- **[Materials](../materials/math/index.md)** - Dive into mathematical foundations

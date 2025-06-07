@@ -7,8 +7,6 @@ to implement various Markov Decision Process algorithms. The environment
 supports both discrete and continuous state/action spaces and provides
 methods for defining transition probabilities and reward functions.
 
-Author: Manus AI
-Date: June 2025
 """
 
 import torch

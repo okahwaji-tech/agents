@@ -1,5 +1,158 @@
 /* Custom styles for LLM & Agentic Workflows documentation */
 
+/* Text justification for better readability */
+.md-content__inner {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+/* Keep headings left-aligned */
+.md-content__inner h1,
+.md-content__inner h2,
+.md-content__inner h3,
+.md-content__inner h4,
+.md-content__inner h5,
+.md-content__inner h6 {
+    text-align: left;
+}
+
+/* Keep lists left-aligned */
+.md-content__inner ul,
+.md-content__inner ol {
+    text-align: left;
+}
+
+/* Keep code blocks left-aligned */
+.md-content__inner pre,
+.md-content__inner code {
+    text-align: left;
+}
+
+/* Keep tables left-aligned */
+.md-content__inner table {
+    text-align: left;
+}
+
+/* Mathematical equation styling */
+/* Center display equations */
+.MathJax_Display {
+    text-align: center !important;
+    margin: 1.5em 0 !important;
+    padding: 0.5em 0 !important;
+}
+
+/* Style for display equations */
+mjx-container[display="true"] {
+    display: block !important;
+    margin: 1.5em auto !important; /* This centers the block on the page */
+    padding: 0.5em 0 !important;
+}
+
+/* Inline math styling */
+mjx-container[display="false"] {
+    display: inline !important;
+    margin: 0 0.1em !important;
+}
+
+/* Better spacing around equations */
+.md-content p:has(mjx-container[display="true"]) {
+    text-align: center;
+    margin: 1.5em 0;
+}
+
+/* Equation numbering support */
+.MathJax_Display .mjx-mrow {
+    position: relative;
+}
+
+/* Math block containers */
+.math-block {
+    text-align: center;
+    margin: 1.5em 0;
+    padding: 1em 0;
+    background-color: var(--md-code-bg-color);
+    border-radius: 8px;
+    border-left: 4px solid var(--md-primary-fg-color);
+}
+
+/* Inline math in justified text */
+.md-content__inner p mjx-container {
+    vertical-align: baseline;
+    margin: 0 0.1em;
+}
+
+/* Ensure math doesn't break text justification */
+.md-content__inner p {
+    word-spacing: normal;
+    letter-spacing: normal;
+}
+
+/* Special handling for mathematical paragraphs */
+.math-paragraph {
+    text-align: center;
+    margin: 1.5em 0;
+}
+
+/* Mathematical notation improvements */
+.math-notation {
+    font-family: 'Computer Modern', 'Latin Modern Math', 'STIX Two Math', serif;
+    font-style: normal;
+}
+
+/* Better rendering for complex equations */
+mjx-math {
+    line-height: 1.4 !important;
+}
+
+/* Responsive math scaling */
+@media (max-width: 768px) {
+    mjx-container[display="true"] {
+        font-size: 0.9em;
+        margin: 1em auto;
+    }
+
+    .MathJax_Display {
+        margin: 1em 0;
+    }
+
+    .math-block {
+        padding: 0.5em 0;
+        margin: 1em 0;
+    }
+}
+
+/* Admonition blocks styling with justified text */
+.md-typeset .admonition {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.md-typeset .admonition-title {
+    text-align: left !important;
+    font-weight: 600;
+}
+
+/* Keep admonition content properly formatted */
+.md-typeset .admonition p {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.md-typeset .admonition ul,
+.md-typeset .admonition ol {
+    text-align: left;
+}
+
+.md-typeset .admonition code {
+    text-align: left;
+}
+
+/* Special styling for mathematical admonitions */
+.md-typeset .admonition mjx-container[display="true"] {
+    text-align: center !important;
+    margin: 1em auto !important;
+}
+
 /* Progress tracking tables */
 .progress-table {
     width: 100%;

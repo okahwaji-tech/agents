@@ -44,35 +44,35 @@ mkdocs serve
 ### Choose Your Starting Point
 
 === "Complete Beginner"
-    **Start Here**: [Week 1 - Introduction to LLMs](study-guide/week-1/)
-    
+    **Start Here**: [Week 1 - Introduction to LLMs](study-guide/week-1/index.md)
+
     - 📖 Begin with mathematical foundations
     - 🧮 Review probability theory and linear algebra
     - 💻 Set up your first LLM implementation
     - ⏱️ Estimated time: 15-19 hours
 
 === "Some ML Background"
-    **Start Here**: [Week 2 - Transformer Architecture](study-guide/week-2/)
-    
-    - 🔍 Dive into attention mechanisms
-    - 🏗️ Build transformers from scratch
-    - 🏥 Explore healthcare applications
+    **Start Here**: [Mathematical Foundations](materials/math/index.md)
+
+    - 🔍 Dive into probability theory and linear algebra
+    - 🏗️ Build understanding from mathematical foundations
+    - 🧮 Explore information theory concepts
     - ⏱️ Estimated time: 15-19 hours
 
 === "LLM Experience"
-    **Start Here**: [Week 7 - Advanced Techniques](study-guide/week-7/)
-    
-    - 🚀 Advanced training methods
-    - 🤖 Reinforcement learning from human feedback
-    - 🏥 Healthcare-specific fine-tuning
+    **Start Here**: [LLM Fundamentals](materials/llm/index.md)
+
+    - 🚀 Advanced LLM concepts
+    - 🤖 Word embeddings and evaluation methods
+    - 🧠 Deep dive into LLM architecture
     - ⏱️ Estimated time: 15-19 hours
 
 === "Want to Build Agents"
-    **Start Here**: [Week 13 - Agent Foundations](study-guide/week-13/)
-    
-    - 🤖 Agent architectures and planning
-    - 🛠️ Tool use and API integration
-    - 🏥 Medical agent applications
+    **Start Here**: [Machine Learning Foundations](materials/ml/index.md)
+
+    - 🤖 Reinforcement learning fundamentals
+    - 🛠️ Markov Decision Processes
+    - 🔗 RL-LLM connections
     - ⏱️ Estimated time: 15-19 hours
 
 ## 🎯 First Week Goals
@@ -95,9 +95,9 @@ If you're specifically interested in healthcare AI:
 4. **Medical Knowledge Integration** - UMLS, medical ontologies
 
 ### Healthcare-Specific Resources
-- [Healthcare Applications Overview](materials/healthcare/overview.md)
-- [Medical AI Safety Guidelines](materials/healthcare/safety-compliance.md)
-- [Clinical Decision Support Examples](code-examples/healthcare/)
+- [Code Examples](code-examples/index.md) - Practical implementations
+- [Learning Materials](materials/index.md) - Comprehensive study materials
+- [Resources](resources/index.md) - Additional learning resources
 
 ## 🍎 Apple Silicon Quick Optimization
 
@@ -120,16 +120,13 @@ torch.mps.empty_cache()  # Clear GPU memory
 ### M3 Ultra Specific Optimizations
 {{ apple_silicon_tip("The M3 Ultra has 192GB unified memory. Use larger batch sizes and models that fit entirely in memory for optimal performance.") }}
 
-## 📊 Progress Tracking Quick Setup
+## 📊 Learning Organization
 
-### Enable Progress Tracking
-1. **Automatic Saving** - Your progress is saved locally in browser storage
-2. **Study Timer** - Track time spent on each topic
-3. **Achievement System** - Unlock badges as you progress
-4. **Analytics** - View learning velocity and patterns
-
-### Quick Progress Check
-{{ progress_bar(0, "Overall Progress", "primary") }}
+### Study Structure
+1. **Weekly Objectives** - Clear learning goals for each week
+2. **Study Materials** - Organized by mathematical foundations, LLM concepts, and healthcare applications
+3. **Code Examples** - Hands-on implementations for each concept
+4. **Self-Assessment** - Checklists to verify understanding
 
 ## 🔧 Development Environment
 
@@ -161,7 +158,7 @@ jupyter lab --no-browser --port=8888
 
 ### Study Groups
 - Join weekly study sessions
-- Share progress and insights
+- Share learning insights and discoveries
 - Collaborate on projects
 
 ## 📋 Study Schedule Templates
@@ -191,7 +188,7 @@ Before starting your learning journey:
 - [ ] ✅ Environment set up and tested
 - [ ] 🍎 Apple Silicon optimization verified
 - [ ] 📚 Week 1 materials reviewed
-- [ ] 📊 Progress tracking enabled
+- [ ] 📊 Study materials organized
 - [ ] ⏱️ Study schedule planned
 - [ ] 🏥 Healthcare focus areas identified
 - [ ] 🤝 Community resources bookmarked
@@ -200,8 +197,8 @@ Before starting your learning journey:
 
 1. **[Complete Environment Setup](getting-started/installation.md)** - Detailed installation guide
 2. **[Apple Silicon Optimization](getting-started/apple-silicon.md)** - M3 Ultra specific setup
-3. **[Begin Week 1](study-guide/week-1/)** - Start your learning journey
-4. **[Join Community](resources/community.md)** - Connect with other learners
+3. **[Begin Week 1](study-guide/week-1/index.md)** - Start your learning journey
+4. **[Browse Resources](resources/index.md)** - Explore additional learning materials
 
 ---
 
@@ -209,8 +206,8 @@ Before starting your learning journey:
   <h3>🚀 Ready to Begin?</h3>
   <p>You're all set! Choose your starting point and begin your journey to LLM mastery.</p>
   <div class="cta-buttons">
-    <a href="study-guide/week-1/" class="cta-primary">Start Week 1 →</a>
-    <a href="roadmap/" class="cta-secondary">View Full Roadmap</a>
+    <a href="study-guide/week-1/index.md" class="cta-primary">Start Week 1 →</a>
+    <a href="roadmap.md" class="cta-secondary">View Full Roadmap</a>
   </div>
 </div>
 
