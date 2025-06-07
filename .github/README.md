@@ -106,3 +106,4 @@ The workflow uses the same dependencies as local development:
 - Workflow uses official GitHub Actions with pinned versions
 - No secrets required for public repository documentation
 - Uses GitHub's recommended Pages deployment action
+# GitHub Actions workflow is now active
