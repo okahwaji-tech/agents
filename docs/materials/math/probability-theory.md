@@ -1,121 +1,187 @@
 # Probability Theory Fundamentals for Large Language Models
 
----
+!!! info "🎯 Learning Objectives"
+    By the end of this comprehensive guide, you will master:
+
+    - **Mathematical foundations** of probability theory for language modeling
+    - **Conditional probability** and Bayes' theorem in LLM context
+    - **Chain rule decomposition** for autoregressive text generation
+    - **PyTorch implementations** of probabilistic models
+    - **Healthcare applications** of probabilistic language models
+    - **Uncertainty quantification** and model calibration techniques
+
+!!! abstract "🔑 Core Insight"
+    Every large language model is fundamentally a **sophisticated probability distribution** over sequences of tokens. Understanding this probabilistic foundation is essential for designing, training, and deploying effective language models in high-stakes applications like healthcare.
 
 ## Table of Contents
 
-### 1. Introduction and Motivation
-- 1.1 Why Probability Theory is Essential for LLMs
-- 1.2 From Classical Statistics to Modern Language Modeling
-- 1.3 Healthcare Applications of Probabilistic Language Models
-- 1.4 Study Guide Structure and Learning Objectives
+### [1. Introduction and Motivation](#1-introduction-and-motivation)
+- [1.1 Why Probability Theory is Essential for LLMs](#11-why-probability-theory-is-essential-for-llms)
+- [1.2 From Classical Statistics to Modern Language Modeling](#12-from-classical-statistics-to-modern-language-modeling)
+- [1.3 Healthcare Applications of Probabilistic Language Models](#13-healthcare-applications-of-probabilistic-language-models)
+- [1.4 Study Guide Structure and Learning Objectives](#14-study-guide-structure-and-learning-objectives)
 
-### 2. Probability Theory Fundamentals
-- 2.1 Sample Spaces, Events, and Probability Axioms
-- 2.2 Random Variables and Probability Functions
-- 2.3 Mathematical Foundations and Notation
-- 2.4 Connection to Information Theory and Entropy
+### [2. Probability Theory Fundamentals](#2-probability-theory-fundamentals)
+- [2.1 Sample Spaces, Events, and Probability Axioms](#21-sample-spaces-events-and-probability-axioms)
+- [2.2 Random Variables and Probability Functions](#22-random-variables-and-probability-functions)
+- [2.3 Mathematical Foundations and Notation](#23-mathematical-foundations-and-notation)
+- [2.4 Connection to Information Theory and Entropy](#24-connection-to-information-theory-and-entropy)
 
-### 3. Discrete and Continuous Probability Distributions
-- 3.1 Discrete Probability Distributions
-  - 3.1.1 Bernoulli and Binomial Distributions
-  - 3.1.2 Multinomial Distribution (The Foundation of Token Prediction)
-  - 3.1.3 Categorical Distribution in Vocabulary Modeling
-  - 3.1.4 PyTorch Implementation: Discrete Distributions
-- 3.2 Continuous Probability Distributions
-  - 3.2.1 Normal Distribution and Its Role in Neural Networks
-  - 3.2.2 Exponential and Gamma Distributions
-  - 3.2.3 Beta Distribution for Probability Modeling
-  - 3.2.4 PyTorch Implementation: Continuous Distributions
-- 3.3 From Distributions to Language: Vocabulary as Discrete Space
-- 3.4 Healthcare Case Study: Medical Term Prediction
+### [3. Discrete and Continuous Probability Distributions](#3-discrete-and-continuous-probability-distributions)
+- [3.1 Discrete Probability Distributions](#31-discrete-probability-distributions)
+  - [3.1.1 Bernoulli and Binomial Distributions](#311-bernoulli-and-binomial-distributions)
+  - [3.1.2 Multinomial Distribution (The Foundation of Token Prediction)](#312-multinomial-distribution-the-foundation-of-token-prediction)
+  - [3.1.3 Categorical Distribution in Vocabulary Modeling](#313-categorical-distribution-in-vocabulary-modeling)
+  - [3.1.4 PyTorch Implementation: Discrete Distributions](#314-pytorch-implementation-discrete-distributions)
+- [3.2 Continuous Probability Distributions](#32-continuous-probability-distributions)
+  - [3.2.1 Normal Distribution and Its Role in Neural Networks](#321-normal-distribution-and-its-role-in-neural-networks)
+  - [3.2.2 Exponential and Gamma Distributions](#322-exponential-and-gamma-distributions)
+  - [3.2.3 Beta Distribution for Probability Modeling](#323-beta-distribution-for-probability-modeling)
+  - [3.2.4 PyTorch Implementation: Continuous Distributions](#324-pytorch-implementation-continuous-distributions)
+- [3.3 From Distributions to Language: Vocabulary as Discrete Space](#33-from-distributions-to-language-vocabulary-as-discrete-space)
+- [3.4 Healthcare Case Study: Medical Term Prediction](#34-healthcare-case-study-medical-term-prediction)
 
-### 4. Conditional Probability and Bayes' Theorem
-- 4.1 Conditional Probability: The Heart of Language Modeling
-  - 4.1.1 Mathematical Definition and Properties
-  - 4.1.2 P(word|context): The Language Modeling Objective
-  - 4.1.3 Independence vs. Dependence in Token Sequences
-- 4.2 Bayes' Theorem: Updating Beliefs with Evidence
-  - 4.2.1 Mathematical Formulation and Interpretation
-  - 4.2.2 Prior, Likelihood, and Posterior in LLMs
-  - 4.2.3 Bayesian Inference in Language Understanding
-- 4.3 PyTorch Implementation: Conditional Probability Calculations
-- 4.4 Healthcare Applications: Diagnostic Reasoning with LLMs
+### [4. Conditional Probability and Bayes' Theorem](#4-conditional-probability-and-bayes-theorem)
+- [4.1 Conditional Probability: The Heart of Language Modeling](#41-conditional-probability-the-heart-of-language-modeling)
+  - [4.1.1 Mathematical Definition and Properties](#411-mathematical-definition-and-properties)
+  - [4.1.2 P(word|context): The Language Modeling Objective](#412-pwordcontext-the-language-modeling-objective)
+  - [4.1.3 Independence vs. Dependence in Token Sequences](#413-independence-vs-dependence-in-token-sequences)
+- [4.2 Bayes' Theorem: Updating Beliefs with Evidence](#42-bayes-theorem-updating-beliefs-with-evidence)
+  - [4.2.1 Mathematical Formulation and Interpretation](#421-mathematical-formulation-and-interpretation)
+  - [4.2.2 Prior, Likelihood, and Posterior in LLMs](#422-prior-likelihood-and-posterior-in-llms)
+  - [4.2.3 Bayesian Inference in Language Understanding](#423-bayesian-inference-in-language-understanding)
+- [4.3 PyTorch Implementation: Conditional Probability Calculations](#43-pytorch-implementation-conditional-probability-calculations)
+- [4.4 Healthcare Applications: Diagnostic Reasoning with LLMs](#44-healthcare-applications-diagnostic-reasoning-with-llms)
 
-### 5. Joint and Marginal Distributions
-- 5.1 Joint Probability Distributions
-  - 5.1.1 Mathematical Definition and Properties
-  - 5.1.2 Joint Distributions in Multi-token Prediction
-  - 5.1.3 Correlation and Dependence Between Tokens
-- 5.2 Marginal Distributions
-  - 5.2.1 Marginalization: Summing Out Variables
-  - 5.2.2 Marginal Likelihood in Language Models
-  - 5.2.3 Token-level vs. Sequence-level Probabilities
-- 5.3 PyTorch Implementation: Joint and Marginal Calculations
-- 5.4 Healthcare Case Study: Multi-symptom Diagnosis Modeling
+### [5. Joint and Marginal Distributions](#5-joint-and-marginal-distributions)
+- [5.1 Joint Probability Distributions](#51-joint-probability-distributions)
+  - [5.1.1 Mathematical Definition and Properties](#511-mathematical-definition-and-properties)
+  - [5.1.2 Joint Distributions in Multi-token Prediction](#512-joint-distributions-in-multi-token-prediction)
+  - [5.1.3 Correlation and Dependence Between Tokens](#513-correlation-and-dependence-between-tokens)
+- [5.2 Marginal Distributions](#52-marginal-distributions)
+  - [5.2.1 Marginalization: Summing Out Variables](#521-marginalization-summing-out-variables)
+  - [5.2.2 Marginal Likelihood in Language Models](#522-marginal-likelihood-in-language-models)
+  - [5.2.3 Token-level vs. Sequence-level Probabilities](#523-token-level-vs-sequence-level-probabilities)
+- [5.3 PyTorch Implementation: Joint and Marginal Calculations](#53-pytorch-implementation-joint-and-marginal-calculations)
+- [5.4 Healthcare Case Study: Multi-symptom Diagnosis Modeling](#54-healthcare-case-study-multi-symptom-diagnosis-modeling)
 
-### 6. Chain Rule of Probability: The Foundation of Autoregressive Modeling
-- 6.1 Mathematical Formulation of the Chain Rule
-  - 6.1.1 Decomposing Joint Probabilities
-  - 6.1.2 P(w₁, w₂, ..., wₙ) = P(w₁) × P(w₂|w₁) × ... × P(wₙ|w₁,...,wₙ₋₁)
-  - 6.1.3 Order Dependence and Causality
-- 6.2 Autoregressive Language Modeling
-  - 6.2.1 Left-to-Right Generation
-  - 6.2.2 Teacher Forcing vs. Autoregressive Inference
-  - 6.2.3 Attention Mechanisms and Conditional Dependencies
-- 6.3 PyTorch Implementation: Autoregressive Text Generation
-- 6.4 Advanced Topics: Bidirectional and Masked Language Modeling
-- 6.5 Healthcare Applications: Clinical Note Generation
+### [6. Chain Rule of Probability: The Foundation of Autoregressive Modeling](#6-chain-rule-of-probability-the-foundation-of-autoregressive-modeling)
+- [6.1 Mathematical Formulation of the Chain Rule](#61-mathematical-formulation-of-the-chain-rule)
+  - [6.1.1 Decomposing Joint Probabilities](#611-decomposing-joint-probabilities)
+  - [6.1.2 $P(w_1, w_2, \ldots, w_n) = P(w_1) \times P(w_2|w_1) \times \ldots \times P(w_n|w_1,\ldots,w_{n-1})$](#612-pw_1-w_2-ldots-w_n--pw_1-times-pw_2w_1-times-ldots-times-pw_nw_1ldotsw_n-1)
+  - [6.1.3 Order Dependence and Causality](#613-order-dependence-and-causality)
+- [6.2 Autoregressive Language Modeling](#62-autoregressive-language-modeling)
+  - [6.2.1 Left-to-Right Generation](#621-left-to-right-generation)
+  - [6.2.2 Teacher Forcing vs. Autoregressive Inference](#622-teacher-forcing-vs-autoregressive-inference)
+  - [6.2.3 Attention Mechanisms and Conditional Dependencies](#623-attention-mechanisms-and-conditional-dependencies)
+- [6.3 PyTorch Implementation: Autoregressive Text Generation](#63-pytorch-implementation-autoregressive-text-generation)
+- [6.4 Advanced Topics: Bidirectional and Masked Language Modeling](#64-advanced-topics-bidirectional-and-masked-language-modeling)
+- [6.5 Healthcare Applications: Clinical Note Generation](#65-healthcare-applications-clinical-note-generation)
 
-### 7. Practical Applications: Calculating P(word|context)
-- 7.1 N-gram Language Models
-  - 7.1.1 Unigram, Bigram, and Trigram Models
-  - 7.1.2 Maximum Likelihood Estimation
-  - 7.1.3 Smoothing Techniques
-- 7.2 Neural Language Models
-  - 7.2.1 From N-grams to Neural Networks
-  - 7.2.2 Softmax and Cross-Entropy Loss
-  - 7.2.3 Temperature Scaling and Probability Calibration
-- 7.3 Transformer-based Language Models
-  - 7.3.1 Self-Attention and Conditional Probability
-  - 7.3.2 Masked Self-Attention in GPT Models
-  - 7.3.3 Bidirectional Context in BERT Models
-- 7.4 PyTorch Implementation: Complete Language Model
-- 7.5 Healthcare Case Study: Medical Text Generation
----
+### [7. Practical Applications: Calculating P(word|context)](#7-practical-applications-calculating-pwordcontext)
+- [7.1 N-gram Language Models](#71-n-gram-language-models)
+  - [7.1.1 Unigram, Bigram, and Trigram Models](#711-unigram-bigram-and-trigram-models)
+  - [7.1.2 Maximum Likelihood Estimation](#712-maximum-likelihood-estimation)
+  - [7.1.3 Smoothing Techniques](#713-smoothing-techniques)
+- [7.2 Neural Language Models](#72-neural-language-models)
+  - [7.2.1 From N-grams to Neural Networks](#721-from-n-grams-to-neural-networks)
+  - [7.2.2 Softmax and Cross-Entropy Loss](#722-softmax-and-cross-entropy-loss)
+  - [7.2.3 Temperature Scaling and Probability Calibration](#723-temperature-scaling-and-probability-calibration)
+- [7.3 Transformer-based Language Models](#73-transformer-based-language-models)
+  - [7.3.1 Self-Attention and Conditional Probability](#731-self-attention-and-conditional-probability)
+  - [7.3.2 Masked Self-Attention in GPT Models](#732-masked-self-attention-in-gpt-models)
+  - [7.3.3 Bidirectional Context in BERT Models](#733-bidirectional-context-in-bert-models)
+- [7.4 PyTorch Implementation: Complete Language Model](#74-pytorch-implementation-complete-language-model)
+- [7.5 Healthcare Case Study: Medical Text Generation](#75-healthcare-case-study-medical-text-generation)
+!!! success "🎯 Detailed Learning Outcomes"
+    **Mathematical Mastery**:
 
-## Learning Objectives
+    ✅ Understand sample spaces, events, and probability axioms
 
-By the end of this study guide, you will be able to:
+    ✅ Work with discrete and continuous probability distributions
 
-1. **Understand the mathematical foundations** of probability theory as they apply to language modeling
-2. **Implement probability calculations** using PyTorch for both discrete and continuous distributions
-3. **Apply conditional probability and Bayes' theorem** to understand how LLMs predict next tokens
-4. **Use the chain rule of probability** to decompose sequence probabilities in autoregressive models
-5. **Calculate P(word|context)** using various approaches from n-grams to transformers
-6. **Apply probabilistic concepts** to healthcare-specific language modeling tasks
-7. **Evaluate and improve** the probabilistic behavior of language models
+    ✅ Apply conditional probability and Bayes' theorem
 
----
+    ✅ Use the chain rule for sequence decomposition
+
+    **Implementation Skills**:
+
+    ✅ Implement probability calculations in PyTorch
+
+    ✅ Build autoregressive language models
+
+    ✅ Calculate P(word|context) efficiently
+
+    ✅ Develop uncertainty quantification techniques
+
+    **Healthcare Applications**:
+
+    ✅ Apply probabilistic models to medical text
+
+    ✅ Quantify uncertainty in clinical predictions
+
+    ✅ Build calibrated diagnostic support systems
+
+    ✅ Ensure safety and reliability in medical AI
 
 
 ## 1. Introduction and Motivation
 
+!!! abstract "🤖 The Probabilistic Nature of Language Models"
+    Large language models like GPT-4, Claude, and Gemini are fundamentally **probability distributions** over sequences of tokens. Every prediction, every generated word, every response emerges from sophisticated probabilistic calculations that determine the likelihood of different continuations given the current context.
+
 ### 1.1 Why Probability Theory is Essential for LLMs
 
-The remarkable success of large language models (LLMs) such as GPT-4, Claude, and Gemini has fundamentally transformed our understanding of artificial intelligence and natural language processing. However, beneath the sophisticated architectures and billions of parameters lies a mathematical foundation that is both elegant and profound: probability theory. Understanding this foundation is not merely an academic exercise but a practical necessity for anyone seeking to design, implement, fine-tune, or deploy language models effectively in real-world applications.
+!!! note "🔑 Core Understanding"
+    Understanding probability theory is not merely academic—it's a **practical necessity** for anyone working with language models in real-world applications, especially high-stakes domains like healthcare where uncertainty quantification can be a matter of life and death.
 
-At its core, every large language model is a sophisticated probability distribution over sequences of tokens. When ChatGPT generates the response "The patient presents with acute chest pain," it is not simply retrieving this phrase from a database or following a deterministic rule. Instead, it is computing the conditional probability P(word|context) for each token in the sequence, where the context includes all previously generated tokens and the input prompt. This probabilistic nature is what enables LLMs to generate coherent, contextually appropriate, and surprisingly creative text across diverse domains and tasks.
+!!! example "💬 How LLMs Generate Text"
+    When ChatGPT generates "The patient presents with acute chest pain," it's not retrieving from a database. Instead, it computes:
 
-The mathematical elegance of this approach becomes apparent when we consider the chain rule of probability, which allows us to decompose the probability of an entire sequence into a product of conditional probabilities. For a sequence of tokens w₁, w₂, ..., wₙ, the joint probability can be expressed as:
+    - $P(\text{"The"} | \text{context})$
+    - $P(\text{"patient"} | \text{"The", context})$
+    - $P(\text{"presents"} | \text{"The patient", context})$
+    - And so on...
 
-P(w₁, w₂, ..., wₙ) = P(w₁) × P(w₂|w₁) × P(w₃|w₁, w₂) × ... × P(wₙ|w₁, w₂, ..., wₙ₋₁)
+!!! note "🧮 The Chain Rule Foundation"
+    **Mathematical Elegance**: The chain rule of probability decomposes sequence probability:
 
-This decomposition is the mathematical foundation of autoregressive language modeling, the paradigm that underlies most modern LLMs. Each term in this product represents a prediction task: given the context of all previous tokens, what is the probability distribution over the next token? The model learns to approximate these conditional distributions through exposure to vast amounts of text data, gradually developing an understanding of language patterns, semantic relationships, and even complex reasoning capabilities.
+    $$P(w_1, w_2, \ldots, w_n) = P(w_1) \times P(w_2|w_1) \times P(w_3|w_1, w_2) \times \ldots \times P(w_n|w_1, \ldots, w_{n-1})$$
 
-For machine learning engineers working in healthcare, finance, or other specialized domains, understanding probability theory is particularly crucial. Healthcare language models must navigate the inherent uncertainty in medical diagnosis, where symptoms may be ambiguous, multiple conditions may present similarly, and the stakes of incorrect predictions are extraordinarily high. A model that can quantify its uncertainty through well-calibrated probability distributions is far more valuable than one that provides only point estimates. When a clinical decision support system suggests a diagnosis with 85% confidence versus 95% confidence, this probabilistic information directly impacts clinical decision-making and patient safety.
+    This decomposition is the **mathematical foundation** of autoregressive language modeling that underlies GPT, Claude, and other modern LLMs.
 
-The practical implications extend beyond individual predictions to the entire model development lifecycle. During training, the cross-entropy loss function that guides parameter updates is fundamentally a measure of how well the model's predicted probability distributions match the true distributions in the training data. During evaluation, metrics such as perplexity provide insights into how well the model has learned to assign appropriate probabilities to held-out text. During deployment, techniques such as temperature scaling and nucleus sampling allow practitioners to control the randomness and creativity of generated text by manipulating the underlying probability distributions.
+**Key Insight**: Each term represents a prediction task—given all previous tokens, what's the probability distribution over the next token? Models learn these conditional distributions through exposure to vast text data, developing understanding of language patterns, semantics, and reasoning.
+
+!!! example "🏥 Healthcare Applications"
+    **Why Probability Matters in Medical AI**:
+
+    Healthcare language models must navigate **inherent uncertainty** in medical diagnosis:
+
+    - **Ambiguous symptoms**: Multiple conditions may present similarly
+    - **High stakes**: Incorrect predictions can impact patient safety
+    - **Uncertainty quantification**: 85% vs 95% confidence directly impacts clinical decisions
+
+    **Example Scenario**:
+    ```
+    Symptoms: Chest pain, shortness of breath, elevated cardiac enzymes
+
+    Model predictions:
+    • Myocardial infarction: 65% confidence
+    • Unstable angina: 20% confidence
+    • Pulmonary embolism: 10% confidence
+    • Other conditions: 5% confidence
+    ```
+
+    The **35% uncertainty** signals need for additional testing—this probabilistic information is crucial for patient safety.
+
+!!! tip "🔄 Probability Throughout the ML Lifecycle"
+    **Training**: Cross-entropy loss measures how well predicted probability distributions match true distributions
+
+    **Evaluation**: Perplexity quantifies how well the model assigns probabilities to held-out text
+
+    **Deployment**: Temperature scaling and nucleus sampling control text generation by manipulating probability distributions
+
+    **Key Insight**: Probability theory isn't just theoretical—it's the practical foundation for every stage of model development.
 
 Furthermore, the probabilistic foundation of LLMs enables sophisticated techniques for uncertainty quantification, calibration, and robustness. Bayesian approaches to neural networks can provide principled methods for estimating model uncertainty, while variational inference techniques can help approximate complex posterior distributions. These advanced methods are particularly relevant for high-stakes applications where understanding and quantifying uncertainty is as important as making accurate predictions.
 
@@ -123,13 +189,34 @@ The connection between probability theory and information theory also provides d
 
 ### 1.2 From Classical Statistics to Modern Language Modeling
 
-The journey from classical statistical methods to modern language modeling represents one of the most remarkable intellectual progressions in the history of artificial intelligence. This evolution demonstrates how fundamental mathematical principles, developed centuries ago, continue to provide the theoretical foundation for cutting-edge technologies that are reshaping society.
+!!! note "📚 Historical Evolution"
+    The journey from classical statistics to modern LLMs demonstrates how **fundamental mathematical principles** developed centuries ago continue to power cutting-edge AI technologies.
 
-Classical probability theory, formalized by mathematicians such as Pierre-Simon Laplace and Andrey Kolmogorov, established the axiomatic foundations that still govern our understanding of uncertainty and randomness today. Kolmogorov's axioms, introduced in 1933, provide the mathematical framework that underlies all modern probabilistic reasoning: the probability of any event is non-negative, the probability of the entire sample space is one, and the probability of the union of disjoint events equals the sum of their individual probabilities. These seemingly simple axioms give rise to the rich mathematical structure that enables us to reason about complex, high-dimensional probability distributions over sequences of discrete tokens.
+!!! example "🏛️ Mathematical Foundations"
+    **Kolmogorov's Axioms (1933)** - The bedrock of all probability theory:
 
-The application of probability theory to language began in earnest during the mid-20th century with the development of information theory by Claude Shannon. Shannon's groundbreaking work demonstrated that language could be modeled as a stochastic process, where each symbol or word in a sequence depends probabilistically on the preceding context. His famous experiments with n-gram models, which predict the next character or word based on the previous n-1 characters or words, established the fundamental paradigm that continues to influence language modeling today. Shannon's calculation that English text has an entropy of approximately 1.3 bits per character provided one of the first quantitative measures of the information content and predictability of natural language.
+    1. **Non-negativity**: $P(A) \geq 0$ for any event $A$
+    2. **Normalization**: $P(\Omega) = 1$ (something must happen)
+    3. **Additivity**: $P(A \cup B) = P(A) + P(B)$ for disjoint events
 
-The transition from Shannon's n-gram models to modern neural language models represents a profound scaling of the same fundamental principles. While Shannon worked with simple Markov chains that could capture only local dependencies, modern transformers can model dependencies across thousands of tokens through sophisticated attention mechanisms. However, the underlying mathematical framework remains the same: we seek to learn a probability distribution P(wₜ|w₁, w₂, ..., wₜ₋₁) that captures the conditional dependencies between tokens in natural language.
+    These simple axioms enable reasoning about complex, high-dimensional probability distributions over token sequences.
+
+!!! timeline "🔄 Evolution Timeline"
+    **1933**: Kolmogorov formalizes probability theory axioms
+
+    **1948**: Shannon develops information theory and n-gram models
+
+    **1980s-90s**: Neural networks enter language modeling (Bengio et al.)
+
+    **2000s**: RNNs and LSTMs model long-range dependencies
+
+    **2017**: Transformers revolutionize the field (Vaswani et al.)
+
+    **2020s**: Large language models achieve human-level performance
+
+The application of probability theory to language began in earnest during the mid-20th century with the development of information theory by Claude Shannon. Shannon's groundbreaking work demonstrated that language could be modeled as a stochastic process, where each symbol or word in a sequence depends probabilistically on the preceding context. His famous experiments with n-gram models, which predict the next character or word based on the previous $n-1$ characters or words, established the fundamental paradigm that continues to influence language modeling today. Shannon's calculation that English text has an entropy of approximately 1.3 bits per character provided one of the first quantitative measures of the information content and predictability of natural language.
+
+The transition from Shannon's n-gram models to modern neural language models represents a profound scaling of the same fundamental principles. While Shannon worked with simple Markov chains that could capture only local dependencies, modern transformers can model dependencies across thousands of tokens through sophisticated attention mechanisms. However, the underlying mathematical framework remains the same: we seek to learn a probability distribution $P(w_t|w_1, w_2, \ldots, w_{t-1})$ that captures the conditional dependencies between tokens in natural language.
 
 The introduction of neural networks to language modeling in the 1980s and 1990s marked a crucial turning point in this evolution. Researchers such as Yoshua Bengio demonstrated that neural networks could learn distributed representations of words and capture semantic relationships that were invisible to traditional n-gram models. The key insight was that neural networks could learn to map discrete tokens into continuous vector spaces where semantic similarity could be measured through geometric distance. This breakthrough enabled models to generalize beyond the specific word sequences seen during training, a capability that was severely limited in classical statistical approaches.
 
@@ -153,9 +240,9 @@ Consider a scenario where a patient presents with chest pain, shortness of breat
 
 The mathematical foundation for such applications lies in Bayes' theorem, which provides a principled framework for updating probability estimates as new evidence becomes available. When additional test results become available, the model can update its probability estimates using the formula:
 
-P(diagnosis|new_evidence) = P(new_evidence|diagnosis) × P(diagnosis) / P(new_evidence)
+$$P(\text{diagnosis}|\text{new evidence}) = \frac{P(\text{new evidence}|\text{diagnosis}) \times P(\text{diagnosis})}{P(\text{new evidence})}$$
 
-This Bayesian updating process mirrors the cognitive process that experienced clinicians use when integrating multiple sources of evidence to reach a diagnosis. The prior probability P(diagnosis) represents the baseline likelihood of each condition based on population statistics and initial presentation. The likelihood P(new_evidence|diagnosis) represents how well each potential diagnosis explains the new evidence. The posterior probability P(diagnosis|new_evidence) represents the updated probability estimate that incorporates all available information.
+This Bayesian updating process mirrors the cognitive process that experienced clinicians use when integrating multiple sources of evidence to reach a diagnosis. The prior probability $P(\text{diagnosis})$ represents the baseline likelihood of each condition based on population statistics and initial presentation. The likelihood $P(\text{new evidence}|\text{diagnosis})$ represents how well each potential diagnosis explains the new evidence. The posterior probability $P(\text{diagnosis}|\text{new evidence})$ represents the updated probability estimate that incorporates all available information.
 
 Medical text generation represents another important application where probabilistic modeling is essential. Electronic health records (EHRs) contain vast amounts of unstructured text in the form of clinical notes, discharge summaries, and procedure reports. Probabilistic language models can assist healthcare providers by generating draft clinical documentation, summarizing patient histories, and extracting relevant information from complex medical texts. The uncertainty quantification capabilities of these models are crucial for ensuring that generated text is appropriately flagged when the model's confidence is low.
 
@@ -201,31 +288,105 @@ The assessment strategy for this guide emphasizes practical application over the
 
 ## 2. Probability Theory Fundamentals
 
+!!! abstract "🔑 Mathematical Foundation"
+    Probability theory rests on three fundamental concepts that provide the framework for all probabilistic reasoning in language models:
+
+    1. **Sample Spaces** ($\Omega$): All possible outcomes
+    2. **Events** ($A, B, C$): Collections of outcomes of interest
+    3. **Probability Measures** ($P$): Functions assigning likelihood to events
+
 ### 2.1 Sample Spaces, Events, and Probability Axioms
 
-The mathematical foundation of probability theory rests on three fundamental concepts that provide the framework for all probabilistic reasoning: sample spaces, events, and probability measures. Understanding these concepts is essential for anyone working with probabilistic models, as they define the mathematical structure within which all probability calculations take place. In the context of language modeling, these concepts take on particular significance because they provide the formal framework for reasoning about the uncertainty inherent in natural language generation and understanding.
+!!! note "🎯 Core Concepts"
+    These concepts define the **mathematical structure** within which all probability calculations in language modeling take place. They provide the formal framework for reasoning about uncertainty in natural language generation and understanding.
 
-A sample space, denoted by Ω (omega), represents the set of all possible outcomes of a random experiment or process. In classical probability theory, this might be the set of all possible outcomes when rolling a die: Ω = {1, 2, 3, 4, 5, 6}. In the context of language modeling, the sample space is typically much more complex and high-dimensional. For a language model generating text, the sample space might be the set of all possible sequences of tokens up to some maximum length. If we have a vocabulary V of size |V| and we consider sequences of length n, then the sample space contains |V|ⁿ possible sequences.
+!!! example "🎲 Sample Spaces ($\Omega$)"
+    **Definition**: The set of all possible outcomes of a random process.
 
-To make this concrete, consider a simple language model that generates sequences of three words from a vocabulary containing only four words: {"the", "cat", "sat", "mat"}. The sample space for this model contains 4³ = 64 possible sequences, including sequences like ("the", "cat", "sat"), ("cat", "sat", "mat"), and ("mat", "mat", "mat"). Each of these sequences represents a possible outcome of the text generation process, and the sample space Ω contains all such possibilities.
+    **Classical Example**: Rolling a die → $\Omega = \{1, 2, 3, 4, 5, 6\}$
+
+    **Language Modeling**: For vocabulary $V$ and sequences of length $n$ → $|\Omega| = |V|^n$ possible sequences
+
+    **Concrete Example**:
+
+    Vocabulary: $\{\text{"the"}, \text{"cat"}, \text{"sat"}, \text{"mat"}\}$
+
+    Sequence length: 3 words
+
+    Sample space size: $4^3 = 64$ possible sequences
+
+    Examples: $(\text{"the"}, \text{"cat"}, \text{"sat"})$, $(\text{"cat"}, \text{"sat"}, \text{"mat"})$, $(\text{"mat"}, \text{"mat"}, \text{"mat"})$
+
+!!! warning "🌌 Scale Challenge"
+    **Real Language Models**:
+
+    - Vocabularies: 50,000+ tokens
+    - Sequences: 1,000+ tokens
+    - Sample space: Larger than atoms in the observable universe!
+
+    This vast size creates both **opportunities** (incredible expressiveness) and **challenges** (impossible to enumerate all sequences).
 
 The size and structure of the sample space have profound implications for language modeling. Real language models work with vocabularies containing tens of thousands or even hundreds of thousands of tokens, and they generate sequences that can be hundreds or thousands of tokens long. This means that the sample space is astronomically large, containing more possible sequences than there are atoms in the observable universe. This vast size creates both opportunities and challenges: it allows for incredible expressiveness and creativity in generated text, but it also makes it impossible to explicitly enumerate or store probability values for all possible sequences.
 
-Events in probability theory are subsets of the sample space that represent collections of outcomes of interest. An event A is said to occur if the outcome of the random process belongs to the subset A. In language modeling, events might represent various properties or characteristics of generated text. For example, we might define an event A as "the generated sequence contains at least one medical term" or "the generated sequence is grammatically correct." The probability of an event represents our degree of belief that the event will occur when we sample from the underlying probability distribution.
+!!! note "🔗 Cross-Reference"
+    The mathematical techniques for handling these vast sample spaces are covered in detail in [Section 6: Chain Rule of Probability](#6-chain-rule-of-probability-the-foundation-of-autoregressive-modeling), which shows how the chain rule enables tractable computation over infinite sequence spaces.
 
-The mathematical structure of events is formalized through the concept of a σ-algebra (sigma-algebra), which is a collection of subsets of the sample space that satisfies certain closure properties. Specifically, a σ-algebra F must contain the empty set ∅ and the entire sample space Ω, and it must be closed under complementation and countable unions. This mathematical structure ensures that we can perform all the logical operations we need when reasoning about events, such as computing the probability of the union or intersection of events.
+!!! example "📊 Events (Subsets of $\Omega$)"
+    **Definition**: Collections of outcomes of interest (subsets of the sample space).
+
+    **Language Modeling Events**:
+
+    - $A$: "Generated sequence contains at least one medical term"
+    - $B$: "Generated sequence is grammatically correct"
+    - $C$: "Generated response is empathetic and accurate"
+
+    **Event Occurrence**: Event $A$ occurs if the generated outcome belongs to subset $A$.
+
+!!! note "🔧 Mathematical Structure: σ-algebra"
+    **Formal Framework**: A σ-algebra $\mathcal{F}$ is a collection of subsets satisfying:
+
+    1. **Contains extremes**: $\emptyset, \Omega \in \mathcal{F}$
+    2. **Closed under complement**: If $A \in \mathcal{F}$, then $A^c \in \mathcal{F}$
+    3. **Closed under countable unions**: If $A_1, A_2, \ldots \in \mathcal{F}$, then $\bigcup_{i=1}^{\infty} A_i \in \mathcal{F}$
+
+    This structure enables logical operations like computing $P(A \cup B)$ and $P(A \cap B)$.
 
 In practical language modeling applications, we often work with events that have natural linguistic interpretations. For instance, we might be interested in the event that a generated medical report contains a specific diagnosis, or the event that a generated response to a patient query is both accurate and empathetic. These events correspond to subsets of the vast sample space of possible text sequences, and understanding their probabilistic properties is crucial for building effective language models.
 
-The probability measure P is a function that assigns a real number between 0 and 1 to each event in the σ-algebra, representing our degree of belief that the event will occur. The probability measure must satisfy Kolmogorov's three axioms, which provide the mathematical foundation for all probabilistic reasoning. The first axiom states that the probability of any event is non-negative: P(A) ≥ 0 for all events A. This axiom ensures that probabilities are always meaningful positive quantities.
+!!! note "📏 Probability Measure ($P$)"
+    **Definition**: Function assigning real numbers in $[0,1]$ to events, representing degree of belief.
 
-The second axiom states that the probability of the entire sample space is 1: P(Ω) = 1. This axiom reflects the fact that some outcome must occur when we perform our random experiment. In the context of language modeling, this means that when we generate text, we must produce some sequence of tokens, even if that sequence is empty or consists of special tokens indicating the end of generation.
+    **Kolmogorov's Three Axioms** (1933):
 
-The third axiom, known as countable additivity, states that for any countable collection of disjoint events A₁, A₂, A₃, ..., the probability of their union equals the sum of their individual probabilities: P(A₁ ∪ A₂ ∪ A₃ ∪ ...) = P(A₁) + P(A₂) + P(A₃) + .... This axiom ensures that probabilities behave in an intuitive way when we combine events, and it provides the mathematical foundation for many important probability calculations.
+    1. **Non-negativity**: $P(A) \geq 0$ for all events $A$
+    2. **Normalization**: $P(\Omega) = 1$ (something must happen)
+    3. **Additivity**: $P(A \cup B) = P(A) + P(B)$ for disjoint events $A, B$
+
+!!! example "🤖 Language Modeling Interpretation"
+    **Axiom 2 in Practice**: When generating text, we must produce some sequence of tokens.
+
+    - Could be meaningful text: "The patient has pneumonia"
+    - Could be empty sequence: `<EOS>` (end of sequence)
+    - Could be special tokens: `<UNK>` (unknown)
+
+    **Key Point**: The total probability across all possible sequences sums to 1.
+
+The third axiom, known as countable additivity, states that for any countable collection of disjoint events $A_1, A_2, A_3, \ldots$, the probability of their union equals the sum of their individual probabilities:
+
+$$P(A_1 \cup A_2 \cup A_3 \cup \ldots) = P(A_1) + P(A_2) + P(A_3) + \ldots$$
+
+This axiom ensures that probabilities behave in an intuitive way when we combine events, and it provides the mathematical foundation for many important probability calculations.
 
 These axioms might seem abstract, but they have immediate practical implications for language modeling. For example, when a language model computes a probability distribution over the next token in a sequence, the probabilities assigned to all possible tokens must sum to 1 (by the second axiom). When we compute the probability of generating text that satisfies multiple independent criteria, we can multiply the individual probabilities (a consequence of the third axiom). When we want to ensure that our model assigns reasonable probabilities to different types of text, we need to verify that these probabilities satisfy the axioms.
 
-The concept of conditional probability emerges naturally from these foundations and plays a central role in language modeling. Given two events A and B, where P(B) > 0, the conditional probability of A given B is defined as P(A|B) = P(A ∩ B) / P(B). This formula captures the intuitive idea that learning that event B has occurred should update our beliefs about the likelihood of event A. In language modeling, conditional probability is ubiquitous: we constantly compute the probability of the next token given the previous tokens, the probability of a particular interpretation given the input text, and the probability of various outcomes given the current context.
+The concept of conditional probability emerges naturally from these foundations and plays a central role in language modeling. Given two events $A$ and $B$, where $P(B) > 0$, the conditional probability of $A$ given $B$ is defined as:
+
+$$P(A|B) = \frac{P(A \cap B)}{P(B)}$$
+
+This formula captures the intuitive idea that learning that event $B$ has occurred should update our beliefs about the likelihood of event $A$. In language modeling, conditional probability is ubiquitous: we constantly compute the probability of the next token given the previous tokens, the probability of a particular interpretation given the input text, and the probability of various outcomes given the current context.
+
+!!! note "🔗 Cross-Reference"
+    Conditional probability is explored in depth in [Section 4: Conditional Probability and Bayes' Theorem](#4-conditional-probability-and-bayes-theorem), which covers its central role in language modeling.
 
 The mathematical elegance of probability theory lies in how these simple axioms give rise to a rich and powerful framework for reasoning about uncertainty. From these basic foundations, we can derive all the sophisticated techniques used in modern probabilistic modeling, including Bayes' theorem, the law of total probability, and the various probability distributions that we will explore in subsequent sections.
 
@@ -235,25 +396,59 @@ Understanding these foundations is particularly important for practitioners work
 
 Random variables provide the mathematical bridge between abstract probability spaces and the concrete numerical calculations that drive practical applications in language modeling. A random variable is fundamentally a function that maps outcomes from the sample space to real numbers, allowing us to work with numerical quantities rather than abstract outcomes. This transformation is crucial in language modeling because it enables us to perform mathematical operations on linguistic concepts, compute gradients for training neural networks, and implement efficient algorithms for text generation and analysis.
 
-Formally, a random variable X is a measurable function X: Ω → ℝ that assigns a real number to each outcome in the sample space Ω. The measurability requirement ensures that we can compute probabilities for events defined in terms of the random variable, such as P(X ≤ x) for any real number x. In language modeling, we encounter random variables at multiple levels of abstraction, from individual token indices to complex semantic representations derived from neural network activations.
+Formally, a random variable $X$ is a measurable function $X: \Omega \to \mathbb{R}$ that assigns a real number to each outcome in the sample space $\Omega$. The measurability requirement ensures that we can compute probabilities for events defined in terms of the random variable, such as $P(X \leq x)$ for any real number $x$. In language modeling, we encounter random variables at multiple levels of abstraction, from individual token indices to complex semantic representations derived from neural network activations.
 
-Consider a simple example from language modeling: let X be a random variable representing the index of the next token in a sequence, where tokens are drawn from a vocabulary V = {w₁, w₂, ..., w|V|}. If we assign indices 1, 2, ..., |V| to these tokens, then X can take values in the set {1, 2, ..., |V|}. The probability mass function of X, denoted P(X = k), represents the probability that the next token is wₖ. This probability distribution encodes the model's beliefs about which tokens are most likely to appear next, given the current context.
+Consider a simple example from language modeling: let $X$ be a random variable representing the index of the next token in a sequence, where tokens are drawn from a vocabulary $V = \{w_1, w_2, \ldots, w_{|V|}\}$. If we assign indices $1, 2, \ldots, |V|$ to these tokens, then $X$ can take values in the set $\{1, 2, \ldots, |V|\}$. The probability mass function of $X$, denoted $P(X = k)$, represents the probability that the next token is $w_k$. This probability distribution encodes the model's beliefs about which tokens are most likely to appear next, given the current context.
 
 The distinction between discrete and continuous random variables is fundamental in probability theory and has important implications for language modeling. Discrete random variables, such as token indices, take values from a countable set and are characterized by probability mass functions (PMFs). Continuous random variables, such as the activations of neural network layers, take values from uncountable sets and are characterized by probability density functions (PDFs). Understanding this distinction is crucial because it determines which mathematical tools and computational techniques are appropriate for different modeling tasks.
 
 In the context of transformer-based language models, we encounter both types of random variables. The input and output tokens are discrete random variables, while the internal representations (embeddings, attention weights, hidden states) are continuous random variables. The softmax function that produces the final probability distribution over tokens serves as a bridge between these two worlds, transforming continuous logits into discrete probability distributions.
 
-The probability mass function (PMF) of a discrete random variable X is defined as P(X = x) = P({ω ∈ Ω : X(ω) = x}), which represents the probability that the random variable takes the specific value x. For the PMF to be valid, it must satisfy two conditions: P(X = x) ≥ 0 for all x, and ∑ₓ P(X = x) = 1, where the sum is taken over all possible values of X. These conditions ensure that the PMF represents a valid probability distribution.
+The probability mass function (PMF) of a discrete random variable $X$ is defined as:
 
-In language modeling, the PMF over the vocabulary represents the model's prediction for the next token. For a vocabulary of size |V|, we have a PMF P(X = k) for k ∈ {1, 2, ..., |V|}, where ∑ᵏ₌₁|V| P(X = k) = 1. The shape of this distribution reflects the model's confidence and preferences: a peaked distribution indicates high confidence in a few tokens, while a flat distribution indicates uncertainty across many tokens. Techniques such as temperature scaling allow us to modify the shape of this distribution to control the randomness of generated text.
+$$P(X = x) = P(\{\omega \in \Omega : X(\omega) = x\})$$
 
-The probability density function (PDF) of a continuous random variable X is a function f(x) such that P(a ≤ X ≤ b) = ∫ₐᵇ f(x) dx for any interval [a, b]. Unlike the PMF, the PDF does not directly represent probabilities; instead, it represents the density of probability at each point. The PDF must satisfy f(x) ≥ 0 for all x and ∫₋∞^∞ f(x) dx = 1. The interpretation of the PDF is that f(x)dx represents the probability that X falls in the infinitesimal interval [x, x + dx].
+which represents the probability that the random variable takes the specific value $x$. For the PMF to be valid, it must satisfy two conditions:
+
+1. **Non-negativity**: $P(X = x) \geq 0$ for all $x$
+2. **Normalization**: $\sum_x P(X = x) = 1$
+
+where the sum is taken over all possible values of $X$. These conditions ensure that the PMF represents a valid probability distribution.
+
+In language modeling, the PMF over the vocabulary represents the model's prediction for the next token. For a vocabulary of size $|V|$, we have a PMF $P(X = k)$ for $k \in \{1, 2, \ldots, |V|\}$, where:
+
+$$\sum_{k=1}^{|V|} P(X = k) = 1$$
+
+The shape of this distribution reflects the model's confidence and preferences: a peaked distribution indicates high confidence in a few tokens, while a flat distribution indicates uncertainty across many tokens. Techniques such as temperature scaling allow us to modify the shape of this distribution to control the randomness of generated text.
+
+The probability density function (PDF) of a continuous random variable $X$ is a function $f(x)$ such that:
+
+$$P(a \leq X \leq b) = \int_a^b f(x) \, dx$$
+
+for any interval $[a, b]$. Unlike the PMF, the PDF does not directly represent probabilities; instead, it represents the density of probability at each point. The PDF must satisfy:
+
+1. **Non-negativity**: $f(x) \geq 0$ for all $x$
+2. **Normalization**: $\int_{-\infty}^{\infty} f(x) \, dx = 1$
+
+The interpretation of the PDF is that $f(x)dx$ represents the probability that $X$ falls in the infinitesimal interval $[x, x + dx]$.
 
 In neural language models, continuous random variables arise naturally from the real-valued computations performed by the network. For example, the attention weights in a transformer model can be viewed as samples from continuous probability distributions over the input sequence positions. The hidden states and embeddings are also continuous random variables that encode semantic and syntactic information about the input text.
 
-The cumulative distribution function (CDF) provides a unified way to characterize both discrete and continuous random variables. For any random variable X, the CDF is defined as F(x) = P(X ≤ x). The CDF is a non-decreasing function that approaches 0 as x → -∞ and approaches 1 as x → +∞. For discrete random variables, the CDF is a step function that jumps at each possible value of the random variable. For continuous random variables, the CDF is a smooth function whose derivative (where it exists) equals the PDF.
+The cumulative distribution function (CDF) provides a unified way to characterize both discrete and continuous random variables. For any random variable $X$, the CDF is defined as:
 
-The concept of expectation (or expected value) is central to understanding the behavior of random variables. For a discrete random variable X with PMF P(X = x), the expectation is E[X] = ∑ₓ x · P(X = x). For a continuous random variable X with PDF f(x), the expectation is E[X] = ∫₋∞^∞ x · f(x) dx. The expectation represents the average value of the random variable over many realizations and provides a single-number summary of the distribution's central tendency.
+$$F(x) = P(X \leq x)$$
+
+The CDF is a non-decreasing function that approaches 0 as $x \to -\infty$ and approaches 1 as $x \to +\infty$. For discrete random variables, the CDF is a step function that jumps at each possible value of the random variable. For continuous random variables, the CDF is a smooth function whose derivative (where it exists) equals the PDF.
+
+The concept of expectation (or expected value) is central to understanding the behavior of random variables. For a discrete random variable $X$ with PMF $P(X = x)$, the expectation is:
+
+$$E[X] = \sum_x x \cdot P(X = x)$$
+
+For a continuous random variable $X$ with PDF $f(x)$, the expectation is:
+
+$$E[X] = \int_{-\infty}^{\infty} x \cdot f(x) \, dx$$
+
+The expectation represents the average value of the random variable over many realizations and provides a single-number summary of the distribution's central tendency.
 
 In language modeling, expectations play crucial roles in both training and inference. During training, the cross-entropy loss can be interpreted as the negative expected log-likelihood of the true tokens under the model's predicted distributions. During inference, beam search and other decoding algorithms implicitly optimize expected scores over possible continuations. Understanding expectations also helps in analyzing model behavior: for example, the expected length of generated sequences provides insights into the model's tendency toward verbosity or conciseness.
 
@@ -277,25 +472,31 @@ Random variables are conventionally denoted by capital letters from the end of t
 
 Probability measures and functions use the notation P(·) for probability, where the argument can be an event, a statement about random variables, or a conditional expression. The notation P(A) represents the probability of event A, P(X = x) represents the probability that random variable X takes the value x, and P(X ≤ x) represents the probability that X is less than or equal to x. Conditional probabilities are denoted P(A|B), read as "the probability of A given B," and they represent the probability of event A under the condition that event B has occurred.
 
-In language modeling, we frequently encounter sequences of random variables, which require additional notational conventions. A sequence of n random variables is typically denoted X₁, X₂, ..., Xₙ or more compactly as X₁:ₙ. The joint probability of the entire sequence is written P(X₁ = x₁, X₂ = x₂, ..., Xₙ = xₙ) or P(X₁:ₙ = x₁:ₙ). When the context is clear, this is often abbreviated to P(x₁, x₂, ..., xₙ) or P(x₁:ₙ).
+In language modeling, we frequently encounter sequences of random variables, which require additional notational conventions. A sequence of $n$ random variables is typically denoted $X_1, X_2, \ldots, X_n$ or more compactly as $X_{1:n}$. The joint probability of the entire sequence is written $P(X_1 = x_1, X_2 = x_2, \ldots, X_n = x_n)$ or $P(X_{1:n} = x_{1:n})$. When the context is clear, this is often abbreviated to $P(x_1, x_2, \ldots, x_n)$ or $P(x_{1:n})$.
 
 The chain rule of probability, which is fundamental to autoregressive language modeling, is expressed mathematically as:
 
-P(X₁:ₙ = x₁:ₙ) = P(X₁ = x₁) × P(X₂ = x₂|X₁ = x₁) × ... × P(Xₙ = xₙ|X₁:ₙ₋₁ = x₁:ₙ₋₁)
+$$P(X_{1:n} = x_{1:n}) = P(X_1 = x_1) \times P(X_2 = x_2|X_1 = x_1) \times \ldots \times P(X_n = x_n|X_{1:n-1} = x_{1:n-1})$$
 
 This can be written more compactly using product notation:
 
-P(X₁:ₙ = x₁:ₙ) = ∏ᵢ₌₁ⁿ P(Xᵢ = xᵢ|X₁:ᵢ₋₁ = x₁:ᵢ₋₁)
+$$P(X_{1:n} = x_{1:n}) = \prod_{i=1}^{n} P(X_i = x_i|X_{1:i-1} = x_{1:i-1})$$
 
-where the convention is that P(X₁ = x₁|X₁:₀ = x₁:₀) = P(X₁ = x₁) since there is no conditioning context for the first token.
+where the convention is that $P(X_1 = x_1|X_{1:0} = x_{1:0}) = P(X_1 = x_1)$ since there is no conditioning context for the first token.
 
-Expectation and variance have their own notational conventions that are essential for understanding probabilistic analysis. The expectation of a random variable X is denoted E[X] or sometimes μₓ. For functions of random variables, we write E[g(X)] to represent the expected value of the function g applied to X. Conditional expectations are denoted E[X|Y], representing the expected value of X given knowledge of Y. Variance is denoted Var(X) or σₓ², and standard deviation is denoted σₓ or SD(X).
+!!! note "🔗 Cross-Reference"
+    This chain rule decomposition is the mathematical foundation explored in [Section 6: Chain Rule of Probability](#6-chain-rule-of-probability-the-foundation-of-autoregressive-modeling).
+
+Expectation and variance have their own notational conventions that are essential for understanding probabilistic analysis. The expectation of a random variable $X$ is denoted $\mathbb{E}[X]$ or sometimes $\mu_X$. For functions of random variables, we write $\mathbb{E}[g(X)]$ to represent the expected value of the function $g$ applied to $X$. Conditional expectations are denoted $\mathbb{E}[X|Y]$, representing the expected value of $X$ given knowledge of $Y$. Variance is denoted $\text{Var}(X)$ or $\sigma_X^2$, and standard deviation is denoted $\sigma_X$ or $\text{SD}(X)$.
 
 In the context of neural language models, we often work with vector-valued random variables and probability distributions over high-dimensional spaces. Vector random variables are typically denoted with bold letters (𝐗, 𝐘, 𝐙), and their components might be written as X₁, X₂, ..., Xₐ where d is the dimensionality. Probability density functions for continuous vector random variables are denoted f(𝐱) or p(𝐱), where 𝐱 represents a specific vector value.
 
-The notation for probability distributions themselves follows established conventions that help identify the type and parameters of the distribution. For example, X ~ N(μ, σ²) indicates that random variable X follows a normal distribution with mean μ and variance σ². Similarly, X ~ Bernoulli(p) indicates a Bernoulli distribution with parameter p, and X ~ Categorical(𝐩) indicates a categorical distribution with probability vector 𝐩.
+The notation for probability distributions themselves follows established conventions that help identify the type and parameters of the distribution. For example, $X \sim \mathcal{N}(\mu, \sigma^2)$ indicates that random variable $X$ follows a normal distribution with mean $\mu$ and variance $\sigma^2$. Similarly, $X \sim \text{Bernoulli}(p)$ indicates a Bernoulli distribution with parameter $p$, and $X \sim \text{Categorical}(\mathbf{p})$ indicates a categorical distribution with probability vector $\mathbf{p}$.
 
-Logarithmic notation is particularly important in language modeling because many calculations involve products of probabilities, which can lead to numerical underflow when implemented on computers. The log-probability is denoted log P(x) or ℓ(x), and log-likelihood functions are often written as ℓ(θ) = log P(data|θ) where θ represents model parameters. The natural logarithm (base e) is typically used unless otherwise specified, though base-2 logarithms are common in information theory contexts.
+!!! note "🔗 Cross-Reference"
+    These probability distributions are covered in detail in [Section 3: Discrete and Continuous Probability Distributions](#3-discrete-and-continuous-probability-distributions).
+
+Logarithmic notation is particularly important in language modeling because many calculations involve products of probabilities, which can lead to numerical underflow when implemented on computers. The log-probability is denoted $\log P(x)$ or $\ell(x)$, and log-likelihood functions are often written as $\ell(\theta) = \log P(\text{data}|\theta)$ where $\theta$ represents model parameters. The natural logarithm (base $e$) is typically used unless otherwise specified, though base-2 logarithms are common in information theory contexts.
 
 Information-theoretic quantities have their own notational conventions that are increasingly important in language modeling. Entropy is denoted H(X) for a random variable X, mutual information between two random variables is denoted I(X; Y), and the Kullback-Leibler divergence from distribution Q to distribution P is denoted D_KL(P||Q) or KL(P||Q). Cross-entropy between distributions P and Q is denoted H(P, Q).
 
@@ -339,27 +540,31 @@ D_KL(P||Q) = ∑ₓ P(x) log(P(x)/Q(x)) = H(P, Q) - H(P)
 
 The KL divergence measures how much information is lost when we use distribution Q to approximate distribution P. In language modeling, KL divergence is used in various contexts, including regularization techniques, model distillation, and variational inference. The asymmetry of KL divergence (D_KL(P||Q) ≠ D_KL(Q||P) in general) has important implications for how we design and interpret these applications.
 
-Mutual information quantifies the amount of information that one random variable contains about another. For two random variables X and Y, the mutual information is defined as:
+Mutual information quantifies the amount of information that one random variable contains about another. For two random variables $X$ and $Y$, the mutual information is defined as:
 
-I(X; Y) = ∑ₓ,ᵧ P(x, y) log(P(x, y)/(P(x)P(y)))
+$$I(X; Y) = \sum_{x,y} P(x, y) \log\left(\frac{P(x, y)}{P(x)P(y)}\right)$$
 
-Mutual information can also be expressed in terms of entropy: I(X; Y) = H(X) - H(X|Y) = H(Y) - H(Y|X). This formulation shows that mutual information measures how much the uncertainty about X is reduced by knowing Y, or vice versa. In language modeling, mutual information helps us understand the dependencies between different parts of a sequence and can guide architectural decisions about how to model these dependencies.
+Mutual information can also be expressed in terms of entropy:
 
-Conditional entropy H(X|Y) measures the average uncertainty about X given knowledge of Y:
+$$I(X; Y) = H(X) - H(X|Y) = H(Y) - H(Y|X)$$
 
-H(X|Y) = -∑ₓ,ᵧ P(x, y) log P(x|y)
+This formulation shows that mutual information measures how much the uncertainty about $X$ is reduced by knowing $Y$, or vice versa. In language modeling, mutual information helps us understand the dependencies between different parts of a sequence and can guide architectural decisions about how to model these dependencies.
+
+Conditional entropy $H(X|Y)$ measures the average uncertainty about $X$ given knowledge of $Y$:
+
+$$H(X|Y) = -\sum_{x,y} P(x, y) \log P(x|y)$$
 
 In language modeling, conditional entropy is fundamental because autoregressive models are essentially learning to minimize the conditional entropy of each token given the previous tokens. The chain rule of entropy states that:
 
-H(X₁, X₂, ..., Xₙ) = H(X₁) + H(X₂|X₁) + ... + H(Xₙ|X₁, ..., Xₙ₋₁)
+$$H(X_1, X_2, \ldots, X_n) = H(X_1) + H(X_2|X_1) + \ldots + H(X_n|X_1, \ldots, X_{n-1})$$
 
 This decomposition directly parallels the chain rule of probability and provides the information-theoretic foundation for autoregressive language modeling.
 
 The concept of perplexity, widely used for evaluating language models, is directly derived from entropy. Perplexity is defined as:
 
-Perplexity = 2^H(X)
+$$\text{Perplexity} = 2^{H(X)}$$
 
-where H(X) is the entropy of the true distribution measured in bits. Perplexity can be interpreted as the effective vocabulary size: a model with perplexity 100 is as uncertain about the next token as if it were choosing uniformly among 100 equally likely options. Lower perplexity indicates better model performance, as the model is more confident in its predictions and assigns higher probabilities to the actual tokens.
+where $H(X)$ is the entropy of the true distribution measured in bits. Perplexity can be interpreted as the effective vocabulary size: a model with perplexity 100 is as uncertain about the next token as if it were choosing uniformly among 100 equally likely options. Lower perplexity indicates better model performance, as the model is more confident in its predictions and assigns higher probabilities to the actual tokens.
 
 The rate-distortion theory, another branch of information theory, provides insights into the trade-offs between compression and quality in language generation. This theory characterizes the minimum amount of information needed to represent a source with a given level of distortion. In language modeling, this translates to understanding the trade-offs between model size, computational efficiency, and generation quality. Smaller models necessarily lose some information about the training distribution, and rate-distortion theory helps us understand the fundamental limits of this compression.
 
@@ -387,7 +592,11 @@ Discrete probability distributions form the mathematical foundation for modeling
 
 #### 3.1.1 Bernoulli and Binomial Distributions
 
-The Bernoulli distribution represents the simplest case of a discrete probability distribution, modeling a single trial with two possible outcomes: success (typically coded as 1) or failure (typically coded as 0). A random variable X follows a Bernoulli distribution with parameter p if P(X = 1) = p and P(X = 0) = 1 - p, where 0 ≤ p ≤ 1. This distribution is fundamental in language modeling because many linguistic phenomena can be modeled as binary choices: whether a particular word appears in a document, whether a sentence is grammatically correct, or whether a generated response is appropriate for a given context.
+The Bernoulli distribution represents the simplest case of a discrete probability distribution, modeling a single trial with two possible outcomes: success (typically coded as 1) or failure (typically coded as 0). A random variable $X$ follows a Bernoulli distribution with parameter $p$ if:
+
+$$P(X = 1) = p \quad \text{and} \quad P(X = 0) = 1 - p$$
+
+where $0 \leq p \leq 1$. This distribution is fundamental in language modeling because many linguistic phenomena can be modeled as binary choices: whether a particular word appears in a document, whether a sentence is grammatically correct, or whether a generated response is appropriate for a given context.
 
 In healthcare applications, Bernoulli distributions naturally model binary medical outcomes and decisions. For example, a language model processing electronic health records might model the presence or absence of specific symptoms, the occurrence of adverse drug reactions, or the success or failure of particular treatments. Consider a model that processes clinical notes to identify mentions of chest pain. The random variable X representing "chest pain mentioned in this note" follows a Bernoulli distribution, where p represents the probability that chest pain is mentioned given the current context.
 
@@ -395,13 +604,19 @@ The mathematical properties of the Bernoulli distribution are straightforward bu
 
 The binomial distribution extends the Bernoulli distribution to model the number of successes in n independent Bernoulli trials, each with the same success probability p. A random variable X follows a binomial distribution, denoted X ~ Binomial(n, p), if:
 
-P(X = k) = C(n, k) × p^k × (1-p)^(n-k)
+$$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$$
 
-where C(n, k) = n!/(k!(n-k)!) is the binomial coefficient representing the number of ways to choose k successes from n trials.
+where $\binom{n}{k} = \frac{n!}{k!(n-k)!}$ is the binomial coefficient representing the number of ways to choose $k$ successes from $n$ trials.
 
 In language modeling contexts, binomial distributions arise naturally when we consider multiple independent binary events. For instance, when analyzing a collection of medical documents, we might model the number of documents that mention a particular symptom, the number of sentences that contain medical terminology, or the number of paragraphs that discuss treatment options. Each of these scenarios involves counting successes (positive outcomes) across multiple independent trials.
 
-Consider a healthcare language model that processes patient discharge summaries to identify mentions of specific medications. If we examine n = 100 discharge summaries, and each summary has probability p = 0.3 of mentioning a particular medication, then the number of summaries mentioning that medication follows a Binomial(100, 0.3) distribution. The expected number of mentions is E[X] = np = 30, with variance Var(X) = np(1-p) = 21.
+Consider a healthcare language model that processes patient discharge summaries to identify mentions of specific medications. If we examine $n = 100$ discharge summaries, and each summary has probability $p = 0.3$ of mentioning a particular medication, then the number of summaries mentioning that medication follows a $\text{Binomial}(100, 0.3)$ distribution. The expected number of mentions is:
+
+$$E[X] = np = 30$$
+
+with variance:
+
+$$\text{Var}(X) = np(1-p) = 21$$
 
 The binomial distribution has several important properties that influence its use in language modeling. As n increases while p remains constant, the distribution becomes approximately normal (by the central limit theorem), which simplifies analysis and computation for large-scale applications. The distribution is unimodal when p ≠ 0.5, with the mode occurring at ⌊(n+1)p⌋. When p = 0.5, the distribution is symmetric around its mean np.
 
@@ -451,9 +666,23 @@ pᵢ = exp(zᵢ) / ∑ⱼ₌₁ᵏ exp(zⱼ)
 
 This softmax transformation ensures that the resulting probabilities are non-negative and sum to one, satisfying the requirements for a valid categorical distribution. The logits can take any real values, providing the neural network with flexibility in learning appropriate representations.
 
-The mathematical properties of the categorical distribution have important implications for language modeling. The expected value of X is E[X] = ∑ᵢ₌₁ᵏ i × pᵢ, which represents the weighted average of the token indices. However, this expected value is rarely meaningful in language modeling because token indices are typically arbitrary. More meaningful is the mode of the distribution, which corresponds to the token with the highest probability: mode(X) = argmax pᵢ.
+The mathematical properties of the categorical distribution have important implications for language modeling. The expected value of $X$ is:
 
-The variance of the categorical distribution is Var(X) = ∑ᵢ₌₁ᵏ i² × pᵢ - (∑ᵢ₌₁ᵏ i × pᵢ)², but again, this quantity is not typically meaningful due to the arbitrary nature of token indices. More useful measures of the distribution's properties include its entropy H(X) = -∑ᵢ₌₁ᵏ pᵢ log pᵢ, which measures the uncertainty or randomness of the distribution, and its concentration, which can be measured by the maximum probability max pᵢ or the effective vocabulary size exp(H(X)).
+$$E[X] = \sum_{i=1}^k i \times p_i$$
+
+which represents the weighted average of the token indices. However, this expected value is rarely meaningful in language modeling because token indices are typically arbitrary. More meaningful is the mode of the distribution, which corresponds to the token with the highest probability:
+
+$$\text{mode}(X) = \arg\max_i p_i$$
+
+The variance of the categorical distribution is:
+
+$$\text{Var}(X) = \sum_{i=1}^k i^2 \times p_i - \left(\sum_{i=1}^k i \times p_i\right)^2$$
+
+but again, this quantity is not typically meaningful due to the arbitrary nature of token indices. More useful measures of the distribution's properties include its entropy:
+
+$$H(X) = -\sum_{i=1}^k p_i \log p_i$$
+
+which measures the uncertainty or randomness of the distribution, and its concentration, which can be measured by the maximum probability $\max_i p_i$ or the effective vocabulary size $\exp(H(X))$.
 
 In healthcare language modeling, categorical distributions model the selection of medical terms, diagnostic codes, treatment options, and other discrete medical entities. For example, when a language model processes a clinical note and predicts the next word after "patient diagnosed with", it computes a categorical distribution over medical conditions. The shape of this distribution reflects the model's knowledge about which conditions are most likely given the context, with higher probabilities assigned to more plausible diagnoses.
 
@@ -535,11 +764,11 @@ In language modeling, exponential distributions can model various temporal aspec
 
 The exponential distribution also appears in the mathematical analysis of attention mechanisms in transformer models. The softmax function used in attention can be viewed as computing a categorical distribution over input positions, but the underlying computations involve exponential functions. The attention weights αᵢⱼ = exp(eᵢⱼ)/∑ₖ exp(eᵢₖ) involve exponential transformations of the attention energies eᵢⱼ. Understanding the exponential distribution helps in analyzing the behavior of these attention mechanisms and designing improvements.
 
-The gamma distribution generalizes the exponential distribution and provides a flexible family of distributions for modeling positive-valued quantities with various shapes. A random variable X follows a gamma distribution with shape parameter α > 0 and rate parameter β > 0, denoted X ~ Gamma(α, β), if its probability density function is:
+The gamma distribution generalizes the exponential distribution and provides a flexible family of distributions for modeling positive-valued quantities with various shapes. A random variable $X$ follows a gamma distribution with shape parameter $\alpha > 0$ and rate parameter $\beta > 0$, denoted $X \sim \text{Gamma}(\alpha, \beta)$, if its probability density function is:
 
-f(x) = (β^α/Γ(α)) × x^(α-1) × e^(-βx) for x ≥ 0
+$$f(x) = \frac{\beta^\alpha}{\Gamma(\alpha)} x^{\alpha-1} e^{-\beta x} \quad \text{for } x \geq 0$$
 
-where Γ(α) is the gamma function. The gamma distribution reduces to the exponential distribution when α = 1, and it approaches a normal distribution as α becomes large.
+where $\Gamma(\alpha)$ is the gamma function. The gamma distribution reduces to the exponential distribution when $\alpha = 1$, and it approaches a normal distribution as $\alpha$ becomes large.
 
 The flexibility of the gamma distribution makes it useful for modeling a wide variety of phenomena in healthcare applications. Medical measurements such as enzyme levels, hormone concentrations, and treatment response times often follow gamma distributions. The shape parameter α controls the skewness of the distribution: when α < 1, the distribution is highly skewed with a mode at 0; when α = 1, it becomes exponential; when α > 1, it becomes more bell-shaped and less skewed.
 
@@ -553,21 +782,33 @@ In the context of regularization, gamma distributions provide alternatives to no
 
 The mathematical properties of gamma distributions also make them useful for modeling heteroscedastic noise, where the variance of the noise depends on the input. In healthcare applications, measurement errors often exhibit this property: the uncertainty in laboratory results may depend on the magnitude of the measurement, the specific test being performed, or patient-specific factors. Gamma distributions provide a flexible framework for modeling such scenarios.
 
-The beta function and its relationship to the gamma function provide additional mathematical tools for working with these distributions. The beta function B(α, β) = Γ(α)Γ(β)/Γ(α + β) appears in the normalization constants of various probability distributions and in the analysis of neural network activations. Understanding these mathematical relationships helps in deriving new results and implementing efficient algorithms.
+The beta function and its relationship to the gamma function provide additional mathematical tools for working with these distributions. The beta function:
+
+$$B(\alpha, \beta) = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}$$
+
+appears in the normalization constants of various probability distributions and in the analysis of neural network activations. Understanding these mathematical relationships helps in deriving new results and implementing efficient algorithms.
 
 #### 3.2.3 Beta Distribution for Probability Modeling
 
 The beta distribution occupies a unique and important position in probability theory and machine learning because it is defined on the interval [0, 1], making it the natural choice for modeling probabilities, proportions, and other quantities that are constrained to lie between 0 and 1. In language modeling, the beta distribution provides a powerful tool for modeling uncertainty about probabilities themselves, implementing sophisticated regularization schemes, and developing Bayesian approaches to neural networks.
 
-A random variable X follows a beta distribution with shape parameters α > 0 and β > 0, denoted X ~ Beta(α, β), if its probability density function is:
+A random variable $X$ follows a beta distribution with shape parameters $\alpha > 0$ and $\beta > 0$, denoted $X \sim \text{Beta}(\alpha, \beta)$, if its probability density function is:
 
-f(x) = (Γ(α + β)/(Γ(α)Γ(β))) × x^(α-1) × (1-x)^(β-1) for 0 ≤ x ≤ 1
+$$f(x) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} x^{\alpha-1} (1-x)^{\beta-1} \quad \text{for } 0 \leq x \leq 1$$
 
-The beta distribution is remarkably flexible, capable of representing a wide variety of shapes depending on the values of α and β. When α = β = 1, it reduces to the uniform distribution on [0, 1]. When α > 1 and β > 1, it is unimodal with mode at (α-1)/(α+β-2). When α < 1 or β < 1, it can be U-shaped or J-shaped, placing more probability mass near the boundaries.
+The beta distribution is remarkably flexible, capable of representing a wide variety of shapes depending on the values of $\alpha$ and $\beta$. When $\alpha = \beta = 1$, it reduces to the uniform distribution on $[0, 1]$. When $\alpha > 1$ and $\beta > 1$, it is unimodal with mode at $\frac{\alpha-1}{\alpha+\beta-2}$. When $\alpha < 1$ or $\beta < 1$, it can be U-shaped or J-shaped, placing more probability mass near the boundaries.
 
-The mean of the beta distribution is E[X] = α/(α + β), and the variance is Var(X) = αβ/((α + β)²(α + β + 1)). These formulas show that the mean depends on the ratio of the parameters, while the variance depends on both the individual parameters and their sum. As α + β increases while keeping their ratio constant, the variance decreases, meaning the distribution becomes more concentrated around its mean.
+The mean of the beta distribution is:
 
-In language modeling, beta distributions naturally arise when we want to model uncertainty about probabilities. For example, when estimating the probability that a particular medical term appears in clinical notes, we might use a beta distribution to represent our uncertainty about this probability. The parameters α and β can be interpreted as pseudo-counts: α represents the number of times we observed the term, and β represents the number of times we didn't observe it. This interpretation connects the beta distribution to Bayesian inference and provides an intuitive way to update our beliefs as we observe more data.
+$$E[X] = \frac{\alpha}{\alpha + \beta}$$
+
+and the variance is:
+
+$$\text{Var}(X) = \frac{\alpha\beta}{(\alpha + \beta)^2(\alpha + \beta + 1)}$$
+
+These formulas show that the mean depends on the ratio of the parameters, while the variance depends on both the individual parameters and their sum. As $\alpha + \beta$ increases while keeping their ratio constant, the variance decreases, meaning the distribution becomes more concentrated around its mean.
+
+In language modeling, beta distributions naturally arise when we want to model uncertainty about probabilities. For example, when estimating the probability that a particular medical term appears in clinical notes, we might use a beta distribution to represent our uncertainty about this probability. The parameters $\alpha$ and $\beta$ can be interpreted as pseudo-counts: $\alpha$ represents the number of times we observed the term, and $\beta$ represents the number of times we didn't observe it. This interpretation connects the beta distribution to Bayesian inference and provides an intuitive way to update our beliefs as we observe more data.
 
 The beta distribution is the conjugate prior for the Bernoulli and binomial distributions, meaning that if we start with a beta prior and observe Bernoulli or binomial data, the posterior distribution is also beta. This conjugacy property makes Bayesian inference computationally tractable and provides a principled way to incorporate prior knowledge into statistical models. If we start with a Beta(α, β) prior and observe k successes in n trials, the posterior is Beta(α + k, β + n - k).
 
@@ -664,17 +905,44 @@ The case study of medical term prediction illustrates how discrete probability d
 
 ## 4. Conditional Probability and Bayes' Theorem
 
+!!! abstract "🔑 The Heart of Language Modeling"
+    **Every language model prediction** fundamentally involves computing conditional probabilities:
+
+    $$P(\text{word}|\text{context})$$
+
+    From simple n-grams to sophisticated transformers, this is the **universal language modeling objective**.
+
 ### 4.1 Conditional Probability: The Heart of Language Modeling
 
-Conditional probability represents the mathematical foundation upon which all modern language modeling is built. Every prediction made by a language model, from simple n-gram models to sophisticated transformer architectures, fundamentally involves computing conditional probabilities of the form P(word|context). Understanding the mathematical properties, computational challenges, and practical implications of conditional probability is essential for anyone working with language models, as it provides the theoretical framework that governs model behavior, training dynamics, and generation quality.
+!!! note "🎯 Foundation of Modern AI"
+    Conditional probability provides the **theoretical framework** that governs:
+
+    - Model behavior and predictions
+    - Training dynamics and optimization
+    - Generation quality and coherence
+    - Uncertainty quantification
 
 #### 4.1.1 Mathematical Definition and Properties
 
-The mathematical definition of conditional probability provides the formal foundation for reasoning about dependencies between events and random variables. For two events A and B where P(B) > 0, the conditional probability of A given B is defined as:
+!!! note "📐 Formal Definition"
+    For events $A$ and $B$ where $P(B) > 0$:
 
-P(A|B) = P(A ∩ B) / P(B)
+    $$P(A|B) = \frac{P(A \cap B)}{P(B)}$$
 
-This definition captures the intuitive notion that learning about event B should update our beliefs about the likelihood of event A. The conditional probability represents the proportion of outcomes in which A occurs among those outcomes where B occurs. This ratio formulation ensures that conditional probabilities satisfy the axioms of probability theory while providing a principled way to incorporate new information.
+    **Intuition**: Learning about event $B$ updates our beliefs about the likelihood of event $A$.
+
+    **Interpretation**: Proportion of outcomes where $A$ occurs among those where $B$ occurs.
+
+!!! example "🔍 Key Properties"
+    **Non-negativity**: $P(A|B) \geq 0$ for all events $A, B$ with $P(B) > 0$
+
+    **Normalization**: For partition $A_1, A_2, \ldots, A_n$:
+
+    $$\sum_{i=1}^{n} P(A_i|B) = 1$$
+
+    **Multiplication Rule**:
+
+    $$P(A \cap B) = P(A|B) \times P(B) = P(B|A) \times P(A)$$
 
 The mathematical properties of conditional probability have direct implications for language modeling. Conditional probabilities are non-negative: P(A|B) ≥ 0 for all events A and B with P(B) > 0. They also satisfy the normalization property: if A₁, A₂, ..., Aₙ form a partition of the sample space (mutually exclusive and exhaustive events), then ∑ᵢ P(Aᵢ|B) = 1. This normalization property is crucial in language modeling because it ensures that the probabilities assigned to all possible next tokens sum to 1, creating a valid probability distribution.
 
@@ -692,7 +960,19 @@ This law is fundamental in language modeling because it allows us to compute the
 
 #### 4.1.2 P(word|context): The Language Modeling Objective
 
-The expression P(word|context) represents the fundamental computational task that defines language modeling: given some linguistic context, what is the probability distribution over possible next words? This seemingly simple formulation encompasses the entire challenge of natural language understanding and generation, requiring models to capture syntax, semantics, pragmatics, and world knowledge in a unified probabilistic framework.
+!!! example "🎯 The Universal Language Modeling Task"
+    **Core Question**: Given linguistic context, what is the probability distribution over possible next words?
+
+    $$P(\text{word}|\text{context})$$
+
+    **What This Encompasses**:
+
+    - **Syntax**: Grammatical structure and rules
+    - **Semantics**: Meaning and word relationships
+    - **Pragmatics**: Context-dependent interpretation
+    - **World Knowledge**: Facts about the world
+
+    This seemingly simple formulation captures the **entire challenge** of natural language understanding and generation!
 
 The context in language modeling typically consists of the sequence of words or tokens that precede the current position. For a sequence w₁, w₂, ..., wₜ₋₁, the language modeling objective is to compute P(wₜ|w₁, w₂, ..., wₜ₋₁) for each possible value of wₜ in the vocabulary. This conditional probability distribution encodes the model's beliefs about which words are most likely to continue the sequence, given the observed context.
 
@@ -726,7 +1006,15 @@ However, natural language exhibits extensive dependencies between tokens at mult
 
 The simplest language models, such as unigram models, assume complete independence between tokens. In a unigram model, P(w₁, w₂, ..., wₙ) = ∏ᵢ P(wᵢ), meaning that each word's probability depends only on its frequency in the training corpus. While computationally simple, unigram models fail to capture even basic linguistic patterns such as word order or syntactic constraints, resulting in incoherent generated text.
 
-N-gram models introduce limited dependence by conditioning each token on the previous n-1 tokens. A bigram model assumes P(wᵢ|w₁, ..., wᵢ₋₁) = P(wᵢ|wᵢ₋₁), while a trigram model assumes P(wᵢ|w₁, ..., wᵢ₋₁) = P(wᵢ|wᵢ₋₂, wᵢ₋₁). These models capture local dependencies but assume conditional independence from more distant context. The Markov assumption underlying n-gram models states that the future depends only on the recent past, not on the entire history.
+N-gram models introduce limited dependence by conditioning each token on the previous $n-1$ tokens. A bigram model assumes:
+
+$$P(w_i|w_1, \ldots, w_{i-1}) = P(w_i|w_{i-1})$$
+
+while a trigram model assumes:
+
+$$P(w_i|w_1, \ldots, w_{i-1}) = P(w_i|w_{i-2}, w_{i-1})$$
+
+These models capture local dependencies but assume conditional independence from more distant context. The Markov assumption underlying n-gram models states that the future depends only on the recent past, not on the entire history.
 
 The limitations of the Markov assumption become apparent when considering linguistic phenomena that involve long-range dependencies. Coreference resolution, where pronouns must agree with their antecedents, can span arbitrarily long distances. Syntactic dependencies, such as subject-verb agreement in complex sentences, may also involve long-range relationships. Semantic coherence and discourse structure require maintaining information across entire documents or conversations.
 
@@ -744,15 +1032,40 @@ The evaluation of dependency modeling in language models involves several approa
 
 ### 4.2 Bayes' Theorem: Updating Beliefs with Evidence
 
-Bayes' theorem represents one of the most profound and practical results in probability theory, providing a mathematical framework for updating beliefs in light of new evidence. In the context of language modeling, Bayes' theorem offers insights into how models should incorporate new information, how uncertainty should be quantified and updated, and how prior knowledge can be combined with observed data to make better predictions. Understanding Bayes' theorem is essential for developing sophisticated language models that can reason under uncertainty and adapt to new information.
+!!! abstract "🔄 The Foundation of Learning"
+    Bayes' theorem provides a **mathematical framework for updating beliefs** in light of new evidence. It's essential for:
+
+    - Incorporating new information in language models
+    - Quantifying and updating uncertainty
+    - Combining prior knowledge with observed data
+    - Reasoning under uncertainty
+
+!!! note "🧠 Why It Matters for LLMs"
+    Language models must constantly update their predictions as they process new tokens. Bayes' theorem provides the **theoretical foundation** for this belief updating process.
 
 #### 4.2.1 Mathematical Formulation and Interpretation
 
-Bayes' theorem provides a mathematical relationship between conditional probabilities that allows us to "invert" conditional relationships. For events A and B where P(B) > 0, Bayes' theorem states:
+!!! note "🧮 Bayes' Theorem Formula"
+    For events $A$ and $B$ where $P(B) > 0$:
 
-P(A|B) = P(B|A) × P(A) / P(B)
+    $$P(A|B) = \frac{P(B|A) \times P(A)}{P(B)}$$
 
-This seemingly simple formula encapsulates a profound insight about the nature of inference and learning. It shows how to compute the probability of a hypothesis A given observed evidence B by combining three components: the likelihood P(B|A) of observing the evidence given the hypothesis, the prior probability P(A) of the hypothesis before observing the evidence, and the marginal probability P(B) of the evidence.
+    **Components**:
+
+    - **Posterior**: $P(A|B)$ - Updated belief about $A$ after observing $B$
+    - **Likelihood**: $P(B|A)$ - How well $A$ explains evidence $B$
+    - **Prior**: $P(A)$ - Initial belief about $A$ before evidence
+    - **Marginal**: $P(B)$ - Normalization constant (total evidence)
+
+!!! example "🔄 The Inference Process"
+    **Step-by-step belief updating**:
+
+    1. **Start** with prior belief $P(A)$
+    2. **Observe** evidence $B$
+    3. **Compute** likelihood $P(B|A)$
+    4. **Update** to posterior $P(A|B)$
+
+    This process captures the **essence of learning** from data!
 
 The interpretation of each component in Bayes' theorem provides insights into the inference process. The posterior probability P(A|B) represents our updated belief about hypothesis A after observing evidence B. The likelihood P(B|A) measures how well hypothesis A explains the observed evidence. The prior probability P(A) represents our initial belief about hypothesis A before observing any evidence. The marginal probability P(B) serves as a normalization constant that ensures the posterior probabilities sum to 1 across all possible hypotheses.
 
@@ -816,11 +1129,37 @@ The evaluation of Bayesian language understanding systems requires metrics that 
 
 The integration of external knowledge sources presents both opportunities and challenges for Bayesian language understanding. Medical knowledge bases, clinical guidelines, and scientific literature provide rich sources of prior knowledge that can improve understanding of medical texts. However, incorporating this knowledge into neural language models requires careful design to ensure that the integration is principled and that the resulting models remain computationally tractable.
 
+!!! example "🏥 Healthcare Application: Diagnostic Reasoning"
+    **Scenario**: Medical AI system diagnosing chest pain
+
+    **Bayes' Theorem in Action**:
+
+    $$P(\text{MI}|\text{chest pain, elevated troponin}) = \frac{P(\text{chest pain, elevated troponin}|\text{MI}) \times P(\text{MI})}{P(\text{chest pain, elevated troponin})}$$
+
+    **Components**:
+
+    - **Prior**: $P(\text{MI}) = 0.05$ (5% base rate in ER)
+    - **Likelihood**: $P(\text{symptoms}|\text{MI}) = 0.85$ (85% of MI patients have these symptoms)
+    - **Evidence**: $P(\text{symptoms}) = 0.15$ (15% of all ER patients have these symptoms)
+
+    **Posterior**: $P(\text{MI}|\text{symptoms}) = \frac{0.85 \times 0.05}{0.15} = 0.28$ (28% probability)
+
+    **Clinical Impact**: The 28% probability suggests need for additional testing—this uncertainty quantification is crucial for patient safety.
+
 ### 4.3 PyTorch Implementation: Conditional Probability Calculations
 
-The practical implementation of conditional probability calculations in PyTorch provides the computational foundation for building and experimenting with language models. Understanding how to efficiently compute, manipulate, and optimize conditional probabilities is essential for anyone working with neural language models. This section provides detailed implementations that demonstrate the key concepts while highlighting the computational considerations that arise in practice.
+!!! tip "💻 Implementation Overview"
+    **Practical Foundation**: Understanding how to efficiently compute, manipulate, and optimize conditional probabilities is essential for building neural language models.
 
-The basic building block for conditional probability calculations in language modeling is the categorical distribution over the vocabulary. PyTorch provides built-in support for categorical distributions through the `torch.distributions` module, but understanding the underlying computations is crucial for implementing custom models and debugging issues.
+    **Key Components**:
+
+    - Categorical distributions over vocabulary
+    - Conditional probability calculations
+    - Uncertainty quantification
+    - Model calibration techniques
+
+!!! example "🐍 PyTorch Implementation"
+    **Foundation**: Categorical distribution over vocabulary using `torch.distributions`
 
 ```python
 import torch
@@ -1283,9 +1622,9 @@ Transformer models use self-attention mechanisms to directly model dependencies 
 
 The attention mechanism in transformers computes dependencies using the formula:
 
-Attention(Q, K, V) = softmax(QK^T / √d_k)V
+$$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$
 
-where Q, K, and V are query, key, and value matrices derived from the input tokens. The softmax operation ensures that the attention weights form a valid probability distribution, and the scaling factor √d_k helps stabilize training. This mechanism allows the model to learn which tokens should attend to which other tokens, effectively learning the dependency structure of the language.
+where $Q$, $K$, and $V$ are query, key, and value matrices derived from the input tokens. The softmax operation ensures that the attention weights form a valid probability distribution, and the scaling factor $\sqrt{d_k}$ helps stabilize training. This mechanism allows the model to learn which tokens should attend to which other tokens, effectively learning the dependency structure of the language.
 
 #### 5.1.3 Multi-dimensional Probability Spaces in LLMs
 
@@ -1311,25 +1650,25 @@ Marginal distributions provide a fundamental tool for extracting information abo
 
 #### 5.2.1 Mathematical Definition and Computation
 
-The mathematical definition of marginal distributions provides the foundation for understanding how to extract individual probabilities from joint distributions. For a joint distribution P(X, Y) over two random variables X and Y, the marginal distribution of X is obtained by summing (or integrating) over all possible values of Y:
+The mathematical definition of marginal distributions provides the foundation for understanding how to extract individual probabilities from joint distributions. For a joint distribution $P(X, Y)$ over two random variables $X$ and $Y$, the marginal distribution of $X$ is obtained by summing (or integrating) over all possible values of $Y$:
 
-P(X = x) = ∑ᵧ P(X = x, Y = y)
+$$P(X = x) = \sum_y P(X = x, Y = y)$$
 
 for discrete variables, or
 
-f_X(x) = ∫ f(x, y) dy
+$$f_X(x) = \int f(x, y) \, dy$$
 
-for continuous variables. This operation effectively "marginalizes out" the variable Y, leaving a distribution that describes the behavior of X alone.
+for continuous variables. This operation effectively "marginalizes out" the variable $Y$, leaving a distribution that describes the behavior of $X$ alone.
 
-The process of marginalization can be extended to higher dimensions. For a joint distribution over n variables P(X₁, X₂, ..., Xₙ), the marginal distribution of any subset of variables is obtained by summing over all possible values of the remaining variables. For example, the marginal distribution of X₁ and X₂ is:
+The process of marginalization can be extended to higher dimensions. For a joint distribution over $n$ variables $P(X_1, X_2, \ldots, X_n)$, the marginal distribution of any subset of variables is obtained by summing over all possible values of the remaining variables. For example, the marginal distribution of $X_1$ and $X_2$ is:
 
-P(X₁ = x₁, X₂ = x₂) = ∑_{x₃,...,xₙ} P(X₁ = x₁, X₂ = x₂, X₃ = x₃, ..., Xₙ = xₙ)
+$$P(X_1 = x_1, X_2 = x_2) = \sum_{x_3,\ldots,x_n} P(X_1 = x_1, X_2 = x_2, X_3 = x_3, \ldots, X_n = x_n)$$
 
 This operation allows us to focus on specific aspects of the joint distribution while accounting for the influence of all other variables.
 
-In language modeling, marginalization is crucial for understanding the behavior of individual tokens or positions. Consider a language model that defines a joint distribution over an entire sequence P(W₁, W₂, ..., Wₙ). The marginal distribution of the token at position i is:
+In language modeling, marginalization is crucial for understanding the behavior of individual tokens or positions. Consider a language model that defines a joint distribution over an entire sequence $P(W_1, W_2, \ldots, W_n)$. The marginal distribution of the token at position $i$ is:
 
-P(Wᵢ = w) = ∑_{w₁,...,wᵢ₋₁,wᵢ₊₁,...,wₙ} P(W₁ = w₁, ..., Wᵢ₋₁ = wᵢ₋₁, Wᵢ = w, Wᵢ₊₁ = wᵢ₊₁, ..., Wₙ = wₙ)
+$$P(W_i = w) = \sum_{w_1,\ldots,w_{i-1},w_{i+1},\ldots,w_n} P(W_1 = w_1, \ldots, W_{i-1} = w_{i-1}, W_i = w, W_{i+1} = w_{i+1}, \ldots, W_n = w_n)$$
 
 This marginal distribution tells us the overall probability of token w appearing at position i, averaged over all possible contexts and continuations.
 
@@ -1339,17 +1678,17 @@ The computational challenge of marginalization in language modeling arises from 
 
 Token frequency analysis represents one of the most fundamental applications of marginal distributions in language modeling, providing insights into the statistical properties of text corpora and the behavior of trained models. Understanding token frequencies is crucial for designing effective vocabularies, analyzing model biases, and interpreting model behavior.
 
-The marginal distribution of tokens in a corpus provides the foundation for frequency analysis. For a corpus containing N total tokens, the marginal probability of token w is simply its relative frequency:
+The marginal distribution of tokens in a corpus provides the foundation for frequency analysis. For a corpus containing $N$ total tokens, the marginal probability of token $w$ is simply its relative frequency:
 
-P(W = w) = count(w) / N
+$$P(W = w) = \frac{\text{count}(w)}{N}$$
 
 This empirical marginal distribution captures the overall frequency patterns in the data and serves as a baseline for more sophisticated models. However, this simple frequency-based approach ignores the contextual dependencies that are crucial for language understanding and generation.
 
 The frequency distribution of natural language typically follows a power law, known as Zipf's law, which states that the frequency of a word is inversely proportional to its rank in the frequency table. Mathematically, this can be expressed as:
 
-f(r) ∝ 1/r^α
+$$f(r) \propto \frac{1}{r^\alpha}$$
 
-where f(r) is the frequency of the word with rank r, and α is typically close to 1. This power law distribution has important implications for language modeling because it means that a small number of words account for a large proportion of the text, while a large number of words are very rare.
+where $f(r)$ is the frequency of the word with rank $r$, and $\alpha$ is typically close to 1. This power law distribution has important implications for language modeling because it means that a small number of words account for a large proportion of the text, while a large number of words are very rare.
 
 The implications of Zipf's law for language modeling are significant. The most frequent words (such as "the," "and," "of") appear very often and are relatively easy to predict, while rare words appear infrequently and may be difficult to model accurately. This creates challenges for model training because the model must learn to handle both the common patterns represented by frequent words and the diverse patterns represented by rare words.
 
@@ -1363,7 +1702,7 @@ Position-dependent probabilities represent an important aspect of language model
 
 The mathematical framework for position-dependent probabilities involves conditioning the marginal distribution of tokens on their position in the sequence. For a sequence of length n, the position-dependent marginal probability of token w at position i is:
 
-P(Wᵢ = w) = ∑_{w₁,...,wᵢ₋₁,wᵢ₊₁,...,wₙ} P(W₁ = w₁, ..., Wᵢ₋₁ = wᵢ₋₁, Wᵢ = w, Wᵢ₊₁ = wᵢ₊₁, ..., Wₙ = wₙ)
+$$P(W_i = w) = \sum_{w_1,\ldots,w_{i-1},w_{i+1},\ldots,w_n} P(W_1 = w_1, \ldots, W_{i-1} = w_{i-1}, W_i = w, W_{i+1} = w_{i+1}, \ldots, W_n = w_n)$$
 
 This distribution can vary significantly across positions, reflecting the different roles that different positions play in the overall structure of the text.
 
@@ -1842,9 +2181,9 @@ Lower perplexity corresponds to lower entropy, indicating better predictive perf
 
 #### 5.4.2 Mutual Information in Token Relationships
 
-Mutual information quantifies the amount of information that one random variable provides about another, making it a powerful tool for analyzing dependencies in language models. For two random variables X and Y, the mutual information is:
+Mutual information quantifies the amount of information that one random variable provides about another, making it a powerful tool for analyzing dependencies in language models. For two random variables $X$ and $Y$, the mutual information is:
 
-I(X; Y) = ∑ₓ,ᵧ P(X = x, Y = y) log [P(X = x, Y = y) / (P(X = x)P(Y = y))]
+$$I(X; Y) = \sum_{x,y} P(X = x, Y = y) \log \left[\frac{P(X = x, Y = y)}{P(X = x)P(Y = y)}\right]$$
 
 Mutual information is always non-negative, with I(X; Y) = 0 if and only if X and Y are independent. Higher mutual information indicates stronger dependencies between the variables.
 
@@ -1917,9 +2256,9 @@ The chain rule also provides a natural framework for text generation. To generat
 
 While the chain rule provides an exact factorization of joint probabilities, the resulting conditional distributions P(wᵢ|w₁, ..., wᵢ₋₁) can still be extremely complex because they depend on the entire preceding context. To make these distributions tractable, language models often make conditional independence assumptions that simplify the dependencies.
 
-The most common simplification is the Markov assumption, which states that each token depends only on a fixed number of preceding tokens rather than the entire history. A k-th order Markov model assumes:
+The most common simplification is the Markov assumption, which states that each token depends only on a fixed number of preceding tokens rather than the entire history. A $k$-th order Markov model assumes:
 
-P(wᵢ|w₁, ..., wᵢ₋₁) = P(wᵢ|wᵢ₋ₖ, ..., wᵢ₋₁)
+$$P(w_i|w_1, \ldots, w_{i-1}) = P(w_i|w_{i-k}, \ldots, w_{i-1})$$
 
 This assumption dramatically reduces the complexity of the conditional distributions but may miss important long-range dependencies in natural language.
 
@@ -1955,18 +2294,19 @@ Recurrent neural networks (RNNs) were among the first successful neural architec
 
 The mathematical formulation of an RNN language model is:
 
-hᵢ = f(wᵢ₋₁, hᵢ₋₁)
-P(wᵢ|w₁, ..., wᵢ₋₁) = softmax(Whᵢ + b)
+$$h_i = f(w_{i-1}, h_{i-1})$$
 
-where f is a nonlinear function (such as LSTM or GRU), h is the hidden state, and W and b are learned parameters.
+$$P(w_i|w_1, \ldots, w_{i-1}) = \text{softmax}(Wh_i + b)$$
+
+where $f$ is a nonlinear function (such as LSTM or GRU), $h$ is the hidden state, and $W$ and $b$ are learned parameters.
 
 Transformer models represent a more recent and highly successful approach to autoregressive language modeling. Transformers use self-attention mechanisms to directly model dependencies between any two positions in a sequence, without the sequential processing constraints of RNNs. The attention mechanism computes a weighted combination of all previous positions, allowing the model to focus on the most relevant context for each prediction.
 
 The mathematical formulation of transformer attention is:
 
-Attention(Q, K, V) = softmax(QK^T / √d_k)V
+$$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$
 
-where Q, K, and V are query, key, and value matrices derived from the input tokens. The softmax operation ensures that the attention weights form a valid probability distribution over the context positions.
+where $Q$, $K$, and $V$ are query, key, and value matrices derived from the input tokens. The softmax operation ensures that the attention weights form a valid probability distribution over the context positions.
 
 #### 6.2.3 Training and Optimization
 
@@ -2613,6 +2953,75 @@ Bias detection and mitigation in medical language models requires understanding 
 Interpretability and explainability in medical AI systems often involve explaining probability calculations to clinicians and patients. Understanding the mathematical foundations enables the development of more effective explanation techniques that build trust and support clinical decision-making.
 
 The integration of structured medical knowledge with probabilistic language models represents an important frontier for healthcare AI. Combining the flexibility of neural language models with the precision of medical ontologies and knowledge bases requires sophisticated approaches to probability modeling.
+!!! success "🎯 Key Takeaways: Probability Theory Mastery"
+    **Mathematical Foundations**:
+
+    ✅ **Sample spaces and events**: Framework for all probabilistic reasoning
+
+    ✅ **Kolmogorov's axioms**: Mathematical foundation of probability theory
+
+    ✅ **Conditional probability**: The heart of language modeling $P(\text{word}|\text{context})$
+
+    ✅ **Bayes' theorem**: Framework for updating beliefs with evidence
+
+    **Distribution Mastery**:
+
+    ✅ **Discrete distributions**: Categorical, multinomial for token prediction
+
+    ✅ **Continuous distributions**: Normal, beta for neural network internals
+
+    ✅ **Joint and marginal**: Understanding token relationships and dependencies
+
+    ✅ **Chain rule**: Mathematical foundation of autoregressive modeling
+
+    **Implementation Skills**:
+
+    ✅ **PyTorch distributions**: Practical probability calculations
+
+    ✅ **Uncertainty quantification**: Calibrated confidence estimates
+
+    ✅ **Healthcare applications**: Medical diagnosis and decision support
+
+    ✅ **Safety considerations**: Responsible AI in high-stakes domains
+
+!!! example "🏥 Healthcare Impact"
+    **Real-world Applications**:
+
+    - **Diagnostic Support**: Quantifying uncertainty in medical predictions
+    - **Clinical Documentation**: Intelligent assistance for medical records
+    - **Drug Discovery**: Probabilistic models for molecular properties
+    - **Risk Stratification**: Identifying high-risk patients
+    - **Treatment Planning**: Evidence-based recommendation systems
+
+!!! tip "🚀 Advanced Connections"
+    **Bridge to Cutting-edge Research**:
+
+    - **Transformers**: Attention as probability distributions
+    - **RLHF**: Aligning models with human preferences
+    - **In-context Learning**: Few-shot learning through conditional probability
+    - **Multimodal Models**: Joint distributions over text, images, and more
+    - **Causal Inference**: Understanding cause and effect in language
+
+!!! warning "⚠️ Critical Considerations"
+    **Responsible AI Development**:
+
+    - **Uncertainty Quantification**: Essential for high-stakes applications
+    - **Bias Detection**: Probability distributions can reflect data biases
+    - **Regulatory Compliance**: FDA requirements for medical AI systems
+    - **Privacy Protection**: Differential privacy and federated learning
+    - **Interpretability**: Explaining probability calculations to clinicians
+
+!!! abstract "🌟 The Future of Probabilistic AI"
+    **Emerging Frontiers**:
+
+    - **Multimodal Integration**: Text + images + sensors
+    - **Causal Reasoning**: Beyond correlation to causation
+    - **Continual Learning**: Updating probabilities with new data
+    - **Federated Healthcare**: Privacy-preserving distributed learning
+    - **Hybrid Systems**: Combining neural and symbolic reasoning
+
+**Final Insight**: Every breakthrough in language modeling—from GPT to Claude to future systems—builds on these fundamental probability theory concepts. Master these foundations to understand, improve, and responsibly deploy the next generation of AI systems.
+
 ---
 
 

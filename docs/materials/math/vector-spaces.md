@@ -1,58 +1,180 @@
-# Vector Spaces and Subspaces
+# 🧮 Vector Spaces and Subspaces
 
-## Axioms and Properties of Vector Spaces
 
-A vector space (or linear space) is a set $V$ equipped with two operations: vector addition and scalar multiplication, satisfying a specific list of axioms. Intuitively, vectors can be added together and scaled by numbers (scalars) while staying in the same set. Formally, for a vector space $V$ over a field $F$ (e.g. real numbers $\mathbb{R}$), the following properties must hold for all $\mathbf{u}, \mathbf{v}, \mathbf{w} \in V$ and scalars $a, b \in F$:
+!!! abstract "🔑 Key Concept: Vector Space"
+    - A **vector space** $V$ over a field $F$ is a set equipped with two operations:
+        - Vector addition
+        - Scalar multiplication
+    - These operations must satisfy ten fundamental axioms.
+    - This abstract structure:
+        - Underlies all of linear algebra.
+        - Forms the mathematical foundation for machine learning algorithms, neural networks, and modern AI systems.
 
-1. **Closure under Addition:** $\mathbf{u} + \mathbf{v} \in V$. (Adding any two vectors yields another vector in $V$).
+## 📐 Axioms and Properties of Vector Spaces
 
-2. **Closure under Scalar Multiplication:** $a \mathbf{v} \in V$. (Scaling any vector by any scalar yields a vector in $V$).
+!!! note "Definition: Vector Space"
+    A **vector space** (or linear space) is a set $V$ equipped with two operations: vector addition and scalar multiplication, satisfying a specific list of axioms. Intuitively, vectors can be added together and scaled by numbers (scalars) while staying in the same set.
 
-3. **Commutativity of Addition:** $\mathbf{u} + \mathbf{v} = \mathbf{v} + \mathbf{u}$.
+Formally, for a vector space $V$ over a field $F$ (e.g., real numbers $\mathbb{R}$), the following properties must hold for all $\mathbf{u}, \mathbf{v}, \mathbf{w} \in V$ and scalars $a, b \in F$:
 
-4. **Associativity of Addition:** $(\mathbf{u} + \mathbf{v}) + \mathbf{w} = \mathbf{u} + (\mathbf{v} + \mathbf{w})$.
+### 🔢 The Ten Fundamental Axioms
 
-5. **Additive Identity:** There exists a zero vector $\mathbf{0} \in V$ such that $\mathbf{v} + \mathbf{0} = \mathbf{v}$ for all $\mathbf{v}\in V$.
+!!! example "Vector Space Axioms"
 
-6. **Additive Inverse:** For each $\mathbf{v} \in V$, there is a vector $-\mathbf{v} \in V$ such that $\mathbf{v} + (-\mathbf{v}) = \mathbf{0}$.
+    **1. Closure under Addition:**
 
-7. **Multiplicative Identity:** $1 \mathbf{v} = \mathbf{v}$ for all $\mathbf{v} \in V$ (here $1$ is the multiplicative identity in the field $F$).
+    $$\mathbf{u} + \mathbf{v} \in V$$
 
-8. **Associativity of Scalar Multiplication:** $(ab)\mathbf{v} = a(b\mathbf{v})$.
+    Adding any two vectors yields another vector in $V$.
 
-9. **Distributivity of Scalar over Vector Addition:** $a(\mathbf{u} + \mathbf{v}) = a\mathbf{u} + a\mathbf{v}$.
+    **2. Closure under Scalar Multiplication:**
 
-10. **Distributivity of Vectors over Scalar Addition:** $(a + b)\mathbf{v} = a\mathbf{v} + b\mathbf{v}$.
+    $$a \mathbf{v} \in V$$
 
-These axioms ensure that $V$ has an algebraic structure allowing linear combinations. A key consequence of the first two axioms (closure properties) is that no matter how you add or scale vectors in $V$, you remain in $V$. The middle set of axioms provides the familiar behavior of addition (commutativity, associativity, identity, inverses). The last few axioms govern how scalar multiplication interacts with addition and itself. If a set with two operations satisfies all these axioms, it is a vector space. Notably, these axioms implicitly require the presence of a zero vector and additive inverses (via the identity and inverse axioms), so every vector space contains a special zero element and each vector's negation.
+    Scaling any vector by any scalar yields a vector in $V$.
 
-### Examples of Vector Spaces
+    **3. Commutativity of Addition:**
 
-The concept of vector space is very general – it is not limited to the geometric arrows in 2D or 3D. Classic examples include:
+    $$\mathbf{u} + \mathbf{v} = \mathbf{v} + \mathbf{u}$$
 
-1. **Real Number Line $\mathbb{R}$:** All real numbers form a 1-dimensional vector space over $\mathbb{R}$ under standard addition and multiplication. The zero vector is $0$.
+    **4. Associativity of Addition:**
 
-2. **Euclidean Space $\mathbb{R}^n$:** The set of all $n$-tuples of real numbers (column vectors of length $n$) is an $n$-dimensional vector space. Vector addition and scalar multiplication are done component-wise. For example, in $\mathbb{R}^3$, $(x_1,y_1,z_1)+(x_2,y_2,z_2)=(x_1+x_2, y_1+y_2, z_1+z_2)$ and $a(x,y,z)=(ax, ay, az)$.
+    $$(\mathbf{u} + \mathbf{v}) + \mathbf{w} = \mathbf{u} + (\mathbf{v} + \mathbf{w})$$
 
-3. **Polynomial Spaces:** The set of all polynomials (with real coefficients) of degree $\leq k$ is a vector space. Vectors are polynomials $p(x)$, addition is polynomial addition, and scalars are real numbers multiplying polynomials. For example, the set of all quadratic polynomials $ax^2+bx+c$ is a vector space (of dimension 3).
+    **5. Additive Identity:**
 
-4. **Matrix Spaces:** The set of all $m\times n$ matrices with entries from a field is a vector space. Two matrices can be added and multiplied by scalars (each entry scaled) to produce another matrix. For instance, 
+    There exists a zero vector $\mathbf{0} \in V$ such that:
 
-$$2 \begin{pmatrix}1 & 4\\3 & 5\end{pmatrix} + (-1)\begin{pmatrix}0 & 2\\1 & 1\end{pmatrix} = \begin{pmatrix}2 & 8\\6 & 10\end{pmatrix} + \begin{pmatrix}0 & -2\\-1 & -1\end{pmatrix} = \begin{pmatrix}2 & 6\\5 & 9\end{pmatrix}$$
+    $$\mathbf{v} + \mathbf{0} = \mathbf{v} \text{ for all } \mathbf{v} \in V$$
 
-which is still a matrix of the same size.
+    **6. Additive Inverse:**
 
-5. **Function Spaces:** The set of all real-valued functions on a domain (say all functions $f: \mathbb{R}\to\mathbb{R}$) is a vector space. Here vectors are functions; addition is defined as $(f+g)(x)=f(x)+g(x)$ and scalar multiplication as $(a\cdot f)(x)=a \cdot f(x)$. Many specific function spaces (e.g. spaces of continuous or differentiable functions) are also vector spaces.
+    For each $\mathbf{v} \in V$, there is a vector $-\mathbf{v} \in V$ such that:
 
-These examples highlight how abstract the vector space concept is – as long as the elements and operations obey the axioms, we have a vector space. The geometric 2D/3D vectors are just one instance. This abstraction lets us apply linear algebra to many contexts (polynomials, matrices, functions, etc.), not just physical vectors.
+    $$\mathbf{v} + (-\mathbf{v}) = \mathbf{0}$$
 
-**Why are these properties important?** They guarantee that linear combinations make sense in $V$. If $\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_k\}$ are in $V$, any linear combination $a_1\mathbf{v}_1 + a_2\mathbf{v}_2 + \cdots + a_k\mathbf{v}_k$ is also a vector in $V$. This closure under linear combination enables powerful techniques like solving linear equations, defining bases and dimensions, and more. Many theorems (e.g. relating to spans, linear independence, etc.) hinge on these axioms.
+    **7. Multiplicative Identity:**
 
-### Vector Spaces in Machine Learning/Deep Learning
+    $$1 \mathbf{v} = \mathbf{v} \text{ for all } \mathbf{v} \in V$$
 
-Almost all data and parameters in machine learning are represented in vector spaces. For example, an embedding in an NLP model is a vector in $\mathbb{R}^d$ (for some dimension $d$, e.g. 768 for BERT). These embedding spaces obey the vector space axioms, allowing meaningful arithmetic on representations. A famous example is the word analogy: "king is to queen as man is to woman." In a good word embedding space, you can do the vector arithmetic $\mathbf{v}(\text{king}) - \mathbf{v}(\text{man}) + \mathbf{v}(\text{woman}) \approx \mathbf{v}(\text{queen})$. Here $\mathbf{v}(w)$ denotes the embedding vector for word $w$. The fact this linear combination of word vectors yields another word vector (specifically, one close to "queen") is a testament to the semantic structure captured in the vector space. This analogical reasoning using addition/subtraction is possible because the embedding vectors live in a high-dimensional vector space that respects linear relationships.
+    where $1$ is the multiplicative identity in the field $F$.
 
-In deep learning frameworks like PyTorch or TensorFlow, vectors are typically represented as arrays (tensors) of numbers, and all operations (like addition, scaling, dot-products) follow linear algebra rules. The vector space axioms are implicitly honored by these frameworks. For instance, adding two tensors of the same shape yields another tensor of that shape (closure under addition), and multiplying a tensor by a scalar (a Python float/NumPy scalar) yields another tensor (closure under scalar multiplication). Below is a short code snippet illustrating some axioms with PyTorch:
+    **8. Associativity of Scalar Multiplication:**
+
+    $$(ab)\mathbf{v} = a(b\mathbf{v})$$
+
+    **9. Distributivity of Scalar over Vector Addition:**
+
+    $$a(\mathbf{u} + \mathbf{v}) = a\mathbf{u} + a\mathbf{v}$$
+
+    **10. Distributivity of Vectors over Scalar Addition:**
+
+    $$(a + b)\mathbf{v} = a\mathbf{v} + b\mathbf{v}$$
+
+!!! tip "Key Insight"
+    These axioms ensure that $V$ has an algebraic structure allowing **linear combinations**. A key consequence of the first two axioms (closure properties) is that no matter how you add or scale vectors in $V$, you remain in $V$.
+
+The middle set of axioms provides the familiar behavior of addition (commutativity, associativity, identity, inverses). The last few axioms govern how scalar multiplication interacts with addition and itself. If a set with two operations satisfies all these axioms, it is a vector space.
+
+!!! warning "Important Note"
+    These axioms implicitly require the presence of a zero vector and additive inverses (via the identity and inverse axioms), so every vector space contains a special zero element and each vector's negation.
+
+### 🌟 Examples of Vector Spaces
+
+!!! info "Generality of Vector Spaces"
+    The concept of vector space is very general – it is not limited to the geometric arrows in 2D or 3D. Classic examples include:
+
+#### 📊 Common Vector Space Examples
+
+=== "Real Number Line"
+    **$\mathbb{R}$ - The Real Number Line**
+
+    All real numbers form a 1-dimensional vector space over $\mathbb{R}$ under standard addition and multiplication.
+
+    - **Zero vector:** $0$
+    - **Operations:** Standard arithmetic
+    - **Dimension:** 1
+
+=== "Euclidean Space"
+    **$\mathbb{R}^n$ - Euclidean Space**
+
+    The set of all $n$-tuples of real numbers (column vectors of length $n$) is an $n$-dimensional vector space.
+
+    **Component-wise operations:**
+
+    $$\text{Addition: } (x_1,y_1,z_1)+(x_2,y_2,z_2)=(x_1+x_2, y_1+y_2, z_1+z_2)$$
+
+    $$\text{Scalar multiplication: } a(x,y,z)=(ax, ay, az)$$
+
+=== "Polynomial Spaces"
+    **Polynomial Vector Spaces**
+
+    The set of all polynomials (with real coefficients) of degree $\leq k$ is a vector space.
+
+    - **Vectors:** Polynomials $p(x)$
+    - **Addition:** Polynomial addition
+    - **Scalars:** Real numbers multiplying polynomials
+    - **Example:** Quadratic polynomials $ax^2+bx+c$ form a 3-dimensional vector space
+
+=== "Matrix Spaces"
+    **Matrix Vector Spaces**
+
+    The set of all $m\times n$ matrices with entries from a field is a vector space.
+
+    **Example calculation:**
+
+    $$2 \begin{pmatrix}1 & 4\\3 & 5\end{pmatrix} + (-1)\begin{pmatrix}0 & 2\\1 & 1\end{pmatrix}$$
+
+    $$= \begin{pmatrix}2 & 8\\6 & 10\end{pmatrix} + \begin{pmatrix}0 & -2\\-1 & -1\end{pmatrix} = \begin{pmatrix}2 & 6\\5 & 9\end{pmatrix}$$
+
+=== "Function Spaces"
+    **Function Vector Spaces**
+
+    The set of all real-valued functions on a domain (e.g., $f: \mathbb{R}\to\mathbb{R}$) is a vector space.
+
+    **Operations:**
+
+    $$\text{Addition: } (f+g)(x)=f(x)+g(x)$$
+
+    $$\text{Scalar multiplication: } (a\cdot f)(x)=a \cdot f(x)$$
+
+!!! tip "Abstract Nature of Vector Spaces"
+    These examples highlight how abstract the vector space concept is – as long as the elements and operations obey the axioms, we have a vector space. The geometric 2D/3D vectors are just one instance. This abstraction lets us apply linear algebra to many contexts (polynomials, matrices, functions, etc.), not just physical vectors.
+
+!!! question "Why Are These Properties Important?"
+    They guarantee that **linear combinations** make sense in $V$. If $\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_k\}$ are in $V$, any linear combination:
+
+    $$a_1\mathbf{v}_1 + a_2\mathbf{v}_2 + \cdots + a_k\mathbf{v}_k$$
+
+    is also a vector in $V$. This closure under linear combination enables powerful techniques like solving linear equations, defining bases and dimensions, and more.
+
+### 🤖 Vector Spaces in Machine Learning/Deep Learning
+
+!!! example "ML Applications of Vector Spaces"
+    Almost all data and parameters in machine learning are represented in vector spaces. This fundamental structure enables the mathematical operations that power modern AI systems.
+
+#### 🔤 Word Embeddings and Semantic Arithmetic
+
+In NLP models, embeddings are vectors in $\mathbb{R}^d$ (e.g., $d = 768$ for BERT). These embedding spaces obey the vector space axioms, allowing meaningful arithmetic on representations.
+
+!!! tip "Famous Word Analogy Example"
+    **"King is to Queen as Man is to Woman"**
+
+    In a good word embedding space, you can perform vector arithmetic:
+
+    $$\mathbf{v}(\text{king}) - \mathbf{v}(\text{man}) + \mathbf{v}(\text{woman}) \approx \mathbf{v}(\text{queen})$$
+
+    where $\mathbf{v}(w)$ denotes the embedding vector for word $w$.
+
+The fact that this linear combination of word vectors yields another word vector (specifically, one close to "queen") demonstrates the semantic structure captured in the vector space. This analogical reasoning using addition/subtraction is possible because the embedding vectors live in a high-dimensional vector space that respects linear relationships.
+
+#### 🧠 Deep Learning Frameworks and Vector Operations
+
+!!! info "Framework Implementation"
+    In deep learning frameworks like PyTorch or TensorFlow, vectors are typically represented as arrays (tensors) of numbers, and all operations follow linear algebra rules. The vector space axioms are implicitly honored by these frameworks:
+
+    - **Closure under addition:** Adding two tensors of the same shape yields another tensor of that shape
+    - **Closure under scalar multiplication:** Multiplying a tensor by a scalar yields another tensor
 
 ```python
 import torch
@@ -62,112 +184,249 @@ u = torch.tensor([1.0, 2.0, 3.0])
 v = torch.tensor([-4.0, 5.0, 0.5])
 w = torch.tensor([2.0, -3.0, 1.0])
 
+# Verify vector space axioms
+print("=== Vector Space Axiom Verification ===")
+
 # Commutativity of addition: u + v == v + u
-lhs = u + v
-rhs = v + u
-print(torch.allclose(lhs, rhs))  # should output: True
+print(f"Commutativity: {torch.allclose(u + v, v + u)}")
 
 # Additive identity: u + 0 = u
 zero_vec = torch.zeros(3)
-print(torch.allclose(u + zero_vec, u))  # True
+print(f"Additive identity: {torch.allclose(u + zero_vec, u)}")
 
 # Additive inverse: u + (-u) = 0
-print(torch.allclose(u + (-1)*u, zero_vec))  # True
+print(f"Additive inverse: {torch.allclose(u + (-1)*u, zero_vec)}")
 
 # Associativity of addition: (u+v)+w == u+(v+w)
-lhs = (u + v) + w
-rhs = u + (v + w)
-print(torch.allclose(lhs, rhs))  # True
+print(f"Associativity: {torch.allclose((u + v) + w, u + (v + w))}")
 
 # Distributivity: a*(u+v) == a*u + a*v
 a = 3.5
-lhs = a * (u + v)
-rhs = a * u + a * v
-print(torch.allclose(lhs, rhs))  # True
+print(f"Distributivity: {torch.allclose(a * (u + v), a * u + a * v)}")
 ```
 
-This code confirms some vector space properties (commutativity, identity, inverse, associativity, distributivity) with concrete numeric examples. In practice, these properties enable linear operations in neural networks: for example, the output of a layer is often computed as $W\mathbf{x} + \mathbf{b}$ (a linear combination of input $\mathbf{x}$ plus a bias vector). The correctness of such operations relies on the fact that $\mathbf{x}$ and $\mathbf{b}$ live in the same vector space so addition is valid, and $W\mathbf{x}$ (a matrix times a vector) produces another vector in that space.
+!!! note "🧠 Neural Network Applications"
+    These vector space properties enable linear operations in neural networks:
+
+    - **Layer computation**: $\mathbf{y} = W\mathbf{x} + \mathbf{b}$ (linear combination)
+    - **Gradient descent**: Vector addition in parameter space
+    - **Backpropagation**: Linear combinations of gradients
+
+    The correctness of these operations relies on vectors living in well-defined vector spaces where addition and scalar multiplication are valid.
 
 ## Vector Subspaces: Definitions and Properties
 
-A subspace is a subset of a vector space that is itself a vector space (under the same operations). More precisely, if $(V, +, \cdot)$ is a vector space over a field $F$, then a subset $W \subseteq V$ is called a vector subspace of $V$ if $W$ is non-empty and for every $\mathbf{u}, \mathbf{v} \in W$ and scalar $a \in F$:
+!!! abstract "🔑 Key Concept: Vector Subspace"
+    A **subspace** is a subset of a vector space that is itself a vector space under the same operations. Think of it as a "smaller" vector space living inside a larger one.
 
-1. The sum $\mathbf{u} + \mathbf{v}$ is in $W$ (closure under addition in $W$), and
-2. The scalar multiple $a\mathbf{u}$ is in $W$ (closure under scalar multiplication in $W$).
+A subspace is a subset of a vector space that inherits the vector space structure. More precisely, if $(V, +, \cdot)$ is a vector space over a field $F$, then a subset $W \subseteq V$ is called a vector subspace of $V$ if:
 
-Equivalently, $W$ must contain the zero vector and be closed under addition and scaling. In short, $W$ is a subspace of $V$ if $W$ itself satisfies all the vector space axioms using the same operations as $V$. We do not need to check all ten axioms for $W$ from scratch; it's enough to ensure the subset is closed under addition and scalar multiplication (and contains $0$), because then all other axioms are automatically inherited from $V$. This criterion is often known as the **Subspace Test**:
+1. $W$ is non-empty
+2. $W$ is **closed under addition**: $\mathbf{u} + \mathbf{v} \in W$ for all $\mathbf{u}, \mathbf{v} \in W$
+3. $W$ is **closed under scalar multiplication**: $a\mathbf{u} \in W$ for all $\mathbf{u} \in W$ and scalars $a \in F$
 
-**Subspace Test:** A non-empty subset $W \subseteq V$ is a subspace of $V$ if and only if for any vectors $\mathbf{u}, \mathbf{v} \in W$ and any scalars $a, b$, the linear combination $a\mathbf{u} + b\mathbf{v}$ is also in $W$.
+!!! tip "✅ The Subspace Test"
+    **Simplified Test**: A non-empty subset $W \subseteq V$ is a subspace if and only if for any vectors $\mathbf{u}, \mathbf{v} \in W$ and any scalars $a, b$:
 
-This test encapsulates the closure properties (taking $a=b=1$ gives closure under addition, and $b=0$ gives closure under scalar multiplication, and it automatically yields the zero vector when $a=1, b=-1$ or simply $a=b=0$).
+    $$a\mathbf{u} + b\mathbf{v} \in W$$
+
+    This single condition encapsulates both closure properties:
+
+    - Setting $a=b=1$: closure under addition
+    - Setting $b=0$: closure under scalar multiplication
+    - Setting $a=1, b=-1$: guarantees zero vector is in $W$
+
+The beauty of this test is that we don't need to verify all ten vector space axioms – the other properties are automatically inherited from the parent space $V$.
 
 ### Key Properties of Subspaces
 
-Key properties of any subspace $W$ of $V$:
+!!! note "📊 Essential Subspace Properties"
+    Any subspace $W$ of vector space $V$ has these fundamental properties:
 
-1. $W$ contains the zero vector of $V$. (Indeed, $0 = 0\mathbf{u} \in W$ for any $\mathbf{u}\in W$ since $W$ is non-empty.)
+    **1. Contains Zero Vector**
 
-2. $W$ is closed under addition and scalar multiplication. That is, combining or scaling vectors in $W$ cannot produce a vector outside $W$.
+    - $\mathbf{0} \in W$ (since $\mathbf{0} = 0\mathbf{u}$ for any $\mathbf{u} \in W$)
 
-3. Every subspace is itself a vector space (with the same addition and scalar operations restricted to $W$). All the axioms hold in $W$ because they hold in $V$ and $W$ is closed under the operations.
+    **2. Closure Properties**
 
-4. **Intersection and Union:** The intersection of any collection of subspaces is also a subspace (common elements satisfy the subspace criteria). In contrast, the union of two subspaces is generally not a subspace unless one subspace is contained in the other. For example, if $U$ and $W$ are two distinct subspaces of $V$, $U \cup W$ usually fails closure (take $\mathbf{u}\in U$, $\mathbf{w}\in W$; unless one is in the other, $\mathbf{u}+\mathbf{w}$ will lie outside the union). This is a common pitfall: two lines through the origin in $\mathbb{R}^2$, each a subspace, have a union that is not a subspace (except if one line equals the other).
+    - Closed under addition: $\mathbf{u} + \mathbf{v} \in W$ for all $\mathbf{u}, \mathbf{v} \in W$
+    - Closed under scalar multiplication: $a\mathbf{u} \in W$ for all $\mathbf{u} \in W$, $a \in F$
+
+    **3. Inherits Vector Space Structure**
+
+    - $W$ is itself a vector space with operations restricted from $V$
+    - All ten axioms automatically satisfied
+
+    **4. Intersection vs Union Behavior**
+
+    - ✅ **Intersection**: $U \cap W$ is always a subspace
+    - ❌ **Union**: $U \cup W$ is generally NOT a subspace
+
+!!! warning "⚠️ Common Pitfall: Union of Subspaces"
+    The union of two subspaces is usually **not** a subspace!
+
+    **Example**: In $\mathbb{R}^2$, let $U$ = x-axis and $W$ = y-axis. Both are subspaces, but:
+
+    - $\mathbf{u} = (1,0) \in U$ and $\mathbf{w} = (0,1) \in W$
+    - $\mathbf{u} + \mathbf{w} = (1,1) \notin U \cup W$
+
+    The union fails closure under addition!
 
 ### Examples of Subspaces
 
-Subspaces appear in many forms. Intuitively, subspaces of $\mathbb{R}^n$ are flat geometric objects through the origin (lines, planes, etc. through the origin). Here are some examples:
+!!! example "🌟 Geometric Subspaces in $\mathbb{R}^n$"
+    Subspaces of $\mathbb{R}^n$ are flat geometric objects passing through the origin:
 
-1. **In $\mathbb{R}^3$, any line through the origin** is a one-dimensional subspace of $\mathbb{R}^3$. For instance, $W = \{ t(1,2,3) : t \in \mathbb{R}\}$ is a subspace of $\mathbb{R}^3$ (a line through $(1,2,3)$). It contains $0=(0,0,0)$ (when $t=0$) and is closed under addition/scaling (adding two multiples of $(1,2,3)$ yields another multiple of $(1,2,3)$).
+    **1. Lines Through Origin (1D subspaces)**
 
-2. **In $\mathbb{R}^3$, any plane through the origin** is a two-dimensional subspace. For example, $W = \{(x,y,0) : x,y \in \mathbb{R}\}$ (the $xy$-plane) is a subspace of $\mathbb{R}^3$. It contains $(0,0,0)$, and adding or scaling vectors that have zero $z$-component keeps the $z$-component zero.
+    - Example: $W = \{t(1,2,3) : t \in \mathbb{R}\} \subset \mathbb{R}^3$
+    - Contains origin: $(0,0,0)$ when $t=0$
+    - Closed under operations: $t_1(1,2,3) + t_2(1,2,3) = (t_1+t_2)(1,2,3)$
 
-3. **Solution sets of homogeneous linear equations:** If $A\mathbf{x}=\mathbf{0}$ is a homogeneous linear system, the set of all solutions $\{\mathbf{x}: A\mathbf{x}=\mathbf{0}\}$ is a subspace of $\mathbb{R}^n$ (where $n$ is the number of columns of $A$). This set is called the null space (or kernel) of $A$. It is a subspace because $A(c_1\mathbf{x}_1 + c_2\mathbf{x}_2) = c_1A\mathbf{x}_1 + c_2A\mathbf{x}_2 = \mathbf{0}$ for any two solutions $\mathbf{x}_1,\mathbf{x}_2$ and scalars $c_1,c_2$, so any linear combination of solutions is still a solution.
+    **2. Planes Through Origin (2D subspaces)**
 
-4. **Column spaces and Row spaces:** The set of all linear combinations of the columns of a matrix $A$ (the column space of $A$) is a subspace of $\mathbb{R}^m$ (if $A$ is $m\times n$). Similarly, the row space (all linear combinations of row vectors) is a subspace of $\mathbb{R}^n$. These subspaces are fundamental in linear algebra (relating to the rank of $A$).
+    - Example: $W = \{(x,y,0) : x,y \in \mathbb{R}\}$ (the $xy$-plane)
+    - Contains origin and closed under linear combinations
 
-5. **Polynomial subspaces:** Consider $V$ = all polynomials, and let $W$ = all polynomials of degree $\leq k$. $W$ is a subspace of $V$. It's closed under addition and scaling (adding two polynomials of degree at most $k$ yields at most degree $k$, etc.). Another example: the set of all even functions (or odd functions) is a subspace of the vector space of all real functions, since the sum of even functions is even, etc.
+!!! example "🔢 Algebraic Subspaces"
+    **3. Null Space (Kernel)**
+
+    For homogeneous system $A\mathbf{x} = \mathbf{0}$:
+
+    $$\text{null}(A) = \{\mathbf{x} : A\mathbf{x} = \mathbf{0}\}$$
+
+    This is a subspace because: $A(c_1\mathbf{x}_1 + c_2\mathbf{x}_2) = c_1A\mathbf{x}_1 + c_2A\mathbf{x}_2 = \mathbf{0}$
+
+    **4. Column Space**
+
+    For matrix $A$ (size $m \times n$):
+
+    $$\text{col}(A) = \{\mathbf{y} : \mathbf{y} = A\mathbf{x} \text{ for some } \mathbf{x} \in \mathbb{R}^n\}$$
+
+    Set of all linear combinations of columns of $A$
+
+    **5. Polynomial Subspaces**
+
+    - $W = \{p(x) : \deg(p) \leq k\}$ (polynomials of degree at most $k$)
+    - Even functions: $\{f : f(-x) = f(x)\}$
+    - Odd functions: $\{f : f(-x) = -f(x)\}$
 
 ### Subspaces in Machine Learning
 
-In ML and data science, subspaces often correspond to certain feature subspaces or latent spaces. For example, in PCA (Principal Component Analysis), we find a low-dimensional subspace of $\mathbb{R}^n$ that captures most variance of the data. The top $k$ principal components span a $k$-dimensional subspace (the principal subspace); projecting data onto this subspace reduces dimensionality while preserving key structure. In deep learning, the concept of a latent space (e.g. the space of encoded features in an autoencoder) is essentially a vector space, and sometimes we constrain it to a subspace for regularization (e.g. requiring certain features to be zero – effectively confining data to a subspace). The column space example above has a direct analog: the column space of a network layer's weight matrix is the subspace of outputs that the layer can produce (since any output is $W\mathbf{x}$ for some input $\mathbf{x}$, and thus lies in the span of the columns of $W$). Understanding subspaces can help in analyzing model capacity: for instance, if a model's weight matrices have rank deficiency, the outputs lie in a lower-dimensional subspace of the target space, potentially limiting expressiveness.
+!!! example "🤖 ML Applications of Subspaces"
+    Subspaces appear throughout machine learning and data science:
 
-To illustrate a simple subspace situation in code, consider $\mathbb{R}^2$ and two subspaces: $U =$ x-axis (all vectors of the form $(x,0)$) and $W =$ y-axis (all vectors of the form $(0,y)$). Both $U$ and $W$ are subspaces of $\mathbb{R}^2$. However, their union $U \cup W$ (all vectors that lie on either the x-axis or y-axis) is not a subspace because it's not closed under addition. For example, $\mathbf{u}=(1,0)\in U$ and $\mathbf{w}=(0,1)\in W$, but $\mathbf{u}+\mathbf{w}=(1,1)$ is not in $U \cup W$ (it's not on either axis). We can check this with a short snippet:
+    **Principal Component Analysis (PCA)**
+
+    - Find low-dimensional subspace of $\mathbb{R}^n$ capturing most data variance
+    - Top $k$ principal components span a $k$-dimensional subspace
+    - Dimensionality reduction while preserving structure
+
+    **Deep Learning Applications**
+
+    - **Latent spaces**: Autoencoder feature spaces are vector subspaces
+    - **Layer outputs**: Column space of weight matrix $W$ defines possible outputs
+    - **Regularization**: Constraining features to subspaces (e.g., sparsity)
+
+    **Model Capacity Analysis**
+
+    - Rank-deficient weight matrices → outputs in lower-dimensional subspace
+    - Understanding subspace structure helps analyze model expressiveness
+
+!!! example "🏥 Healthcare Application: Medical Image Analysis"
+    In medical imaging, subspaces help with:
+
+    - **Feature extraction**: PCA on medical image patches
+    - **Noise reduction**: Project noisy images onto clean subspaces
+    - **Anomaly detection**: Healthy tissue spans a subspace; anomalies lie outside
+    - **Compression**: Store medical images in lower-dimensional subspaces
+
+!!! tip "💻 Code Example: Why Union Fails"
+    Let's demonstrate why the union of subspaces is not a subspace using $\mathbb{R}^2$:
+
+    - $U$ = x-axis: vectors of form $(x,0)$
+    - $W$ = y-axis: vectors of form $(0,y)$
+
+    Both are subspaces, but $U \cup W$ is not!
 
 ```python
+import torch
+
 # Define x-axis subspace U and y-axis subspace W in R^2
 def in_U(v):  # check if v is on x-axis
-    return v[1] == 0
+    return abs(v[1]) < 1e-6
 
 def in_W(v):  # check if v is on y-axis
-    return v[0] == 0
+    return abs(v[0]) < 1e-6
 
-u = torch.tensor([1.0, 0.0])
-w = torch.tensor([0.0, 1.0])
-sum_vec = u + w
+u = torch.tensor([1.0, 0.0])  # in U (x-axis)
+w = torch.tensor([0.0, 1.0])  # in W (y-axis)
+sum_vec = u + w               # = (1,1)
 
-print(in_U(u) and in_U(w))      # True, True (u and w individually lie in U or W respectively)
-print(in_U(sum_vec), in_W(sum_vec))  # False, False -> sum_vec = (1,1) is in neither U nor W
+print(f"u in U: {in_U(u)}, w in W: {in_W(w)}")  # True, True
+print(f"u+w in U: {in_U(sum_vec)}, u+w in W: {in_W(sum_vec)}")  # False, False
+print(f"u+w = {sum_vec} is in neither U nor W!")
 ```
 
-This prints True, True for the first line (meaning $u \in U$ and $w \in W$ individually) and False, False for the second (meaning $(1,1)$ is in neither $U$ nor $W$), confirming the union is not closed under addition. In contrast, the intersection $U \cap W$ in this case is $\{\mathbf{0}\}$, which is a subspace (the trivial subspace). This simple exercise shows the importance of the closure property in defining subspaces.
+**Result**: $(1,1)$ is in neither $U$ nor $W$, confirming the union fails closure under addition.
+
+**Key Insight**: The intersection $U \cap W = \{\mathbf{0}\}$ IS a subspace (the trivial subspace), but the union is not!
 
 ## Intersections and Sums of Subspaces
 
-When dealing with multiple subspaces, two fundamental operations are their intersection and their sum. We touched on intersections above; here we formalize and explore these concepts further.
+!!! abstract "🔑 Key Operations on Subspaces"
+    When working with multiple subspaces, two fundamental operations are:
+
+    - **Intersection** ($U \cap W$): Vectors common to both subspaces
+    - **Sum** ($U + W$): All possible sums of vectors from each subspace
 
 ### Intersection of Subspaces
 
-If $U$ and $W$ are subspaces of a vector space $V$, then $U \cap W = \{\mathbf{v} : \mathbf{v} \in U \text{ and } \mathbf{v} \in W\}$ is also a subspace of $V$. The intersection is at least $\{\mathbf{0}\}$ (since $0$ lies in every subspace) and possibly larger if $U$ and $W$ have other vectors in common. The intersection $U \cap W$ satisfies the subspace test: if $\mathbf{x}, \mathbf{y}$ are in both $U$ and $W$, then $\mathbf{x}+\mathbf{y}$ is in both $U$ and $W$ (since each is a subspace), hence in the intersection; similarly for scalar multiples. In general, the intersection $U \cap W$ is the largest subspace contained in both $U$ and $W$. For example, in $\mathbb{R}^3$, if $U$ is the $xy$-plane and $W$ is the $xz$-plane, then $U \cap W$ is the $x$-axis (their line of intersection), which indeed is a subspace (1-dimensional line) common to both. If two subspaces have only the zero vector in common (their intersection is $\{0\}$), we say they intersect trivially. This situation is especially important for direct sums (discussed in the next section).
+!!! note "📊 Intersection Properties"
+    For subspaces $U, W \subseteq V$:
+
+    $$U \cap W = \{\mathbf{v} : \mathbf{v} \in U \text{ and } \mathbf{v} \in W\}$$
+
+    **Key Properties:**
+
+    - Always contains $\mathbf{0}$ (since $\mathbf{0}$ is in every subspace)
+    - Is itself a subspace of $V$
+    - Represents the largest subspace contained in both $U$ and $W$
+    - If $U \cap W = \{\mathbf{0}\}$, we say they intersect **trivially**
+
+!!! example "🌟 Geometric Example"
+    In $\mathbb{R}^3$:
+
+    - $U$ = $xy$-plane: $\{(x,y,0) : x,y \in \mathbb{R}\}$
+    - $W$ = $xz$-plane: $\{(x,0,z) : x,z \in \mathbb{R}\}$
+    - $U \cap W$ = $x$-axis: $\{(x,0,0) : x \in \mathbb{R}\}$
+
+    The intersection is a 1-dimensional line common to both planes.
 
 ### Sum of Subspaces
 
-Given two subspaces $U, W \subseteq V$, their sum is defined as
+!!! abstract "🔑 Subspace Sum Definition"
+    For subspaces $U, W \subseteq V$, their **sum** is:
 
-$$U + W = \{ \mathbf{u} + \mathbf{w} : \mathbf{u} \in U, \mathbf{w} \in W \}$$
+    $$U + W = \{ \mathbf{u} + \mathbf{w} : \mathbf{u} \in U, \mathbf{w} \in W \}$$
 
-In words, $U+W$ consists of all vectors you can form by adding one vector from $U$ and one from $W$. It's not a disjoint union, but rather all possible sums of one element from each. $U+W$ is itself a subspace of $V$. To see this, consider any two vectors in $U+W$: say $\mathbf{v}_1 = \mathbf{u}_1 + \mathbf{w}_1$ and $\mathbf{v}_2 = \mathbf{u}_2 + \mathbf{w}_2$ with $\mathbf{u}_i \in U, \mathbf{w}_i \in W$. Their sum is $\mathbf{v}_1+\mathbf{v}_2 = (\mathbf{u}_1+\mathbf{u}_2)+(\mathbf{w}_1+\mathbf{w}_2)$. Since $U$ and $W$ are subspaces, $\mathbf{u}_1+\mathbf{u}_2 \in U$ and $\mathbf{w}_1+\mathbf{w}_2 \in W$. Thus $\mathbf{v}_1+\mathbf{v}_2$ is still of the form (something in $U$) + (something in $W$), hence in $U+W$. Similarly, for a scalar $a$, $a\mathbf{v}_1 = (a\mathbf{u}_1) + (a\mathbf{w}_1) \in U+W$. The zero vector is $0+0 \in U+W$. So $U+W$ satisfies the subspace criteria.
+    This consists of all vectors formed by adding one vector from $U$ and one from $W$.
 
-Geometrically, $U+W$ can be thought of as the smallest subspace of $V$ that contains both $U$ and $W$. Indeed, any subspace containing $U$ and $W$ must contain all their sums and scalar multiples, so it must contain $U+W$. For example, in $\mathbb{R}^3$, if $U$ is a line along the $x$-axis and $W$ is a line along the $y$-axis, then $U+W$ is the $xy$-plane (all vectors of the form $(a,b,0)$). That plane is the smallest subspace containing both lines. If instead $W$ were the $xy$-plane and $U$ the $x$-axis (which lies within $W$), then $U+W = W$ (summing doesn't go beyond the larger subspace in that case). More generally, if $U \subseteq W$, then $U+W = W$. At the other extreme, if $U$ and $W$ share only the zero vector (no other overlap), the dimension of $U+W$ is $\dim(U) + \dim(W)$ (for finite dimensions), since their sum basically puts the subspaces "together" as direct summands (we formalize this as the direct sum soon).
+**Why is $U+W$ a subspace?** Consider vectors $\mathbf{v}_1 = \mathbf{u}_1 + \mathbf{w}_1$ and $\mathbf{v}_2 = \mathbf{u}_2 + \mathbf{w}_2$ in $U+W$:
+
+- **Closure under addition**: $\mathbf{v}_1+\mathbf{v}_2 = (\mathbf{u}_1+\mathbf{u}_2)+(\mathbf{w}_1+\mathbf{w}_2) \in U+W$
+- **Closure under scaling**: $a\mathbf{v}_1 = (a\mathbf{u}_1) + (a\mathbf{w}_1) \in U+W$
+- **Contains zero**: $\mathbf{0} = \mathbf{0} + \mathbf{0} \in U+W$
+
+!!! note "📊 Geometric Interpretation"
+    $U+W$ is the **smallest subspace** containing both $U$ and $W$.
+
+    **Examples in $\mathbb{R}^3$:**
+
+    - $U$ = $x$-axis, $W$ = $y$-axis → $U+W$ = $xy$-plane
+    - $U$ = $x$-axis, $W$ = $xy$-plane → $U+W$ = $xy$-plane (since $U \subseteq W$)
+
+    **General Rule**: If $U \subseteq W$, then $U+W = W$
 
 ### Generalization
 
@@ -179,27 +438,79 @@ This is also a subspace of $V$. For instance, $U_1+U_2+U_3$ is the set of all su
 
 ### Relationship between Dimension, Sum, and Intersection
 
-For finite-dimensional spaces, there is an important formula called **Grassmann's dimension formula**:
+!!! abstract "🔑 Grassmann's Dimension Formula"
+    For finite-dimensional subspaces $U, W \subseteq V$:
 
-$$\dim(U+W) = \dim(U) + \dim(W) - \dim(U \cap W)$$
+    $$\dim(U+W) = \dim(U) + \dim(W) - \dim(U \cap W)$$
 
-This formula reflects that if $U$ and $W$ overlap (non-trivial intersection), we count that overlap once when summing dimensions. If $U$ and $W$ only intersect trivially ($U \cap W = \{0\}$), then $\dim(U+W) = \dim(U)+\dim(W)$. In the previous example, $\dim(x\text{-axis})=1$, $\dim(y\text{-axis})=1$, and $\dim$(their intersection$)=0$, so $\dim(xy\text{-plane}) = 1+1-0 = 2$, which checks out.
+    **Intuition**: When combining subspaces, we avoid double-counting their overlap.
+
+!!! example "🧮 Dimension Calculation"
+    **Example**: In $\mathbb{R}^3$, let $U$ = $x$-axis and $W$ = $y$-axis
+
+    - $\dim(U) = 1$ (line)
+    - $\dim(W) = 1$ (line)
+    - $\dim(U \cap W) = 0$ (only origin in common)
+    - $\dim(U + W) = 1 + 1 - 0 = 2$ (the $xy$-plane)
+
+    **Special Case**: If $U \cap W = \{\mathbf{0}\}$ (trivial intersection):
+
+    $$\dim(U+W) = \dim(U) + \dim(W)$$
 
 ### Application in Machine Learning
 
-While we rarely speak explicitly about "sums of subspaces" in applied ML, the concept appears when combining feature sets or learned representations. For instance, consider a scenario with multiple sets of features (say visual features and textual features for an image captioning system). One approach to combine them is to concatenate feature vectors (which corresponds to a direct product of vector spaces), but another approach is to project them into a common vector space and then add them. When we add two feature vectors (one from subspace $U$ of visual features, one from subspace $W$ of textual features), the result lies in $U+W$. In neural networks, skip connections or residual connections effectively add vectors coming from different subspaces (e.g. the output of a previous layer with the output of a deeper layer) – the result lives in the sum of those subspaces. If those subspaces carry complementary information, the sum has richer representation power. In attention mechanisms, it's common to sum positional encodings and word embeddings. Suppose $U$ is the subspace spanned by positional encoding vectors and $W$ is the subspace spanned by token embedding vectors. Individual position or token embeddings lie in $U$ or $W$ respectively, and the combined input embedding is a sum $\mathbf{p}+\mathbf{t}$ with $\mathbf{p}\in U$, $\mathbf{t}\in W$. This sum resides in $U+W$. If $U$ and $W$ overlap minimally (ideally only at $\{0\}$), the model can disentangle content and positional information. In practice, learned embeddings may not be strictly confined to separate subspaces, but the idea of combining different representation subspaces via addition is powerful (and designers try to ensure one doesn't dominate or distort the other, e.g. by scaling).
+!!! example "🤖 ML Applications: Subspace Sums"
+    Subspace sums appear throughout machine learning:
+
+    **1. Multimodal Feature Fusion**
+
+    - Visual features subspace $U$ + textual features subspace $W$
+    - Combined representation lies in $U + W$
+    - Enables rich multimodal understanding
+
+    **2. Residual/Skip Connections**
+
+    - Output of layer $i$: subspace $U_i$
+    - Output of layer $j$: subspace $U_j$
+    - Skip connection: $\mathbf{h} = \mathbf{u}_i + \mathbf{u}_j \in U_i + U_j$
+
+    **3. Transformer Embeddings**
+
+    - Positional encoding subspace: $U$
+    - Token embedding subspace: $W$
+    - Combined input: $\mathbf{p} + \mathbf{t} \in U + W$
+
+    **Ideal Case**: $U \cap W = \{\mathbf{0}\}$ allows disentangling position and content information.
+
+!!! example "🏥 Healthcare Application: Multi-Source Medical Data"
+    In healthcare AI:
+
+    - **Lab results subspace** + **Imaging features subspace** + **Clinical notes subspace**
+    - Combined representation captures comprehensive patient state
+    - Each modality contributes unique information to diagnosis
 
 ## Direct Sums of Subspaces
 
-The direct sum is a special case of the sum of subspaces where the intersection is trivial. Suppose $X$ and $Y$ are subspaces of $V$. We say $V$ is the direct sum of $X$ and $Y$ if every vector in $V$ can be expressed uniquely as the sum of a vector from $X$ and a vector from $Y$. In notation, we write:
+!!! abstract "🔑 Key Concept: Direct Sum"
+    A **direct sum** is a special case where subspaces combine with no overlap. For subspaces $X, Y \subseteq V$:
 
-$$V = X \oplus Y$$
+    $$V = X \oplus Y$$
 
-This definition encompasses two conditions:
+    means every vector in $V$ has a **unique** decomposition as $\mathbf{v} = \mathbf{x} + \mathbf{y}$ with $\mathbf{x} \in X, \mathbf{y} \in Y$.
 
-1. **Spanning (Sum) Condition:** Every $v \in V$ can be written as $v = x + y$ with $x \in X$ and $y \in Y$. (So $X+Y = V$ in terms of set equality, i.e. the sum of the subspaces covers the whole space $V$.)
+!!! note "📊 Direct Sum Conditions"
+    $V = X \oplus Y$ if and only if both conditions hold:
 
-2. **Uniqueness Condition:** This representation is unique; no vector in $V$ has two different such $X+Y$ decompositions. Equivalently, the only way to write $0$ as $x+y$ with $x \in X, y \in Y$ is the trivial way $x=0, y=0$.
+    **1. Spanning Condition**
+
+    - $X + Y = V$ (the sum covers the entire space)
+    - Every vector can be written as $\mathbf{v} = \mathbf{x} + \mathbf{y}$
+
+    **2. Uniqueness Condition**
+
+    - The decomposition is unique
+    - Equivalently: $X \cap Y = \{\mathbf{0}\}$ (trivial intersection)
+    - Only way to write $\mathbf{0} = \mathbf{x} + \mathbf{y}$ is with $\mathbf{x} = \mathbf{y} = \mathbf{0}$
 
 These two conditions together imply that $X \cap Y = \{\mathbf{0}\}$. In fact, it can be shown that $V = X \oplus Y$ if and only if $V = X + Y$ and $X \cap Y = \{0\}$. The "if" part is straightforward: if $X+Y=V$ and they only intersect at $0$, take any $v\in V$; it has at least one decomposition $v=x+y$. If there were another $v=x'+y'$, subtracting gives $0 = (x-x') + (y-y')$ with $x-x' \in X$ and $y-y' \in Y$. By uniqueness, this forces $x-x'=0$ and $y-y'=0$, so $x=x', y=y'$, proving uniqueness. Conversely, if decomposition is unique, in particular $0$ can only decompose as $0+0$, implying no non-zero vector can be in both $X$ and $Y$ (so intersection is $\{0\}$); and certainly $X+Y$ must equal $V$ by the assumption that every vector can be expressed as such a sum.
 
@@ -216,8 +527,6 @@ When $V$ is a direct sum of subspaces $X$ and $Y$, we sometimes call $X$ and $Y$
 **Example 1:** Decomposing $\mathbb{R}^n$ into complementary subspaces. Consider $X=\{(x,0,0,\ldots,0)\}$ the $x_1$-axis in $\mathbb{R}^n$, and $Y=\{(0,x_2,x_3,\ldots,x_n)\}$ the subspace of vectors with first coordinate $0$. Then $X \cap Y = \{\mathbf{0}\}$ and $X+Y = \mathbb{R}^n$ (any vector splits into its first-coordinate part plus the rest). So $\mathbb{R}^n = X \oplus Y$. Here $Y = (\text{span of basis }e_2,\ldots,e_n)$ can be viewed as a complement of $X$ in $\mathbb{R}^n$ (and vice versa, $X$ is a complement of $Y$).
 
 **Example 2:** Direct sum in matrix spaces. The space of all $n\times n$ real matrices, denoted $M_{n}(\mathbb{R})$, can be seen as the direct sum of two subspaces: $S =$ the space of symmetric matrices and $A =$ the space of skew-symmetric (anti-symmetric) matrices. Any matrix $M$ can be uniquely written as $M = S + A$ where $S = \frac{1}{2}(M + M^T)$ is symmetric and $A = \frac{1}{2}(M - M^T)$ is skew-symmetric. We have $M_{n}(\mathbb{R}) = S \oplus A$. Indeed, $S \cap A = \{\mathbf{0}\}$ (the only matrix that is both symmetric and skew-symmetric is the zero matrix), and clearly $S + A$ gives all matrices (by the formula above, every matrix is the sum of one symmetric and one skew matrix). This is a powerful decomposition in linear algebra and has practical uses (e.g. any square matrix's even and odd parts under transpose). The uniqueness of the decomposition is evident from the formula – it's essentially the projection onto symmetric vs skew components.
-
-**Example 3:** Direct sum of more than two subspaces. Consider $\mathbb{R}^3$ and let $U_1 = \text{span}\{(1,0,0)\}$ (the $x$-axis), $U_2 = \text{span}\{(0,1,0)\}$ (the $y$-axis), and $U_3 = \text{span}\{(0,0,1)\}$ (the $z$-axis). Then $\mathbb{R}^3 = U_1 \oplus U_2 \oplus U_3$, since any vector $(a,b,c)$ decomposes uniquely as $(a,0,0)+(0,b,0)+(0,0,c)$. All pairwise intersections are trivial (each pair of axes only meet at the origin). This extends the idea of coordinate axes providing a direct sum decomposition of the space (which is essentially what a basis does). In general, if $\{\mathbf{v}_1,\ldots,\mathbf{v}_n\}$ is a basis of $V$, and we let $U_i = \text{span}\{\mathbf{v}_i\}$ (the one-dimensional subspace generated by $\mathbf{v}_i$), then $V = U_1 \oplus \cdots \oplus U_n$.
 
 ### Direct Sums in Machine Learning
 
@@ -267,7 +576,23 @@ except RuntimeError as e:
 
 In the first part, we form matrix $A = [e_1 \; e_2]$ and solve $A \begin{pmatrix}c\\d\end{pmatrix} = v$. For example, if $v=(2,0)$, the solution will yield $c=1, d=1$ (since $1*(1,1)+1*(1,-1)=(2,0)$). The output will show that the reconstructed vector matches $v$ exactly. In the second part, we attempt the same with $U=\text{span}\{(1,0)\}$ and $W=\text{span}\{(2,0)\}$. Here $W$ is not adding a new dimension (it's the same line as $U$), so $U+W$ is just that line, not all of $\mathbb{R}^2$. The matrix $B$ constructed from $(1,0)$ and $(2,0)$ as columns is rank-deficient (not invertible), and `torch.linalg.solve` will throw an error, indicating no unique solution (indeed, if $v=(2,0)$, there are infinitely many solutions like $v = (2,0)+ (0,0)$ or $v=(1,0)+(1,0)$, etc., and if $v$ had any non-zero second component, no solution at all). This aligns with the failure of direct sum conditions – $U \cap W$ is not $\{0\}$ but $U$ itself in this degenerate case, and $U+W \neq \mathbb{R}^2$.
 
-## Conclusion
+!!! success "🔑 Key Takeaways: Vector Spaces and Subspaces"
+    **Vector Spaces** provide the fundamental algebraic structure for linear algebra and machine learning:
 
-The direct sum gives a rigorous way to split a vector space into independent parts. In ML terms, if certain feature sets or embedding components are independent (capturing orthogonal information), we can think of the overall representation as a direct sum of those feature subspaces. This viewpoint helps in understanding multi-component models. For example, one might say a model's embedding space factorizes into subspaces each encoding a different type of information (if true, that's beneficial because the information won't interfere). Indeed, researchers often describe multi-head attention as providing multiple representation subspaces for the model to attend to. By ensuring those subspaces are "independent" (linearly, to some extent), the model effectively uses a direct-sum-like structure to diversify what each head learns.
+    - **Ten axioms** define the essential properties of addition and scalar multiplication.
+    - **Examples everywhere**: $\mathbb{R}^n$, polynomials, matrices, functions, embeddings.
+    - **Subspaces** are "smaller" vector spaces living inside larger ones.
+    - **Operations on subspaces** include intersection ($\cap$, always a subspace), sum ($+$, always a subspace), direct sum ($\oplus$, sum with unique decomposition), while union ($\cup$) is usually NOT a subspace.
+    - **ML Applications**: Feature spaces, embeddings, attention mechanisms, and multimodal fusion demonstrate the power of vector spaces.
+
+    **Machine Learning Impact**:
+    Understanding vector spaces enables:
+
+    - **Deep learning**: Neural network operations as linear transformations.
+    - **NLP**: Word embeddings and semantic arithmetic.
+    - **Computer vision**: Image feature spaces and transformations.
+    - **Healthcare AI**: Multi-modal medical data fusion.
+    - **Model analysis**: Understanding capacity and expressiveness.
+
+    The direct sum concept is particularly powerful in ML – when feature sets or embedding components are independent (capturing orthogonal information), we can think of representations as direct sums of feature subspaces. This viewpoint helps understand multi-component models like multi-head attention, where each head operates on different representation subspaces in parallel.
 

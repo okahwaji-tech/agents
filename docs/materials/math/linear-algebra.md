@@ -1,5 +1,13 @@
 # Vector Spaces and Subspaces
 
+!!! abstract "📚 Learning Objectives"
+    By the end of this chapter, you should be able to:
+    - Define a vector space and list its fundamental axioms and properties.
+    - Provide and recognize common examples of vector spaces, such as $\mathbb{R}^n$, polynomial spaces, matrix spaces, and function spaces.
+    - Explain the concept of a vector subspace and use the subspace test to identify subspaces.
+    - Understand and apply the concepts of intersection, sum, and direct sum of subspaces, including Grassmann's dimension formula.
+    - Describe how vector spaces and subspaces are utilized in machine learning, including word embeddings, PCA, and neural network architectures.
+
 ## Axioms and Properties of Vector Spaces
 
 A vector space (or linear space) is a set $V$ equipped with two operations: vector addition and scalar multiplication, satisfying a specific list of axioms. Intuitively, vectors can be added together and scaled by numbers (scalars) while staying in the same set. Formally, for a vector space $V$ over a field $F$ (e.g. real numbers $\mathbb{R}$), the following properties must hold for all $\mathbf{u}, \mathbf{v}, \mathbf{w} \in V$ and scalars $a, b \in F$:

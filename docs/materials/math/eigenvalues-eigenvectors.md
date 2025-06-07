@@ -1,5 +1,14 @@
 # Eigenvalues & Eigenvectors
 
+!!! info "Learning Objectives"
+    By the end of this guide, you will understand:
+
+    - The mathematical foundations of eigenvalues and eigenvectors
+    - Core computational methods and algorithms
+    - Applications in machine learning and data science
+    - Healthcare-specific use cases and implementations
+    - Advanced topics in deep learning and LLMs
+
 ## Table of Contents
 
 1. [Introduction and Motivation](#1-introduction-and-motivation)
@@ -19,6 +28,15 @@
 
 The study of eigenvalues and eigenvectors represents one of the most profound and practically significant areas of linear algebra, with applications that permeate virtually every aspect of modern machine learning, data science, and artificial intelligence. For machine learning engineers working in today's rapidly evolving technological landscape, understanding these mathematical concepts is not merely an academic exercise but a fundamental requirement for developing sophisticated AI systems, optimizing neural networks, and extracting meaningful insights from complex datasets.
 
+!!! tip "Why This Matters"
+    Eigenvalue decomposition is the mathematical foundation behind:
+
+    - **Principal Component Analysis (PCA)** - dimensionality reduction
+    - **Spectral Clustering** - advanced clustering algorithms
+    - **Neural Network Optimization** - understanding loss landscapes
+    - **Recommender Systems** - matrix factorization techniques
+    - **Graph Analysis** - network structure understanding
+
 The structure of this guide reflects a pedagogical approach that builds understanding incrementally, starting with the foundational concepts that may be familiar from undergraduate linear algebra courses and progressing to advanced topics that represent the current state of research in the field. Each section includes not only theoretical exposition but also practical examples, implementation details, and connections to real-world applications that demonstrate the relevance and power of these mathematical tools.
 
 ---
@@ -31,19 +49,87 @@ Before delving into the specific properties and applications of eigenvalues and 
 
 The concept of a vector space provides the fundamental framework within which eigenvalues and eigenvectors are defined and analyzed. A vector space, denoted typically as $V$, is a mathematical structure that consists of a collection of objects called vectors, along with two operations: vector addition and scalar multiplication. These operations must satisfy specific axioms that ensure the algebraic structure behaves in predictable and useful ways.
 
-Formally, a vector space $V$ over a field $F$ (typically the real numbers $\mathbb{R}$ or complex numbers $\mathbb{C}$ in our applications) is a set equipped with two operations such that for all vectors $\mathbf{u}, \mathbf{v}, \mathbf{w} \in V$ and all scalars $a, b \in F$, the following axioms hold: associativity of addition ($(\mathbf{u} + \mathbf{v}) + \mathbf{w} = \mathbf{u} + (\mathbf{v} + \mathbf{w})$), commutativity of addition ($\mathbf{u} + \mathbf{v} = \mathbf{v} + \mathbf{u}$), existence of an additive identity (there exists a zero vector $\mathbf{0}$ such that $\mathbf{v} + \mathbf{0} = \mathbf{v}$), existence of additive inverses (for each $\mathbf{v}$ there exists $-\mathbf{v}$ such that $\mathbf{v} + (-\mathbf{v}) = \mathbf{0}$), compatibility of scalar multiplication with field multiplication ($a(b\mathbf{v}) = (ab)\mathbf{v}$), existence of a multiplicative identity ($1\mathbf{v} = \mathbf{v}$), and distributivity properties ($a(\mathbf{u} + \mathbf{v}) = a\mathbf{u} + a\mathbf{v}$ and $(a + b)\mathbf{v} = a\mathbf{v} + b\mathbf{v}$).
+!!! note "Vector Space Definition"
+    A vector space $V$ over a field $F$ (typically $\mathbb{R}$ or $\mathbb{C}$) is a set equipped with two operations satisfying these axioms:
 
-In the context of machine learning and data science, the most commonly encountered vector spaces are finite-dimensional spaces such as $\mathbb{R}^n$, where vectors represent feature vectors, data points, or model parameters. For instance, in healthcare applications, a patient's medical record might be represented as a vector in $\mathbb{R}^d$, where each dimension corresponds to a different medical measurement, diagnostic test result, or demographic characteristic. The vector space structure allows us to perform meaningful operations on these representations, such as computing distances between patients, averaging treatment outcomes, or applying linear transformations to extract relevant features.
+**Formal Definition**: A vector space $V$ over a field $F$ (typically the real numbers $\mathbb{R}$ or complex numbers $\mathbb{C}$ in our applications) is a set equipped with two operations such that for all vectors $\mathbf{u}, \mathbf{v}, \mathbf{w} \in V$ and all scalars $a, b \in F$, the following axioms hold:
 
-Vector subspaces represent one of the most important concepts for understanding eigenvalue theory. A subset $W$ of a vector space $V$ is called a subspace if it is itself a vector space under the same operations as $V$. This occurs precisely when $W$ is closed under vector addition and scalar multiplication, and contains the zero vector. More formally, $W$ is a subspace of $V$ if and only if: (1) $\mathbf{0} \in W$, (2) for all $\mathbf{u}, \mathbf{v} \in W$, we have $\mathbf{u} + \mathbf{v} \in W$, and (3) for all $\mathbf{v} \in W$ and all scalars $a$, we have $a\mathbf{v} \in W$.
+1. **Associativity of addition**: $(\mathbf{u} + \mathbf{v}) + \mathbf{w} = \mathbf{u} + (\mathbf{v} + \mathbf{w})$
 
-The significance of subspaces in eigenvalue theory cannot be overstated. When we compute the eigenvalues and eigenvectors of a matrix $A$, each eigenvalue $\lambda$ has an associated eigenspace, which is precisely the subspace of all vectors $\mathbf{v}$ such that $A\mathbf{v} = \lambda\mathbf{v}$. This eigenspace, also known as the null space of $(A - \lambda I)$, captures all the directions in which the linear transformation represented by $A$ acts as a simple scaling operation.
+2. **Commutativity of addition**: $\mathbf{u} + \mathbf{v} = \mathbf{v} + \mathbf{u}$
 
-In practical applications, subspaces often represent meaningful geometric or semantic structures in the data. For example, in principal component analysis (PCA), the principal components define a subspace that captures the directions of maximum variance in the dataset. In healthcare applications, this might correspond to identifying the most informative combinations of biomarkers for predicting disease progression, where the principal component subspace represents the most diagnostically relevant feature combinations.
+3. **Additive identity**: There exists a zero vector $\mathbf{0}$ such that $\mathbf{v} + \mathbf{0} = \mathbf{v}$
 
-The dimension of a vector space or subspace is defined as the number of vectors in any basis for that space. A basis is a linearly independent set of vectors that spans the entire space, meaning that every vector in the space can be expressed as a unique linear combination of the basis vectors. The concept of dimension is crucial for understanding the geometric properties of eigenspaces and for determining the computational complexity of eigenvalue algorithms.
+4. **Additive inverses**: For each $\mathbf{v}$ there exists $-\mathbf{v}$ such that $\mathbf{v} + (-\mathbf{v}) = \mathbf{0}$
 
-Linear independence is a fundamental concept that underlies much of eigenvalue theory. A set of vectors $\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k\}$ is linearly independent if the only solution to the equation $c_1\mathbf{v}_1 + c_2\mathbf{v}_2 + \cdots + c_k\mathbf{v}_k = \mathbf{0}$ is $c_1 = c_2 = \cdots = c_k = 0$. If there exists a non-trivial solution (where at least one coefficient is non-zero), then the vectors are linearly dependent.
+5. **Compatibility of scalar multiplication**: $a(b\mathbf{v}) = (ab)\mathbf{v}$
+
+6. **Multiplicative identity**: $1\mathbf{v} = \mathbf{v}$
+
+7. **Distributivity properties**:
+   - $a(\mathbf{u} + \mathbf{v}) = a\mathbf{u} + a\mathbf{v}$
+   - $(a + b)\mathbf{v} = a\mathbf{v} + b\mathbf{v}$
+
+In the context of machine learning and data science, the most commonly encountered vector spaces are finite-dimensional spaces such as
+
+$$\mathbb{R}^n$$
+
+where vectors represent feature vectors, data points, or model parameters. For instance, in healthcare applications, a patient's medical record might be represented as a vector in
+
+$$\mathbb{R}^d$$
+
+where each dimension corresponds to a different medical measurement, diagnostic test result, or demographic characteristic.
+
+!!! example "Healthcare Application"
+    A patient vector in
+
+    $$\mathbb{R}^5$$
+
+    might represent:
+
+    $$\mathbf{p} = \begin{pmatrix} \text{age} \\ \text{blood pressure} \\ \text{cholesterol} \\ \text{BMI} \\ \text{glucose level} \end{pmatrix}$$
+
+**Vector Subspaces**: A subset $W$ of a vector space $V$ is called a subspace if it is itself a vector space under the same operations as $V$. This occurs precisely when $W$ is closed under vector addition and scalar multiplication, and contains the zero vector.
+
+!!! important "Subspace Criteria"
+    $W$ is a subspace of $V$ if and only if:
+
+    1. Contains zero vector:
+       $$\mathbf{0} \in W$$
+
+    2. Closed under addition - for all $\mathbf{u}, \mathbf{v} \in W$:
+       $$\mathbf{u} + \mathbf{v} \in W$$
+
+    3. Closed under scalar multiplication - for all $\mathbf{v} \in W$ and scalars $a$:
+       $$a\mathbf{v} \in W$$
+
+The significance of subspaces in eigenvalue theory cannot be overstated. When we compute the eigenvalues and eigenvectors of a matrix $A$, each eigenvalue $\lambda$ has an associated **eigenspace**, which is precisely the subspace of all vectors $\mathbf{v}$ such that:
+
+$$A\mathbf{v} = \lambda\mathbf{v}$$
+
+This eigenspace, also known as the null space of $(A - \lambda I)$, captures all the directions in which the linear transformation represented by $A$ acts as a simple scaling operation:
+
+!!! important "Eigenspace Definition"
+    $$\text{Eigenspace: } E_\lambda = \text{null}(A - \lambda I) = \{\mathbf{v} : (A - \lambda I)\mathbf{v} = \mathbf{0}\}$$
+
+!!! tip "Practical Insight"
+    In PCA, the principal components define a subspace that captures the directions of maximum variance in the dataset. In healthcare, this might identify the most informative combinations of biomarkers for predicting disease progression.
+
+**Dimension and Basis**: The dimension of a vector space or subspace is defined as the number of vectors in any basis for that space. A basis is a linearly independent set of vectors that spans the entire space, meaning that every vector in the space can be expressed as a unique linear combination of the basis vectors.
+
+**Linear Independence**: A set of vectors
+
+$$\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k\}$$
+
+is linearly independent if the only solution to the equation:
+
+$$c_1\mathbf{v}_1 + c_2\mathbf{v}_2 + \cdots + c_k\mathbf{v}_k = \mathbf{0}$$
+
+is
+
+$$c_1 = c_2 = \cdots = c_k = 0$$
+
+If there exists a non-trivial solution (where at least one coefficient is non-zero), then the vectors are linearly dependent.
 
 The relationship between linear independence and eigenvalues becomes apparent when we consider that eigenvectors corresponding to distinct eigenvalues are always linearly independent. This property is fundamental to the diagonalization of matrices and has important implications for the numerical computation of eigenvalues. In machine learning applications, linear independence of feature vectors often indicates that different features capture distinct aspects of the underlying phenomenon being modeled.
 
@@ -57,7 +143,23 @@ This geometric perspective is particularly valuable when working with covariance
 
 The concepts of vector spans and linear combinations provide the foundation for understanding how vectors can be combined to create new vectors and how subspaces are generated from sets of vectors. These concepts are intimately connected to eigenvalue theory, as eigenspaces are defined as the spans of eigenvectors, and the process of diagonalization involves expressing vectors as linear combinations of eigenvectors.
 
-A linear combination of vectors $\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k$ in a vector space $V$ is any vector of the form $c_1\mathbf{v}_1 + c_2\mathbf{v}_2 + \cdots + c_k\mathbf{v}_k$, where $c_1, c_2, \ldots, c_k$ are scalars. The set of all possible linear combinations of these vectors is called the span of the vectors, denoted $\text{span}\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k\}$. The span always forms a subspace of $V$, and it represents the smallest subspace that contains all of the given vectors.
+A linear combination of vectors
+
+$$\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k$$
+
+in a vector space $V$ is any vector of the form
+
+$$c_1\mathbf{v}_1 + c_2\mathbf{v}_2 + \cdots + c_k\mathbf{v}_k$$
+
+where
+
+$$c_1, c_2, \ldots, c_k$$
+
+are scalars. The set of all possible linear combinations of these vectors is called the span of the vectors, denoted
+
+$$\text{span}\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k\}$$
+
+The span always forms a subspace of $V$ and it represents the smallest subspace that contains all of the given vectors.
 
 The geometric interpretation of spans provides valuable intuition for understanding eigenvalue problems. In $\mathbb{R}^2$, the span of a single non-zero vector is a line through the origin, while the span of two linearly independent vectors is the entire plane. In $\mathbb{R}^3$, the span of a single vector is a line, the span of two linearly independent vectors is a plane, and the span of three linearly independent vectors is the entire three-dimensional space.
 
@@ -77,7 +179,7 @@ The concept of spanning sets also provides insight into the redundancy and effic
 
 In healthcare data analysis, this efficiency consideration is particularly important due to the high dimensionality and complexity of medical datasets. Electronic health records, for example, may contain thousands of potential features, but many of these features may be redundant or provide little additional information. By understanding the span of the most informative features, we can develop more efficient and interpretable models that focus on the essential patterns in the data.
 
-The connection between linear combinations and matrix multiplication provides another important perspective on eigenvalue problems. When we multiply a matrix $A$ by a vector $\mathbf{v}$, the result $A\mathbf{v}$ is a linear combination of the columns of $A$, with the coefficients given by the entries of $\mathbf{v}$. This perspective helps explain why eigenvectors are special: they are the vectors for which this linear combination process results in a vector that is parallel to the original vector.
+The connection between linear combinations and matrix multiplication provides another important perspective on eigenvalue problems. When we multiply a matrix $A$ by a vector $\mathbf{v}$, the result $A\mathbf{v}$ is a linear combination of the columns of $A$ with the coefficients given by the entries of $\mathbf{v}$. This perspective helps explain why eigenvectors are special: they are the vectors for which this linear combination process results in a vector that is parallel to the original vector.
 
 This matrix multiplication perspective is particularly useful for understanding iterative eigenvalue algorithms such as the power method. In the power method, we repeatedly multiply a vector by the matrix, and under certain conditions, this process converges to the dominant eigenvector. The convergence occurs because the repeated application of the linear transformation gradually eliminates components in directions other than the dominant eigenspace.
 
@@ -85,9 +187,29 @@ This matrix multiplication perspective is particularly useful for understanding 
 
 The determinant of a square matrix is a scalar value that encodes important geometric and algebraic properties of the linear transformation represented by the matrix. In the context of eigenvalue theory, determinants play a crucial role in the computation of eigenvalues through the characteristic polynomial, and they provide geometric insight into how linear transformations affect volumes and orientations in vector spaces.
 
-For a $2 \times 2$ matrix $A = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$, the determinant is defined as $\det(A) = ad - bc$. This simple formula extends to larger matrices through various computational methods, including cofactor expansion, row reduction, and specialized algorithms for particular matrix structures. The determinant can be interpreted geometrically as the signed volume of the parallelepiped formed by the column vectors of the matrix, with the sign indicating whether the transformation preserves or reverses orientation.
+**Basic Definition**: For a $2 \times 2$ matrix:
 
-The fundamental connection between determinants and eigenvalues arises through the characteristic polynomial. For an $n \times n$ matrix $A$, the characteristic polynomial is defined as $p(\lambda) = \det(A - \lambda I)$, where $I$ is the identity matrix and $\lambda$ is a scalar variable. The eigenvalues of $A$ are precisely the roots of this characteristic polynomial, i.e., the values of $\lambda$ for which $\det(A - \lambda I) = 0$.
+$$A = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$$
+
+the determinant is:
+
+$$\det(A) = ad - bc$$
+
+This simple formula extends to larger matrices through various computational methods, including cofactor expansion, row reduction, and specialized algorithms for particular matrix structures.
+
+!!! note "Geometric Interpretation"
+    The determinant represents the **signed volume** of the parallelepiped formed by the column vectors of the matrix. The sign indicates whether the transformation preserves or reverses orientation.
+
+**Connection to Eigenvalues**: The fundamental connection between determinants and eigenvalues arises through the **characteristic polynomial**. For an $n \times n$ matrix $A$, we define:
+
+$$p(\lambda) = \det(A - \lambda I)$$
+
+where $I$ is the identity matrix and $\lambda$ is a scalar variable.
+
+!!! important "Key Result"
+    The eigenvalues of $A$ are precisely the roots of the characteristic polynomial:
+
+    $$\det(A - \lambda I) = 0$$
 
 This connection reveals why the determinant is so important in eigenvalue theory: the condition for $\lambda$ to be an eigenvalue is equivalent to the condition that the matrix $(A - \lambda I)$ is singular (non-invertible), which occurs precisely when its determinant is zero. This relationship provides both a theoretical foundation for understanding eigenvalues and a practical method for computing them.
 
@@ -154,11 +276,35 @@ Having established the foundational mathematical concepts, we now turn to the ce
 
 ### 3.1 Fundamental Definitions
 
-The formal definition of eigenvalues and eigenvectors provides the starting point for understanding their mathematical properties and practical applications. Given a square matrix $A$ of size $n \times n$, a non-zero vector $\mathbf{v}$ is called an eigenvector of $A$ if there exists a scalar $\lambda$ such that $A\mathbf{v} = \lambda\mathbf{v}$. The scalar $\lambda$ is called the eigenvalue corresponding to the eigenvector $\mathbf{v}$. This deceptively simple equation captures a profound geometric relationship: the linear transformation represented by $A$ acts on the eigenvector $\mathbf{v}$ by simply scaling it by the factor $\lambda$, without changing its direction.
+The formal definition of eigenvalues and eigenvectors provides the starting point for understanding their mathematical properties and practical applications.
 
-The eigenvalue equation $A\mathbf{v} = \lambda\mathbf{v}$ can be rewritten as $(A - \lambda I)\mathbf{v} = \mathbf{0}$, where $I$ is the identity matrix. This formulation reveals that finding eigenvectors is equivalent to finding non-trivial solutions to a homogeneous linear system. For such solutions to exist, the matrix $(A - \lambda I)$ must be singular, which occurs precisely when $\det(A - \lambda I) = 0$. This condition defines the characteristic equation of the matrix, and its solutions are the eigenvalues.
+!!! abstract "Core Definition"
+    Given a square matrix $A$ of size $n \times n$, a non-zero vector $\mathbf{v}$ is called an **eigenvector** of $A$ if there exists a scalar $\lambda$ such that:
 
-The characteristic polynomial $p(\lambda) = \det(A - \lambda I)$ is a polynomial of degree $n$ in the variable $\lambda$. By the fundamental theorem of algebra, this polynomial has exactly $n$ roots (counting multiplicities) in the complex numbers, which means that every $n \times n$ matrix has exactly $n$ eigenvalues, though some may be repeated and some may be complex even when the matrix has real entries.
+    $$A\mathbf{v} = \lambda\mathbf{v}$$
+
+    The scalar $\lambda$ is called the **eigenvalue** corresponding to the eigenvector $\mathbf{v}$.
+
+This deceptively simple equation captures a profound geometric relationship: the linear transformation represented by $A$ acts on the eigenvector $\mathbf{v}$ by simply scaling it by the factor $\lambda$ without changing its direction.
+
+**Alternative Formulation**: The eigenvalue equation can be rewritten as:
+
+$$A\mathbf{v} = \lambda\mathbf{v} \quad \Leftrightarrow \quad (A - \lambda I)\mathbf{v} = \mathbf{0}$$
+
+where $I$ is the identity matrix. This reveals that finding eigenvectors is equivalent to finding non-trivial solutions to a homogeneous linear system.
+
+!!! important "Existence Condition"
+    For non-trivial solutions to exist, the matrix $(A - \lambda I)$ must be singular:
+
+    $$\det(A - \lambda I) = 0$$
+
+    This is called the **characteristic equation**.
+
+**Characteristic Polynomial**: The characteristic polynomial is defined as:
+
+$$p(\lambda) = \det(A - \lambda I)$$
+
+This is a polynomial of degree $n$ in the variable $\lambda$. By the fundamental theorem of algebra, this polynomial has exactly $n$ roots (counting multiplicities) in the complex numbers, which means that every $n \times n$ matrix has exactly $n$ eigenvalues.
 
 The geometric interpretation of eigenvalues and eigenvectors provides crucial intuition for understanding their significance in machine learning applications. An eigenvector represents a direction in the vector space that is preserved by the linear transformation, while the corresponding eigenvalue indicates how much the vector is scaled in that direction. If $\lambda > 1$, the transformation stretches vectors in the direction of the eigenvector; if $0 < \lambda < 1$, it compresses them; if $\lambda < 0$, it both scales and reverses the direction; and if $\lambda = 0$, it maps the eigenvector to the zero vector.
 
@@ -293,11 +439,42 @@ The theoretical foundations of eigenvalues and eigenvectors find their most comp
 
 ### 4.1 Principal Component Analysis (PCA)
 
-Principal Component Analysis stands as perhaps the most widely recognized and practically important application of eigenvalue decomposition in data science. At its core, PCA provides a systematic method for reducing the dimensionality of datasets while preserving the maximum amount of variance, making it an indispensable tool for exploratory data analysis, feature extraction, and data visualization. The mathematical foundation of PCA rests entirely on the eigenvalue decomposition of covariance matrices, making it an ideal bridge between theoretical eigenvalue concepts and practical data science applications.
+Principal Component Analysis stands as perhaps the most widely recognized and practically important application of eigenvalue decomposition in data science. At its core, PCA provides a systematic method for reducing the dimensionality of datasets while preserving the maximum amount of variance, making it an indispensable tool for exploratory data analysis, feature extraction, and data visualization.
 
-The mathematical formulation of PCA begins with a dataset represented as an $n \times p$ matrix $X$, where $n$ represents the number of observations (such as patients in a healthcare study) and $p$ represents the number of features (such as biomarkers, vital signs, or laboratory measurements). The first step in PCA involves centering the data by subtracting the mean of each feature, resulting in a centered data matrix $\tilde{X}$ where each column has zero mean. This centering operation is crucial because it ensures that the principal components represent directions of maximum variance rather than being influenced by the absolute magnitudes of the features.
+!!! abstract "PCA Overview"
+    PCA finds the directions of maximum variance in high-dimensional data and projects the data onto a lower-dimensional subspace defined by these directions (principal components).
 
-The sample covariance matrix $C$ is then computed as $C = \frac{1}{n-1}\tilde{X}^T\tilde{X}$, which is a $p \times p$ symmetric positive semi-definite matrix. Each entry $C_{ij}$ represents the covariance between features $i$ and $j$, with diagonal entries representing the variances of individual features. The eigenvalue decomposition of this covariance matrix, $C = Q\Lambda Q^T$, provides the mathematical foundation for PCA, where $Q$ contains the eigenvectors (principal components) and $\Lambda$ contains the eigenvalues (which represent the variances along the principal component directions).
+**Mathematical Formulation**: PCA begins with a dataset represented as an $n \times p$ matrix $X$ where:
+- $n$ = number of observations (e.g., patients)
+- $p$ = number of features (e.g., biomarkers)
+
+**Step 1: Data Centering**
+The first step involves centering the data by subtracting the mean of each feature:
+
+$$\tilde{X} = X - \mathbf{1}\boldsymbol{\mu}^T$$
+
+where $\boldsymbol{\mu}$ is the vector of feature means and $\mathbf{1}$ is a vector of ones.
+
+**Step 2: Covariance Matrix**
+The sample covariance matrix is computed as:
+
+$$C = \frac{1}{n-1}\tilde{X}^T\tilde{X}$$
+
+This is a $p \times p$ symmetric positive semi-definite matrix where:
+- $C_{ij}$ represents the covariance between features $i$ and $j$
+- Diagonal entries represent the variances of individual features
+
+**Step 3: Eigenvalue Decomposition**
+The eigenvalue decomposition of the covariance matrix provides the foundation for PCA:
+
+$$C = Q\Lambda Q^T$$
+
+where:
+- $Q$ contains the eigenvectors (principal components)
+- $\Lambda$ contains the eigenvalues (variances along principal component directions)
+
+!!! tip "Key Insight"
+    The eigenvectors of the covariance matrix are the principal components, and the eigenvalues represent the amount of variance explained by each component.
 
 The geometric interpretation of PCA reveals its power as a dimensionality reduction technique. The principal components represent the directions of maximum variance in the data, with the first principal component pointing in the direction of greatest variance, the second principal component pointing in the direction of greatest remaining variance (orthogonal to the first), and so on. This orthogonal decomposition ensures that the principal components capture independent sources of variation in the data, making them particularly valuable for understanding the underlying structure of complex datasets.
 
@@ -333,11 +510,39 @@ In clinical applications, the integration of PCA results with existing medical k
 
 ### 4.2 Singular Value Decomposition (SVD)
 
-Singular Value Decomposition represents one of the most fundamental and versatile matrix factorization techniques in linear algebra, with applications that span virtually every area of data science and machine learning. While closely related to eigenvalue decomposition, SVD extends these concepts to rectangular matrices and provides a more general framework for understanding the structure of linear transformations. In healthcare applications, SVD has proven particularly valuable for collaborative filtering in medical recommendation systems, latent factor modeling in epidemiological studies, and noise reduction in medical imaging.
+Singular Value Decomposition represents one of the most fundamental and versatile matrix factorization techniques in linear algebra, with applications that span virtually every area of data science and machine learning. While closely related to eigenvalue decomposition, SVD extends these concepts to rectangular matrices and provides a more general framework for understanding the structure of linear transformations.
 
-The mathematical foundation of SVD rests on the fundamental theorem that any $m \times n$ matrix $A$ can be factorized as $A = U\Sigma V^T$, where $U$ is an $m \times m$ orthogonal matrix, $\Sigma$ is an $m \times n$ diagonal matrix with non-negative entries (the singular values), and $V$ is an $n \times n$ orthogonal matrix. The columns of $U$ are called the left singular vectors, the columns of $V$ are called the right singular vectors, and the diagonal entries of $\Sigma$ are the singular values, typically arranged in descending order.
+!!! abstract "SVD Theorem"
+    Any $m \times n$ matrix $A$ can be factorized as:
 
-The relationship between SVD and eigenvalue decomposition provides important theoretical insights and computational connections. The left singular vectors of $A$ are the eigenvectors of $AA^T$, the right singular vectors are the eigenvectors of $A^TA$, and the singular values are the square roots of the eigenvalues of both $AA^T$ and $A^TA$. This relationship reveals that SVD can be viewed as a simultaneous eigenvalue decomposition of two related symmetric matrices, providing a unified framework for understanding both row and column structure in the data.
+    $$A = U\Sigma V^T$$
+
+    where:
+    - $U$ is an $m \times m$ orthogonal matrix (left singular vectors)
+    - $\Sigma$ is an $m \times n$ diagonal matrix (singular values)
+    - $V$ is an $n \times n$ orthogonal matrix (right singular vectors)
+
+**Mathematical Foundation**: The SVD factorization can be written as:
+
+$$A = U\Sigma V^T = \sum_{i=1}^{\min(m,n)} \sigma_i \mathbf{u}_i \mathbf{v}_i^T$$
+
+where:
+- $\mathbf{u}_i$ are the columns of $U$ (left singular vectors)
+- $\mathbf{v}_i$ are the columns of $V$ (right singular vectors)
+- $\sigma_i$ are the singular values (arranged in descending order)
+
+**Connection to Eigenvalue Decomposition**: SVD provides a unified framework for understanding both row and column structure:
+
+- Left singular vectors of $A$ = eigenvectors of $AA^T$
+- Right singular vectors of $A$ = eigenvectors of $A^TA$
+- Singular values of $A$ = $\sqrt{\text{eigenvalues of } AA^T \text{ or } A^TA}$
+
+!!! note "Key Relationships"
+    $$AA^T = U\Sigma^2 U^T$$
+
+    $$A^TA = V\Sigma^2 V^T$$
+
+This relationship reveals that SVD can be viewed as a simultaneous eigenvalue decomposition of two related symmetric matrices.
 
 The geometric interpretation of SVD illuminates its power as a data analysis tool. The SVD factorization can be viewed as a sequence of three geometric transformations: a rotation (or reflection) by $V^T$, a scaling along the coordinate axes by $\Sigma$, and another rotation (or reflection) by $U$. This decomposition reveals the fundamental geometric structure of the linear transformation represented by $A$, identifying the principal directions of stretching and the corresponding scaling factors.
 
@@ -407,13 +612,43 @@ The clinical interpretation of spectral clustering results often requires integr
 
 ### 4.4 Linear Discriminant Analysis (LDA)
 
-Linear Discriminant Analysis represents a fundamental supervised dimensionality reduction technique that leverages eigenvalue decomposition to find linear combinations of features that best separate different classes or groups. Unlike Principal Component Analysis, which focuses on maximizing variance without considering class labels, LDA explicitly seeks directions that maximize the separation between classes while minimizing the variation within classes. This supervised approach makes LDA particularly valuable for healthcare applications where the goal is to distinguish between different disease states, treatment responses, or patient outcomes.
+Linear Discriminant Analysis represents a fundamental supervised dimensionality reduction technique that leverages eigenvalue decomposition to find linear combinations of features that best separate different classes or groups. Unlike PCA, which focuses on maximizing variance without considering class labels, LDA explicitly seeks directions that maximize the separation between classes while minimizing the variation within classes.
 
-The mathematical foundation of LDA rests on the analysis of two scatter matrices that capture different aspects of the data structure. The within-class scatter matrix $S_W$ measures the variability of data points within each class, while the between-class scatter matrix $S_B$ measures the separation between class means. The optimal discriminant directions are found by solving the generalized eigenvalue problem $S_B \mathbf{v} = \lambda S_W \mathbf{v}$, where the eigenvectors corresponding to the largest eigenvalues provide the most discriminative linear combinations of the original features.
+!!! abstract "LDA Objective"
+    Find directions that maximize the ratio:
+    $$\frac{\text{between-class variance}}{\text{within-class variance}}$$
 
-The within-class scatter matrix is defined as $S_W = \sum_{i=1}^c \sum_{\mathbf{x} \in C_i} (\mathbf{x} - \boldsymbol{\mu}_i)(\mathbf{x} - \boldsymbol{\mu}_i)^T$, where $c$ is the number of classes, $C_i$ represents the set of data points in class $i$, and $\boldsymbol{\mu}_i$ is the mean of class $i$. This matrix captures the covariance structure within each class, pooled across all classes. The between-class scatter matrix is defined as $S_B = \sum_{i=1}^c n_i (\boldsymbol{\mu}_i - \boldsymbol{\mu})(\boldsymbol{\mu}_i - \boldsymbol{\mu})^T$, where $n_i$ is the number of points in class $i$ and $\boldsymbol{\mu}$ is the overall mean. This matrix captures how much the class means differ from the overall mean.
+**Mathematical Foundation**: LDA analyzes two scatter matrices that capture different aspects of the data structure:
 
-The generalized eigenvalue problem $S_B \mathbf{v} = \lambda S_W \mathbf{v}$ can be transformed into a standard eigenvalue problem by computing $S_W^{-1}S_B \mathbf{v} = \lambda \mathbf{v}$, provided that $S_W$ is invertible. The eigenvalues $\lambda$ represent the ratio of between-class variance to within-class variance along each discriminant direction, with larger eigenvalues indicating more discriminative directions. The number of non-zero eigenvalues is at most $\min(p, c-1)$, where $p$ is the number of features and $c$ is the number of classes.
+**Within-Class Scatter Matrix**: Measures variability within each class:
+
+$$S_W = \sum_{i=1}^c \sum_{\mathbf{x} \in C_i} (\mathbf{x} - \boldsymbol{\mu}_i)(\mathbf{x} - \boldsymbol{\mu}_i)^T$$
+
+where:
+- $c$ = number of classes
+- $C_i$ = set of data points in class $i$
+- $\boldsymbol{\mu}_i$ = mean of class $i$
+
+**Between-Class Scatter Matrix**: Measures separation between class means:
+
+$$S_B = \sum_{i=1}^c n_i (\boldsymbol{\mu}_i - \boldsymbol{\mu})(\boldsymbol{\mu}_i - \boldsymbol{\mu})^T$$
+
+where:
+- $n_i$ = number of points in class $i$
+- $\boldsymbol{\mu}$ = overall mean
+
+**Generalized Eigenvalue Problem**: The optimal discriminant directions are found by solving:
+
+$$S_B \mathbf{v} = \lambda S_W \mathbf{v}$$
+
+This can be transformed into a standard eigenvalue problem:
+
+$$S_W^{-1}S_B \mathbf{v} = \lambda \mathbf{v}$$
+
+!!! important "Key Properties"
+    - Eigenvalues $\lambda$ represent the ratio of between-class to within-class variance
+    - Larger eigenvalues indicate more discriminative directions
+    - Maximum number of non-zero eigenvalues: $\min(p, c-1)$
 
 The geometric interpretation of LDA provides valuable intuition for understanding its behavior and applications. The discriminant directions represent linear combinations of the original features that maximize the separation between class means relative to the within-class variability. In the projected space defined by these discriminant directions, the classes are as well-separated as possible, making classification tasks more straightforward and interpretable.
 
@@ -764,36 +999,50 @@ These case studies illustrate the broad applicability and practical impact of ei
 
 ### A. Mathematical Notation Reference
 
-*   Scalars: $a, b, c, \lambda, \sigma$ (lowercase letters, often Greek)
-*   Vectors: $\mathbf{u}, \mathbf{v}, \mathbf{w}, \mathbf{x}$ (lowercase bold letters)
-*   Matrices: $A, B, C, L, Q, R, U, V, \Sigma, \Lambda$ (uppercase letters, sometimes Greek)
-*   Vector space: $V, W$
-*   Field (Real numbers, Complex numbers): $\mathbb{R}, \mathbb{C}$
-*   Vector dimension: $n, p, d$
-*   Identity matrix: $I$
-*   Zero vector: $\mathbf{0}$
-*   Transpose: $A^T, \mathbf{v}^T$
-*   Inverse: $A^{-1}$
-*   Determinant: $\det(A), |A|$
-*   Trace: $\text{tr}(A)$
-*   Span: $\text{span}\{\mathbf{v}_1, \ldots, \mathbf{v}_k\}$
-*   Null space: $\text{null}(A)$
-*   Eigenvalue: $\lambda$
-*   Eigenvector: $\mathbf{v}$
-*   Eigenspace: $E_\lambda$
-*   Singular value: $\sigma$
-*   Left singular vector: $\mathbf{u}$
-*   Right singular vector: $\mathbf{v}$
-*   Covariance matrix: $C, \Sigma$
-*   Scatter matrices (LDA): $S_W, S_B$
-*   Graph Laplacian: $L$
-*   Adjacency matrix: $W, A$
-*   Degree matrix: $D$
-*   Hessian matrix: $H$
-*   Jacobian matrix: $J$
-*   L2 norm: $\|\mathbf{v}\|_2 = \sqrt{\sum v_i^2}$
-*   Frobenius norm: $\|A\|_F = \sqrt{\sum_{i,j} a_{ij}^2}$
-*   Spectral norm: $\|A\|_2 = \max_{\|\mathbf{x}\|=1} \|A\mathbf{x}\|_2 = \sigma_{max}(A)$
+| Symbol | Description | Example |
+|--------|-------------|---------|
+| **Scalars** | | |
+| $a, b, c, \lambda, \sigma$ | Lowercase letters, often Greek | $\lambda = 3.14$ |
+| **Vectors** | | |
+| $\mathbf{u}, \mathbf{v}, \mathbf{w}, \mathbf{x}$ | Lowercase bold letters | $\mathbf{v} = \begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix}$ |
+| **Matrices** | | |
+| $A, B, C, L, Q, R, U, V, \Sigma, \Lambda$ | Uppercase letters | $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$ |
+| **Spaces** | | |
+| $V, W$ | Vector spaces | $V = \mathbb{R}^n$ |
+| $\mathbb{R}, \mathbb{C}$ | Real and complex numbers | $\mathbb{R}^3$ |
+| **Dimensions** | | |
+| $n, p, d$ | Vector dimensions | $n = 1000$ samples |
+| **Special Matrices** | | |
+| $I$ | Identity matrix | $I_3 = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix}$ |
+| $\mathbf{0}$ | Zero vector | $\mathbf{0} = \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}$ |
+| **Operations** | | |
+| $A^T, \mathbf{v}^T$ | Transpose | $(A^T)_{ij} = A_{ji}$ |
+| $A^{-1}$ | Matrix inverse | $AA^{-1} = I$ |
+| $\det(A), \|A\|$ | Determinant | $\det(A) = ad - bc$ |
+| $\text{tr}(A)$ | Trace (sum of diagonal) | $\text{tr}(A) = \sum_i A_{ii}$ |
+| **Subspaces** | | |
+| $\text{span}\{\mathbf{v}_1, \ldots, \mathbf{v}_k\}$ | Span of vectors | All linear combinations |
+| $\text{null}(A)$ | Null space | $\{\mathbf{x} : A\mathbf{x} = \mathbf{0}\}$ |
+| **Eigenvalue Theory** | | |
+| $\lambda$ | Eigenvalue | $A\mathbf{v} = \lambda\mathbf{v}$ |
+| $\mathbf{v}$ | Eigenvector | Non-zero vector |
+| $E_\lambda$ | Eigenspace | $\{\mathbf{v} : A\mathbf{v} = \lambda\mathbf{v}\}$ |
+| **SVD Components** | | |
+| $\sigma$ | Singular value | $A = U\Sigma V^T$ |
+| $\mathbf{u}$ | Left singular vector | Columns of $U$ |
+| $\mathbf{v}$ | Right singular vector | Columns of $V$ |
+| **Application-Specific** | | |
+| $C, \Sigma$ | Covariance matrix | $C = \frac{1}{n-1}X^TX$ |
+| $S_W, S_B$ | Within/between scatter (LDA) | Class separation |
+| $L$ | Graph Laplacian | $L = D - W$ |
+| $W, A$ | Adjacency matrix | Graph connections |
+| $D$ | Degree matrix | Node degrees |
+| $H$ | Hessian matrix | Second derivatives |
+| $J$ | Jacobian matrix | First derivatives |
+| **Norms** | | |
+| $\\|\mathbf{v}\\|_2$ | L2 norm | $\sqrt{\sum v_i^2}$ |
+| $\\|A\\|_F$ | Frobenius norm | $\sqrt{\sum_{i,j} a_{ij}^2}$ |
+| $\\|A\\|_2$ | Spectral norm | $\max_{\\|\mathbf{x}\\|=1} \\|A\mathbf{x}\\|_2$ |
 
 ### B. Python Code Examples
 
@@ -881,29 +1130,82 @@ print("Principal axes (eigenvectors):\n", pca_model.components_)
 
 Understanding the computational complexity of different eigenvalue and SVD algorithms is crucial for selecting appropriate methods for different data sizes and structures.
 
-**Dense Matrix Algorithms (n x n matrix):**
+!!! warning "Algorithm Selection"
+    Choose algorithms based on:
+    - Matrix size and structure
+    - Required accuracy
+    - Available computational resources
+    - Number of eigenvalues needed
 
-*   **Characteristic Polynomial Root Finding:** $O(n!)$ or higher (impractical).
-*   **QR Algorithm (General Matrix):** $O(n^3)$ per iteration. Typically requires $O(n)$ iterations for convergence after reduction to Hessenberg form ($O(n^3)$ cost). Total cost often dominated by $O(n^3)$.
-*   **Symmetric QR Algorithm (Symmetric Matrix):** $O(n^3)$ for initial reduction to tridiagonal form. $O(n^2)$ per iteration on tridiagonal matrix. Total cost often dominated by $O(n^3)$.
-*   **SVD (via QR or Jacobi methods):** $O(n^3)$ (for square matrices, or $O(mn^2)$ or $O(m^2n)$ for $m \times n$ matrices).
-*   **Power Iteration / Inverse Iteration:** $O(n^2)$ per iteration. Number of iterations depends on eigenvalue separation.
+#### Dense Matrix Algorithms
 
-**Sparse Matrix Algorithms (n x n matrix, nnz non-zero entries):**
+For an $n \times n$ matrix:
 
-*   **Lanczos / Arnoldi (for k eigenvalues/vectors):** $O(k \times \text{cost(MatVec)} + k^2n)$. Cost of matrix-vector product (MatVec) is typically $O(nnz)$. Total cost often $O(k \times nnz + k^2n)$.
-*   **Sparse SVD (via Lanczos on normal equations):** Similar complexity to sparse eigenvalue methods.
+| Algorithm | Complexity | Notes |
+|-----------|------------|-------|
+| **Characteristic Polynomial** | $$O(n!)$$ | Impractical for $$n > 4$$ |
+| **QR Algorithm (General)** | $$O(n^3)$$ | Standard for dense matrices |
+| **QR Algorithm (Symmetric)** | $$O(n^3)$$ | More efficient for symmetric |
+| **SVD (QR/Jacobi)** | $$O(n^3)$$ | For square matrices |
+| **Power Iteration** | $$O(n^2)$$ per iteration | Depends on eigenvalue separation |
 
-**Randomized Algorithms (m x n matrix, target rank k, oversampling p):**
+#### Sparse Matrix Algorithms
 
-*   **Randomized SVD/PCA:** $O(mn 	imes (k+p) + (m+n)(k+p)^2)$. Can be significantly faster than deterministic methods when $k$ is small, approaching $O(mn 	imes k)$.
+For an $n \times n$ matrix with $nnz$ non-zeros:
 
-**Notes:**
+| Algorithm | Complexity | Best For |
+|-----------|------------|----------|
+| **Lanczos/Arnoldi** | $$O(k \cdot nnz + k^2n)$$ | Few eigenvalues ($$k \ll n$$) |
+| **Sparse SVD** | Similar to Lanczos | Large sparse matrices |
 
-*   Complexity is often stated in terms of floating-point operations (flops).
-*   Constants hidden by Big-O notation can be significant.
-*   Actual runtime depends heavily on implementation, hardware (CPU vs GPU), caching, and matrix properties.
-*   For very large matrices, communication costs in distributed algorithms can dominate.
+where $k$ = number of desired eigenvalues/vectors.
 
-Choosing the most efficient algorithm requires considering matrix size, density/sparsity, structure (symmetric, Hessenberg), desired number of eigenvalues/vectors, required accuracy, and available computational resources.
+#### Randomized Algorithms
 
+For an $m \times n$ matrix, target rank $k$ | Algorithm | Complexity | Advantage |
+|-----------|------------|-----------|
+| **Randomized SVD/PCA** | $$O(mn(k+p) + (m+n)(k+p)^2)$$ | Fast for low-rank approximation |
+
+where $p$ = oversampling parameter.
+
+!!! tip "Performance Considerations"
+    - **Constants matter**: Big-O notation hides significant constants
+    - **Hardware effects**: CPU vs GPU, memory hierarchy, parallelization
+    - **Matrix properties**: Condition number, eigenvalue distribution
+    - **Communication costs**: Important for distributed algorithms
+
+#### Algorithm Selection Guide
+
+```mermaid
+graph TD
+    A["Matrix Size?"] --> B["Small: n < 1000"]
+    A --> C["Large: n > 1000"]
+
+    B --> D["Dense QR Algorithm"]
+
+    C --> E["Sparse Matrix?"]
+    E --> F["Yes: Lanczos/Arnoldi"]
+    E --> G["No: Consider structure"]
+
+    G --> H["Symmetric Matrix?"]
+    H --> I["Yes: Symmetric QR"]
+    H --> J["No: General QR or Randomized"]
+
+    F --> K["Few eigenvalues needed?"]
+    K --> L["Yes: Perfect choice"]
+    K --> M["No: Consider randomized"]
+```
+
+---
+
+
+### Additional Resources
+
+- **Books**: "Matrix Analysis" by Horn & Johnson, "Numerical Linear Algebra" by Trefethen & Bau
+- **Software**: NumPy, SciPy, scikit-learn for Python implementations
+- **Datasets**: UCI ML Repository, Kaggle healthcare datasets for practice
+
+---
+
+!!! quote "Final Thought"
+    "The eigenvalue decomposition is not just a mathematical tool—it's a lens through which we can understand the fundamental structure of data and the behavior of complex systems."

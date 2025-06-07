@@ -1,14 +1,15 @@
 site_name: LLM & Agentic Workflows Learning Guide
 site_description: A comprehensive repository for learning Large Language Models and agentic workflows with healthcare applications
 site_author: Omar Kahwaji
-site_url: https://okahwaji-tech.github.io/agents/
+site_url: https://okahwaji-tech.github.io/llm-learning-guide/
 
-repo_name: okahwaji-tech/agents
-repo_url: https://github.com/okahwaji-tech/agents
+repo_name: okahwaji-tech/llm-learning-guide
+repo_url: https://github.com/okahwaji-tech/llm-learning-guide
 edit_uri: edit/main/docs/
 
 theme:
   name: material
+  custom_dir: docs/overrides
   palette:
     # Palette toggle for light mode
     - scheme: default
@@ -31,6 +32,10 @@ theme:
     - navigation.expand
     - navigation.path
     - navigation.top
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.tracking
     - search.highlight
     - search.share
     - search.suggest
@@ -38,24 +43,35 @@ theme:
     - content.code.select
     - content.code.annotate
     - content.tabs.link
+    - content.action.edit
+    - content.action.view
+    - content.tooltips
     - toc.follow
     - toc.integrate
+    - announce.dismiss
   icon:
     repo: fontawesome/brands/github
     edit: material/pencil
     view: material/eye
+    tag:
+      default: fontawesome/solid/tag
+      math: fontawesome/solid/calculator
+      code: fontawesome/solid/code
+      healthcare: fontawesome/solid/heart-pulse
+
 
 markdown_extensions:
+  - toc:
+      permalink: true
+      title: On this page
+  - tables
+  - fenced_code
   - abbr
   - admonition
   - attr_list
   - def_list
   - footnotes
   - md_in_html
-  - toc:
-      permalink: true
-      title: On this page
-  - tables
   - pymdownx.arithmatex:
       generic: true
   - pymdownx.betterem:
@@ -75,7 +91,7 @@ markdown_extensions:
       normalize_issue_symbols: true
       repo_url_shorthand: true
       user: okahwaji-tech
-      repo: agents
+      repo: llm-learning-guide
   - pymdownx.mark
   - pymdownx.smartsymbols
   - pymdownx.snippets:
@@ -107,6 +123,26 @@ plugins:
       enable_creation_date: true
       type: timeago
   - awesome-pages
+  # - macros:
+  #     module_name: docs.macros
+  - glightbox:
+      touchNavigation: true
+      loop: false
+      effect: zoom
+      slide_effect: slide
+      width: 100%
+      height: auto
+      zoomable: true
+      draggable: true
+      auto_caption: false
+      caption_position: bottom
+  - minify:
+      minify_html: true
+      minify_js: true
+      minify_css: true
+      htmlmin_opts:
+        remove_comments: true
+      cache_safe: true
 
 extra:
   social:
@@ -116,10 +152,13 @@ extra:
       link: https://linkedin.com/in/omarkahwaji
   analytics:
     provider: google
-    property: !ENV GOOGLE_ANALYTICS_KEY
+    property: G-XXXXXXXXXX  # Replace with your Google Analytics ID
+
 
 extra_javascript:
   - javascripts/mathjax.js
+
+  - javascripts/study-components.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
@@ -127,31 +166,47 @@ extra_css:
   - stylesheets/extra.css
 
 nav:
-  - Home: index.md
-  - Getting Started:
+  - Home:
+    - Welcome: index.md
+    - Study Roadmap: roadmap.md
+    - Quick Start: quick-start.md
+
+  - 📚 Study Guide:
+    - Overview: study-guide/index.md
+    - Week 1 - Introduction to LLMs:
+      - Overview: study-guide/week-1/index.md
+      - Checklist: study-guide/week-1/checklist.md
+  - 📚 Learning Materials:
+    - 🏠 Materials Hub: materials/index.md
+    - 🧮 Mathematical Foundations:
+      - Overview: materials/math/index.md
+      - 🟢 Foundational:
+        - Probability Theory: materials/math/probability-theory.md
+        - Linear Algebra: materials/math/linear-algebra.md
+        - Information Theory: materials/math/information-theory.md
+        - Matrix Operations: materials/math/matrix-multiplication.md
+      - 🟡 Intermediate:
+        - Vector Spaces: materials/math/vector-spaces.md
+        - Eigenvalues & Eigenvectors: materials/math/eigenvalues-eigenvectors.md
+    - 🤖 Machine Learning & RL:
+      - Overview: materials/ml/index.md
+      - 🟡 Core RL Concepts:
+        - Reinforcement Learning: materials/ml/reinforcement-learning.md
+        - Markov Decision Processes: materials/ml/mdp.md
+      - 🔴 Advanced Topics:
+        - RL-LLM Connections: materials/ml/rl-llm-foundation.md
+    - 🧠 LLM Fundamentals:
+      - Overview: materials/llm/index.md
+      - 🟢 Getting Started:
+        - Introduction to LLMs: materials/llm/llm-fundamentals.md
+        - Word Embeddings: materials/llm/word-embeddings.md
+      - 🟡 Advanced Concepts:
+        - Evaluation Methods: materials/llm/evaluation.md
+  - 💻 Code Examples:
+    - Overview: code-examples/index.md
+  - 🔧 Getting Started:
     - Installation: getting-started/installation.md
     - Development Setup: getting-started/development-setup.md
     - Apple Silicon Optimization: getting-started/apple-silicon.md
-  - Study Guide:
-    - Overview: study-guide/index.md
-    - Week 1 - Introduction to LLMs: study-guide/week-1/index.md
-  - Materials:
-    - Mathematical Foundations:
-      - Overview: materials/math/index.md
-      - Probability Theory: materials/math/probability-theory.md
-      - Information Theory: materials/math/information-theory.md
-      - Linear Algebra: materials/math/linear-algebra.md
-      - Vector Spaces: materials/math/vector-spaces.md
-      - Matrix Operations: materials/math/matrix-multiplication.md
-      - Eigenvalues & Eigenvectors: materials/math/eigenvalues-eigenvectors.md
-    - Machine Learning:
-      - Reinforcement Learning: materials/ml/reinforcement-learning.md
-      - Markov Decision Processes: materials/ml/mdp.md
-      - RL-LLM Connections: materials/ml/rl-llm-foundation.md
-    - LLM Fundamentals:
-      - Introduction to LLMs: materials/llm/llm-fundamentals.md
-      - Word Embeddings: materials/llm/word-embeddings.md
-      - Evaluation Methods: materials/llm/evaluation.md
-  - Code Examples: code-examples/index.md
-  - Progress Tracking: progress/index.md
-  - Resources: resources/index.md
+  - 📖 Resources Hub:
+    - 🏠 Resource Center: resources/index.md

@@ -1,5 +1,4 @@
 # Comprehensive PyTorch Implementation Examples for SVD
-# Healthcare-Focused Singular Value Decomposition Applications
 
 import torch
 import torch.nn as nn

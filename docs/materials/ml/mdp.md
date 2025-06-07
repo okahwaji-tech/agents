@@ -1,104 +1,277 @@
-# Markov Decision Processes
+# 🎯 Markov Decision Processes: From Fundamentals to Advanced Applications
+
+!!! info "🎯 Learning Objectives"
+    By the end of this comprehensive guide, you will master:
+
+    - **Fundamental Concepts:** Define Markov Decision Processes (MDPs) and explain their significance in modeling sequential decision-making under uncertainty
+    - **Core Components:** Identify and describe the essential elements of an MDP: states, actions, transition probabilities, rewards, and policies
+    - **Mathematical Framework:** Understand and formulate value functions (state-value V and action-value Q) and the Bellman equations
+    - **Solution Methods:** Describe fundamental MDP algorithms like Value Iteration and Policy Iteration with practical implementations
+    - **MDP Variations:** Differentiate between various types of MDPs, including finite-horizon, infinite-horizon, and average-reward formulations
+    - **Reinforcement Learning:** Explain the deep connection between MDPs and modern RL algorithms
+    - **Healthcare Applications:** Apply MDP concepts to real-world medical decision-making problems
+    - **Advanced Extensions:** Recognize sophisticated MDP variants such as POMDPs and Robust MDPs
+
+!!! abstract "🔑 Key Concept: Markov Decision Process"
+    A **Markov Decision Process** is a mathematical framework for modeling sequential decision-making under uncertainty, where an agent makes decisions in an environment that changes stochastically in response to the agent's actions. MDPs form the theoretical foundation for reinforcement learning and optimal control in artificial intelligence.
 
 ---
 
-## Table of Contents
+## 🌟 Introduction
 
-1. [Introduction](#introduction)
-2. [Intuitive Understanding of MDPs](#intuitive-understanding)
-3. [Formal Mathematical Framework](#formal-framework)
-4. [Core Components and Properties](#core-components)
-5. [Value Functions and Bellman Equations](#value-functions)
-6. [Solution Methods and Algorithms](#solution-methods)
-7. [Types and Variations of MDPs](#mdp-variations)
-8. [Reinforcement Learning Applications](#reinforcement-learning)
-9. [Healthcare Industry Applications](#healthcare-applications)
-10. [Advanced Topics and Extensions](#advanced-topics)
-11. [Conclusion](#conclusion)
+Markov Decision Processes (MDPs) represent one of the most fundamental and powerful frameworks for modeling sequential decision-making under uncertainty. This mathematical framework provides the theoretical foundation for understanding how intelligent agents can make optimal decisions in environments where outcomes are partially random and partially under the agent's control.
 
----
+!!! example "Real-World Applications"
+    MDPs serve as the backbone for countless applications across diverse domains:
 
-## Introduction
-
-Markov Decision Processes (MDPs) represent one of the most fundamental and powerful frameworks for modeling sequential decision-making under uncertainty. This mathematical framework provides the theoretical foundation for understanding how intelligent agents can make optimal decisions in environments where outcomes are partially random and partially under the agent's control. From healthcare treatment planning to autonomous vehicle navigation, MDPs serve as the backbone for countless applications in artificial intelligence, operations research, and decision science.
+    - **Healthcare:** Treatment planning, drug dosing, clinical decision support
+    - **Autonomous Systems:** Vehicle navigation, robotics, drone control
+    - **Finance:** Portfolio optimization, algorithmic trading, risk management
+    - **Operations Research:** Supply chain management, resource allocation
+    - **Artificial Intelligence:** Reinforcement learning, game playing, dialogue systems
 
 The significance of MDPs extends far beyond theoretical mathematics. In the modern era of machine learning and artificial intelligence, MDPs form the mathematical foundation for reinforcement learning, enabling systems to learn optimal behaviors through interaction with their environment. This comprehensive guide will take you through a journey from the most basic intuitive understanding to advanced theoretical concepts and practical implementations.
 
+---
 
+## 🧠 Intuitive Understanding of MDPs
 
+### 🏥 The Basic Concept: A Healthcare Analogy
 
-## Intuitive Understanding of MDPs
+!!! example "Patient Journey Through Healthcare System"
+    To understand Markov Decision Processes intuitively, imagine a patient navigating through a healthcare system seeking treatment for a chronic condition.
 
-### The Basic Concept: A Simple Analogy
+    **The Journey:** The patient finds themselves in different situations or **"states"** throughout their healthcare journey:
+    - Emergency room visit
+    - Specialist consultation
+    - Diagnostic testing phase
+    - Active treatment period
+    - Recovery or maintenance phase
 
-To understand Markov Decision Processes intuitively, imagine a patient navigating through a healthcare system seeking treatment for a chronic condition. The patient finds themselves in different situations or "states" throughout their healthcare journey - they might be in the emergency room, in a specialist's office, undergoing diagnostic tests, or receiving treatment. At each point in their journey, they have choices or "actions" available to them - they could follow their doctor's recommendation, seek a second opinion, change their lifestyle, or pursue alternative treatments.
+    **Decision Points:** At each point, they have **"actions"** available:
+    - Follow doctor's recommendation
+    - Seek a second opinion
+    - Change lifestyle habits
+    - Pursue alternative treatments
+    - Adjust medication adherence
 
-Each decision the patient makes leads to consequences. Sometimes these consequences are positive, like improved health outcomes or reduced symptoms, which we can think of as "rewards." Sometimes the consequences are negative, like side effects, increased costs, or worsening conditions, which represent negative rewards or penalties. The crucial insight that makes this a Markov Decision Process is that what happens next depends only on the patient's current situation and the action they choose now, not on the entire history of how they arrived at this point.
+    **Consequences:** Each decision leads to **"rewards"** (positive or negative):
+    - ✅ **Positive:** Improved health outcomes, symptom relief, cost savings
+    - ❌ **Negative:** Side effects, increased costs, worsening conditions
 
-This "memoryless" property, known as the Markov property, is fundamental to MDPs. In our healthcare example, if a patient is currently experiencing specific symptoms and chooses a particular treatment, the outcome depends on their current state and chosen action, regardless of whether they arrived at this state through emergency care, routine checkups, or specialist referrals. This assumption simplifies the decision-making process significantly, allowing us to focus on the present situation rather than maintaining complex histories.
+!!! tip "The Markov Property: Key Insight"
+    The crucial insight that makes this a Markov Decision Process is that **what happens next depends only on the patient's current situation and the action they choose now**, not on the entire history of how they arrived at this point.
 
-### Key Components in Simple Terms
+This **"memoryless"** property, known as the Markov property, is fundamental to MDPs. In our healthcare example, if a patient is currently experiencing specific symptoms and chooses a particular treatment, the outcome depends on their current state and chosen action, regardless of whether they arrived at this state through emergency care, routine checkups, or specialist referrals. This assumption simplifies the decision-making process significantly, allowing us to focus on the present situation rather than maintaining complex histories.
+
+### 🧩 Key Components in Simple Terms
 
 The healthcare analogy helps us understand the four essential components of any MDP:
 
-**States** represent all the possible situations or conditions the patient might find themselves in. These could include different stages of disease progression, various symptom presentations, different care settings, or combinations of health indicators. In a more abstract sense, states capture all the relevant information needed to make decisions at any given moment.
+!!! note "The Four Pillars of MDPs"
 
-**Actions** are the choices available to the patient in each state. These might include following prescribed medications, changing diet and exercise habits, scheduling follow-up appointments, seeking specialist care, or choosing between different treatment options. The set of available actions might vary depending on the current state - for instance, certain treatments might only be available at specific stages of disease progression.
+    === "States (S)"
+        **What:** All possible situations or conditions the patient might find themselves in
 
-**Rewards** quantify the immediate consequences of taking specific actions in particular states. In healthcare, rewards might represent improvements in quality of life, reduction in symptoms, cost savings, or progress toward treatment goals. Negative rewards could represent side effects, increased costs, or setbacks in health outcomes. The reward structure encodes what we value and what we want to optimize for.
+        **Examples:**
+        - Different stages of disease progression
+        - Various symptom presentations
+        - Different care settings (ICU, ward, outpatient)
+        - Combinations of health indicators
 
-**Transition Probabilities** capture the uncertainty inherent in healthcare outcomes. When a patient chooses a treatment, there's typically some uncertainty about the result. A medication might work well for some patients but not others, or a surgical procedure might have different success rates depending on various factors. These probabilities describe how likely different outcomes are when taking specific actions in particular states.
+        **Purpose:** Capture all relevant information needed to make decisions at any given moment
 
-### The Goal: Optimal Decision-Making
+    === "Actions (A)"
+        **What:** The choices available to the patient in each state
 
-The ultimate objective in an MDP is to find an optimal policy - a strategy that tells the patient what action to take in each possible state to maximize their expected long-term benefit. This isn't just about making good decisions in the moment; it's about making decisions that lead to the best possible outcomes over time, considering both immediate and future consequences.
+        **Examples:**
+        - Following prescribed medications
+        - Changing diet and exercise habits
+        - Scheduling follow-up appointments
+        - Seeking specialist care
+        - Choosing between treatment options
 
-In healthcare, this might mean accepting some short-term discomfort from treatment side effects to achieve better long-term health outcomes, or it might mean investing in preventive care now to avoid more serious conditions later. The mathematical framework of MDPs provides tools to find these optimal strategies systematically, balancing immediate costs and benefits with long-term consequences.
+        **Note:** Available actions might vary by state (e.g., certain treatments only available at specific disease stages)
 
+    === "Rewards (R)"
+        **What:** Quantify the immediate consequences of taking specific actions in particular states
 
+        **Positive Rewards:**
+        - Improvements in quality of life
+        - Reduction in symptoms
+        - Cost savings
+        - Progress toward treatment goals
 
-## Formal Mathematical Framework
+        **Negative Rewards:**
+        - Side effects
+        - Increased costs
+        - Setbacks in health outcomes
 
-### Definition and Mathematical Structure
+        **Purpose:** Encode what we value and want to optimize for
 
-A Markov Decision Process is formally defined as a tuple (S, A, P, R, γ), where each component has precise mathematical meaning and properties. This mathematical formalization allows us to apply rigorous analytical techniques and develop algorithms with provable guarantees.
+    === "Transition Probabilities (P)"
+        **What:** Capture the uncertainty inherent in healthcare outcomes
 
-**State Space (S)**: The state space S is a set containing all possible states that the system can occupy. This set can be finite, countably infinite, or uncountably infinite (continuous). In finite MDPs, we typically denote states as S = {s₁, s₂, ..., sₙ} where n is the total number of states. For healthcare applications, states might represent discrete categories like "healthy," "mild symptoms," "severe symptoms," and "critical condition," or they could be continuous variables like blood pressure readings, glucose levels, or pain scores on a continuous scale.
+        **Examples:**
+        - Medication effectiveness varies between patients
+        - Surgical procedures have different success rates
+        - Treatment responses depend on various factors
 
-The mathematical properties of the state space determine which solution methods can be applied. Finite state spaces allow for exact dynamic programming solutions, while continuous state spaces typically require approximation methods or discretization techniques. The choice of state representation is crucial - it must capture all information relevant to decision-making while remaining computationally tractable.
+        **Purpose:** Describe how likely different outcomes are when taking specific actions in particular states
 
-**Action Space (A)**: The action space A represents all possible actions available to the decision-maker. Like the state space, this can be finite or continuous. In many formulations, we allow for state-dependent action spaces, denoted A(s), representing the set of actions available in state s. For a patient with diabetes, the action space might include discrete choices like "take medication," "skip medication," "exercise," or "eat specific foods," or continuous actions like "insulin dosage amount" or "exercise duration."
+### 🎯 The Goal: Optimal Decision-Making
 
-The mathematical structure of the action space affects both the complexity of finding optimal policies and the types of algorithms that can be applied. Discrete action spaces often use tabular methods or discrete optimization techniques, while continuous action spaces require policy gradient methods or other continuous optimization approaches.
+!!! abstract "Ultimate Objective"
+    The ultimate objective in an MDP is to find an **optimal policy** - a strategy that tells the patient what action to take in each possible state to maximize their expected long-term benefit.
 
-**Transition Probability Function (P)**: The transition probability function P: S × A × S → [0,1] defines the dynamics of the system. For discrete state spaces, P(s'|s,a) represents the probability of transitioning to state s' when taking action a in state s. This function must satisfy the probability axioms:
+This isn't just about making good decisions in the moment; it's about making decisions that lead to the best possible outcomes over time, considering both immediate and future consequences.
 
-1. P(s'|s,a) ≥ 0 for all s, s' ∈ S and a ∈ A
-2. Σₛ'∈S P(s'|s,a) = 1 for all s ∈ S and a ∈ A(s)
+!!! example "Healthcare Trade-offs"
+    **Short-term vs. Long-term Optimization:**
 
-For continuous state spaces, P becomes a probability density function, and the summation is replaced by integration. In healthcare contexts, these probabilities might represent the likelihood of treatment success, disease progression rates, or the probability of side effects occurring.
+    - **Accept short-term discomfort** from treatment side effects to achieve better long-term health outcomes
+    - **Invest in preventive care now** to avoid more serious conditions later
+    - **Balance immediate symptom relief** with sustainable treatment approaches
+    - **Consider treatment adherence** and patient quality of life
 
-The Markov property is embedded in this formulation: P(sₜ₊₁|sₜ, aₜ, sₜ₋₁, aₜ₋₁, ..., s₀, a₀) = P(sₜ₊₁|sₜ, aₜ). This means the probability of the next state depends only on the current state and action, not on the entire history. This assumption is both a strength and a limitation - it simplifies analysis but requires careful state design to ensure all relevant information is captured.
+The mathematical framework of MDPs provides tools to find these optimal strategies systematically, balancing immediate costs and benefits with long-term consequences through rigorous optimization techniques.
 
-**Reward Function (R)**: The reward function quantifies the immediate value of taking specific actions in particular states. Several formulations are common in the literature:
+---
 
-1. R: S × A → ℝ (reward depends on state and action)
-2. R: S × A × S → ℝ (reward depends on state, action, and next state)
-3. R: S → ℝ (reward depends only on state)
+## 📐 Formal Mathematical Framework
 
-The most general formulation is R(s,a,s'), representing the immediate reward received when transitioning from state s to state s' via action a. In practice, we often work with the expected immediate reward r(s,a) = E[R(s,a,s')] = Σₛ' P(s'|s,a)R(s,a,s').
+### 🔢 Definition and Mathematical Structure
 
-In healthcare applications, rewards might represent quality-adjusted life years (QALYs), cost savings, symptom relief scores, or composite measures of health outcomes. The reward function encodes the objectives and preferences of the decision-maker, making it one of the most critical components to design correctly.
+!!! note "Formal Definition"
+    A Markov Decision Process is formally defined as a tuple:
 
-**Discount Factor (γ)**: The discount factor γ ∈ [0,1] determines how much future rewards are valued relative to immediate rewards. A discount factor of γ = 0 makes the agent completely myopic, caring only about immediate rewards. A discount factor of γ = 1 treats all future rewards equally with immediate rewards, though this can lead to mathematical complications in infinite-horizon problems.
+    $$\text{MDP} = (S, A, P, R, \gamma)$$
 
-The discount factor serves multiple purposes: it reflects the time value of benefits (future benefits may be less certain or valuable), ensures mathematical convergence in infinite-horizon problems, and provides a mechanism for trading off short-term and long-term objectives. In healthcare, discounting might reflect patient preferences for immediate symptom relief versus long-term health outcomes, or it might account for uncertainty about future health states.
+    where each component has precise mathematical meaning and properties. This mathematical formalization allows us to apply rigorous analytical techniques and develop algorithms with provable guarantees.
+
+#### 📊 State Space (S)
+
+The state space $S$ is a set containing all possible states that the system can occupy. This set can be finite, countably infinite, or uncountably infinite (continuous).
+
+!!! example "State Space Examples"
+    **Finite State Spaces:** $S = \{s_1, s_2, \ldots, s_n\}$ where $n$ is the total number of states
+
+    **Healthcare Applications:**
+    - **Discrete categories:** "healthy," "mild symptoms," "severe symptoms," "critical condition"
+    - **Continuous variables:** blood pressure readings, glucose levels, pain scores
+    - **Hybrid representations:** combinations of discrete and continuous features
+
+**Mathematical Properties:**
+- **Finite state spaces** → exact dynamic programming solutions
+- **Continuous state spaces** → approximation methods or discretization techniques
+- **Choice of representation** → must capture all decision-relevant information while remaining computationally tractable
+
+#### ⚡ Action Space (A)
+
+The action space $A$ represents all possible actions available to the decision-maker. Like the state space, this can be finite or continuous.
+
+!!! tip "State-Dependent Actions"
+    We often use state-dependent action spaces, denoted $A(s)$, representing the set of actions available in state $s$.
+
+**Healthcare Examples:**
+- **Discrete actions:** "take medication," "skip medication," "exercise," "eat specific foods"
+- **Continuous actions:** insulin dosage amount, exercise duration, therapy intensity
+- **Hybrid actions:** combinations of discrete choices and continuous parameters
+
+**Mathematical Impact:**
+- **Discrete action spaces** → tabular methods, discrete optimization
+- **Continuous action spaces** → policy gradient methods, continuous optimization
+
+#### 🔄 Transition Probability Function (P)
+
+The transition probability function $P: S \times A \times S \rightarrow [0,1]$ defines the dynamics of the system.
+
+!!! note "Mathematical Definition"
+    For discrete state spaces, $P(s'|s,a)$ represents the probability of transitioning to state $s'$ when taking action $a$ in state $s$.
+
+**Probability Axioms:**
+
+$$P(s'|s,a) \geq 0 \quad \forall s, s' \in S, a \in A$$
+
+$$\sum_{s' \in S} P(s'|s,a) = 1 \quad \forall s \in S, a \in A(s)$$
+
+**Extensions:**
+- **Continuous state spaces:** $P$ becomes a probability density function, summation → integration
+- **Healthcare contexts:** probabilities represent treatment success likelihood, disease progression rates, side effect occurrence
+
+!!! warning "The Markov Property"
+    The fundamental assumption embedded in this formulation:
+
+    $$P(s_{t+1} | s_t, a_t, s_{t-1}, a_{t-1}, \ldots, s_0, a_0) = P(s_{t+1} | s_t, a_t)$$
+
+    **Meaning:** The probability of the next state depends only on the current state and action, not on the entire history.
+
+    **Trade-off:** Simplifies analysis but requires careful state design to ensure all relevant information is captured.
+
+#### 🎁 Reward Function (R)
+
+The reward function quantifies the immediate value of taking specific actions in particular states.
+
+!!! example "Common Formulations"
+    **Three main formulations are common in the literature:**
+
+    === "State-Action Rewards"
+        $$R: S \times A \rightarrow \mathbb{R}$$
+
+        Reward depends on state and action
+
+    === "Transition Rewards"
+        $$R: S \times A \times S \rightarrow \mathbb{R}$$
+
+        Reward depends on state, action, and next state (most general)
+
+    === "State Rewards"
+        $$R: S \rightarrow \mathbb{R}$$
+
+        Reward depends only on state
+
+**Expected Immediate Reward:**
+
+The most general formulation is $R(s,a,s')$, representing the immediate reward received when transitioning from state $s$ to state $s'$ via action $a$. In practice, we often work with the expected immediate reward:
+
+$$r(s,a) = \mathbb{E}[R(s,a,s')] = \sum_{s' \in S} P(s'|s,a)R(s,a,s')$$
+
+**Healthcare Applications:**
+- Quality-adjusted life years (QALYs)
+- Cost savings and economic outcomes
+- Symptom relief scores
+- Composite measures of health outcomes
+- Patient satisfaction metrics
+
+!!! warning "Critical Design Component"
+    The reward function encodes the objectives and preferences of the decision-maker, making it one of the most critical components to design correctly.
+
+#### ⏰ Discount Factor (γ)
+
+The discount factor $\gamma \in [0,1]$ determines how much future rewards are valued relative to immediate rewards.
+
+!!! note "Discount Factor Interpretation"
+    - **γ = 0:** Agent is completely myopic (only immediate rewards matter)
+    - **γ = 1:** All future rewards treated equally with immediate rewards
+    - **0 < γ < 1:** Balanced consideration of immediate and future rewards
+
+**Multiple Purposes:**
+- **Time value of benefits:** Future benefits may be less certain or valuable
+- **Mathematical convergence:** Ensures convergence in infinite-horizon problems
+- **Trade-off mechanism:** Balances short-term and long-term objectives
+
+**Healthcare Context:**
+- Patient preferences for immediate symptom relief vs. long-term health outcomes
+- Uncertainty about future health states
+- Economic considerations in treatment planning
 
 ### Mathematical Properties and Assumptions
 
 The mathematical framework of MDPs relies on several key assumptions and properties that enable rigorous analysis:
 
-**Markov Property**: The fundamental assumption that P(sₜ₊₁|sₜ, aₜ, sₜ₋₁, aₜ₋₁, ...) = P(sₜ₊₁|sₜ, aₜ) is what makes the process "Markovian." This memoryless property is crucial for the mathematical tractability of MDPs. In practice, this assumption can be satisfied by including sufficient information in the state representation, though this may lead to larger state spaces.
+**Markov Property**: The fundamental assumption that
+$$ P(s_{t+1} | s_t, a_t, s_{t-1}, a_{t-1}, \dots) = P(s_{t+1} | s_t, a_t) $$
+is what makes the process "Markovian." This memoryless property is crucial for the mathematical tractability of MDPs. In practice, this assumption can be satisfied by including sufficient information in the state representation, though this may lead to larger state spaces.
 
 **Stationarity**: Most MDP theory assumes that the transition probabilities and reward function do not change over time. This allows us to find stationary optimal policies that don't depend on the time step. In healthcare, this assumption might be violated by factors like disease progression, aging, or changing treatment protocols, requiring extensions to time-varying MDPs.
 
@@ -113,11 +286,12 @@ These mathematical foundations enable the development of solution algorithms wit
 
 A policy π represents a complete strategy for decision-making in an MDP. Formally, a policy is a mapping from states to actions or probability distributions over actions. We distinguish between several types of policies based on their mathematical properties:
 
-**Deterministic Policies**: A deterministic policy π: S → A assigns exactly one action to each state. For any state s, π(s) specifies the unique action to take. In healthcare, a deterministic policy might be a treatment protocol that specifies exactly which medication to prescribe based on a patient's current symptoms and test results.
+**Deterministic Policies**: A deterministic policy $ \pi: S \rightarrow A $ assigns exactly one action to each state. For any state s, π(s) specifies the unique action to take. In healthcare, a deterministic policy might be a treatment protocol that specifies exactly which medication to prescribe based on a patient's current symptoms and test results.
 
-**Stochastic Policies**: A stochastic policy π: S × A → [0,1] assigns a probability distribution over actions for each state. We write π(a|s) as the probability of taking action a in state s, with the constraint that Σₐ∈A(s) π(a|s) = 1 for all states s. Stochastic policies can be beneficial when multiple actions have similar expected values or when exploration is desired.
+**Stochastic Policies**: A stochastic policy $ \pi: S \times A \rightarrow [0,1] $ assigns a probability distribution over actions for each state. We write $ \pi(a|s) $ as the probability of taking action a in state s, with the constraint that 
+$$ \sum_{a \in A(s)} \pi(a|s) = 1 \quad \forall s \in S $$ Stochastic policies can be beneficial when multiple actions have similar expected values or when exploration is desired.
 
-**Stationary vs. Non-stationary Policies**: A stationary policy does not change over time - the same mapping from states to actions is used at every time step. A non-stationary policy πₜ can vary with time, potentially using different strategies at different time steps. For infinite-horizon MDPs, there always exists an optimal stationary policy, which significantly simplifies the search for optimal strategies.
+**Stationary vs. Non-stationary Policies**: A stationary policy does not change over time - the same mapping from states to actions is used at every time step. A non-stationary policy $\pi_t$ can vary with time, potentially using different strategies at different time steps. For infinite-horizon MDPs, there always exists an optimal stationary policy, which significantly simplifies the search for optimal strategies.
 
 **History-Dependent vs. Markovian Policies**: A Markovian policy depends only on the current state, while a history-dependent policy might consider the entire sequence of past states and actions. Due to the Markov property of the underlying process, Markovian policies are sufficient for optimality in MDPs, though history-dependent policies might be useful in partially observable environments.
 
@@ -133,53 +307,48 @@ An episode or trajectory in an MDP is a sequence of states, actions, and rewards
 
 ### Return and Value Concepts
 
-The return Gₜ represents the total discounted reward obtained from time step t onward:
-
-Gₜ = Rₜ₊₁ + γRₜ₊₂ + γ²Rₜ₊₃ + ... = Σₖ₌₀^∞ γᵏRₜ₊ₖ₊₁
+The return $G_t$ represents the total discounted reward obtained from time step t onward:
+$$ G_t = R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \dots = \sum_{k=0}^{\infty} \gamma^k R_{t+k+1} $$
 
 This formulation captures the fundamental trade-off between immediate and future rewards. The discount factor γ determines how much weight is given to future rewards relative to immediate ones. In healthcare contexts, this might represent the trade-off between immediate symptom relief and long-term health outcomes.
 
 **Finite-Horizon Return**: For finite-horizon problems with horizon H:
-Gₜ = Rₜ₊₁ + γRₜ₊₂ + ... + γᴴ⁻ᵗ⁻¹Rₕ = Σₖ₌₀^(H-t-1) γᵏRₜ₊ₖ₊₁
+$$ G_t = R_{t+1} + \gamma R_{t+2} + \dots + \gamma^{H-t-1} R_H = \sum_{k=0}^{H-t-1} \gamma^k R_{t+k+1} $$
 
 **Average Return**: An alternative to discounted return is the average return per time step:
-ρ = lim(T→∞) (1/T) E[Σₜ₌₀^(T-1) Rₜ₊₁]
+$$ \rho = \lim_{T\to\infty} \frac{1}{T} \mathbb{E}\left[\sum_{t=0}^{T-1} R_{t+1}\right] $$
 
 This formulation is useful when we want to optimize long-term average performance rather than discounted cumulative reward.
 
 ### State Value Functions
 
-The state value function Vᵖ(s) represents the expected return when starting in state s and following policy π thereafter:
-
-Vᵖ(s) = Eᵖ[Gₜ | Sₜ = s] = Eᵖ[Σₖ₌₀^∞ γᵏRₜ₊ₖ₊₁ | Sₜ = s]
+The state value function $V^p(s)$ represents the expected return when starting in state $s$ and following policy $p$ thereafter:
+$$ V^p(s) = \mathbb{E}_p[G_t | S_t = s] = \mathbb{E}_p\left[\sum_{k=0}^{\infty} \gamma^k R_{t+k+1} | S_t = s\right] $$
 
 This function provides a measure of how "good" it is to be in a particular state under a given policy. In healthcare, the value function might represent the expected quality-adjusted life years remaining for a patient in a particular health state following a specific treatment protocol.
 
-The optimal state value function V*(s) represents the maximum expected return achievable from state s:
-
-V*(s) = max_π Vᵖ(s)
+The optimal state value function $V^*(s)$ represents the maximum expected return achievable from state $s$:
+$$ V^*(s) = \max_{\pi} V^\pi(s) $$
 
 This represents the best possible outcome achievable from each state, providing an upper bound on performance and a target for optimization algorithms.
 
 ### Action Value Functions
 
-The action value function (or Q-function) Qᵖ(s,a) represents the expected return when taking action a in state s and then following policy π:
+The action value function (or Q-function) $Q^p(s,a)$ represents the expected return when taking action $a$ in state $s$ and then following policy $p$:
+$$ Q^p(s,a) = \mathbb{E}_p[G_t | S_t = s, A_t = a] = \mathbb{E}_p\left[\sum_{k=0}^{\infty} \gamma^k R_{t+k+1} | S_t = s, A_t = a\right] $$
 
-Qᵖ(s,a) = Eᵖ[Gₜ | Sₜ = s, Aₜ = a] = Eᵖ[Σₖ₌₀^∞ γᵏRₜ₊ₖ₊₁ | Sₜ = s, Aₜ = a]
+The Q-function is particularly useful because it directly encodes the value of taking specific actions, making it straightforward to derive optimal policies: 
+$$ \pi^*(s) = \arg\max_a Q^*(s,a) $$
 
-The Q-function is particularly useful because it directly encodes the value of taking specific actions, making it straightforward to derive optimal policies: π*(s) = argmax_a Q*(s,a).
-
-The optimal action value function Q*(s,a) represents the maximum expected return achievable by taking action a in state s and then acting optimally thereafter:
-
-Q*(s,a) = max_π Qᵖ(s,a)
+The optimal action value function $Q^*(s,a)$ represents the maximum expected return achievable by taking action $a$ in state $s$ and then acting optimally thereafter:
+$$ Q^*(s,a) = \max_{\pi} Q^\pi(s,a) $$
 
 ### Relationship Between Value Functions
 
 The state and action value functions are related through the policy and transition dynamics:
 
-Vᵖ(s) = Σₐ π(a|s) Qᵖ(s,a)
-
-Qᵖ(s,a) = Σₛ' P(s'|s,a)[R(s,a,s') + γVᵖ(s')]
+$$ V^p(s) = \sum_a \pi(a|s) Q^p(s,a) $$
+$$ Q^p(s,a) = \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma V^p(s')] $$
 
 These relationships form the foundation for many solution algorithms and provide insight into how values propagate through the state space based on the policy and dynamics of the system.
 
@@ -203,12 +372,12 @@ The Bellman equations represent one of the most fundamental results in dynamic p
 For any policy π, the value functions satisfy the Bellman expectation equations, which express the consistency conditions that must hold for value functions under that policy.
 
 **State Value Bellman Expectation Equation**:
-Vᵖ(s) = Σₐ π(a|s) Σₛ' P(s'|s,a)[R(s,a,s') + γVᵖ(s')]
+$$ V^p(s) = \sum_a \pi(a|s) \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma V^p(s')] $$
 
 This equation states that the value of a state under policy π equals the expected immediate reward plus the discounted expected value of the successor state. The expectation is taken over both the stochastic policy π and the stochastic transition dynamics P.
 
 **Action Value Bellman Expectation Equation**:
-Qᵖ(s,a) = Σₛ' P(s'|s,a)[R(s,a,s') + γ Σₐ' π(a'|s')Qᵖ(s',a')]
+$$ Q^p(s,a) = \sum_{s'} P(s'|s,a)\left[R(s,a,s') + \gamma \sum_{a'} \pi(a'|s')Q^p(s',a')\right] $$
 
 This equation expresses the action value as the expected immediate reward plus the discounted expected value of the next state-action pair under the policy.
 
@@ -219,12 +388,12 @@ In healthcare contexts, these equations capture how the value of a patient's cur
 The Bellman optimality equations characterize the optimal value functions and provide the foundation for computing optimal policies.
 
 **State Value Bellman Optimality Equation**:
-V*(s) = max_a Σₛ' P(s'|s,a)[R(s,a,s') + γV*(s')]
+$$ V^*(s) = \max_a \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma V^*(s')] $$
 
 This equation states that the optimal value of a state equals the maximum over all actions of the expected immediate reward plus the discounted optimal value of the successor state. The maximization operation reflects the optimal choice of action in each state.
 
 **Action Value Bellman Optimality Equation**:
-Q*(s,a) = Σₛ' P(s'|s,a)[R(s,a,s') + γ max_a' Q*(s',a')]
+$$ Q^*(s,a) = \sum_{s'} P(s'|s,a)\left[R(s,a,s') + \gamma \max_{a'} Q^*(s',a')\right] $$
 
 This equation expresses the optimal action value as the expected immediate reward plus the discounted maximum value over all actions in the successor state.
 
@@ -236,16 +405,15 @@ The Bellman equations possess several important mathematical properties that ena
 
 **Fixed Point Property**: The Bellman equations can be viewed as fixed point equations. The Bellman expectation operator Tᵖ and Bellman optimality operator T are defined as:
 
-(TᵖV)(s) = Σₐ π(a|s) Σₛ' P(s'|s,a)[R(s,a,s') + γV(s')]
+$$ (T^pV)(s) = \sum_a \pi(a|s) \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma V(s')] $$
+$$ (TV)(s) = \max_a \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma V(s')] $$
 
-(TV)(s) = max_a Σₛ' P(s'|s,a)[R(s,a,s') + γV(s')]
-
-The value functions are fixed points of these operators: Vᵖ = TᵖVᵖ and V* = TV*.
+The value functions are fixed points of these operators: $V^p = T^p V^p$ and $V^* = T V^*$.
 
 **Contraction Property**: Under the assumption that γ < 1, both operators are contractions in the supremum norm. This means:
 
-||TᵖV₁ - TᵖV₂||∞ ≤ γ||V₁ - V₂||∞
-||TV₁ - TV₂||∞ ≤ γ||V₁ - V₂||∞
+$$ \|T^pV_1 - T^pV_2\|_{\infty} \leq \gamma \|V_1 - V_2\|_{\infty} $$
+$$ \|TV_1 - TV_2\|_{\infty} \leq \gamma \|V_1 - V_2\|_{\infty} $$
 
 The contraction property, combined with the Banach fixed point theorem, guarantees that iterative application of these operators converges to the unique fixed point (the true value function) at a geometric rate.
 
@@ -255,36 +423,36 @@ For finite MDPs, the Bellman expectation equations can be expressed in matrix fo
 
 Let V be the vector of state values, R^π be the vector of expected immediate rewards under policy π, and P^π be the transition probability matrix under policy π. Then:
 
-V^π = R^π + γP^πV^π
+$$ \mathbf{V}^\pi = \mathbf{R}^\pi + \gamma \mathbf{P}^\pi \mathbf{V}^\pi $$
 
 This can be solved directly as:
-V^π = (I - γP^π)⁻¹R^π
+$$ \mathbf{V}^\pi = (\mathbf{I} - \gamma \mathbf{P}^\pi)^{-1} \mathbf{R}^\pi $$
 
 provided that the matrix (I - γP^π) is invertible, which is guaranteed when γ < 1.
 
 ### Policy Improvement and the Policy Improvement Theorem
 
-The Bellman equations provide the foundation for policy improvement, a key concept in solving MDPs. Given the value function V^π for a policy π, we can construct an improved policy π' by acting greedily with respect to V^π:
+The Bellman equations provide the foundation for policy improvement, a key concept in solving MDPs. Given the value function $V^\pi$ for a policy $\pi$, we can construct an improved policy $\pi'$ by acting greedily with respect to $V^\pi$:
 
-π'(s) = argmax_a Σₛ' P(s'|s,a)[R(s,a,s') + γV^π(s')]
+$$\pi'(s) = \arg\max_a \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma V^\pi(s')]$$
 
-The Policy Improvement Theorem states that this greedy policy π' is at least as good as the original policy π, and strictly better unless π is already optimal:
+The Policy Improvement Theorem states that this greedy policy $\pi'$ is at least as good as the original policy $\pi$, and strictly better unless $\pi$ is already optimal:
 
-V^π'(s) ≥ V^π(s) for all s ∈ S
+$$V^{\pi'}(s) \geq V^\pi(s) \text{ for all } s \in S$$
 
-with equality if and only if π is optimal.
+with equality if and only if $\pi$ is optimal.
 
 ### Bellman Equations for Different MDP Variants
 
 **Finite Horizon MDPs**: For finite horizon problems, the Bellman equations become time-dependent:
 
-Vₜ^π(s) = Σₐ π(a|s) Σₛ' P(s'|s,a)[R(s,a,s') + γVₜ₊₁^π(s')]
+$$V_t^\pi(s) = \sum_a \pi(a|s) \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma V_{t+1}^\pi(s')]$$
 
 with boundary condition V_H^π(s) = 0 for all s (assuming the episode terminates at time H).
 
 **Average Reward MDPs**: For average reward criteria, the Bellman equations take the form:
 
-ρ^π + h^π(s) = Σₐ π(a|s) Σₛ' P(s'|s,a)[R(s,a,s') + h^π(s')]
+$$\rho^\pi + h^\pi(s) = \sum_a \pi(a|s) \sum_{s'} P(s'|s,a)[R(s,a,s') + h^\pi(s')]$$
 
 where ρ^π is the average reward under policy π and h^π(s) is the differential value function representing the relative value of state s.
 
@@ -472,13 +640,13 @@ Vₜ(s) = max_a E[Rₜ₊₁ + γVₜ₊₁(S_{t+1}) | Sₜ = s, Aₜ = a]
 
 with boundary condition V_H(s) = 0 for all s ∈ S (assuming no terminal rewards).
 
-**Optimal Policy Structure**: The optimal policy πₜ*(s) may depend on both the current state s and the time step t. This time-dependence arises because the remaining opportunity for future rewards decreases as the horizon approaches.
+**Optimal Policy Structure**: The optimal policy $\pi_t^*(s)$ may depend on both the current state $s$ and the time step $t$. This time-dependence arises because the remaining opportunity for future rewards decreases as the horizon approaches.
 
 **Solution Methods**: Finite-horizon problems are typically solved using backward induction:
 1. Set V_H(s) = 0 for all s ∈ S
 2. For t = H-1, H-2, ..., 0:
    - Compute Vₜ(s) = max_a Σₛ' P(s'|s,a)[R(s,a,s') + γVₜ₊₁(s')]
-   - Set πₜ*(s) = argmax_a Σₛ' P(s'|s,a)[R(s,a,s') + γVₜ₊₁(s')]
+   - Set $\pi_t^*(s) = \arg\max_a \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma V_{t+1}(s')]$
 
 **Healthcare Applications**: Finite-horizon formulations are natural for medical scenarios with defined endpoints, such as:
 - Surgical recovery protocols with predetermined recovery periods
@@ -1161,19 +1329,23 @@ While standard MDPs assume complete observability of the system state, many real
 **Mathematical Formulation**: A POMDP is defined by the tuple (S, A, Ω, O, P, R, γ) where:
 - S, A, P, R, γ are defined as in standard MDPs
 - Ω is the set of possible observations
-- O(o|s,a) is the observation function specifying the probability of observing o after taking action a in state s
+- $O(o|s,a)$ is the observation function specifying the probability of observing $o$ after taking action $a$ in state $s$
 
-**Belief States**: Since the true state is not directly observable, the agent must maintain a belief state b(s) representing the probability distribution over possible states given the observation history. The belief state becomes the sufficient statistic for optimal decision-making in POMDPs.
+**Belief States**: Since the true state is not directly observable, the agent must maintain a belief state $b(s)$ representing the probability distribution over possible states given the observation history. The belief state becomes the sufficient statistic for optimal decision-making in POMDPs.
 
-**Belief Update**: After taking action a and observing o, the belief state updates according to Bayes' rule:
-b'(s') = η O(o|s',a) Σₛ P(s'|s,a)b(s)
+**Belief Update**: After taking action $a$ and observing $o$, the belief state updates according to Bayes' rule:
+$$ b'(s') = \eta O(o|s',a) \sum_{s} P(s'|s,a)b(s) $$
 
-where η is a normalization constant ensuring Σₛ' b'(s') = 1.
+where $\eta$ is a normalization constant ensuring:
+$$ \sum_{s'} b'(s') = 1 $$
 
 **Value Functions**: The value function is defined over belief states rather than physical states:
-V(b) = max_a [R(b,a) + γ Σₒ P(o|b,a)V(b')]
+$$ V(b) = \max_a \left[ R(b,a) + \gamma \sum_{o} P(o|b,a)V(b') \right] $$
 
-where R(b,a) = Σₛ b(s)R(s,a) and P(o|b,a) = Σₛ,ₛ' b(s)P(s'|s,a)O(o|s',a).
+where:
+$$ R(b,a) = \sum_{s} b(s)R(s,a) $$
+and
+$$ P(o|b,a) = \sum_{s,s'} b(s)P(s'|s,a)O(o|s',a) $$
 
 **Computational Complexity**: POMDPs are PSPACE-complete in general, making exact solutions intractable for all but the smallest problems. The continuous nature of the belief space compounds the computational challenges.
 
@@ -1376,4 +1548,11 @@ The mathematical elegance and practical power of Markov Decision Processes make 
 This guide has provided the theoretical foundations, practical methods, and real-world applications necessary to understand and apply MDPs effectively. The combination of mathematical rigor with practical healthcare examples reflects the dual nature of MDPs as both elegant theoretical constructs and powerful practical tools. As the field continues to evolve, the fundamental principles and methods covered in this guide will remain essential building blocks for more advanced applications and extensions.
 
 The journey through MDPs - from simple intuitive concepts to sophisticated mathematical frameworks - mirrors the broader evolution of healthcare from intuition-based practice to evidence-based, data-driven decision-making. MDPs provide a bridge between these approaches, offering mathematical rigor while remaining grounded in practical healthcare realities. As we continue to advance toward more personalized, efficient, and effective healthcare systems, MDPs will undoubtedly play an increasingly central role in achieving these goals.
+
+!!! success "🔑 Key Takeaways"
+    - **Fundamental Framework:** MDPs provide a robust mathematical structure for modeling and solving sequential decision-making problems where outcomes are uncertain.
+    - **Bellman Equations are Core:** The Bellman equations are central to understanding and solving MDPs, linking the value of a state or action to the values of subsequent states.
+    - **Diverse Solution Methods:** Solutions range from dynamic programming (Value/Policy Iteration) for known models to reinforcement learning techniques for model-free scenarios.
+    - **Healthcare Applications:** MDPs are invaluable in healthcare for optimizing treatment strategies, resource allocation, and patient management over time.
+    - **Advanced Extensions:** POMDPs and Robust MDPs extend the basic framework to handle partial observability and model uncertainty, crucial for real-world complexity.
 

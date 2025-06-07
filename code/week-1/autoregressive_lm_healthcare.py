@@ -4,8 +4,6 @@ Comprehensive PyTorch Implementation: Autoregressive Language Modeling
 
 This module provides a complete implementation of autoregressive language modeling
 using the chain rule of probability, with healthcare applications and examples.
-
-Author: Generated for Probability Theory Study Guide
 Focus: Chain Rule and Autoregressive Modeling in Healthcare LLMs
 """
 

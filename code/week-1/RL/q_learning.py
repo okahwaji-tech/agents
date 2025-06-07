@@ -5,9 +5,6 @@ Q-Learning Algorithm Implementation
 This module implements the Q-Learning algorithm, a model-free reinforcement learning
 method that learns optimal action-value functions directly from experience without
 requiring knowledge of the environment's transition probabilities or reward function.
-
-Author: Manus AI
-Date: June 2025
 """
 
 import torch

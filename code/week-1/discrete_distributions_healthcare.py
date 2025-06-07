@@ -5,7 +5,6 @@ Comprehensive PyTorch Implementation: Discrete Probability Distributions for LLM
 This module provides practical implementations of discrete probability distributions
 commonly used in language modeling, with a focus on healthcare applications.
 
-Author: Generated for Probability Theory Study Guide
 Focus: LLM Applications in Healthcare
 """
 

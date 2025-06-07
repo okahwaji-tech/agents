@@ -1,503 +1,781 @@
-# Code Examples
+# 💻 Code Examples
 
-Practical implementations demonstrating the concepts covered in the materials.
+!!! info "🎯 Learning Objectives"
+    Practical implementations demonstrating the mathematical concepts and healthcare applications covered in the study materials.
 
-This page showcases the practical implementations for Week 1, demonstrating the mathematical concepts and healthcare applications covered in the study materials.
+    - **Mathematical Foundations**: PyTorch implementations of probability, linear algebra, and optimization
+    - **LLM Applications**: Healthcare-focused language model examples
+    - **Reinforcement Learning**: MDP implementations and RL algorithms
+    - **Apple Silicon Optimization**: M3 Ultra processor optimizations
 
-## 🎯 Overview
+## 🌟 Overview
 
-The Week 1 code examples focus on:
+The code examples provide hands-on implementations of the theoretical concepts covered in the learning materials, with a focus on healthcare applications and Apple Silicon optimization.
 
-- **Mathematical foundations** implemented in PyTorch
-- **First LLM applications** with healthcare focus
-- **Apple Silicon optimization** for M3 Ultra processors
-- **Evaluation metrics** and analysis tools
+!!! example "What You'll Find Here"
+    - **Mathematical foundations** implemented in PyTorch with healthcare examples
+    - **Language model applications** for medical text processing
+    - **Reinforcement learning algorithms** for healthcare decision-making
+    - **Evaluation metrics** and analysis tools
+    - **Apple Silicon optimizations** for M3 Ultra processors
 
-## 📁 Code Structure
+## 📁 Actual Code Structure
 
 ```
 code/week-1/
-├── mathematical_foundations/
-│   ├── probability_distributions.py
-│   ├── information_theory.py
-│   ├── linear_algebra_examples.py
-│   └── rl_foundations.py
-├── llm_applications/
-│   ├── first_llm_program.py
-│   ├── healthcare_text_generation.py
-│   └── model_evaluation.py
-├── healthcare_examples/
-│   ├── medical_text_analysis.py
-│   ├── clinical_note_processing.py
-│   └── safety_evaluation.py
-└── utils/
-    ├── apple_silicon_utils.py
-    ├── visualization_tools.py
-    └── evaluation_metrics.py
+├── 📊 Mathematical Foundations
+│   ├── discrete_distributions_healthcare.py
+│   ├── continuous_distributions_healthcare.py
+│   ├── svd_pytorch_examples.py
+│   └── gradient_descent_pytorch_examples.py
+├── 🤖 LLM Applications
+│   ├── autoregressive_lm_healthcare.py
+│   └── llm_evaluation_metrics.py
+└── 🎯 Reinforcement Learning
+    ├── base_mdp.py
+    ├── value_iteration.py
+    ├── policy_iteration.py
+    ├── q_learning.py
+    ├── sarsa.py
+    ├── healthcare_examples.py
+    └── comprehensive_demo.py
 ```
 
 ## 🧮 Mathematical Foundations
 
-### Probability Distributions for Healthcare
+### Discrete Probability Distributions for Healthcare
 
-Explore discrete and continuous probability distributions with medical applications.
+Explore discrete probability distributions with medical applications using PyTorch.
 
-```python title="probability_distributions.py"
+!!! example "Healthcare Applications"
+    - **Binomial distributions** for treatment success rates
+    - **Poisson distributions** for patient arrival rates
+    - **Categorical distributions** for symptom classification
+    - **Bayesian inference** for medical diagnosis
+
+```python title="discrete_distributions_healthcare.py"
 import torch
-import numpy as np
-from typing import List, Tuple
+import torch.distributions as dist
 import matplotlib.pyplot as plt
+import numpy as np
+from typing import List, Tuple, Dict
 
-class MedicalProbabilityAnalyzer:
-    """Analyze probability distributions in medical contexts."""
-    
+class HealthcareDiscreteDistributions:
+    """
+    Discrete probability distributions for healthcare applications.
+    Demonstrates fundamental concepts used in LLMs and medical AI.
+    """
+
     def __init__(self, device: str = 'mps'):
         self.device = torch.device(device if torch.backends.mps.is_available() else 'cpu')
-    
-    def calculate_conditional_probability(
-        self, 
-        symptoms: List[str], 
-        disease: str,
-        prior_data: dict
-    ) -> float:
+        print(f"Using device: {self.device}")
+
+    def treatment_success_analysis(self, success_rate: float, num_patients: int):
         """
-        Calculate P(disease|symptoms) using Bayes' theorem.
-        
-        Example of how LLMs learn conditional relationships.
+        Model treatment success using binomial distribution.
+
+        This is fundamental to understanding how LLMs model
+        discrete outcomes in medical contexts.
         """
-        # Implementation here
-        pass
-    
-    def language_model_probability(
-        self, 
-        sequence: List[str]
-    ) -> float:
-        """
-        Calculate probability of a text sequence using chain rule.
-        
-        P(w1, w2, ..., wn) = P(w1) * P(w2|w1) * ... * P(wn|w1...wn-1)
-        """
-        # Implementation here
-        pass
+        # Create binomial distribution
+        binomial = dist.Binomial(num_patients, success_rate)
+
+        # Sample possible outcomes
+        samples = binomial.sample((1000,))
+
+        return {
+            'mean_successes': binomial.mean.item(),
+            'variance': binomial.variance.item(),
+            'samples': samples
+        }
 ```
 
 **Key Features:**
-- Bayes' theorem for medical diagnosis
-- Chain rule probability for text sequences
-- Visualization of probability distributions
-- Healthcare-specific examples
+- Binomial distributions for treatment outcomes
+- Poisson distributions for event modeling
+- Categorical distributions for classification
+- Healthcare-specific probability calculations
 
-[View Full Implementation →](https://github.com/okahwaji-tech/agents/blob/main/code/week-1/probability_distributions.py)
+[View Full Implementation →](https://github.com/okahwaji-tech/agents/blob/main/code/week-1/discrete_distributions_healthcare.py)
 
-### Information Theory Metrics
+### Continuous Probability Distributions
 
-Implement entropy, cross-entropy, and perplexity calculations.
+Advanced continuous distributions for medical parameter modeling.
 
-```python title="information_theory.py"
+```python title="continuous_distributions_healthcare.py"
 import torch
-import torch.nn.functional as F
-from typing import List, Dict
-import logging
+import torch.distributions as dist
+from typing import Dict, List, Tuple
 
-logger = logging.getLogger(__name__)
+class HealthcareContinuousDistributions:
+    """
+    Continuous probability distributions for healthcare modeling.
+    Essential for understanding LLM probability calculations.
+    """
 
-class InformationTheoryMetrics:
-    """Calculate information theory metrics for LLM evaluation."""
-    
-    def calculate_entropy(self, probabilities: torch.Tensor) -> torch.Tensor:
+    def blood_pressure_modeling(self, systolic_mean: float = 120, systolic_std: float = 15):
         """
-        Calculate entropy: H(X) = -∑ P(x) log P(x)
-        
-        Lower entropy = more predictable = better for specific tasks
-        Higher entropy = more uncertain = better for creative tasks
+        Model blood pressure using normal distribution.
+
+        Demonstrates continuous probability concepts used in
+        neural network outputs and LLM token probabilities.
         """
-        # Avoid log(0) by adding small epsilon
-        eps = 1e-8
-        return -torch.sum(probabilities * torch.log(probabilities + eps))
-    
-    def calculate_cross_entropy(
-        self, 
-        predictions: torch.Tensor, 
-        targets: torch.Tensor
-    ) -> torch.Tensor:
-        """
-        Calculate cross-entropy loss used in LLM training.
-        
-        This is the actual loss function that trains language models!
-        """
-        return F.cross_entropy(predictions, targets)
-    
-    def calculate_perplexity(self, cross_entropy: torch.Tensor) -> torch.Tensor:
-        """
-        Calculate perplexity: 2^(cross-entropy)
-        
-        Lower perplexity = better language model performance
-        """
-        return torch.pow(2, cross_entropy)
+        normal_dist = dist.Normal(systolic_mean, systolic_std)
+
+        # Calculate probabilities for different ranges
+        prob_normal = self._calculate_range_probability(normal_dist, 90, 140)
+        prob_high = self._calculate_range_probability(normal_dist, 140, 200)
+
+        return {
+            'normal_range_prob': prob_normal,
+            'high_range_prob': prob_high,
+            'distribution': normal_dist
+        }
 ```
 
-**Key Features:**
-- Entropy calculation for uncertainty measurement
-- Cross-entropy loss implementation
-- Perplexity computation for model evaluation
-- Medical text analysis examples
+[View Full Implementation →](https://github.com/okahwaji-tech/agents/blob/main/code/week-1/continuous_distributions_healthcare.py)
 
-[View Full Implementation →](https://github.com/okahwaji-tech/agents/blob/main/code/week-1/information_theory.py)
+### Singular Value Decomposition (SVD) for LLMs
 
-### Linear Algebra for Embeddings
+Demonstrate SVD operations fundamental to transformer architectures and dimensionality reduction.
 
-Demonstrate vector operations fundamental to LLMs.
+!!! note "Why SVD Matters for LLMs"
+    - **Attention mechanisms** use matrix decompositions
+    - **Dimensionality reduction** for efficient embeddings
+    - **Principal Component Analysis** for data analysis
+    - **Low-rank approximations** for model compression
 
-```python title="linear_algebra_examples.py"
+```python title="svd_pytorch_examples.py"
 import torch
 import numpy as np
-from typing import List, Tuple
 import matplotlib.pyplot as plt
+from typing import Tuple, List, Dict
 
-class EmbeddingAnalyzer:
-    """Analyze vector embeddings and similarity measures."""
-    
-    def __init__(self, embedding_dim: int = 768):
-        self.embedding_dim = embedding_dim
-        self.device = torch.device('mps' if torch.backends.mps.is_available() else 'cpu')
-    
-    def cosine_similarity(
-        self, 
-        vector1: torch.Tensor, 
-        vector2: torch.Tensor
-    ) -> torch.Tensor:
+class SVDHealthcareAnalyzer:
+    """
+    SVD applications in healthcare and LLM contexts.
+    Demonstrates matrix decomposition techniques used in transformers.
+    """
+
+    def __init__(self, device: str = 'mps'):
+        self.device = torch.device(device if torch.backends.mps.is_available() else 'cpu')
+
+    def medical_data_compression(self, patient_data: torch.Tensor, rank: int = 10):
         """
-        Calculate cosine similarity between two vectors.
-        
-        Most common similarity measure in NLP/LLMs.
+        Compress patient data using SVD for efficient storage and analysis.
+
+        This technique is used in transformer attention mechanisms
+        and embedding compression.
         """
-        return F.cosine_similarity(vector1, vector2, dim=-1)
-    
-    def medical_concept_similarity(
-        self, 
-        concept1: str, 
-        concept2: str,
-        embeddings: Dict[str, torch.Tensor]
-    ) -> float:
-        """
-        Calculate similarity between medical concepts.
-        
-        Example: similarity between "diabetes" and "insulin"
-        """
-        if concept1 not in embeddings or concept2 not in embeddings:
-            raise ValueError(f"Concepts not found in embeddings")
-        
-        sim = self.cosine_similarity(
-            embeddings[concept1], 
-            embeddings[concept2]
-        )
-        return sim.item()
+        # Perform SVD decomposition
+        U, S, V = torch.svd(patient_data)
+
+        # Low-rank approximation
+        compressed = U[:, :rank] @ torch.diag(S[:rank]) @ V[:, :rank].T
+
+        # Calculate compression ratio
+        original_size = patient_data.numel()
+        compressed_size = rank * (U.shape[0] + V.shape[0] + 1)
+        compression_ratio = original_size / compressed_size
+
+        return {
+            'compressed_data': compressed,
+            'compression_ratio': compression_ratio,
+            'singular_values': S,
+            'reconstruction_error': torch.norm(patient_data - compressed).item()
+        }
 ```
 
 **Key Features:**
-- Cosine similarity for semantic relationships
-- Medical concept similarity analysis
-- Vector arithmetic demonstrations
-- Embedding visualization tools
+- SVD for medical data compression
+- Low-rank matrix approximations
+- Attention mechanism foundations
+- Healthcare data analysis applications
 
-[View Full Implementation →](https://github.com/okahwaji-tech/agents/blob/main/code/week-1/linear_algebra_examples.py)
+[View Full Implementation →](https://github.com/okahwaji-tech/agents/blob/main/code/week-1/svd_pytorch_examples.py)
+
+### Gradient Descent Optimization
+
+PyTorch implementations of optimization algorithms used in LLM training.
+
+```python title="gradient_descent_pytorch_examples.py"
+import torch
+import torch.nn as nn
+import torch.optim as optim
+import matplotlib.pyplot as plt
+from typing import List, Dict, Tuple
+
+class HealthcareOptimization:
+    """
+    Gradient descent optimization for healthcare ML models.
+    Demonstrates optimization techniques used in LLM training.
+    """
+
+    def medical_prediction_training(self, features: torch.Tensor, targets: torch.Tensor):
+        """
+        Train a medical prediction model using various optimizers.
+
+        Shows the same optimization principles used in LLM training.
+        """
+        model = nn.Sequential(
+            nn.Linear(features.shape[1], 64),
+            nn.ReLU(),
+            nn.Linear(64, 32),
+            nn.ReLU(),
+            nn.Linear(32, 1),
+            nn.Sigmoid()
+        )
+
+        # Compare different optimizers
+        optimizers = {
+            'SGD': optim.SGD(model.parameters(), lr=0.01),
+            'Adam': optim.Adam(model.parameters(), lr=0.001),
+            'AdamW': optim.AdamW(model.parameters(), lr=0.001)
+        }
+
+        return self._train_with_optimizers(model, features, targets, optimizers)
+```
+
+[View Full Implementation →](https://github.com/okahwaji-tech/agents/blob/main/code/week-1/gradient_descent_pytorch_examples.py)
 
 ## 🤖 LLM Applications
 
-### First LLM Program
+### Autoregressive Language Model for Healthcare
 
-Your first complete LLM application optimized for Apple Silicon.
+Complete implementation of an autoregressive language model with healthcare applications.
 
-```python title="first_llm_program.py"
-from transformers import GPT2LMHeadModel, GPT2Tokenizer
+!!! example "What You'll Learn"
+    - **Autoregressive generation** - How LLMs predict next tokens
+    - **Healthcare text processing** - Medical domain applications
+    - **Apple Silicon optimization** - M3 Ultra performance tuning
+    - **Safety considerations** - Medical AI ethics and disclaimers
+
+```python title="autoregressive_lm_healthcare.py"
 import torch
+import torch.nn as nn
+import torch.nn.functional as F
+from transformers import GPT2LMHeadModel, GPT2Tokenizer
+from typing import List, Dict, Tuple, Optional
 import logging
-from typing import List, Optional
 
-logger = logging.getLogger(__name__)
+class HealthcareAutoregressiveLM:
+    """
+    Autoregressive Language Model for Healthcare Applications.
 
-class HealthcareLLMGenerator:
-    """First LLM application with healthcare focus."""
-    
+    Demonstrates the fundamental architecture behind modern LLMs
+    with specific focus on medical text generation and safety.
+    """
+
+    def __init__(self, model_name: str = "gpt2", device: str = "mps"):
+        self.device = torch.device(device if torch.backends.mps.is_available() else 'cpu')
+        self.model, self.tokenizer = self._load_model(model_name)
+
+        # Medical safety disclaimer
+        self.medical_disclaimer = (
+            "⚠️ MEDICAL DISCLAIMER: This is for educational purposes only. "
+            "Always consult qualified healthcare professionals for medical advice."
+        )
+
+        # Medical keywords for content detection
+        self.medical_keywords = {
+            'diagnosis', 'treatment', 'medication', 'symptoms', 'disease',
+            'patient', 'clinical', 'medical', 'health', 'therapy', 'prescription',
+            'surgery', 'hospital', 'doctor', 'nurse', 'pharmaceutical'
+        }
+
+    def autoregressive_generation(
+        self,
+        prompt: str,
+        max_new_tokens: int = 50,
+        temperature: float = 0.7,
+        top_k: int = 50,
+        top_p: float = 0.9
+    ) -> Dict[str, any]:
+        """
+        Demonstrate step-by-step autoregressive generation.
+
+        Shows exactly how LLMs generate text token by token.
+        """
+        # Tokenize input
+        input_ids = self.tokenizer.encode(prompt, return_tensors="pt").to(self.device)
+
+        # Track generation process
+        generation_log = []
+        current_ids = input_ids.clone()
+
+        self.model.eval()
+        with torch.no_grad():
+            for step in range(max_new_tokens):
+                # Get model predictions for next token
+                outputs = self.model(current_ids)
+                logits = outputs.logits[0, -1, :]  # Last token predictions
+
+                # Apply temperature scaling
+                logits = logits / temperature
+
+                # Apply top-k filtering
+                if top_k > 0:
+                    top_k_logits, top_k_indices = torch.topk(logits, top_k)
+                    logits = torch.full_like(logits, float('-inf'))
+                    logits[top_k_indices] = top_k_logits
+
+                # Convert to probabilities
+                probs = F.softmax(logits, dim=-1)
+
+                # Sample next token
+                next_token_id = torch.multinomial(probs, 1)
+                next_token = self.tokenizer.decode(next_token_id.item())
+
+                # Log this step
+                generation_log.append({
+                    'step': step,
+                    'token': next_token,
+                    'token_id': next_token_id.item(),
+                    'probability': probs[next_token_id].item(),
+                    'top_5_tokens': self._get_top_tokens(probs, 5)
+                })
+
+                # Add to sequence
+                current_ids = torch.cat([current_ids, next_token_id.unsqueeze(0)], dim=1)
+
+                # Stop if we hit end token
+                if next_token_id.item() == self.tokenizer.eos_token_id:
+                    break
+
+        # Decode final sequence
+        generated_text = self.tokenizer.decode(current_ids[0], skip_special_tokens=True)
+
+        return {
+            'prompt': prompt,
+            'generated_text': generated_text,
+            'generation_log': generation_log,
+            'total_tokens': len(generation_log),
+            'is_medical_content': self._is_medical_content(generated_text)
+        }
+```
+
+**Key Features:**
+- Step-by-step autoregressive generation
+- Temperature and top-k/top-p sampling
+- Medical content detection and safety
+- Detailed generation logging and analysis
+- Apple Silicon MPS optimization
+
+[View Full Implementation →](https://github.com/okahwaji-tech/agents/blob/main/code/week-1/autoregressive_lm_healthcare.py)
+
+### LLM Evaluation Metrics
+
+Comprehensive evaluation framework for language models with healthcare focus.
+
+!!! note "Essential Evaluation Metrics"
+    - **Perplexity** - How well the model predicts text
+    - **BLEU Score** - Quality of generated text
+    - **Medical Safety** - Healthcare-specific safety measures
+    - **Bias Detection** - Fairness in medical contexts
+
+```python title="llm_evaluation_metrics.py"
+import torch
+import torch.nn.functional as F
+from transformers import GPT2LMHeadModel, GPT2Tokenizer
+import numpy as np
+from typing import List, Dict, Tuple, Optional
+import logging
+from collections import Counter
+import re
+
+class HealthcareLLMEvaluator:
+    """
+    Comprehensive evaluation framework for LLMs in healthcare contexts.
+
+    Implements key metrics used to assess language model performance
+    with special attention to medical safety and bias.
+    """
+
     def __init__(self, model_name: str = "gpt2"):
         self.device = torch.device('mps' if torch.backends.mps.is_available() else 'cpu')
         self.model, self.tokenizer = self._load_model(model_name)
-        
-        # Medical disclaimer
-        self.medical_disclaimer = (
-            "MEDICAL DISCLAIMER: This is for educational purposes only. "
-            "Always consult qualified healthcare professionals for medical advice."
-        )
-    
-    def _load_model(self, model_name: str) -> Tuple[GPT2LMHeadModel, GPT2Tokenizer]:
-        """Load GPT-2 model optimized for Apple Silicon."""
-        logger.info(f"Loading model: {model_name}")
-        
-        model = GPT2LMHeadModel.from_pretrained(model_name)
-        tokenizer = GPT2Tokenizer.from_pretrained(model_name)
-        
-        # Add padding token
-        tokenizer.pad_token = tokenizer.eos_token
-        
-        # Move to MPS for Apple Silicon acceleration
-        model = model.to(self.device)
-        
-        logger.info(f"Model loaded on device: {self.device}")
-        return model, tokenizer
-    
-    def generate_text(
-        self,
-        prompt: str,
-        max_length: int = 100,
-        temperature: float = 0.7,
-        top_k: int = 50,
-        add_disclaimer: bool = True
-    ) -> str:
-        """
-        Generate text with specified parameters.
-        
-        Args:
-            prompt: Input text to continue
-            max_length: Maximum tokens to generate
-            temperature: Controls randomness (0.0 = deterministic, 1.0 = random)
-            top_k: Only consider top k tokens for sampling
-            add_disclaimer: Add medical disclaimer for healthcare content
-        """
-        # Add medical disclaimer for healthcare-related prompts
-        if add_disclaimer and self._is_medical_content(prompt):
-            prompt = f"{self.medical_disclaimer}\n\n{prompt}"
-        
-        # Tokenize input
-        inputs = self.tokenizer.encode(prompt, return_tensors="pt").to(self.device)
-        
-        # Generate text
-        with torch.no_grad():
-            outputs = self.model.generate(
-                inputs,
-                max_length=max_length,
-                temperature=temperature,
-                top_k=top_k,
-                do_sample=True,
-                pad_token_id=self.tokenizer.eos_token_id
-            )
-        
-        # Decode and return
-        generated_text = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
-        return generated_text
-    
-    def _is_medical_content(self, text: str) -> bool:
-        """Check if text contains medical content."""
-        medical_keywords = [
-            'diagnosis', 'treatment', 'medication', 'symptoms', 'disease',
-            'patient', 'clinical', 'medical', 'health', 'therapy'
-        ]
-        return any(keyword in text.lower() for keyword in medical_keywords)
-```
 
-**Key Features:**
-- Apple Silicon MPS optimization
-- Healthcare safety disclaimers
-- Temperature and top-k sampling
-- Medical content detection
-- Comprehensive error handling
-
-[View Full Implementation →](https://github.com/okahwaji-tech/agents/blob/main/code/week-1/first_llm_program.py)
-
-### Healthcare Text Analysis
-
-Analyze how LLMs process medical text differently from general text.
-
-```python title="healthcare_text_analysis.py"
-import torch
-from transformers import AutoModel, AutoTokenizer
-import numpy as np
-from typing import List, Dict, Tuple
-import matplotlib.pyplot as plt
-
-class MedicalTextAnalyzer:
-    """Analyze LLM behavior on medical vs. general text."""
-    
-    def __init__(self, model_name: str = "bert-base-uncased"):
-        self.device = torch.device('mps' if torch.backends.mps.is_available() else 'cpu')
-        self.model = AutoModel.from_pretrained(model_name).to(self.device)
-        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
-    
-    def analyze_confidence_patterns(
-        self, 
-        medical_texts: List[str], 
-        general_texts: List[str]
-    ) -> Dict[str, float]:
-        """
-        Compare model confidence on medical vs. general text.
-        
-        Returns confidence metrics for both text types.
-        """
-        medical_confidence = self._calculate_average_confidence(medical_texts)
-        general_confidence = self._calculate_average_confidence(general_texts)
-        
-        return {
-            'medical_confidence': medical_confidence,
-            'general_confidence': general_confidence,
-            'confidence_ratio': medical_confidence / general_confidence
+        # Medical safety keywords
+        self.safety_keywords = {
+            'harmful': ['overdose', 'dangerous', 'lethal', 'toxic', 'fatal'],
+            'beneficial': ['safe', 'effective', 'approved', 'recommended', 'beneficial'],
+            'uncertain': ['experimental', 'investigational', 'off-label', 'unproven']
         }
-    
-    def extract_medical_entities(self, text: str) -> List[str]:
-        """
-        Extract potential medical entities from text.
-        
-        Simple implementation for educational purposes.
-        """
-        # This is a simplified version - real medical NER is much more complex
-        medical_terms = []
-        
-        # Basic medical term patterns
-        medical_keywords = [
-            'diabetes', 'hypertension', 'medication', 'treatment',
-            'diagnosis', 'symptoms', 'patient', 'clinical'
-        ]
-        
-        words = text.lower().split()
-        for word in words:
-            if any(keyword in word for keyword in medical_keywords):
-                medical_terms.append(word)
-        
-        return medical_terms
-```
 
-**Key Features:**
-- Confidence analysis on medical text
-- Medical entity extraction
-- Comparison with general text processing
-- Visualization of model behavior patterns
-
-[View Full Implementation →](https://github.com/okahwaji-tech/agents/blob/main/code/week-1/healthcare_text_analysis.py)
-
-## 📊 Evaluation and Metrics
-
-### LLM Evaluation Framework
-
-Comprehensive evaluation metrics for language models.
-
-```python title="model_evaluation.py"
-import torch
-import torch.nn.functional as F
-from typing import List, Dict, Tuple
-import numpy as np
-from sklearn.metrics import accuracy_score, precision_recall_fscore_support
-
-class LLMEvaluator:
-    """Comprehensive evaluation framework for LLMs."""
-    
-    def __init__(self):
-        self.device = torch.device('mps' if torch.backends.mps.is_available() else 'cpu')
-    
-    def calculate_perplexity(
-        self, 
-        model: torch.nn.Module, 
-        tokenizer, 
-        texts: List[str]
-    ) -> float:
+    def calculate_perplexity(self, texts: List[str]) -> Dict[str, float]:
         """
         Calculate perplexity on a list of texts.
-        
+
+        Perplexity measures how well the model predicts the text.
         Lower perplexity = better language model performance.
         """
-        total_loss = 0
+        total_log_likelihood = 0
         total_tokens = 0
-        
-        model.eval()
+
+        self.model.eval()
         with torch.no_grad():
             for text in texts:
                 # Tokenize
-                inputs = tokenizer(text, return_tensors="pt", truncation=True)
+                inputs = self.tokenizer(text, return_tensors="pt", truncation=True, max_length=512)
                 inputs = {k: v.to(self.device) for k, v in inputs.items()}
-                
-                # Forward pass
-                outputs = model(**inputs, labels=inputs["input_ids"])
-                loss = outputs.loss
-                
-                # Accumulate
-                total_loss += loss.item() * inputs["input_ids"].size(1)
+
+                # Calculate log likelihood
+                outputs = self.model(**inputs, labels=inputs["input_ids"])
+                log_likelihood = -outputs.loss.item() * inputs["input_ids"].size(1)
+
+                total_log_likelihood += log_likelihood
                 total_tokens += inputs["input_ids"].size(1)
-        
-        avg_loss = total_loss / total_tokens
-        perplexity = torch.exp(torch.tensor(avg_loss))
-        
-        return perplexity.item()
-    
-    def evaluate_medical_safety(
-        self, 
-        model, 
-        tokenizer, 
-        test_prompts: List[str]
-    ) -> Dict[str, float]:
+
+        # Calculate perplexity
+        avg_log_likelihood = total_log_likelihood / total_tokens
+        perplexity = torch.exp(torch.tensor(-avg_log_likelihood))
+
+        return {
+            'perplexity': perplexity.item(),
+            'avg_log_likelihood': avg_log_likelihood,
+            'total_tokens': total_tokens
+        }
+
+    def evaluate_medical_safety(self, generated_texts: List[str]) -> Dict[str, float]:
         """
-        Evaluate model safety on medical prompts.
-        
-        Checks for potentially harmful medical advice.
+        Evaluate safety of medical text generation.
+
+        Analyzes generated text for potentially harmful medical advice.
         """
         safety_scores = []
-        
-        for prompt in test_prompts:
-            generated = self._generate_response(model, tokenizer, prompt)
-            safety_score = self._assess_medical_safety(generated)
-            safety_scores.append(safety_score)
-        
+
+        for text in generated_texts:
+            score = self._assess_text_safety(text)
+            safety_scores.append(score)
+
         return {
             'average_safety_score': np.mean(safety_scores),
             'min_safety_score': np.min(safety_scores),
-            'safety_pass_rate': np.mean([s > 0.7 for s in safety_scores])
+            'max_safety_score': np.max(safety_scores),
+            'safety_pass_rate': np.mean([s >= 0.7 for s in safety_scores]),
+            'individual_scores': safety_scores
         }
 ```
 
 **Key Features:**
-- Perplexity calculation for model quality
-- Medical safety evaluation
+- Perplexity calculation for model quality assessment
+- Medical safety evaluation framework
 - Bias detection in healthcare contexts
-- Comprehensive reporting tools
+- Comprehensive reporting and visualization tools
 
-[View Full Implementation →](https://github.com/okahwaji-tech/agents/blob/main/code/week-1/model_evaluation.py)
+[View Full Implementation →](https://github.com/okahwaji-tech/agents/blob/main/code/week-1/llm_evaluation_metrics.py)
 
-## 🛠️ Utilities and Tools
+## 🎯 Reinforcement Learning for Healthcare
+
+### Base MDP Implementation
+
+Foundation classes for Markov Decision Processes in healthcare contexts.
+
+!!! example "RL in Healthcare"
+    - **Treatment planning** - Optimal therapy sequences
+    - **Drug dosing** - Personalized medication schedules
+    - **Resource allocation** - Hospital bed management
+    - **Clinical decision support** - Evidence-based recommendations
+
+```python title="base_mdp.py"
+import numpy as np
+import torch
+from typing import Dict, List, Tuple, Optional, Any
+from abc import ABC, abstractmethod
+
+class HealthcareMDP(ABC):
+    """
+    Base class for healthcare Markov Decision Processes.
+
+    Provides the fundamental structure for modeling medical
+    decision-making problems as MDPs.
+    """
+
+    def __init__(self,
+                 states: List[str],
+                 actions: List[str],
+                 gamma: float = 0.95):
+        """
+        Initialize healthcare MDP.
+
+        Args:
+            states: List of possible patient states
+            actions: List of possible medical interventions
+            gamma: Discount factor for future rewards
+        """
+        self.states = states
+        self.actions = actions
+        self.gamma = gamma
+        self.n_states = len(states)
+        self.n_actions = len(actions)
+
+        # State and action mappings
+        self.state_to_idx = {state: idx for idx, state in enumerate(states)}
+        self.action_to_idx = {action: idx for idx, action in enumerate(actions)}
+        self.idx_to_state = {idx: state for state, idx in self.state_to_idx.items()}
+        self.idx_to_action = {idx: action for action, idx in self.action_to_idx.items()}
+
+        # Initialize transition probabilities and rewards
+        self.P = np.zeros((self.n_states, self.n_actions, self.n_states))
+        self.R = np.zeros((self.n_states, self.n_actions))
+
+        # Medical safety constraints
+        self.safety_constraints = {}
+        self.medical_disclaimer = (
+            "⚠️ MEDICAL DISCLAIMER: This is for educational purposes only. "
+            "Always consult qualified healthcare professionals."
+        )
+
+    @abstractmethod
+    def define_transition_probabilities(self) -> np.ndarray:
+        """Define transition probabilities P(s'|s,a)."""
+        pass
+
+    @abstractmethod
+    def define_reward_function(self) -> np.ndarray:
+        """Define reward function R(s,a)."""
+        pass
+
+    def add_safety_constraint(self, state: str, forbidden_actions: List[str]):
+        """Add medical safety constraints."""
+        if state in self.state_to_idx:
+            self.safety_constraints[state] = forbidden_actions
+```
+
+[View Full Implementation →](https://github.com/okahwaji-tech/agents/blob/main/code/week-1/RL/base_mdp.py)
+
+### Value Iteration Algorithm
+
+Classic dynamic programming solution for MDPs.
+
+```python title="value_iteration.py"
+import numpy as np
+import torch
+from typing import Tuple, Dict, List
+import matplotlib.pyplot as plt
+
+class ValueIteration:
+    """
+    Value Iteration algorithm for solving healthcare MDPs.
+
+    Implements the classic dynamic programming approach
+    to find optimal policies for medical decision-making.
+    """
+
+    def __init__(self, mdp, tolerance: float = 1e-6, max_iterations: int = 1000):
+        self.mdp = mdp
+        self.tolerance = tolerance
+        self.max_iterations = max_iterations
+
+        # Initialize value function
+        self.V = np.zeros(mdp.n_states)
+        self.policy = np.zeros(mdp.n_states, dtype=int)
+
+        # Convergence tracking
+        self.convergence_history = []
+
+    def solve(self) -> Tuple[np.ndarray, np.ndarray]:
+        """
+        Solve MDP using value iteration.
+
+        Returns:
+            V: Optimal value function
+            policy: Optimal policy
+        """
+        for iteration in range(self.max_iterations):
+            V_old = self.V.copy()
+
+            # Value iteration update
+            for s in range(self.mdp.n_states):
+                # Calculate Q-values for all actions
+                q_values = []
+                for a in range(self.mdp.n_actions):
+                    q_value = self.mdp.R[s, a] + self.mdp.gamma * np.sum(
+                        self.mdp.P[s, a, :] * self.V
+                    )
+                    q_values.append(q_value)
+
+                # Update value function
+                self.V[s] = max(q_values)
+                self.policy[s] = np.argmax(q_values)
+
+            # Check convergence
+            delta = np.max(np.abs(self.V - V_old))
+            self.convergence_history.append(delta)
+
+            if delta < self.tolerance:
+                print(f"Converged after {iteration + 1} iterations")
+                break
+
+        return self.V, self.policy
+```
+
+[View Full Implementation →](https://github.com/okahwaji-tech/agents/blob/main/code/week-1/RL/value_iteration.py)
+
+### Q-Learning Implementation
+
+Model-free reinforcement learning for healthcare applications.
+
+```python title="q_learning.py"
+import numpy as np
+import torch
+from typing import Dict, List, Tuple, Optional
+import matplotlib.pyplot as plt
+
+class HealthcareQLearning:
+    """
+    Q-Learning implementation for healthcare decision-making.
+
+    Demonstrates model-free RL that can learn optimal policies
+    without knowing the environment dynamics.
+    """
+
+    def __init__(self,
+                 n_states: int,
+                 n_actions: int,
+                 learning_rate: float = 0.1,
+                 epsilon: float = 0.1,
+                 gamma: float = 0.95):
+
+        self.n_states = n_states
+        self.n_actions = n_actions
+        self.lr = learning_rate
+        self.epsilon = epsilon
+        self.gamma = gamma
+
+        # Initialize Q-table
+        self.Q = np.zeros((n_states, n_actions))
+
+        # Training history
+        self.episode_rewards = []
+        self.episode_lengths = []
+
+    def choose_action(self, state: int) -> int:
+        """
+        Choose action using epsilon-greedy policy.
+
+        Balances exploration vs exploitation in medical decision-making.
+        """
+        if np.random.random() < self.epsilon:
+            # Explore: random action
+            return np.random.randint(self.n_actions)
+        else:
+            # Exploit: best known action
+            return np.argmax(self.Q[state, :])
+
+    def update_q_value(self,
+                      state: int,
+                      action: int,
+                      reward: float,
+                      next_state: int):
+        """
+        Update Q-value using Q-learning update rule.
+
+        Q(s,a) ← Q(s,a) + α[r + γ max Q(s',a') - Q(s,a)]
+        """
+        best_next_action = np.argmax(self.Q[next_state, :])
+        td_target = reward + self.gamma * self.Q[next_state, best_next_action]
+        td_error = td_target - self.Q[state, action]
+
+        self.Q[state, action] += self.lr * td_error
+```
+
+[View Full Implementation →](https://github.com/okahwaji-tech/agents/blob/main/code/week-1/RL/q_learning.py)
+
+### Healthcare Examples
+
+Real-world medical decision-making scenarios using RL.
+
+```python title="healthcare_examples.py"
+import numpy as np
+from typing import Dict, List, Tuple
+from base_mdp import HealthcareMDP
+
+class DrugDosingMDP(HealthcareMDP):
+    """
+    MDP for optimal drug dosing decisions.
+
+    Models the problem of determining appropriate medication
+    dosages based on patient response and side effects.
+    """
+
+    def __init__(self):
+        # Define states: patient condition levels
+        states = [
+            "critical_low", "low", "normal", "high", "critical_high"
+        ]
+
+        # Define actions: dosage adjustments
+        actions = [
+            "decrease_large", "decrease_small", "maintain",
+            "increase_small", "increase_large"
+        ]
+
+        super().__init__(states, actions, gamma=0.9)
+
+        # Define medical constraints
+        self.add_safety_constraint("critical_low", ["decrease_large", "decrease_small"])
+        self.add_safety_constraint("critical_high", ["increase_large", "increase_small"])
+
+        # Initialize transition probabilities and rewards
+        self.define_transition_probabilities()
+        self.define_reward_function()
+```
+
+[View Full Implementation →](https://github.com/okahwaji-tech/agents/blob/main/code/week-1/RL/healthcare_examples.py)
+
+## 🚀 Getting Started
+
+### Quick Setup
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/okahwaji-tech/agents.git
+   cd agents
+   ```
+
+2. **Set up virtual environment**:
+   ```bash
+   python -m venv agents
+   source agents/bin/activate  # On Windows: agents\Scripts\activate
+   ```
+
+3. **Install dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Run examples**:
+   ```bash
+   cd code/week-1
+   python discrete_distributions_healthcare.py
+   python autoregressive_lm_healthcare.py
+   python RL/comprehensive_demo.py
+   ```
 
 ### Apple Silicon Optimization
 
-Utilities for maximizing performance on M3 Ultra processors.
+For M3 Ultra users, ensure MPS is properly configured:
 
-```python title="apple_silicon_utils.py"
+```python
 import torch
-import psutil
-import time
-from typing import Dict, Any
-import logging
+print(f"MPS available: {torch.backends.mps.is_available()}")
+print(f"MPS built: {torch.backends.mps.is_built()}")
+```
 
-logger = logging.getLogger(__name__)
+## 📚 Next Steps
 
-class AppleSiliconOptimizer:
-    """Optimization utilities for Apple Silicon processors."""
-    
-    @staticmethod
-    def setup_mps_environment() -> Dict[str, Any]:
-        """Configure optimal MPS environment settings."""
-        # Set environment variables for optimal performance
-        import os
-        os.environ['PYTORCH_MPS_HIGH_WATERMARK_RATIO'] = '0.0'
-        os.environ['PYTORCH_ENABLE_MPS_FALLBACK'] = '1'
-        
-        # Enable memory efficient attention
-        if hasattr(torch.backends.mps, 'enable_memory_efficient_attention'):
-            torch.backends.mps.enable_memory_efficient_attention = True
-        
-        return {
-            'mps_available': torch.backends.mps.is_available(),
-            'mps_built': torch.backends.mps.is_built(),
-            'device': 'mps' if torch.backends.mps.is_available() else 'cpu'
-        }
-    
-    @staticmethod
-    def cleanup_memory():
-        """Clean up MPS and system memory."""
-        if torch.backends.mps.is_available():
+!!! tip "Continue Learning"
+    - Explore the [Mathematical Foundations](../materials/math/index.md) for deeper theory
+    - Check out [LLM Fundamentals](../materials/llm/index.md) for advanced concepts
+    - Review [Study Guide Week 1](../study-guide/week-1/index.md) for structured learning
+    - Follow the [Study Guide](../study-guide/index.md) for structured learning
+
+## 🔗 Additional Resources
+
+- **GitHub Repository**: [okahwaji-tech/agents](https://github.com/okahwaji-tech/agents)
+- **Documentation**: [Full Documentation](../materials/index.md)
+- **Community**: [Discussions and Issues](https://github.com/okahwaji-tech/agents/discussions)
             torch.mps.empty_cache()
         
         import gc
@@ -579,9 +857,9 @@ After working through these examples, you'll understand:
 
 ## 🔗 Related Resources
 
-- **[Week 1 Study Guide](../../study-guide/week-1/index.md)** - Theoretical foundations
-- **[Mathematical Materials](../../materials/week-1/mathematical-foundations.md)** - Detailed explanations
-- **[Progress Tracking](../../progress/index.md)** - Monitor your learning
+- **[Week 1 Study Guide](../study-guide/week-1/index.md)** - Theoretical foundations
+- **[Mathematical Materials](../materials/math/index.md)** - Detailed explanations
+- **[Learning Materials](../materials/index.md)** - Comprehensive study resources
 
 ---
 

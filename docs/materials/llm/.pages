@@ -1,0 +1,6 @@
+title: LLM Fundamentals
+nav:
+  - index.md
+  - llm-fundamentals.md
+  - word-embeddings.md
+  - evaluation.md

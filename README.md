@@ -1,5 +1,18 @@
-# agents
-This is a repository for learning LLM and agentic workflows.
+# 🤖 LLM & Agentic AI Learning Hub [WIP]
+
+A comprehensive 24-week curriculum for mastering Large Language Models and agentic workflows, with a focus on healthcare AI applications.
+
+## 🌐 Online Documentation
+
+**📖 [View the Complete Learning Hub](https://okahwaji-tech.github.io/llm-learning-guide/)**
+
+Explore our comprehensive online documentation featuring:
+
+- **📚 Interactive Study Guide**: 24-week structured curriculum with progress tracking
+- **🧮 Learning Materials**: Mathematical foundations, LLM concepts, and RL integration
+- **📄 Research Resources**: Curated books, papers, courses, and tools
+- **💻 Code Examples**: Hands-on implementations optimized for Apple Silicon
+- **🏥 Healthcare AI Focus**: Medical applications, compliance, and safety considerations
 
 ## 📋 Table of Contents
 

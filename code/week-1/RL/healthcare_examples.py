@@ -6,9 +6,6 @@ This module implements healthcare-specific MDP examples to demonstrate
 the application of Markov Decision Processes in medical decision-making.
 These examples illustrate how MDPs can be used for treatment planning,
 medication dosing, and patient care optimization.
-
-Author: Manus AI
-Date: June 2025
 """
 
 import torch

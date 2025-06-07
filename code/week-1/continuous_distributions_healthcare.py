@@ -5,7 +5,6 @@ Comprehensive PyTorch Implementation: Continuous Probability Distributions for L
 This module provides practical implementations of continuous probability distributions
 used in neural language models, with applications to healthcare AI systems.
 
-Author: Generated for Probability Theory Study Guide
 Focus: LLM Applications in Healthcare
 """
 

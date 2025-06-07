@@ -1,5 +1,14 @@
 # Reinforcement Learning and Large Language Models: A CS234 Perspective
 
+!!! abstract "📚 Learning Objectives"
+    By the end of this chapter, you should be able to:
+    - Understand the linear algebra foundations relevant to Reinforcement Learning (RL) and Large Language Models (LLMs).
+    - Define Markov Decision Processes (MDPs) and their components.
+    - Explain state spaces, action spaces, and reward functions in the context of RL.
+    - Connect sequential decision-making in RL to token prediction in LLMs.
+    - Discuss applications of RL and LLMs in healthcare.
+    - Implement fundamental RL concepts using PyTorch.
+
 
 ## Table of Contents
 
@@ -34,7 +43,13 @@ The dimensionality of these vector spaces presents both opportunities and challe
 
 Value functions in reinforcement learning are fundamentally linear algebraic objects that can be computed and updated using matrix operations. The Bellman equation, which forms the core of dynamic programming approaches in RL, can be expressed as a system of linear equations when dealing with finite state spaces. This mathematical structure provides a direct connection to the optimization procedures used in training large language models.
 
-The state value function V^π(s) represents the expected cumulative reward from state s under policy π. When we discretize the state space, this function becomes a vector where each element corresponds to the value of a particular state. The Bellman equation then becomes a matrix equation of the form V = R + γPV, where R is the reward vector, P is the transition probability matrix, and γ is the discount factor.
+The state value function V^π(s) represents the expected cumulative reward from state s under policy π. When we discretize the state space, this function becomes a vector where each element corresponds to the value of a particular state. The Bellman equation then becomes a matrix equation of the form:
+
+$$
+V = R + \gamma PV
+$$
+
+where R is the reward vector, P is the transition probability matrix, and $\gamma$ is the discount factor.
 
 This matrix formulation reveals the linear algebraic structure underlying reinforcement learning algorithms. The solution to this system of equations can be found using standard linear algebra techniques, including matrix inversion, iterative methods, and eigenvalue decomposition. These same mathematical tools are employed in various forms throughout the training and inference processes of large language models.
 
@@ -555,9 +570,24 @@ The Bellman equations form the cornerstone of dynamic programming approaches to 
 
 The Bellman equation for the state value function under policy π is given by V^π(s) = Σ_a π(a|s) Σ_{s'} P(s'|s,a)[R(s,a,s') + γV^π(s')]. This equation states that the value of a state under policy π equals the expected immediate reward plus the discounted expected value of the next state, where the expectation is taken over both the policy's action distribution and the environment's transition dynamics.
 
-The optimal Bellman equation, which characterizes the optimal value function, takes the form V*(s) = max_a Σ_{s'} P(s'|s,a)[R(s,a,s') + γV*(s')]. This equation embodies the principle of optimality, stating that an optimal policy has the property that whatever the initial state and initial decision are, the remaining decisions must constitute an optimal policy with regard to the state resulting from the first decision.
+The optimal Bellman equation, which characterizes the optimal value function, takes the form:
 
-The action-value function, or Q-function, provides an alternative formulation that is often more convenient for learning algorithms. The Bellman equation for the optimal Q-function is Q*(s,a) = Σ_{s'} P(s'|s,a)[R(s,a,s') + γ max_{a'} Q*(s',a')]. This formulation allows us to determine the optimal policy directly by selecting the action that maximizes the Q-value in each state: π*(s) = argmax_a Q*(s,a).
+$$
+V^*(s) = \max_a \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma V^*(s')]
+$$
+ This equation embodies the principle of optimality, stating that an optimal policy has the property that whatever the initial state and initial decision are, the remaining decisions must constitute an optimal policy with regard to the state resulting from the first decision.
+
+The action-value function, or Q-function, provides an alternative formulation that is often more convenient for learning algorithms. The Bellman equation for the optimal Q-function is:
+
+$$
+Q^*(s,a) = \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma \max_{a'} Q^*(s',a')]
+$$
+ This formulation allows us to determine the optimal policy directly by selecting the action that maximizes the Q-value in each state:
+
+$$
+\pi^*(s) = \underset{a}{\operatorname{argmax}} Q^*(s,a)
+$$
+
 
 ### Connection to Language Model Training
 
@@ -3016,13 +3046,10 @@ Markov Decision Processes provide the theoretical framework for understanding se
 
 The connection between sequential decision making in reinforcement learning and token prediction in large language models represents one of the most significant insights in modern AI. This connection has enabled the development of sophisticated training techniques like Reinforcement Learning from Human Feedback (RLHF), which allows language models to be aligned with human preferences and clinical guidelines. The mathematical formulation of this connection, through policy gradient methods and actor-critic algorithms, provides the tools necessary for developing AI systems that can generate clinically appropriate text while adhering to medical ethics and safety requirements.
 
-### Key Takeaways for Healthcare AI Development
-
-The mathematical foundations covered in this guide provide several key insights for developing AI systems in healthcare contexts. First, the importance of careful state representation cannot be overstated. Healthcare data is inherently complex, multi-modal, and temporal, requiring sophisticated encoding techniques that can capture the essential features while maintaining computational tractability. The hierarchical and temporal encoding approaches demonstrated in this guide provide practical frameworks for handling this complexity.
-
-Second, the design of reward functions in healthcare applications requires careful consideration of multiple competing objectives, including clinical efficacy, patient safety, cost-effectiveness, and quality of life. The multi-objective reward functions and constitutional AI approaches presented in this guide offer principled methods for balancing these competing concerns while ensuring that AI systems remain aligned with medical ethics and professional standards.
-
-Third, the sequential nature of healthcare decision making requires algorithms that can handle long-term dependencies and credit assignment problems. The connection between reinforcement learning and language modeling provides powerful tools for addressing these challenges, enabling the development of AI systems that can reason about complex temporal relationships in patient care.
+!!! success "🔑 Key Takeaways"
+    - **State Representation is Crucial:** Healthcare data's complexity (multi-modal, temporal) demands sophisticated encoding (e.g., hierarchical, temporal) to capture essential features while maintaining tractability.
+    - **Multi-Objective Reward Functions:** Healthcare AI requires balancing competing objectives (efficacy, safety, cost, quality of life). Principled methods like multi-objective rewards and constitutional AI ensure alignment with ethics and standards.
+    - **Sequential Decision Making:** RL and LLM connections offer tools for long-term dependencies and credit assignment in healthcare, enabling AI to reason about complex temporal patient care relationships.
 
 ### Implementation Considerations for Production Systems
 
