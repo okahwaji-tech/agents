@@ -79,7 +79,7 @@ agents/
 Key configuration sections:
 
 ```yaml
-site_name: LLM & Agentic Workflows Learning Guide
+site_name: Large Language Models Learning Hub
 site_url: https://okahwaji-tech.github.io/agents/
 
 theme:
