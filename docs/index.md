@@ -5,7 +5,7 @@
 
     **24 Weeks** • **4 Phases** • **Hands-on Projects** • **Healthcare Focus**
 
-    *Deployed from main branch - January 2025*
+    *Auto-deployed from main branch - January 2025 ✅*
 
 ## 🎯 Learning Path Overview
 
