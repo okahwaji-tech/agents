@@ -28,14 +28,13 @@
 !!! info "📋 Table of Contents"
     **Navigate through comprehensive eigenvalue analysis for LLMs:**
 
-    1. **[🎯 Learning Objectives](#learning-objectives)** - Master the essential skills and applications
-    2. **[🚀 Introduction](#introduction-and-learning-objectives)** - Why eigenvalues matter for LLM engineers
-    3. **[🧮 Mathematical Foundations](#mathematical-foundations)** - Core concepts and geometric interpretation
-    4. **[📊 Core Eigenvalue Theory](#core-eigenvalue-theory)** - Decomposition methods and computational techniques
-    5. **[🤖 LLM Applications](#llm-applications-and-neural-networks)** - Transformer analysis and optimization
-    6. **[🔬 Cutting-Edge Research](#cutting-edge-research-and-applications)** - Latest developments and applications
-    7. **[🏥 Healthcare Applications](#healthcare-applications)** - Medical AI and clinical decision support
-    8. **[📚 Key Takeaways](#key-takeaways)** - Summary and practical implementation guidance
+    1. **[🚀 Introduction](#introduction-and-learning-objectives)** - Why eigenvalues matter for LLM engineers
+    2. **[🧮 Mathematical Foundations](#mathematical-foundations)** - Core concepts and geometric interpretation
+    3. **[📊 Core Eigenvalue Theory](#core-eigenvalue-theory)** - Decomposition methods and computational techniques
+    4. **[🤖 LLM Applications](#llm-applications-and-neural-networks)** - Transformer analysis and optimization
+    5. **[🔍 Advanced Techniques](#advanced-techniques-and-applications)** - Latest developments and applications
+    6. **[🏥 Healthcare Applications](#healthcare-applications)** - Medical AI and clinical decision support
+    7. **[📚 Key Takeaways](#key-takeaways)** - Summary and practical implementation guidance
 
 ---
 
@@ -52,7 +51,7 @@
     - **⚡ Training Optimization** - Diagnose instabilities in hours instead of weeks
     - **🎯 Performance Tuning** - Target computational bottlenecks with mathematical precision
 
-!!! tip "🏭 Plain English Summary - Why This Matters"
+!!! tip "🏭 Practical Impact - Why This Matters"
     **The difference between understanding eigenvalues deeply versus treating them as black boxes:**
 
     **Think of eigenvalues as the "DNA" of your neural network transformations:**
@@ -142,7 +141,7 @@
 
 ### 🎭 The Intuitive Understanding: Transformations and Special Directions
 
-!!! tip "🏭 Plain English Summary - What Are Eigenvalues?"
+!!! tip "🏭 Conceptual Foundation - What Are Eigenvalues?"
     **Think of eigenvalues as the "natural directions" of any transformation:**
 
     **Imagine you have a transformation machine** - a mathematical function that takes vectors as input and produces transformed vectors as output. In LLMs, these transformation machines are everywhere:
@@ -1766,7 +1765,7 @@ The practical implementation guidance and code examples demonstrate that eigenva
     - **📊 Monitoring dashboards** for spectral properties
     - **🔧 Integration examples** with popular ML frameworks
 
-    For complete implementations and detailed examples, refer to the [**code examples section**](../../code/index.md).
+    For complete implementations and detailed examples, refer to the **code examples section** in the repository.
 
 ---
 
