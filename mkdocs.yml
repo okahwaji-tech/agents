@@ -185,7 +185,6 @@ nav:
         - Information Theory: materials/math/information-theory.md
         - Matrix Operations: materials/math/matrix-multiplication.md
       - 🟡 Intermediate:
-        - Vector Spaces: materials/math/vector-spaces.md
         - Eigenvalues & Eigenvectors: materials/math/eigenvalues-eigenvectors.md
     - 🤖 Machine Learning & RL:
       - Overview: materials/ml/index.md

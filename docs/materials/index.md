@@ -80,7 +80,7 @@
     **For those with ML background**
 
     1. **Quick Review**: [Mathematical Foundations](math/index.md)
-        - [Vector Spaces](math/vector-spaces.md) 🟡
+        - [Linear Algebra](math/linear-algebra.md) 🟢
         - [Matrix Operations](math/matrix-multiplication.md) 🟢
 
     2. **Focus On**: [LLM Fundamentals](llm/index.md)
@@ -157,19 +157,7 @@
 
     [:octicons-arrow-right-24: Explore Information Theory](math/information-theory.md)
 
--   **🟡 Vector Spaces**
 
-    ---
-
-    **Advanced vector concepts**
-
-    - Vector space properties
-    - Basis & dimensionality
-    - Embeddings as vectors
-
-    **Time**: 2-3 hours | **Prerequisites**: Linear algebra
-
-    [:octicons-arrow-right-24: Study Vector Spaces](math/vector-spaces.md)
 
 -   **🟢 Matrix Operations**
 

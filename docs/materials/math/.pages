@@ -4,6 +4,5 @@ nav:
   - probability-theory.md
   - information-theory.md
   - linear-algebra.md
-  - vector-spaces.md
   - matrix-multiplication.md
   - eigenvalues-eigenvectors.md

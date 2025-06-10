@@ -21,10 +21,6 @@ Track your progress through Week 1's learning materials. Check off each item as 
  - [ ] Understand vector spaces and transformations
 
 ### Advanced Topics
-- [ ] **Vector Spaces** (2 hours)
- - [ ] Study [Vector Spaces Materials](../../materials/math/vector-spaces.md)
- - [ ] Understand basis and dimension
-
 - [ ] **Matrix Operations** (1-2 hours)
  - [ ] Review [Matrix Multiplication](../../materials/math/matrix-multiplication.md)
  - [ ] Practice efficient computation

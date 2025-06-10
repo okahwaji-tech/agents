@@ -58,7 +58,6 @@ Understanding the mathematical concepts that power language modeling is crucial 
 
 **Resources:**
 - [Linear Algebra Materials](../../materials/math/linear-algebra.md)
-- [Vector Spaces](../../materials/math/vector-spaces.md)
 - [Matrix Operations](../../materials/math/matrix-multiplication.md)
 
 ### 4. Reinforcement Learning Foundations (0.5 hours)

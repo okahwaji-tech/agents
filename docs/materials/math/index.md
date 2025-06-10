@@ -14,7 +14,6 @@ This section covers the mathematical foundations you need to understand how LLMs
 - **[Linear Algebra](linear-algebra.md)** - Vector operations and matrix mathematics
 
 ### Advanced Topics
-- **[Vector Spaces](vector-spaces.md)** - Understanding embedding spaces
 - **[Matrix Operations](matrix-multiplication.md)** - Essential computations for neural networks
 - **[Eigenvalues & Eigenvectors](eigenvalues-eigenvectors.md)** - Advanced linear algebra concepts
 
