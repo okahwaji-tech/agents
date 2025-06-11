@@ -1476,7 +1476,7 @@ The scalability of RL techniques to even larger models and more complex tasks pr
     **State-of-the-art algorithms adapted for language modeling:**
 
     === "🎯 Q-Learning Implementation"
-        **[`q_learning.py`](../../code/week-1/RL/q_learning.py)**
+        **[`q_learning.py`](https://github.com/okahwaji-tech/llm-learning-guide/blob/main/code/week-1/RL/q_learning.py)**
 
         Model-free temporal difference learning:
         - Q-function approximation for large state spaces
@@ -1485,7 +1485,7 @@ The scalability of RL techniques to even larger models and more complex tasks pr
         - Language-specific adaptations and optimizations
 
     === "🔄 SARSA Algorithm"
-        **[`sarsa.py`](../../code/week-1/RL/sarsa.py)**
+        **[`sarsa.py`](https://github.com/okahwaji-tech/llm-learning-guide/blob/main/code/week-1/RL/sarsa.py)**
 
         On-policy temporal difference method:
         - State-Action-Reward-State-Action learning
@@ -1499,7 +1499,7 @@ The scalability of RL techniques to even larger models and more complex tasks pr
     **Specialized implementations for healthcare scenarios:**
 
     === "🩺 Healthcare RL Examples"
-        **[`healthcare_examples.py`](../../code/week-1/RL/healthcare_examples.py)**
+        **[`healthcare_examples.py`](https://github.com/okahwaji-tech/llm-learning-guide/blob/main/code/week-1/RL/healthcare_examples.py)**
 
         Medical decision-making scenarios:
         - Treatment planning and optimization
@@ -1508,7 +1508,7 @@ The scalability of RL techniques to even larger models and more complex tasks pr
         - Regulatory compliance and safety considerations
 
     === "📋 Comprehensive Demo"
-        **[`comprehensive_demo.py`](../../code/week-1/RL/comprehensive_demo.py)**
+        **[`comprehensive_demo.py`](https://github.com/okahwaji-tech/llm-learning-guide/blob/main/code/week-1/RL/comprehensive_demo.py)**
 
         End-to-end demonstration:
         - Complete RL pipeline for healthcare
