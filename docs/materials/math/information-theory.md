@@ -1,141 +1,511 @@
-# Information Theory Basics for Large Language Models
+# 📊 Information Theory for Large Language Models
 
-## Introduction and Learning Objectives {#introduction}
+!!! success "🎯 Learning Objectives"
+    **Master information theory fundamentals for Large Language Models and unlock advanced optimization techniques:**
 
-Information theory, developed by Claude Shannon in the 1940s, provides the mathematical foundation for understanding how information is quantified, transmitted, and processed. In the context of Large Language Models (LLMs), these concepts are not merely theoretical constructs but practical tools that directly impact model training, evaluation, and deployment strategies.
+    === "🧠 Mathematical Mastery"
+        - **Information Content & Entropy**: Quantify uncertainty and surprise in probabilistic systems
+        - **Cross-Entropy & KL Divergence**: Understand the mathematical foundations of LLM training
+        - **Mutual Information**: Analyze relationships between variables in high-dimensional spaces
+        - **Perplexity**: Master the standard evaluation metric for language model performance
 
-As a Machine Learning Engineer working with LLMs, understanding information theory is crucial for several reasons. First, the loss functions that drive LLM training are fundamentally rooted in information-theoretic principles, particularly cross-entropy. Second, evaluation metrics like perplexity provide insights into model performance and uncertainty. Third, advanced techniques in model alignment, fine-tuning, and optimization rely heavily on concepts like KL divergence and mutual information.
+    === "🤖 LLM Applications"
+        - **Training Optimization**: Apply cross-entropy loss functions with mathematical precision
+        - **Model Evaluation**: Use perplexity and entropy metrics to assess model performance
+        - **Fine-tuning & RLHF**: Leverage KL divergence for model alignment and safety
+        - **Interpretability**: Use mutual information to understand attention patterns and feature relationships
 
-This study guide is designed specifically for practitioners who need to understand these concepts in the context of modern LLM development. We will explore each concept through both mathematical rigor and practical implementation, ensuring that you can not only understand the theory but also apply these concepts in your daily work with language models.
+    === "🔍 Advanced Techniques"
+        - **Model Compression**: Apply information-theoretic principles for efficient deployment
+        - **Uncertainty Quantification**: Measure and interpret model confidence in predictions
+        - **Distribution Analysis**: Compare and analyze different model behaviors
+        - **Performance Optimization**: Target computational bottlenecks with information theory
 
-!!! info "🎯 Learning Objectives"
-    By the end of this study guide, you will be able to:
-
-    - **Understand the mathematical foundations** of information content, entropy, cross-entropy, KL divergence, mutual information, and perplexity
-    - **Implement these concepts in PyTorch** for practical applications in LLM development
-    - **Apply information theory metrics** to evaluate and improve language model performance
-    - **Recognize the role of these concepts** in modern LLM training techniques, including alignment and fine-tuning
-    - **Calculate and interpret** these metrics for real text sequences and model outputs
-    - **Identify appropriate use cases** for each metric in different stages of the LLM development lifecycle
-
-### Why Information Theory Matters for LLMs
-
-The relationship between information theory and language models is profound and multifaceted. When we train a language model, we are essentially teaching it to approximate the probability distribution of human language. The quality of this approximation directly determines the model's ability to generate coherent, contextually appropriate text.
-
-Information theory provides us with precise mathematical tools to measure how well our models capture the underlying patterns in language. Cross-entropy loss, the standard training objective for most LLMs, is a direct application of information-theoretic principles. It measures the difference between the model's predicted probability distribution and the true distribution represented by our training data.
-
-Similarly, perplexity, one of the most widely used evaluation metrics for language models, is derived from cross-entropy and provides an intuitive measure of how "surprised" a model is by a given sequence of text. Lower perplexity indicates that the model finds the text more predictable, suggesting better performance.
-
-In advanced applications, KL divergence plays a crucial role in techniques like Reinforcement Learning from Human Feedback (RLHF), where we need to measure how much a fine-tuned model deviates from its original distribution. Mutual information helps us understand the relationships between different parts of the input and output, which is valuable for interpretability and model analysis.
-
-### The Healthcare Context
-
-Throughout this guide, we will use examples from healthcare applications to illustrate these concepts. Healthcare represents one of the most promising and challenging domains for LLM applications, where understanding model uncertainty and confidence is critical. Whether we're developing models for clinical note analysis, medical question answering, or drug discovery, the principles of information theory help us build more reliable and trustworthy systems.
-
-For instance, when deploying an LLM for medical diagnosis assistance, understanding the model's entropy can help us identify cases where the model is uncertain and should defer to human experts. Cross-entropy analysis can help us evaluate how well our model captures the nuances of medical language, while perplexity can serve as an early warning system for out-of-distribution inputs that might require special handling.
+    === "🏥 Healthcare Applications"
+        - **Clinical Decision Support**: Implement uncertainty-aware medical AI systems
+        - **Safety & Reliability**: Apply information theory for robust healthcare applications
+        - **Regulatory Compliance**: Meet healthcare AI validation requirements with mathematical rigor
+        - **Privacy & Security**: Use information-theoretic measures while protecting patient data
 
 ---
 
+!!! info "📋 Table of Contents"
+    **Navigate through comprehensive information theory analysis for LLMs:**
 
-## Mathematical Foundations {#foundations}
-
-Before diving into specific information-theoretic concepts, it's essential to establish the mathematical foundations that underpin all of these ideas. Understanding these fundamentals will make the subsequent concepts more intuitive and their applications more apparent.
-
-### Probability Distributions and Language Models
-
-At its core, a language model is a probability distribution over sequences of tokens. Given a sequence of tokens $w_1, w_2, ..., w_{n-1}$, the model assigns a probability to each possible next token $w_n$. This can be expressed mathematically as:
-
-$$P(w_n | w_1, w_2, ..., w_{n-1})$$
-
-The quality of a language model is fundamentally determined by how well this probability distribution matches the true distribution of human language. Information theory provides us with the mathematical tools to measure and optimize this alignment.
-
-### Logarithms and Information
-
-Information theory relies heavily on logarithms, which might seem counterintuitive at first. The choice of logarithms is not arbitrary but stems from several important properties that make them ideal for measuring information:
-
-1. **Additivity**: The logarithm of a product equals the sum of logarithms, which means that the information content of independent events can be added together.
-
-2. **Monotonicity**: As probability decreases, the logarithm of the inverse probability increases, reflecting our intuition that rare events carry more information.
-
-3. **Continuity**: Small changes in probability result in small changes in information content.
-
-The base of the logarithm determines the unit of measurement. Base 2 gives us bits, base $e$ gives us nats, and base 10 gives us dits. In practice, most implementations use natural logarithms (base $e$) for computational efficiency, though the choice doesn't affect the relative relationships between measurements.
-
-### Expected Values and Averages
-
-Many information-theoretic measures are defined as expected values over probability distributions. For a discrete random variable $X$ with probability mass function $P(x)$, the expected value of a function $f(X)$ is:
-
-$$E[f(X)] = \sum_{x} P(x) \cdot f(x)$$
-
-This concept is crucial because measures like entropy and cross-entropy are defined as expected values of information content. Understanding this relationship helps clarify why these measures capture average behavior rather than worst-case or best-case scenarios.
-
-### The Connection to Coding Theory
-
-One of the most elegant aspects of information theory is its connection to optimal coding. Shannon's source coding theorem establishes that the entropy of a source represents the minimum average number of bits needed to encode messages from that source. This connection provides intuitive interpretations for many information-theoretic measures.
-
-When we calculate the entropy of a language model's output distribution, we're essentially determining how many bits, on average, would be needed to encode the model's predictions optimally. This perspective helps explain why entropy serves as a measure of uncertainty: more uncertain distributions require more bits to encode because we can't predict the outcomes as reliably.
-
-### Practical Considerations for Implementation
-
-When implementing information-theoretic measures in practice, several numerical considerations become important:
-
-1. **Numerical Stability**: Logarithms of very small probabilities can lead to numerical underflow. Most implementations add a small epsilon value to probabilities before taking logarithms.
-
-2. **Computational Efficiency**: Many calculations involve sums over large vocabularies. Efficient implementation often requires careful attention to vectorization and memory usage.
-
-3. **Approximation Methods**: For very large vocabularies or continuous distributions, exact calculations may be impractical, requiring sampling or other approximation techniques.
-
-These practical considerations will become relevant when we implement these concepts in PyTorch later in this guide.
+    1. **[🚀 Introduction](#introduction-and-learning-objectives)** - Why information theory matters for LLM engineers
+    2. **[🧮 Mathematical Foundations](#mathematical-foundations)** - Core concepts and probability theory
+    3. **[📊 Information Content](#information-content-and-surprise)** - Measuring surprise and uncertainty
+    4. **[🌀 Entropy](#entropy-measuring-uncertainty)** - Quantifying average uncertainty in distributions
+    5. **[⚡ Cross-Entropy](#cross-entropy-the-foundation-of-llm-training)** - The cornerstone of language model training
+    6. **[🔄 KL Divergence](#kl-divergence-measuring-distribution-differences)** - Measuring differences between distributions
+    7. **[🔗 Mutual Information](#mutual-information-quantifying-shared-information)** - Understanding variable relationships
+    8. **[📈 Perplexity](#perplexity-the-standard-evaluation-metric)** - The standard language model evaluation metric
+    9. **[💻 Code Examples](#code-examples)** - PyTorch implementations and practical applications
+    10. **[📚 Key Takeaways](#key-takeaways)** - Summary and practical implementation guidance
 
 ---
 
-## Information Content and Surprise {#information-content}
+## 🚀 Introduction and Learning Objectives
 
-The concept of information content, also known as self-information or surprise, forms the foundation of all information-theoretic measures. Developed by Claude Shannon, this concept formalizes our intuitive understanding that rare events carry more information than common ones.
+!!! abstract "🎯 Why Information Theory Matters for LLM Engineers"
+    **Transform your understanding of Large Language Models through mathematical foundations that power modern AI:**
 
-### Mathematical Definition
+    Information theory, developed by Claude Shannon in the 1940s, provides the mathematical foundation for understanding how information is quantified, transmitted, and processed. In the context of Large Language Models (LLMs), these concepts are not merely theoretical constructs but practical tools that directly impact model training, evaluation, and deployment strategies.
 
-The information content of an event $x$ with probability $P(x)$ is defined as:
+    **Daily Impact on LLM Engineering:**
+    - **⚡ Training Efficiency** - Cross-entropy loss drives all modern language model training
+    - **📊 Model Evaluation** - Perplexity provides intuitive performance measurements
+    - **🔄 Fine-tuning & RLHF** - KL divergence ensures safe model alignment
+    - **🔍 Interpretability** - Mutual information reveals attention patterns and feature relationships
 
-$$I(x) = -\log P(x)$$
+!!! tip "🏭 Practical Impact - Why This Matters"
+    **The difference between understanding information theory deeply versus treating it as a black box:**
 
-The negative sign ensures that information content is always non-negative, since probabilities are between 0 and 1, making their logarithms negative. The choice of logarithm base determines the unit of measurement, with base 2 yielding bits and base $e$ yielding nats.
+    **Think of information theory as the "language" of uncertainty and prediction:**
+    - **Every prediction** your language model makes has an information content that reveals its confidence
+    - **Training objectives** like cross-entropy directly optimize information-theoretic measures
+    - **Evaluation metrics** like perplexity provide intuitive measures of model performance
+    - **Advanced techniques** like RLHF rely on KL divergence to maintain model safety
 
-### Intuitive Understanding
+    **Real business impact:**
+    - **Training optimization**: Understand why certain loss functions work better than others
+    - **Model evaluation**: Interpret perplexity scores and entropy measures with confidence
+    - **Safety & alignment**: Apply KL divergence constraints in RLHF and fine-tuning
+    - **Competitive advantage**: Debug training issues and optimize models with mathematical precision
 
-To understand why this formula captures our notion of information, consider these examples:
+!!! example "🌟 Real-World Impact and Industry Context"
+    **How leading AI companies leverage information theory techniques:**
 
-1. **Certain Event**: If $P(x) = 1$, then $I(x) = -\log(1) = 0$. An event that always happens carries no information because it tells us nothing new.
+    === "🦾 OpenAI's GPT Models"
+        **Cross-entropy optimization for language generation:**
+        - Uses cross-entropy loss as the primary training objective for all GPT variants
+        - Applies perplexity metrics for model evaluation and comparison
+        - Leverages KL divergence in RLHF for ChatGPT alignment
 
-2. **Impossible Event**: As $P(x) \to 0$, $I(x) \to \infty$. Extremely rare events carry enormous amounts of information.
+    === "🔍 Google's PaLM & Gemini"
+        **Information-theoretic evaluation and optimization:**
+        - Employs entropy analysis for understanding model uncertainty
+        - Uses mutual information for attention pattern analysis
+        - Applies information theory principles for model compression
 
-3. **Fair Coin**: If $P(x) = 0.5$, then $I(x) = -\log(0.5) = 1$ bit. This is the standard unit of information.
+    === "🧠 Anthropic's Claude"
+        **Safety and alignment through information theory:**
+        - Uses KL divergence constraints for constitutional AI training
+        - Applies entropy measures for uncertainty quantification
+        - Leverages information theory for bias detection and mitigation
 
-### Applications in Language Modeling
+    === "🏥 Healthcare AI Applications"
+        **Critical applications requiring uncertainty quantification:**
+        - **Clinical decision support** systems use entropy to flag uncertain diagnoses
+        - **Medical imaging** models apply mutual information for feature correlation analysis
+        - **Drug discovery** platforms leverage information theory for molecular property prediction
 
-In the context of language models, information content helps us understand the predictability of different tokens in different contexts. Consider these scenarios:
+    **The bottom line**: Understanding these mathematical foundations is the difference between optimizing your models effectively versus relying entirely on pre-built solutions. It's the difference between understanding why your model behaves a certain way versus treating it as an inscrutable black box.
 
-**High Information Content (Surprising)**: In the sentence "The patient was diagnosed with a rare case of...", the next word carries high information content because many possibilities exist, and the specific diagnosis chosen provides significant new information.
+!!! note "🏥 Healthcare Context Throughout This Guide"
+    **Why healthcare examples illuminate information theory concepts:**
 
-**Low Information Content (Predictable)**: In the sentence "The patient was diagnosed with the common...", the word "cold" or "flu" would have relatively low information content because these are highly predictable completions.
+    Throughout this guide, we will use examples from healthcare applications to illustrate these concepts. Healthcare represents one of the most promising and challenging domains for LLM applications, where understanding model uncertainty and confidence is critical.
 
-This concept directly relates to language model training and evaluation. When a model assigns high probability to the correct next token, it indicates that the model found that token unsurprising given the context, suggesting good performance. Conversely, when a model assigns low probability to the correct token, it indicates surprise, suggesting the model hasn't learned the appropriate patterns.
+    **Key healthcare applications:**
+    - **🩺 Clinical Decision Support** - Entropy helps identify when models should defer to human experts
+    - **📋 Medical Documentation** - Cross-entropy analysis evaluates model understanding of medical language
+    - **💊 Drug Discovery** - Mutual information reveals relationships between molecular properties
+    - **🔍 Diagnostic Assistance** - Perplexity serves as an early warning for out-of-distribution cases
 
-### Information Content in Medical Text Analysis
+    **Why healthcare is perfect for information theory:**
+    - **High stakes** require precise uncertainty quantification
+    - **Complex terminology** creates interesting entropy patterns
+    - **Safety requirements** demand robust mathematical foundations
+    - **Regulatory compliance** benefits from interpretable mathematical measures
 
-Healthcare applications provide particularly compelling examples of information content. Consider a clinical note analysis system processing the following text fragments:
+---
 
-1. "Patient presents with chest pain" - The word "pain" has relatively low information content because it's a common completion after "chest".
+## 🧮 Mathematical Foundations
 
-2. "Patient presents with pneumomediastinum" - The medical term "pneumomediastinum" has very high information content because it's a rare condition that provides specific diagnostic information.
+!!! abstract "🎯 Core Mathematical Concepts"
+    **Master the fundamental mathematical framework that powers Large Language Model analysis:**
 
-Understanding information content helps us design better healthcare NLP systems. For instance, we might want to flag high-information-content terms for special attention, as they often represent critical diagnostic information that requires careful handling.
+    - **📊 Probability Distributions** - The mathematical foundation where language models operate
+    - **📐 Logarithmic Measures** - Why logarithms are essential for information quantification
+    - **🎯 Expected Values** - Understanding averages in probabilistic systems
+    - **🔗 Coding Theory Connections** - The elegant relationship between information and optimal encoding
+    - **⚡ Computational Considerations** - Practical implementation challenges and solutions
 
-### Relationship to Model Confidence
+### 🎭 The Intuitive Understanding: Language Models as Probability Machines
 
-Information content provides a direct measure of model confidence. When a language model assigns high probability to a token (low information content), it's expressing confidence in that prediction. When it assigns low probability (high information content), it's expressing uncertainty.
+!!! tip "🏭 Conceptual Foundation - What Are Language Models?"
+    **Think of language models as sophisticated probability machines:**
 
-This relationship is crucial for deployment in high-stakes environments like healthcare. A medical AI assistant that produces high-information-content predictions might need to flag these for human review, while low-information-content predictions might be handled automatically.
+    **At its core**, a language model is a probability distribution over sequences of tokens. When you type "The patient presents with chest..." into a medical AI system, the model doesn't just guess the next word—it computes a complete probability distribution over all possible continuations.
+
+    **Mathematically**, given a sequence of tokens $w_1, w_2, ..., w_{n-1}$, the model assigns a probability to each possible next token $w_n$:
+
+    $$
+    P(w_n | w_1, w_2, ..., w_{n-1})
+    $$
+
+    **The quality** of a language model is fundamentally determined by how well this probability distribution matches the true distribution of human language. Information theory provides us with the mathematical tools to measure and optimize this alignment.
+
+!!! example "🔍 Concrete Example: Medical Text Prediction"
+    **How probability distributions work in healthcare AI:**
+
+    === "🎯 High-Probability Continuations"
+        **Input**: "The patient's blood pressure is 140 over..."
+
+        **Model predictions**:
+        - "90" → P = 0.45 (common BP reading)
+        - "80" → P = 0.25 (normal diastolic)
+        - "100" → P = 0.15 (elevated diastolic)
+        - Other values → P < 0.15
+
+    === "📊 Low-Probability Continuations"
+        **Input**: "The patient was diagnosed with pneumo..."
+
+        **Model predictions**:
+        - "pneumonia" → P = 0.70 (common condition)
+        - "pneumothorax" → P = 0.15 (less common)
+        - "pneumomediastinum" → P = 0.01 (very rare)
+        - Other completions → P < 0.14
+
+    === "🗜️ Information Theory Insight"
+        **What this reveals about information content:**
+
+        - **High-probability events** (like "pneumonia") carry less information
+        - **Low-probability events** (like "pneumomediastinum") carry more information
+        - **Information theory** quantifies this intuition mathematically
+
+### 📐 Logarithms: The Mathematical Foundation of Information
+
+!!! info "🌐 Why Logarithms Are Essential for Information Theory"
+    **The mathematical properties that make logarithms perfect for measuring information:**
+
+    Information theory relies heavily on logarithms, which might seem counterintuitive at first. The choice of logarithms is not arbitrary but stems from several important properties that make them ideal for measuring information:
+
+!!! note "📚 Key Properties of Logarithms in Information Theory"
+    **Property 1: Additivity**
+
+    $$
+    \log(P(A) \cdot P(B)) = \log(P(A)) + \log(P(B))
+    $$
+
+    **Why this matters**: The information content of independent events can be added together, which aligns with our intuition about combining information.
+
+    **Property 2: Monotonicity**
+
+    $$
+    P(x) \downarrow \Rightarrow -\log(P(x)) \uparrow
+    $$
+
+    **Why this matters**: As probability decreases, information content increases, reflecting our intuition that rare events carry more information.
+
+    **Property 3: Continuity**
+
+    Small changes in probability result in small changes in information content, ensuring numerical stability.
+
+    **Property 4: Unit Flexibility**
+
+    - **Base 2** → bits (computer science standard)
+    - **Base $e$** → nats (mathematical convenience)
+    - **Base 10** → dits (decimal information theory)
+
+### 📊 Expected Values: Understanding Averages in Probabilistic Systems
+
+!!! abstract "🎯 The Foundation of Information-Theoretic Measures"
+    **Why expected values are central to information theory:**
+
+    Many information-theoretic measures are defined as expected values over probability distributions. This concept is crucial because measures like entropy and cross-entropy capture average behavior rather than worst-case or best-case scenarios.
+
+!!! note "📚 Formal Definition: Expected Value"
+    **Definition: Expected Value**
+
+    For a discrete random variable $X$ with probability mass function $P(x)$, the expected value of a function $f(X)$ is:
+
+    $$
+    E[f(X)] = \sum_{x} P(x) \cdot f(x)
+    $$
+
+    **Key insight**: This formula appears everywhere in information theory:
+    - **Entropy** = Expected value of information content
+    - **Cross-entropy** = Expected value of coding cost
+    - **Mutual information** = Expected value of information gain
+
+!!! example "🔍 Healthcare Example: Expected Information Content"
+    **How expected values work in medical text analysis:**
+
+    === "🩺 Medical Vocabulary Analysis"
+        **Consider a medical text with token probabilities:**
+
+        | Token | Probability | Info Content (-log P) |
+        |-------|-------------|----------------------|
+        | "the" | 0.15 | 2.74 bits |
+        | "patient" | 0.08 | 3.64 bits |
+        | "pneumonia" | 0.02 | 5.64 bits |
+        | "pneumomediastinum" | 0.001 | 9.97 bits |
+
+    === "📊 Expected Information Calculation"
+        **Expected information content:**
+
+        $$
+        E[I] = 0.15 \times 2.74 + 0.08 \times 3.64 + 0.02 \times 5.64 + 0.001 \times 9.97 + ...
+        $$
+
+        **Result**: Average information per token ≈ 4.2 bits
+
+        **Interpretation**: On average, each medical token provides 4.2 bits of information
+
+### 🔗 The Elegant Connection to Coding Theory
+
+!!! info "🌐 Shannon's Source Coding Theorem"
+    **The beautiful relationship between information and optimal encoding:**
+
+    One of the most elegant aspects of information theory is its connection to optimal coding. Shannon's source coding theorem establishes that the entropy of a source represents the minimum average number of bits needed to encode messages from that source.
+
+    **Key insights:**
+    - **Entropy** = Optimal average code length
+    - **Cross-entropy** = Average code length using suboptimal code
+    - **KL divergence** = Extra bits needed due to suboptimal coding
+
+!!! tip "🏭 Intuitive Understanding - Coding Perspective"
+    **Think of information theory as optimal communication:**
+
+    **When your language model predicts text:**
+    1. **High-probability tokens** get short codes (like "the" → "01")
+    2. **Low-probability tokens** get long codes (like "pneumomediastinum" → "1101001011")
+    3. **Entropy** tells you the theoretical minimum average code length
+    4. **Cross-entropy** tells you how much longer your actual codes are
+
+    **Practical impact**: This perspective helps explain why entropy serves as a measure of uncertainty—more uncertain distributions require more bits to encode because we can't predict outcomes reliably.
+
+### ⚡ Practical Implementation Considerations
+
+!!! warning "🚀 Numerical Challenges in Large-Scale Applications"
+    **The computational reality of information theory for billion-parameter models:**
+
+    When implementing information-theoretic measures in practice, several numerical considerations become critical for stability and efficiency.
+
+!!! example "🔧 Implementation Best Practices"
+    **Essential techniques for robust information theory calculations:**
+
+    === "🛡️ Numerical Stability"
+        **Common issues and solutions:**
+
+        - **Problem**: Logarithms of very small probabilities cause underflow
+        - **Solution**: Add epsilon value: `torch.log(torch.clamp(probs, min=1e-8))`
+        - **Better**: Use log-space arithmetic throughout computation
+        - **Best**: Use PyTorch's built-in functions like `F.cross_entropy()`
+
+    === "⚡ Computational Efficiency"
+        **Optimization strategies for large vocabularies:**
+
+        - **Vectorization**: Use batch operations across vocabulary dimensions
+        - **Memory management**: Careful tensor allocation for large matrices
+        - **Sparse representations**: Exploit zero probabilities in distributions
+        - **Approximation methods**: Sampling for very large vocabularies
+
+    === "🎯 Hardware Considerations"
+        **Platform-specific optimizations:**
+
+        - **GPU optimization**: Leverage parallel computation for batch processing
+        - **TPU considerations**: Optimize for matrix multiplication patterns
+        - **Memory constraints**: Use gradient checkpointing for large models
+        - **Precision**: Balance between float16 and float32 for stability vs. speed
+
+---
+
+## 📊 Information Content and Surprise
+
+!!! abstract "🎯 The Foundation of All Information-Theoretic Measures"
+    **Master the concept that quantifies surprise and forms the basis of all other information theory concepts:**
+
+    The concept of information content, also known as self-information or surprise, forms the foundation of all information-theoretic measures. Developed by Claude Shannon, this concept formalizes our intuitive understanding that rare events carry more information than common ones.
+
+    **Core applications in LLMs:**
+    - **🎯 Token Prediction** - Quantify how surprising each predicted token is
+    - **📊 Model Confidence** - Measure uncertainty in model predictions
+    - **🔍 Anomaly Detection** - Identify unusual patterns in text
+    - **⚡ Compression** - Determine optimal encoding strategies
+
+### 🎭 The Mathematical Definition and Intuition
+
+!!! note "📚 Formal Definition: Information Content"
+    **Definition: Information Content (Self-Information)**
+
+    The information content of an event $x$ with probability $P(x)$ is defined as:
+
+    $$
+    I(x) = -\log P(x)
+    $$
+
+    **Key properties:**
+    - **📈 Non-negative**: Always $I(x) \geq 0$ since $0 \leq P(x) \leq 1$
+    - **📊 Inversely related to probability**: Lower probability → Higher information content
+    - **🎯 Unit flexibility**: Base 2 (bits), base $e$ (nats), base 10 (dits)
+    - **⚡ Additive for independent events**: $I(x,y) = I(x) + I(y)$ if independent
+
+!!! example "🔍 Intuitive Understanding Through Examples"
+    **Why this formula perfectly captures our notion of information:**
+
+    === "✅ Certain Event"
+        **Scenario**: $P(x) = 1$ (event always happens)
+
+        $$I(x) = -\log(1) = 0$$
+
+        **Interpretation**: An event that always happens carries **no information** because it tells us nothing new.
+
+        **LLM example**: Predicting "the" after "the patient saw" in medical text
+
+    === "🎲 Fair Coin"
+        **Scenario**: $P(x) = 0.5$ (equally likely outcomes)
+
+        $$I(x) = -\log_2(0.5) = 1 \text{ bit}$$
+
+        **Interpretation**: This is the **standard unit of information**—one bit of surprise.
+
+        **LLM example**: Choosing between "positive" or "negative" in test results
+
+    === "🦄 Rare Event"
+        **Scenario**: $P(x) = 0.001$ (very unlikely event)
+
+        $$I(x) = -\log_2(0.001) \approx 9.97 \text{ bits}$$
+
+        **Interpretation**: Extremely rare events carry **enormous amounts of information**.
+
+        **LLM example**: Predicting rare medical condition like "pneumomediastinum"
+
+!!! tip "🏭 Intuitive Understanding - Information as Surprise"
+    **Think of information content as measuring "how surprised you should be":**
+
+    **In everyday language:**
+    - **"The sun rose this morning"** → 0 bits (no surprise, always happens)
+    - **"It rained today"** → ~2-3 bits (somewhat surprising, depends on location/season)
+    - **"A meteor hit my backyard"** → ~20+ bits (extremely surprising, very rare)
+
+    **In language models:**
+    - **Common words** like "the", "and", "is" → Low information content
+    - **Contextual words** like "patient", "diagnosis" → Medium information content
+    - **Rare technical terms** like "pneumomediastinum" → High information content
+
+    **Why this matters**: Understanding information content helps you interpret model confidence and identify when models encounter unusual or out-of-distribution inputs.
+
+### 🤖 Applications in Language Modeling
+
+!!! info "🌐 Information Content in LLM Context"
+    **How information content reveals model behavior and performance:**
+
+    In the context of language models, information content helps us understand the predictability of different tokens in different contexts. This understanding is crucial for model evaluation, debugging, and optimization.
+
+!!! example "🔍 Healthcare Language Modeling Examples"
+    **How information content varies across different medical contexts:**
+
+    === "🔴 High Information Content (Surprising)"
+        **Context**: "The patient was diagnosed with a rare case of..."
+
+        **Analysis**:
+        - **Many possibilities exist** for rare conditions
+        - **Specific diagnosis** provides significant new information
+        - **Model uncertainty** is high, leading to high information content
+        - **Clinical significance**: Rare diagnoses require careful attention
+
+        **Information content**: ~8-12 bits for rare conditions
+
+    === "🟡 Medium Information Content (Contextual)"
+        **Context**: "Blood pressure reading shows 140 over..."
+
+        **Analysis**:
+        - **Several plausible values** (80, 90, 100)
+        - **Context constrains** but doesn't determine the answer
+        - **Medical knowledge** helps narrow possibilities
+        - **Clinical significance**: Standard vital sign documentation
+
+        **Information content**: ~3-5 bits for typical values
+
+    === "🟢 Low Information Content (Predictable)"
+        **Context**: "The patient was diagnosed with the common..."
+
+        **Analysis**:
+        - **Highly predictable** completions like "cold" or "flu"
+        - **Context strongly suggests** common conditions
+        - **Model confidence** is high, leading to low information content
+        - **Clinical significance**: Routine, well-understood conditions
+
+        **Information content**: ~1-3 bits for common conditions
+
+### 🏥 Information Content in Medical Text Analysis
+
+!!! abstract "🎯 Healthcare Applications of Information Content"
+    **How information content analysis improves medical AI systems:**
+
+    Healthcare applications provide particularly compelling examples of information content because medical language contains a rich mixture of common terms and highly specialized vocabulary with varying frequencies and importance.
+
+!!! example "🩺 Clinical Note Analysis System"
+    **Real-world examples of information content in healthcare NLP:**
+
+    === "📋 Routine Documentation"
+        **Text**: "Patient presents with chest pain"
+
+        **Analysis**:
+        - **"Patient"** → ~3 bits (common in medical text)
+        - **"presents"** → ~4 bits (standard medical phrasing)
+        - **"chest"** → ~5 bits (specific body region)
+        - **"pain"** → ~2 bits (very common after "chest")
+
+        **System response**: Process automatically, standard workflow
+
+    === "🚨 Critical Information"
+        **Text**: "Patient presents with pneumomediastinum"
+
+        **Analysis**:
+        - **"Patient"** → ~3 bits (common in medical text)
+        - **"presents"** → ~4 bits (standard medical phrasing)
+        - **"pneumomediastinum"** → ~12 bits (extremely rare condition)
+
+        **System response**: Flag for immediate attention, specialist review
+
+    === "🔍 Diagnostic Insights"
+        **Applications for healthcare NLP systems**:
+
+        - **🚨 Alert generation**: High-information-content terms trigger alerts
+        - **📊 Quality assessment**: Information content patterns indicate documentation quality
+        - **🎯 Attention mechanisms**: Focus on high-information-content medical terms
+        - **🔍 Anomaly detection**: Unusual information content patterns suggest errors
+
+### 🎯 Relationship to Model Confidence and Uncertainty
+
+!!! tip "🏭 Information Content as Confidence Measure"
+    **The direct relationship between information content and model confidence:**
+
+    Information content provides a direct, mathematically principled measure of model confidence. This relationship is particularly crucial for deployment in high-stakes environments like healthcare.
+
+!!! note "📊 Confidence Interpretation Framework"
+    **How to interpret information content for model confidence:**
+
+    **High Confidence (Low Information Content)**:
+    - **Range**: 0-3 bits
+    - **Interpretation**: Model is confident about prediction
+    - **Action**: Process automatically
+    - **Example**: Predicting "degrees" after "98.6"
+
+    **Medium Confidence (Medium Information Content)**:
+    - **Range**: 3-7 bits
+    - **Interpretation**: Model has moderate uncertainty
+    - **Action**: Apply additional validation
+    - **Example**: Predicting specific medication dosage
+
+    **Low Confidence (High Information Content)**:
+    - **Range**: 7+ bits
+    - **Interpretation**: Model is uncertain about prediction
+    - **Action**: Flag for human review
+    - **Example**: Predicting rare medical conditions
+
+!!! warning "🚨 Critical Applications in Healthcare AI"
+    **Why information content analysis is essential for medical AI safety:**
+
+    **Deployment considerations:**
+    - **🏥 Medical AI assistants** producing high-information-content predictions should flag these for human review
+    - **📋 Clinical documentation** systems can use information content to identify incomplete or unusual entries
+    - **💊 Drug interaction** systems can prioritize high-information-content combinations for additional verification
+    - **🔍 Diagnostic support** tools can use information content to gauge prediction reliability
 
 ### Encoding and Compression Perspectives
 
@@ -164,60 +534,165 @@ The concept of information content serves as the building block for all other in
 
 ---
 
+## 🌀 Entropy: Measuring Uncertainty
 
-## Entropy: Measuring Uncertainty {#entropy}
+!!! abstract "🎯 The Cornerstone of Information Theory"
+    **Master the concept that quantifies average uncertainty and forms the foundation of language model evaluation:**
 
-Entropy represents one of the most fundamental concepts in information theory and serves as a cornerstone for understanding language model behavior. Named after the thermodynamic concept of entropy, Shannon's information entropy quantifies the average amount of uncertainty or randomness in a probability distribution.
+    Entropy represents one of the most fundamental concepts in information theory and serves as a cornerstone for understanding language model behavior. Named after the thermodynamic concept of entropy, Shannon's information entropy quantifies the average amount of uncertainty or randomness in a probability distribution.
 
-### Mathematical Definition and Properties
+    **Core applications in LLMs:**
+    - **📊 Model Evaluation** - Measure average uncertainty in predictions
+    - **🎯 Training Monitoring** - Track learning progress through entropy reduction
+    - **🔍 Distribution Analysis** - Compare different model behaviors
+    - **⚡ Optimization** - Guide architecture and hyperparameter choices
 
-The entropy of a discrete random variable $X$ with probability mass function $P(x)$ is defined as:
+### 🎭 Mathematical Definition and Fundamental Properties
 
-$$H(X) = -\sum_{x \in X} P(x) \log P(x)$$
+!!! note "📚 Formal Definition: Shannon Entropy"
+    **Definition: Shannon Entropy**
 
-This formula represents the expected value of the information content across all possible outcomes. In other words, entropy is the average surprise we expect when sampling from the distribution.
+    The entropy of a discrete random variable $X$ with probability mass function $P(x)$ is defined as:
 
-Several key properties make entropy particularly useful for analyzing language models:
+    $$
+    H(X) = -\sum_{x \in X} P(x) \log P(x)
+    $$
 
-1. **Non-negativity**: $H(X) \geq 0$ for all distributions, with equality if and only if the distribution is deterministic (one outcome has probability 1).
+    **Key insight**: This formula represents the **expected value of information content** across all possible outcomes. In other words, entropy is the average surprise we expect when sampling from the distribution.
 
-2. **Maximum Entropy**: For a discrete random variable with $n$ possible outcomes, entropy is maximized when all outcomes are equally likely, giving $H(X) = \log n$.
+!!! success "✨ Fundamental Properties of Entropy"
+    **Essential properties that make entropy perfect for analyzing language models:**
 
-3. **Additivity**: For independent random variables $X$ and $Y$, $H(X,Y) = H(X) + H(Y)$.
+    === "📈 Non-negativity"
+        **Property**: $H(X) \geq 0$ for all distributions
 
-4. **Concavity**: Entropy is a concave function of the probability distribution, which has important implications for optimization.
+        **Equality condition**: $H(X) = 0$ if and only if the distribution is deterministic (one outcome has probability 1)
 
-### Entropy in Language Model Context
+        **LLM interpretation**: Zero entropy means the model is completely certain about its prediction
 
-In language modeling, entropy serves multiple crucial roles that directly impact model development and evaluation:
+    === "🎯 Maximum Entropy Principle"
+        **Property**: For $n$ possible outcomes, entropy is maximized when all outcomes are equally likely
 
-**Training Objective Relationship**: While language models typically optimize cross-entropy loss, understanding entropy helps us interpret what this optimization process achieves. The model learns to minimize the difference between its predicted distribution and the true distribution, effectively reducing the entropy of its predictions when they align with the training data.
+        $$H(X)_{\max} = \log n$$
 
-**Model Confidence Assessment**: High entropy in a model's output distribution indicates uncertainty about the next token, while low entropy suggests confidence. This relationship is particularly important in healthcare applications where model uncertainty must be carefully managed.
+        **LLM interpretation**: Uniform distributions over vocabulary represent maximum uncertainty
 
-**Vocabulary and Tokenization Analysis**: Entropy analysis can inform decisions about vocabulary size, tokenization strategies, and model architecture. Tokens or token sequences with consistently high entropy might benefit from special handling or additional model capacity.
+    === "➕ Additivity for Independence"
+        **Property**: For independent random variables $X$ and $Y$
 
-### Practical Interpretation of Entropy Values
+        $$H(X,Y) = H(X) + H(Y)$$
 
-Understanding what different entropy values mean in practice helps with model analysis and debugging:
+        **LLM interpretation**: Information from independent tokens can be added together
 
-**Low Entropy (0 to 2 bits)**:
-- Indicates highly predictable sequences
-- Model is confident about next token predictions
-- Common in formulaic text, repeated patterns, or well-learned sequences
-- Example: "The patient's temperature is 98.6 degrees [Fahrenheit]" - the word "Fahrenheit" has low entropy given the context
+    === "📊 Concavity"
+        **Property**: Entropy is a concave function of the probability distribution
 
-**Medium Entropy (2 to 6 bits)**:
-- Represents moderate uncertainty
-- Multiple plausible continuations exist
-- Typical for most natural language contexts
-- Example: "The patient complained of [chest pain/headache/nausea/fatigue]" - several symptoms are plausible
+        **Optimization implication**: Local maxima are global maxima, important for training dynamics
 
-**High Entropy (6+ bits)**:
-- Indicates high uncertainty or out-of-distribution inputs
-- Model struggles to predict next token
-- May signal need for additional training data or model capacity
-- Example: Technical medical terminology in contexts the model hasn't seen during training
+        **LLM interpretation**: Averaging probability distributions increases entropy
+
+### 🤖 Entropy in Language Model Context
+
+!!! info "🌐 Multiple Crucial Roles in LLM Development"
+    **How entropy serves as a fundamental tool across the entire LLM development lifecycle:**
+
+    In language modeling, entropy serves multiple crucial roles that directly impact model development, evaluation, and deployment. Understanding these applications helps you leverage entropy analysis for better model performance.
+
+!!! example "🔍 Key Applications in Language Model Development"
+    **How entropy analysis improves every aspect of LLM development:**
+
+    === "🎯 Training Objective Relationship"
+        **Connection to cross-entropy optimization:**
+
+        - **Training process**: Models minimize cross-entropy loss, which includes entropy terms
+        - **Learning dynamics**: Entropy reduction indicates the model is learning patterns
+        - **Convergence monitoring**: Entropy plateaus can signal training completion
+        - **Optimization insight**: Understanding entropy helps interpret loss curves
+
+    === "📊 Model Confidence Assessment"
+        **Using entropy to measure prediction uncertainty:**
+
+        - **High entropy** → Model is uncertain about next token
+        - **Low entropy** → Model is confident in its prediction
+        - **Healthcare critical**: Uncertainty quantification essential for medical applications
+        - **Deployment strategy**: Use entropy thresholds for human-in-the-loop systems
+
+    === "🔧 Architecture and Design Decisions"
+        **Informing model architecture through entropy analysis:**
+
+        - **Vocabulary optimization**: High-entropy tokens may need special handling
+        - **Tokenization strategy**: Entropy patterns inform subword choices
+        - **Model capacity**: Persistent high entropy indicates need for more parameters
+        - **Attention analysis**: Entropy in attention weights reveals focus patterns
+
+### 📊 Practical Interpretation of Entropy Values
+
+!!! tip "🏭 Understanding Entropy Ranges in Practice"
+    **What different entropy values mean for language model behavior and performance:**
+
+    Understanding entropy ranges helps with model analysis, debugging, and deployment decisions. Here's a practical framework for interpreting entropy values in language modeling contexts.
+
+!!! note "📈 Entropy Value Interpretation Framework"
+    **Comprehensive guide to entropy ranges and their implications:**
+
+    === "🟢 Low Entropy (0 to 2 bits)"
+        **Characteristics:**
+        - **Highly predictable sequences**
+        - **Model confidence is high**
+        - **Limited uncertainty in predictions**
+
+        **Common scenarios:**
+        - Formulaic text and repeated patterns
+        - Well-learned sequences from training data
+        - Deterministic contexts with clear answers
+
+        **Healthcare example**:
+        "The patient's temperature is 98.6 degrees [Fahrenheit]"
+        - Word "Fahrenheit" has ~0.5 bits entropy (highly predictable)
+
+        **Implications:**
+        - ✅ Good model performance in this context
+        - ✅ Safe for automated processing
+        - ⚠️ May indicate overfitting if too common
+
+    === "🟡 Medium Entropy (2 to 6 bits)"
+        **Characteristics:**
+        - **Moderate uncertainty in predictions**
+        - **Multiple plausible continuations exist**
+        - **Typical for most natural language**
+
+        **Common scenarios:**
+        - Standard conversational text
+        - Multiple valid completions possible
+        - Normal language model operation
+
+        **Healthcare example**:
+        "The patient complained of [chest pain/headache/nausea/fatigue]"
+        - Several symptoms are plausible (~4 bits entropy)
+
+        **Implications:**
+        - ✅ Normal model behavior
+        - ✅ Reasonable prediction quality
+        - 📊 Monitor for consistency across contexts
+
+    === "🔴 High Entropy (6+ bits)"
+        **Characteristics:**
+        - **High uncertainty or unusual inputs**
+        - **Model struggles with prediction**
+        - **Potential out-of-distribution scenarios**
+
+        **Common scenarios:**
+        - Technical terminology in unfamiliar contexts
+        - Out-of-distribution inputs
+        - Insufficient training data for context
+
+        **Healthcare example**:
+        Rare medical terminology in novel contexts (~8-12 bits)
+
+        **Implications:**
+        - ⚠️ May need additional training data
+        - 🚨 Flag for human review in critical applications
+        - 🔧 Consider model architecture improvements
 
 ### Entropy and Model Architecture
 
@@ -947,1258 +1422,6 @@ Perplexity serves as a fundamental bridge between the theoretical foundations of
 
 ---
 
-
-## PyTorch Implementation Examples {#pytorch-examples}
-
-This section provides comprehensive PyTorch implementations for all the information theory concepts covered in this study guide. Each implementation includes detailed explanations, practical examples using healthcare text, and best practices for numerical stability and computational efficiency.
-
-### Setup and Dependencies
-
-First, let's establish the necessary imports and utility functions that we'll use throughout our implementations:
-
-```python
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-import numpy as np
-import math
-from typing import List, Tuple, Optional, Union
-from collections import Counter
-import matplotlib.pyplot as plt
-
-# Set random seeds for reproducibility
-torch.manual_seed(42)
-np.random.seed(42)
-
-# Device configuration
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-print(f"Using device: {device}")
-
-# Utility function for numerical stability
-def add_epsilon(tensor: torch.Tensor, epsilon: float = 1e-8) -> torch.Tensor:
-    """Add small epsilon to avoid numerical issues with log(0)"""
-    return torch.clamp(tensor, min=epsilon)
-
-# Sample healthcare text data for demonstrations
-healthcare_texts = [
-    "The patient presents with acute chest pain and shortness of breath.",
-    "Blood pressure reading shows 140 over 90 mmHg indicating hypertension.",
-    "Laboratory results reveal elevated white blood cell count suggesting infection.",
-    "Patient reports chronic fatigue and joint pain lasting several months.",
-    "Imaging studies show no evidence of fracture or dislocation.",
-    "Medication adherence appears suboptimal based on patient interview.",
-    "Vital signs are stable with temperature 98.6 degrees Fahrenheit.",
-    "Patient has history of diabetes mellitus type 2 well controlled."
-]
-```
-
-### 1. Information Content Implementation
-
-Information content measures the "surprise" of individual events. Here's a comprehensive implementation:
-
-```python
-class InformationContent:
-    """
-    Calculate information content (self-information) for tokens and sequences.
-    
-    Information content I(x) = -log(P(x)) measures how surprising an event is.
-    Higher probability events have lower information content.
-    """
-    
-    def __init__(self, base: str = 'e'):
-        """
-        Initialize with logarithm base.
-        
-        Args:
-            base: 'e' for nats, '2' for bits, '10' for dits
-        """
-        self.base = base
-        if base == 'e':
-            self.log_fn = torch.log
-        elif base == '2':
-            self.log_fn = torch.log2
-        elif base == '10':
-            self.log_fn = torch.log10
-        else:
-            raise ValueError("Base must be 'e', '2', or '10'")
-    
-    def calculate(self, probabilities: torch.Tensor) -> torch.Tensor:
-        """
-        Calculate information content for given probabilities.
-        
-        Args:
-            probabilities: Tensor of probabilities [batch_size, vocab_size] or [vocab_size]
-            
-        Returns:
-            Information content tensor of same shape as input
-        """
-        # Ensure numerical stability
-        probs = add_epsilon(probabilities)
-        return -self.log_fn(probs)
-    
-    def from_logits(self, logits: torch.Tensor, dim: int = -1) -> torch.Tensor:
-        """
-        Calculate information content from logits.
-        
-        Args:
-            logits: Raw model outputs before softmax
-            dim: Dimension to apply softmax
-            
-        Returns:
-            Information content tensor
-        """
-        probs = F.softmax(logits, dim=dim)
-        return self.calculate(probs)
-    
-    def token_information(self, token_probs: torch.Tensor) -> torch.Tensor:
-        """
-        Calculate information content for specific tokens.
-        
-        Args:
-            token_probs: Probabilities of specific tokens [batch_size] or scalar
-            
-        Returns:
-            Information content for each token
-        """
-        return self.calculate(token_probs)
-
-# Example usage with healthcare text
-def demonstrate_information_content():
-    """Demonstrate information content calculation with healthcare examples."""
-    
-    # Create a simple vocabulary and probability distribution
-    vocab = ["the", "patient", "presents", "with", "pain", "pneumomediastinum"]
-    
-    # Simulate probabilities (pneumomediastinum is much rarer than "the")
-    probs = torch.tensor([0.15, 0.12, 0.08, 0.10, 0.05, 0.001])  # Simplified probabilities
-    
-    ic = InformationContent(base='2')  # Using bits for interpretability
-    information_content = ic.calculate(probs)
-    
-    print("Information Content Analysis (Healthcare Vocabulary):")
-    print("-" * 60)
-    for word, prob, ic_val in zip(vocab, probs, information_content):
-        print(f"{word:15} | P={prob:.3f} | I={ic_val:.2f} bits")
-    
-    print(f"\nObservation: 'pneumomediastinum' has {information_content[-1]:.1f} bits")
-    print(f"while 'the' has only {information_content[0]:.1f} bits")
-    print("Rare medical terms carry much more information!")
-
-# Run the demonstration
-demonstrate_information_content()
-```
-
-### 2. Entropy Implementation
-
-Entropy measures the average uncertainty in a probability distribution:
-
-```python
-class Entropy:
-    """
-    Calculate Shannon entropy for probability distributions.
-    
-    Entropy H(X) = -Σ P(x) * log(P(x)) measures average uncertainty.
-    """
-    
-    def __init__(self, base: str = 'e'):
-        """Initialize with logarithm base."""
-        self.base = base
-        if base == 'e':
-            self.log_fn = torch.log
-        elif base == '2':
-            self.log_fn = torch.log2
-        elif base == '10':
-            self.log_fn = torch.log10
-        else:
-            raise ValueError("Base must be 'e', '2', or '10'")
-    
-    def calculate(self, probabilities: torch.Tensor, dim: int = -1) -> torch.Tensor:
-        """
-        Calculate entropy of probability distribution.
-        
-        Args:
-            probabilities: Probability distribution [batch_size, vocab_size]
-            dim: Dimension to sum over
-            
-        Returns:
-            Entropy values [batch_size] if dim=-1, else reduced tensor
-        """
-        # Ensure numerical stability
-        probs = add_epsilon(probabilities)
-        
-        # Calculate -p * log(p) for each element
-        log_probs = self.log_fn(probs)
-        entropy_terms = -probs * log_probs
-        
-        # Sum over the specified dimension
-        return torch.sum(entropy_terms, dim=dim)
-    
-    def from_logits(self, logits: torch.Tensor, dim: int = -1) -> torch.Tensor:
-        """Calculate entropy from raw logits."""
-        probs = F.softmax(logits, dim=dim)
-        return self.calculate(probs, dim=dim)
-    
-    def conditional_entropy(self, joint_probs: torch.Tensor, 
-                          marginal_probs: torch.Tensor) -> torch.Tensor:
-        """
-        Calculate conditional entropy H(Y|X).
-        
-        Args:
-            joint_probs: Joint probability P(X,Y) [batch_size, x_dim, y_dim]
-            marginal_probs: Marginal probability P(X) [batch_size, x_dim]
-            
-        Returns:
-            Conditional entropy H(Y|X)
-        """
-        # Calculate conditional probabilities P(Y|X) = P(X,Y) / P(X)
-        marginal_expanded = marginal_probs.unsqueeze(-1)
-        conditional_probs = joint_probs / add_epsilon(marginal_expanded)
-        
-        # Calculate entropy for each conditional distribution
-        conditional_entropies = self.calculate(conditional_probs, dim=-1)
-        
-        # Weight by marginal probabilities and sum
-        return torch.sum(marginal_probs * conditional_entropies, dim=-1)
-
-def demonstrate_entropy():
-    """Demonstrate entropy calculation with different distributions."""
-    
-    entropy_calc = Entropy(base='2')
-    
-    # Example 1: Uniform distribution (maximum entropy)
-    uniform_probs = torch.ones(8) / 8  # 8 equally likely outcomes
-    uniform_entropy = entropy_calc.calculate(uniform_probs)
-    
-    # Example 2: Skewed distribution (lower entropy)
-    skewed_probs = torch.tensor([0.7, 0.15, 0.05, 0.03, 0.02, 0.02, 0.02, 0.01])
-    skewed_entropy = entropy_calc.calculate(skewed_probs)
-    
-    # Example 3: Deterministic distribution (minimum entropy)
-    deterministic_probs = torch.tensor([1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
-    deterministic_entropy = entropy_calc.calculate(deterministic_probs)
-    
-    print("Entropy Analysis:")
-    print("-" * 40)
-    print(f"Uniform distribution:      {uniform_entropy:.3f} bits")
-    print(f"Skewed distribution:       {skewed_entropy:.3f} bits")
-    print(f"Deterministic distribution: {deterministic_entropy:.3f} bits")
-    print(f"Maximum possible entropy:   {math.log2(8):.3f} bits")
-    
-    # Healthcare example: Model uncertainty in diagnosis
-    print("\nHealthcare Example - Diagnostic Uncertainty:")
-    print("-" * 50)
-    
-    # High uncertainty case (multiple possible diagnoses)
-    uncertain_diagnosis = torch.tensor([0.25, 0.20, 0.18, 0.15, 0.12, 0.10])
-    uncertain_entropy = entropy_calc.calculate(uncertain_diagnosis)
-    
-    # Low uncertainty case (clear primary diagnosis)
-    certain_diagnosis = torch.tensor([0.85, 0.08, 0.03, 0.02, 0.01, 0.01])
-    certain_entropy = entropy_calc.calculate(certain_diagnosis)
-    
-    print(f"Uncertain diagnosis entropy: {uncertain_entropy:.3f} bits")
-    print(f"Certain diagnosis entropy:   {certain_entropy:.3f} bits")
-    print("\nHigher entropy suggests need for additional tests or expert consultation!")
-
-demonstrate_entropy()
-```
-
-### 3. Cross-Entropy Implementation
-
-Cross-entropy is the foundation of language model training:
-
-```python
-class CrossEntropy:
-    """
-    Calculate cross-entropy between true and predicted distributions.
-    
-    Cross-entropy H(P,Q) = -Σ P(x) * log(Q(x)) measures the difference
-    between true distribution P and predicted distribution Q.
-    """
-    
-    def __init__(self, base: str = 'e', reduction: str = 'mean'):
-        """
-        Initialize cross-entropy calculator.
-        
-        Args:
-            base: Logarithm base ('e', '2', or '10')
-            reduction: How to reduce batch dimension ('mean', 'sum', 'none')
-        """
-        self.base = base
-        self.reduction = reduction
-        
-        if base == 'e':
-            self.log_fn = torch.log
-        elif base == '2':
-            self.log_fn = torch.log2
-        elif base == '10':
-            self.log_fn = torch.log10
-        else:
-            raise ValueError("Base must be 'e', '2', or '10'")
-    
-    def calculate(self, true_probs: torch.Tensor, 
-                  pred_probs: torch.Tensor) -> torch.Tensor:
-        """
-        Calculate cross-entropy between probability distributions.
-        
-        Args:
-            true_probs: True probability distribution [batch_size, vocab_size]
-            pred_probs: Predicted probability distribution [batch_size, vocab_size]
-            
-        Returns:
-            Cross-entropy loss
-        """
-        # Ensure numerical stability
-        pred_probs = add_epsilon(pred_probs)
-        
-        # Calculate -p * log(q)
-        log_pred_probs = self.log_fn(pred_probs)
-        cross_entropy_terms = -true_probs * log_pred_probs
-        
-        # Sum over vocabulary dimension
-        cross_entropy = torch.sum(cross_entropy_terms, dim=-1)
-        
-        # Apply reduction
-        if self.reduction == 'mean':
-            return torch.mean(cross_entropy)
-        elif self.reduction == 'sum':
-            return torch.sum(cross_entropy)
-        else:
-            return cross_entropy
-    
-    def from_logits(self, true_probs: torch.Tensor, 
-                    pred_logits: torch.Tensor) -> torch.Tensor:
-        """Calculate cross-entropy from logits (more numerically stable)."""
-        pred_probs = F.softmax(pred_logits, dim=-1)
-        return self.calculate(true_probs, pred_probs)
-    
-    def sparse_cross_entropy(self, true_indices: torch.Tensor, 
-                           pred_logits: torch.Tensor) -> torch.Tensor:
-        """
-        Calculate cross-entropy for sparse true labels (typical in LM training).
-        
-        Args:
-            true_indices: True token indices [batch_size]
-            pred_logits: Predicted logits [batch_size, vocab_size]
-            
-        Returns:
-            Cross-entropy loss
-        """
-        # Use PyTorch's built-in function for efficiency and stability
-        if self.base == 'e':
-            return F.cross_entropy(pred_logits, true_indices, reduction=self.reduction)
-        else:
-            # Convert to desired base
-            ce_nats = F.cross_entropy(pred_logits, true_indices, reduction='none')
-            if self.base == '2':
-                ce_converted = ce_nats / math.log(2)
-            elif self.base == '10':
-                ce_converted = ce_nats / math.log(10)
-            
-            if self.reduction == 'mean':
-                return torch.mean(ce_converted)
-            elif self.reduction == 'sum':
-                return torch.sum(ce_converted)
-            else:
-                return ce_converted
-
-def demonstrate_cross_entropy():
-    """Demonstrate cross-entropy calculation with language model examples."""
-    
-    ce_calc = CrossEntropy(base='e', reduction='none')
-    
-    # Simulate a simple language model scenario
-    vocab_size = 1000
-    batch_size = 4
-    
-    # Create some example predictions (logits)
-    pred_logits = torch.randn(batch_size, vocab_size)
-    
-    # True next tokens (sparse format)
-    true_tokens = torch.tensor([42, 156, 789, 23])  # Example token indices
-    
-    # Calculate cross-entropy loss
-    ce_loss = ce_calc.sparse_cross_entropy(true_tokens, pred_logits)
-    
-    print("Cross-Entropy Loss Analysis:")
-    print("-" * 40)
-    print(f"Batch size: {batch_size}")
-    print(f"Vocabulary size: {vocab_size}")
-    print(f"Cross-entropy losses: {ce_loss}")
-    print(f"Average loss: {ce_loss.mean():.4f}")
-    
-    # Healthcare example: Medical term prediction
-    print("\nHealthcare Example - Medical Term Prediction:")
-    print("-" * 55)
-    
-    # Simulate predictions for medical terms
-    medical_vocab = ["pain", "fever", "nausea", "fatigue", "pneumonia"]
-    vocab_size = len(medical_vocab)
-    
-    # Good prediction (model is confident about correct term)
-    good_logits = torch.tensor([[2.0, -1.0, -1.0, -1.0, -1.0]])  # High confidence in "pain"
-    true_token = torch.tensor([0])  # "pain" is correct
-    
-    # Poor prediction (model is uncertain)
-    poor_logits = torch.tensor([[0.1, 0.1, 0.1, 0.1, 0.1]])  # Uniform uncertainty
-    
-    good_loss = ce_calc.sparse_cross_entropy(true_token, good_logits)
-    poor_loss = ce_calc.sparse_cross_entropy(true_token, poor_logits)
-    
-    print(f"Good prediction loss: {good_loss.item():.4f}")
-    print(f"Poor prediction loss: {poor_loss.item():.4f}")
-    print(f"Loss ratio: {poor_loss.item() / good_loss.item():.2f}x higher for poor prediction")
-
-demonstrate_cross_entropy()
-```
-
-### 4. KL Divergence Implementation
-
-KL divergence measures the difference between two probability distributions:
-
-```python
-class KLDivergence:
-    """
-    Calculate Kullback-Leibler divergence between probability distributions.
-    
-    KL(P||Q) = Σ P(x) * log(P(x)/Q(x)) measures how much distribution P
-    differs from distribution Q.
-    """
-    
-    def __init__(self, base: str = 'e', reduction: str = 'batchmean'):
-        """
-        Initialize KL divergence calculator.
-        
-        Args:
-            base: Logarithm base ('e', '2', or '10')
-            reduction: How to reduce ('batchmean', 'sum', 'mean', 'none')
-        """
-        self.base = base
-        self.reduction = reduction
-        
-        if base == 'e':
-            self.log_fn = torch.log
-        elif base == '2':
-            self.log_fn = torch.log2
-        elif base == '10':
-            self.log_fn = torch.log10
-        else:
-            raise ValueError("Base must be 'e', '2', or '10'")
-    
-    def calculate(self, p_probs: torch.Tensor, 
-                  q_probs: torch.Tensor) -> torch.Tensor:
-        """
-        Calculate KL divergence KL(P||Q).
-        
-        Args:
-            p_probs: Distribution P [batch_size, vocab_size]
-            q_probs: Distribution Q [batch_size, vocab_size]
-            
-        Returns:
-            KL divergence
-        """
-        # Ensure numerical stability
-        p_probs = add_epsilon(p_probs)
-        q_probs = add_epsilon(q_probs)
-        
-        # Calculate P * log(P/Q) = P * (log(P) - log(Q))
-        log_p = self.log_fn(p_probs)
-        log_q = self.log_fn(q_probs)
-        
-        kl_terms = p_probs * (log_p - log_q)
-        kl_div = torch.sum(kl_terms, dim=-1)
-        
-        # Apply reduction
-        if self.reduction == 'batchmean':
-            return torch.mean(kl_div)
-        elif self.reduction == 'sum':
-            return torch.sum(kl_div)
-        elif self.reduction == 'mean':
-            return torch.mean(kl_div)
-        else:
-            return kl_div
-    
-    def from_logits(self, p_logits: torch.Tensor, 
-                    q_logits: torch.Tensor) -> torch.Tensor:
-        """Calculate KL divergence from logits."""
-        p_probs = F.softmax(p_logits, dim=-1)
-        q_probs = F.softmax(q_logits, dim=-1)
-        return self.calculate(p_probs, q_probs)
-    
-    def pytorch_kl_div(self, p_logits: torch.Tensor, 
-                       q_logits: torch.Tensor) -> torch.Tensor:
-        """Use PyTorch's built-in KL divergence (more efficient)."""
-        # PyTorch's kl_div expects log probabilities as first argument
-        log_q = F.log_softmax(q_logits, dim=-1)
-        p_probs = F.softmax(p_logits, dim=-1)
-        
-        kl_div = F.kl_div(log_q, p_probs, reduction=self.reduction)
-        
-        # Convert to desired base if needed
-        if self.base == '2':
-            return kl_div / math.log(2)
-        elif self.base == '10':
-            return kl_div / math.log(10)
-        else:
-            return kl_div
-
-def demonstrate_kl_divergence():
-    """Demonstrate KL divergence with RLHF and fine-tuning examples."""
-    
-    kl_calc = KLDivergence(base='e', reduction='none')
-    
-    # Example 1: RLHF scenario - measuring deviation from reference model
-    print("KL Divergence Analysis - RLHF Scenario:")
-    print("-" * 45)
-    
-    vocab_size = 100
-    batch_size = 3
-    
-    # Reference model (original model before RLHF)
-    ref_logits = torch.randn(batch_size, vocab_size)
-    
-    # Fine-tuned model (after RLHF training)
-    # Scenario 1: Small deviation (good)
-    small_deviation_logits = ref_logits + 0.1 * torch.randn(batch_size, vocab_size)
-    
-    # Scenario 2: Large deviation (potentially problematic)
-    large_deviation_logits = ref_logits + 2.0 * torch.randn(batch_size, vocab_size)
-    
-    small_kl = kl_calc.from_logits(ref_logits, small_deviation_logits)
-    large_kl = kl_calc.from_logits(ref_logits, large_deviation_logits)
-    
-    print(f"Small deviation KL: {small_kl.mean():.4f} ± {small_kl.std():.4f}")
-    print(f"Large deviation KL: {large_kl.mean():.4f} ± {large_kl.std():.4f}")
-    print(f"Ratio: {large_kl.mean() / small_kl.mean():.1f}x larger")
-    
-    # Example 2: Healthcare domain adaptation
-    print("\nHealthcare Example - Domain Adaptation:")
-    print("-" * 45)
-    
-    # General model distribution (more uniform over general vocabulary)
-    general_probs = F.softmax(torch.randn(1, 10), dim=-1)
-    
-    # Medical model distribution (focused on medical terms)
-    medical_logits = torch.randn(1, 10)
-    medical_logits[0, [2, 5, 7]] += 2.0  # Boost medical terms
-    medical_probs = F.softmax(medical_logits, dim=-1)
-    
-    # Calculate bidirectional KL divergence
-    kl_general_to_medical = kl_calc.calculate(general_probs, medical_probs)
-    kl_medical_to_general = kl_calc.calculate(medical_probs, general_probs)
-    
-    print(f"KL(General || Medical): {kl_general_to_medical.item():.4f}")
-    print(f"KL(Medical || General): {kl_medical_to_general.item():.4f}")
-    print("Note: KL divergence is asymmetric!")
-    
-    # Jensen-Shannon divergence (symmetric alternative)
-    js_div = 0.5 * (kl_general_to_medical + kl_medical_to_general)
-    print(f"Jensen-Shannon divergence: {js_div.item():.4f}")
-
-demonstrate_kl_divergence()
-```
-
-### 5. Mutual Information Implementation
-
-Mutual information quantifies the shared information between variables:
-
-```python
-class MutualInformation:
-    """
-    Calculate mutual information between random variables.
-    
-    I(X;Y) = H(X) - H(X|Y) = H(Y) - H(Y|X) = H(X) + H(Y) - H(X,Y)
-    measures how much information X and Y share.
-    """
-    
-    def __init__(self, base: str = 'e'):
-        """Initialize with logarithm base."""
-        self.base = base
-        self.entropy_calc = Entropy(base=base)
-    
-    def calculate_discrete(self, joint_probs: torch.Tensor) -> torch.Tensor:
-        """
-        Calculate mutual information from joint probability distribution.
-        
-        Args:
-            joint_probs: Joint probability P(X,Y) [x_dim, y_dim]
-            
-        Returns:
-            Mutual information I(X;Y)
-        """
-        # Calculate marginal probabilities
-        marginal_x = torch.sum(joint_probs, dim=1)  # P(X)
-        marginal_y = torch.sum(joint_probs, dim=0)  # P(Y)
-        
-        # Calculate entropies
-        h_x = self.entropy_calc.calculate(marginal_x)
-        h_y = self.entropy_calc.calculate(marginal_y)
-        h_xy = self.entropy_calc.calculate(joint_probs.flatten())
-        
-        # I(X;Y) = H(X) + H(Y) - H(X,Y)
-        return h_x + h_y - h_xy
-    
-    def calculate_from_samples(self, x_samples: torch.Tensor, 
-                             y_samples: torch.Tensor, 
-                             bins: int = 10) -> torch.Tensor:
-        """
-        Estimate mutual information from samples using binning.
-        
-        Args:
-            x_samples: Samples from X [n_samples]
-            y_samples: Samples from Y [n_samples]
-            bins: Number of bins for discretization
-            
-        Returns:
-            Estimated mutual information
-        """
-        # Discretize continuous variables
-        x_discrete = torch.floor(bins * (x_samples - x_samples.min()) / 
-                               (x_samples.max() - x_samples.min() + 1e-8)).long()
-        y_discrete = torch.floor(bins * (y_samples - y_samples.min()) / 
-                               (y_samples.max() - y_samples.min() + 1e-8)).long()
-        
-        # Clamp to valid range
-        x_discrete = torch.clamp(x_discrete, 0, bins - 1)
-        y_discrete = torch.clamp(y_discrete, 0, bins - 1)
-        
-        # Create joint histogram
-        joint_hist = torch.zeros(bins, bins)
-        for i in range(len(x_samples)):
-            joint_hist[x_discrete[i], y_discrete[i]] += 1
-        
-        # Convert to probabilities
-        joint_probs = joint_hist / joint_hist.sum()
-        
-        return self.calculate_discrete(joint_probs)
-    
-    def neural_estimation(self, x_samples: torch.Tensor, 
-                         y_samples: torch.Tensor,
-                         hidden_dim: int = 64,
-                         n_epochs: int = 100) -> torch.Tensor:
-        """
-        Estimate mutual information using neural estimation (MINE).
-        
-        This is a simplified version of the MINE algorithm.
-        """
-        
-        class MINENet(nn.Module):
-            def __init__(self, x_dim: int, y_dim: int, hidden_dim: int):
-                super().__init__()
-                self.net = nn.Sequential(
-                    nn.Linear(x_dim + y_dim, hidden_dim),
-                    nn.ReLU(),
-                    nn.Linear(hidden_dim, hidden_dim),
-                    nn.ReLU(),
-                    nn.Linear(hidden_dim, 1)
-                )
-            
-            def forward(self, x: torch.Tensor, y: torch.Tensor) -> torch.Tensor:
-                xy = torch.cat([x, y], dim=-1)
-                return self.net(xy)
-        
-        # Prepare data
-        x_dim = x_samples.shape[-1] if x_samples.dim() > 1 else 1
-        y_dim = y_samples.shape[-1] if y_samples.dim() > 1 else 1
-        
-        if x_samples.dim() == 1:
-            x_samples = x_samples.unsqueeze(-1)
-        if y_samples.dim() == 1:
-            y_samples = y_samples.unsqueeze(-1)
-        
-        # Create shuffled samples for negative examples
-        y_shuffled = y_samples[torch.randperm(len(y_samples))]
-        
-        # Initialize network
-        mine_net = MINENet(x_dim, y_dim, hidden_dim)
-        optimizer = torch.optim.Adam(mine_net.parameters(), lr=0.01)
-        
-        # Training loop
-        for epoch in range(n_epochs):
-            # Positive samples
-            pos_scores = mine_net(x_samples, y_samples)
-            
-            # Negative samples
-            neg_scores = mine_net(x_samples, y_shuffled)
-            
-            # MINE loss
-            loss = -(torch.mean(pos_scores) - torch.log(torch.mean(torch.exp(neg_scores))))
-            
-            optimizer.zero_grad()
-            loss.backward()
-            optimizer.step()
-        
-        # Final estimate
-        with torch.no_grad():
-            pos_scores = mine_net(x_samples, y_samples)
-            neg_scores = mine_net(x_samples, y_shuffled)
-            mi_estimate = torch.mean(pos_scores) - torch.log(torch.mean(torch.exp(neg_scores)))
-        
-        return mi_estimate
-
-def demonstrate_mutual_information():
-    """Demonstrate mutual information calculation with healthcare examples."""
-    
-    mi_calc = MutualInformation(base='2')
-    
-    # Example 1: Discrete case - symptoms and diagnoses
-    print("Mutual Information Analysis - Healthcare:")
-    print("-" * 45)
-    
-    # Simulate joint distribution of symptoms and diagnoses
-    # Rows: symptoms (fever, cough, fatigue)
-    # Cols: diagnoses (flu, cold, pneumonia)
-    joint_probs = torch.tensor([
-        [0.15, 0.05, 0.02],  # fever
-        [0.10, 0.20, 0.08],  # cough  
-        [0.08, 0.12, 0.20]   # fatigue
-    ])
-    
-    # Normalize to ensure it's a valid probability distribution
-    joint_probs = joint_probs / joint_probs.sum()
-    
-    mi_symptoms_diagnosis = mi_calc.calculate_discrete(joint_probs)
-    
-    print(f"Mutual information between symptoms and diagnosis: {mi_symptoms_diagnosis:.4f} bits")
-    
-    # Calculate marginal entropies for context
-    marginal_symptoms = torch.sum(joint_probs, dim=1)
-    marginal_diagnosis = torch.sum(joint_probs, dim=0)
-    
-    h_symptoms = mi_calc.entropy_calc.calculate(marginal_symptoms)
-    h_diagnosis = mi_calc.entropy_calc.calculate(marginal_diagnosis)
-    
-    print(f"Symptom entropy: {h_symptoms:.4f} bits")
-    print(f"Diagnosis entropy: {h_diagnosis:.4f} bits")
-    print(f"Information reduction: {mi_symptoms_diagnosis/h_diagnosis:.1%}")
-    
-    # Example 2: Continuous case - vital signs correlation
-    print("\nContinuous Case - Vital Signs Correlation:")
-    print("-" * 45)
-    
-    n_samples = 1000
-    
-    # Generate correlated vital signs (blood pressure and heart rate)
-    # Higher correlation = higher mutual information
-    
-    # Case 1: High correlation
-    bp_base = torch.randn(n_samples)
-    hr_high_corr = bp_base + 0.2 * torch.randn(n_samples)  # Highly correlated
-    
-    # Case 2: Low correlation  
-    hr_low_corr = torch.randn(n_samples)  # Independent
-    
-    mi_high = mi_calc.calculate_from_samples(bp_base, hr_high_corr, bins=20)
-    mi_low = mi_calc.calculate_from_samples(bp_base, hr_low_corr, bins=20)
-    
-    print(f"MI (BP, HR) - high correlation: {mi_high:.4f} bits")
-    print(f"MI (BP, HR) - low correlation:  {mi_low:.4f} bits")
-    print(f"Ratio: {mi_high/mi_low:.1f}x higher for correlated variables")
-    
-    # Example 3: Attention analysis simulation
-    print("\nAttention Analysis Simulation:")
-    print("-" * 35)
-    
-    # Simulate attention weights and output quality
-    # High MI suggests attention is focusing on informative tokens
-    
-    attention_weights = torch.softmax(torch.randn(50), dim=0)  # 50 tokens
-    
-    # Create output quality that depends on attention to important tokens
-    important_tokens = torch.zeros(50)
-    important_tokens[[5, 12, 23, 34, 41]] = 1.0  # Mark important tokens
-    
-    output_quality = torch.sum(attention_weights * important_tokens) + 0.1 * torch.randn(1)
-    
-    # Replicate for multiple examples
-    attention_batch = torch.randn(100, 50)
-    quality_batch = torch.sum(F.softmax(attention_batch, dim=-1) * important_tokens, dim=-1)
-    quality_batch += 0.1 * torch.randn(100)
-    
-    # Calculate MI between attention on important tokens and output quality
-    attention_on_important = torch.sum(F.softmax(attention_batch, dim=-1) * important_tokens, dim=-1)
-    
-    mi_attention = mi_calc.calculate_from_samples(attention_on_important, quality_batch, bins=15)
-    
-    print(f"MI (Attention on important tokens, Output quality): {mi_attention:.4f} bits")
-    print("Higher MI suggests attention mechanism is working effectively!")
-
-demonstrate_mutual_information()
-```
-
-### 6. Perplexity Implementation
-
-Perplexity is the standard evaluation metric for language models:
-
-```python
-class Perplexity:
-    """
-    Calculate perplexity for language model evaluation.
-    
-    Perplexity = exp(cross_entropy) measures how surprised the model
-    is by the actual sequence. Lower perplexity indicates better performance.
-    """
-    
-    def __init__(self, base: str = 'e', ignore_index: int = -100):
-        """
-        Initialize perplexity calculator.
-        
-        Args:
-            base: Logarithm base for cross-entropy calculation
-            ignore_index: Token index to ignore (e.g., padding tokens)
-        """
-        self.base = base
-        self.ignore_index = ignore_index
-        self.cross_entropy = CrossEntropy(base=base, reduction='none')
-    
-    def calculate(self, pred_logits: torch.Tensor, 
-                  true_tokens: torch.Tensor,
-                  mask: Optional[torch.Tensor] = None) -> torch.Tensor:
-        """
-        Calculate perplexity from model predictions.
-        
-        Args:
-            pred_logits: Model predictions [batch_size, seq_len, vocab_size]
-            true_tokens: True token indices [batch_size, seq_len]
-            mask: Optional mask for valid tokens [batch_size, seq_len]
-            
-        Returns:
-            Perplexity value
-        """
-        # Reshape for cross-entropy calculation
-        batch_size, seq_len, vocab_size = pred_logits.shape
-        pred_logits_flat = pred_logits.view(-1, vocab_size)
-        true_tokens_flat = true_tokens.view(-1)
-        
-        # Calculate cross-entropy for each token
-        ce_losses = F.cross_entropy(pred_logits_flat, true_tokens_flat, 
-                                  ignore_index=self.ignore_index, reduction='none')
-        
-        # Apply mask if provided
-        if mask is not None:
-            mask_flat = mask.view(-1)
-            ce_losses = ce_losses * mask_flat
-            valid_tokens = mask_flat.sum()
-        else:
-            # Count valid tokens (not ignored)
-            valid_mask = (true_tokens_flat != self.ignore_index)
-            ce_losses = ce_losses * valid_mask.float()
-            valid_tokens = valid_mask.sum()
-        
-        # Calculate average cross-entropy
-        avg_ce = ce_losses.sum() / valid_tokens
-        
-        # Convert to perplexity
-        if self.base == 'e':
-            return torch.exp(avg_ce)
-        elif self.base == '2':
-            return 2 ** avg_ce
-        elif self.base == '10':
-            return 10 ** avg_ce
-    
-    def calculate_sequence_level(self, pred_logits: torch.Tensor, 
-                               true_tokens: torch.Tensor,
-                               mask: Optional[torch.Tensor] = None) -> torch.Tensor:
-        """
-        Calculate per-sequence perplexity.
-        
-        Returns:
-            Perplexity for each sequence [batch_size]
-        """
-        batch_size, seq_len, vocab_size = pred_logits.shape
-        
-        perplexities = []
-        for i in range(batch_size):
-            seq_logits = pred_logits[i]  # [seq_len, vocab_size]
-            seq_tokens = true_tokens[i]  # [seq_len]
-            seq_mask = mask[i] if mask is not None else None
-            
-            # Calculate cross-entropy for this sequence
-            ce_losses = F.cross_entropy(seq_logits, seq_tokens, 
-                                      ignore_index=self.ignore_index, reduction='none')
-            
-            if seq_mask is not None:
-                ce_losses = ce_losses * seq_mask
-                valid_tokens = seq_mask.sum()
-            else:
-                valid_mask = (seq_tokens != self.ignore_index)
-                ce_losses = ce_losses * valid_mask.float()
-                valid_tokens = valid_mask.sum()
-            
-            if valid_tokens > 0:
-                avg_ce = ce_losses.sum() / valid_tokens
-                if self.base == 'e':
-                    perplexity = torch.exp(avg_ce)
-                elif self.base == '2':
-                    perplexity = 2 ** avg_ce
-                elif self.base == '10':
-                    perplexity = 10 ** avg_ce
-                perplexities.append(perplexity)
-            else:
-                perplexities.append(torch.tensor(float('inf')))
-        
-        return torch.stack(perplexities)
-    
-    def sliding_window_perplexity(self, pred_logits: torch.Tensor, 
-                                true_tokens: torch.Tensor,
-                                window_size: int = 100,
-                                stride: int = 50) -> List[float]:
-        """
-        Calculate perplexity over sliding windows (useful for long sequences).
-        
-        Args:
-            pred_logits: Model predictions [1, seq_len, vocab_size]
-            true_tokens: True tokens [1, seq_len]
-            window_size: Size of each window
-            stride: Step size between windows
-            
-        Returns:
-            List of perplexity values for each window
-        """
-        seq_len = pred_logits.shape[1]
-        perplexities = []
-        
-        for start in range(0, seq_len - window_size + 1, stride):
-            end = start + window_size
-            window_logits = pred_logits[:, start:end, :]
-            window_tokens = true_tokens[:, start:end]
-            
-            ppl = self.calculate(window_logits, window_tokens)
-            perplexities.append(ppl.item())
-        
-        return perplexities
-
-def demonstrate_perplexity():
-    """Demonstrate perplexity calculation with healthcare text examples."""
-    
-    ppl_calc = Perplexity(base='e')
-    
-    # Simulate language model evaluation scenario
-    print("Perplexity Analysis - Language Model Evaluation:")
-    print("-" * 55)
-    
-    vocab_size = 1000
-    seq_len = 20
-    batch_size = 4
-    
-    # Simulate different model quality scenarios
-    
-    # Scenario 1: Good model (confident, correct predictions)
-    good_logits = torch.randn(batch_size, seq_len, vocab_size)
-    true_tokens = torch.randint(0, vocab_size, (batch_size, seq_len))
-    
-    # Boost the probability of correct tokens
-    for b in range(batch_size):
-        for s in range(seq_len):
-            good_logits[b, s, true_tokens[b, s]] += 3.0
-    
-    # Scenario 2: Poor model (uncertain predictions)
-    poor_logits = torch.randn(batch_size, seq_len, vocab_size) * 0.1  # Low confidence
-    
-    # Scenario 3: Random model (uniform predictions)
-    random_logits = torch.zeros(batch_size, seq_len, vocab_size)
-    
-    # Calculate perplexities
-    good_ppl = ppl_calc.calculate(good_logits, true_tokens)
-    poor_ppl = ppl_calc.calculate(poor_logits, true_tokens)
-    random_ppl = ppl_calc.calculate(random_logits, true_tokens)
-    
-    print(f"Good model perplexity:   {good_ppl:.2f}")
-    print(f"Poor model perplexity:   {poor_ppl:.2f}")
-    print(f"Random model perplexity: {random_ppl:.2f}")
-    print(f"Theoretical maximum:     {vocab_size:.2f}")
-    
-    # Healthcare example: Medical text complexity
-    print("\nHealthcare Example - Medical Text Complexity:")
-    print("-" * 50)
-    
-    # Simulate different types of medical text
-    medical_vocab_size = 500
-    
-    # Simple clinical note (low perplexity expected)
-    simple_logits = torch.randn(1, 10, medical_vocab_size)
-    simple_tokens = torch.randint(0, medical_vocab_size, (1, 10))
-    
-    # Boost common medical terms
-    common_terms = [45, 67, 123, 234, 345]  # Simulate common medical terms
-    for term in common_terms:
-        simple_logits[0, :, term] += 2.0
-    
-    # Complex research paper (high perplexity expected)
-    complex_logits = torch.randn(1, 10, medical_vocab_size) * 0.5
-    complex_tokens = torch.randint(0, medical_vocab_size, (1, 10))
-    
-    simple_ppl = ppl_calc.calculate(simple_logits, simple_tokens)
-    complex_ppl = ppl_calc.calculate(complex_logits, complex_tokens)
-    
-    print(f"Simple clinical note perplexity: {simple_ppl:.2f}")
-    print(f"Complex research text perplexity: {complex_ppl:.2f}")
-    print(f"Complexity ratio: {complex_ppl/simple_ppl:.1f}x")
-    
-    # Per-sequence analysis
-    print("\nPer-Sequence Perplexity Analysis:")
-    print("-" * 40)
-    
-    # Create batch with varying difficulty
-    mixed_logits = torch.randn(3, 15, medical_vocab_size)
-    mixed_tokens = torch.randint(0, medical_vocab_size, (3, 15))
-    
-    # Make first sequence easy, second medium, third hard
-    mixed_logits[0, :, mixed_tokens[0, :]] += 4.0  # Easy
-    mixed_logits[1, :, mixed_tokens[1, :]] += 1.0  # Medium
-    # Third sequence unchanged (hard)
-    
-    seq_perplexities = ppl_calc.calculate_sequence_level(mixed_logits, mixed_tokens)
-    
-    for i, ppl in enumerate(seq_perplexities):
-        difficulty = ["Easy", "Medium", "Hard"][i]
-        print(f"Sequence {i+1} ({difficulty}): {ppl:.2f}")
-    
-    # Sliding window analysis for long sequences
-    print("\nSliding Window Analysis (Long Sequence):")
-    print("-" * 45)
-    
-    long_seq_len = 200
-    long_logits = torch.randn(1, long_seq_len, medical_vocab_size)
-    long_tokens = torch.randint(0, medical_vocab_size, (1, long_seq_len))
-    
-    # Make the middle section more difficult
-    long_logits[0, 80:120, :] *= 0.3  # Reduce confidence in middle section
-    
-    window_ppls = ppl_calc.sliding_window_perplexity(
-        long_logits, long_tokens, window_size=50, stride=25
-    )
-    
-    print("Perplexity across sliding windows:")
-    for i, ppl in enumerate(window_ppls):
-        start_pos = i * 25
-        print(f"Window {i+1} (pos {start_pos:3d}-{start_pos+50:3d}): {ppl:.2f}")
-    
-    print("\nNote: Higher perplexity in middle windows indicates")
-    print("model difficulty with that section of the text.")
-
-demonstrate_perplexity()
-```
-
-### 7. Comprehensive Example: Healthcare Text Analysis
-
-Let's create a comprehensive example that brings together all the concepts:
-
-```python
-def comprehensive_healthcare_analysis():
-    """
-    Comprehensive analysis of healthcare text using all information theory concepts.
-    This example demonstrates how these metrics work together in practice.
-    """
-    
-    print("=" * 70)
-    print("COMPREHENSIVE HEALTHCARE TEXT ANALYSIS")
-    print("=" * 70)
-    
-    # Initialize all calculators
-    ic_calc = InformationContent(base='2')
-    entropy_calc = Entropy(base='2')
-    ce_calc = CrossEntropy(base='e', reduction='mean')
-    kl_calc = KLDivergence(base='e', reduction='batchmean')
-    mi_calc = MutualInformation(base='2')
-    ppl_calc = Perplexity(base='e')
-    
-    # Simulate a medical language model evaluation scenario
-    vocab_size = 2000  # Medical vocabulary
-    seq_len = 25       # Typical sentence length
-    batch_size = 8     # Batch of medical texts
-    
-    # Create different types of medical text scenarios
-    scenarios = [
-        "routine_checkup",
-        "emergency_case", 
-        "research_paper",
-        "patient_history",
-        "diagnostic_report",
-        "treatment_plan",
-        "medication_list",
-        "surgical_notes"
-    ]
-    
-    print(f"\nAnalyzing {len(scenarios)} different medical text scenarios...")
-    print(f"Vocabulary size: {vocab_size}, Sequence length: {seq_len}")
-    print("-" * 70)
-    
-    # Generate synthetic data for each scenario
-    all_logits = []
-    all_tokens = []
-    scenario_complexities = [0.5, 2.0, 1.8, 1.0, 1.5, 1.2, 0.8, 1.6]  # Relative complexity
-    
-    for i, (scenario, complexity) in enumerate(zip(scenarios, scenario_complexities)):
-        # Generate logits with varying uncertainty based on complexity
-        logits = torch.randn(1, seq_len, vocab_size) / complexity
-        tokens = torch.randint(0, vocab_size, (1, seq_len))
-        
-        # Boost correct token probabilities (simulate model performance)
-        for s in range(seq_len):
-            logits[0, s, tokens[0, s]] += 2.0 / complexity
-        
-        all_logits.append(logits)
-        all_tokens.append(tokens)
-    
-    # Combine all scenarios
-    combined_logits = torch.cat(all_logits, dim=0)
-    combined_tokens = torch.cat(all_tokens, dim=0)
-    
-    # 1. PERPLEXITY ANALYSIS
-    print("1. PERPLEXITY ANALYSIS")
-    print("-" * 30)
-    
-    overall_ppl = ppl_calc.calculate(combined_logits, combined_tokens)
-    seq_ppls = ppl_calc.calculate_sequence_level(combined_logits, combined_tokens)
-    
-    print(f"Overall perplexity: {overall_ppl:.2f}")
-    print("\nPer-scenario perplexity:")
-    
-    for i, (scenario, ppl) in enumerate(zip(scenarios, seq_ppls)):
-        print(f"  {scenario:15}: {ppl:.2f}")
-    
-    # 2. ENTROPY ANALYSIS
-    print(f"\n2. ENTROPY ANALYSIS")
-    print("-" * 25)
-    
-    # Calculate entropy for each position in sequences
-    probs = F.softmax(combined_logits, dim=-1)
-    position_entropies = entropy_calc.calculate(probs, dim=-1)  # [batch, seq_len]
-    
-    avg_entropy_per_scenario = position_entropies.mean(dim=1)
-    
-    print("Average entropy per scenario (bits):")
-    for i, (scenario, entropy) in enumerate(zip(scenarios, avg_entropy_per_scenario)):
-        print(f"  {scenario:15}: {entropy:.3f}")
-    
-    # 3. CROSS-ENTROPY ANALYSIS
-    print(f"\n3. CROSS-ENTROPY ANALYSIS")
-    print("-" * 30)
-    
-    # Compare against a baseline uniform distribution
-    uniform_logits = torch.zeros_like(combined_logits)
-    
-    model_ce = ce_calc.sparse_cross_entropy(combined_tokens.flatten(), 
-                                          combined_logits.view(-1, vocab_size))
-    uniform_ce = ce_calc.sparse_cross_entropy(combined_tokens.flatten(),
-                                            uniform_logits.view(-1, vocab_size))
-    
-    print(f"Model cross-entropy:   {model_ce:.4f}")
-    print(f"Uniform cross-entropy: {uniform_ce:.4f}")
-    print(f"Improvement ratio:     {uniform_ce/model_ce:.2f}x")
-    
-    # 4. KL DIVERGENCE ANALYSIS
-    print(f"\n4. KL DIVERGENCE ANALYSIS")
-    print("-" * 30)
-    
-    # Compare different scenarios to routine checkup (baseline)
-    baseline_probs = F.softmax(all_logits[0], dim=-1)  # routine_checkup
-    
-    print("KL divergence from routine checkup:")
-    for i, scenario in enumerate(scenarios[1:], 1):
-        scenario_probs = F.softmax(all_logits[i], dim=-1)
-        kl_div = kl_calc.calculate(baseline_probs, scenario_probs)
-        print(f"  {scenario:15}: {kl_div:.4f}")
-    
-    # 5. MUTUAL INFORMATION ANALYSIS
-    print(f"\n5. MUTUAL INFORMATION ANALYSIS")
-    print("-" * 35)
-    
-    # Analyze relationship between position in sequence and entropy
-    positions = torch.arange(seq_len).float().repeat(batch_size)
-    entropies_flat = position_entropies.flatten()
-    
-    mi_pos_entropy = mi_calc.calculate_from_samples(positions, entropies_flat, bins=10)
-    print(f"MI(Position, Entropy): {mi_pos_entropy:.4f} bits")
-    
-    # Analyze relationship between scenario complexity and average entropy
-    complexities = torch.tensor(scenario_complexities)
-    avg_entropies = avg_entropy_per_scenario
-    
-    mi_complexity_entropy = mi_calc.calculate_from_samples(complexities, avg_entropies, bins=5)
-    print(f"MI(Complexity, Entropy): {mi_complexity_entropy:.4f} bits")
-    
-    # 6. INFORMATION CONTENT ANALYSIS
-    print(f"\n6. INFORMATION CONTENT ANALYSIS")
-    print("-" * 35)
-    
-    # Find most and least informative tokens
-    token_probs = F.softmax(combined_logits, dim=-1)
-    token_ic = ic_calc.calculate(token_probs)
-    
-    # Get statistics
-    max_ic_per_seq = token_ic.max(dim=1)[0]
-    min_ic_per_seq = token_ic.min(dim=1)[0]
-    avg_ic_per_seq = token_ic.mean(dim=1)
-    
-    print("Information content statistics per scenario:")
-    print("Scenario         | Avg IC | Max IC | Min IC")
-    print("-" * 45)
-    for i, scenario in enumerate(scenarios):
-        print(f"{scenario:15} | {avg_ic_per_seq[i]:6.2f} | {max_ic_per_seq[i]:6.2f} | {min_ic_per_seq[i]:6.2f}")
-    
-    # 7. SUMMARY AND INSIGHTS
-    print(f"\n7. SUMMARY AND INSIGHTS")
-    print("-" * 30)
-    
-    print("Key findings:")
-    
-    # Find most challenging scenario
-    most_challenging_idx = seq_ppls.argmax()
-    most_challenging = scenarios[most_challenging_idx]
-    print(f"• Most challenging scenario: {most_challenging} (PPL: {seq_ppls[most_challenging_idx]:.2f})")
-    
-    # Find most predictable scenario
-    most_predictable_idx = seq_ppls.argmin()
-    most_predictable = scenarios[most_predictable_idx]
-    print(f"• Most predictable scenario: {most_predictable} (PPL: {seq_ppls[most_predictable_idx]:.2f})")
-    
-    # Entropy insights
-    high_entropy_scenarios = [scenarios[i] for i in range(len(scenarios)) 
-                            if avg_entropy_per_scenario[i] > avg_entropy_per_scenario.mean()]
-    print(f"• High entropy scenarios: {', '.join(high_entropy_scenarios)}")
-    
-    # Model performance insights
-    if overall_ppl < 50:
-        performance = "excellent"
-    elif overall_ppl < 100:
-        performance = "good"
-    elif overall_ppl < 200:
-        performance = "fair"
-    else:
-        performance = "poor"
-    
-    print(f"• Overall model performance: {performance} (PPL: {overall_ppl:.2f})")
-    
-    print(f"\nRecommendations:")
-    if mi_pos_entropy > 0.1:
-        print("• Position affects entropy - consider positional encoding improvements")
-    if mi_complexity_entropy > 0.2:
-        print("• Strong complexity-entropy correlation - model adapts well to text difficulty")
-    
-    high_kl_scenarios = [scenarios[i+1] for i in range(len(scenarios)-1) 
-                        if i < len(all_logits)-1]  # Simplified for demo
-    if len(high_kl_scenarios) > 0:
-        print(f"• Consider domain-specific fine-tuning for: {', '.join(high_kl_scenarios[:2])}")
-
-# Run the comprehensive analysis
-comprehensive_healthcare_analysis()
-```
-
-This comprehensive PyTorch implementation section provides practical, working code for all the information theory concepts covered in the study guide. Each implementation includes:
-
-1. **Numerical stability considerations** with epsilon handling
-2. **Efficient PyTorch operations** using built-in functions where possible
-3. **Healthcare-specific examples** demonstrating real-world applications
-4. **Detailed documentation** explaining the mathematical concepts
-5. **Practical usage patterns** showing how to apply these concepts in LLM development
-
-The code is designed to be both educational and practically useful, allowing readers to experiment with these concepts and apply them to their own language modeling projects.
-
----
-
-
 ## Healthcare Applications and Case Studies {#healthcare-applications}
 
 The healthcare industry represents one of the most promising and challenging domains for large language model applications. The concepts of information theory are not merely academic curiosities in this context but essential tools for building reliable, trustworthy, and effective AI systems that can assist healthcare professionals and improve patient outcomes.
@@ -2454,58 +1677,391 @@ The field continues to evolve rapidly, with new applications and theoretical dev
 
 ---
 
-!!! success "🔑 Key Takeaways"
-    This comprehensive study guide has explored the fundamental concepts of information theory and their critical applications in large language model development, training, and evaluation. Here are the key insights:
+## 💻 Code Examples
 
-    **Fundamental Concepts Recap:**
-    
-    - **Information Content:** Quantifies the "surprise" of individual events; crucial for understanding token importance.
-    - **Entropy:** Measures average uncertainty in probability distributions; indicates model confidence and text complexity.
-    - **Cross-Entropy:** The primary loss function for LLM training; understanding it leads to better training and optimization.
-    - **KL Divergence:** Measures differences between distributions; vital for RLHF, knowledge distillation, and model alignment.
-    - **Mutual Information:** Quantifies shared information between variables; key for analyzing attention, feature importance, and multi-modal integration.
-    - **Perplexity:** Standard metric for LLM evaluation; offers an intuitive measure of model surprise by text.
+!!! abstract "🎯 PyTorch Implementation Examples"
+    **Comprehensive implementations of all information theory concepts covered in this guide:**
 
-    **Practical Implementation Insights:**
-    
-    - **Numerical Stability:** Essential for robust systems; use epsilon-stabilization and log-space arithmetic.
-    - **Computational Efficiency:** Critical for large vocabularies/sequences; leverage vectorized operations and PyTorch functions.
-    - **Batch Processing:** Enables scalable analysis in modern deep learning.
-    - **Healthcare Applications:** Illustrate how theory translates to tools for safety and reliability in critical domains.
+    The following code examples provide practical, working implementations of all the information theory concepts discussed in this study guide. Each implementation includes detailed explanations, healthcare-specific examples, and best practices for numerical stability and computational efficiency.
 
-    **Integration with Modern LLM Development:**
-    
-    - **Training/Optimization:** Cross-entropy drives learning; KL divergence helps maintain properties during adaptation.
-    - **Architecture Design:** Information theory guides attention mechanism design and normalization layer placement.
-    - **Evaluation/Monitoring:** Perplexity and entropy are vital for tracking performance and identifying competency gaps.
-    - **Safety/Reliability:** Uncertainty quantification and drift detection are crucial for safe AI deployment.
+!!! info "📁 Code Organization"
+    **Complete implementations available in the repository:**
 
-    **Key Insights for Healthcare Applications:**
-    
-    - **Uncertainty Quantification:** Critical for high-consequence predictions; entropy helps identify when to defer to experts.
-    - **Domain Adaptation:** KL divergence helps balance general capabilities with domain-specific expertise.
-    - **Safety/Compliance:** Information-theoretic metrics support regulatory validation.
-    - **Multi-Modal Integration:** Mutual information aids in optimizing and understanding the combination of diverse data types.
+    All code examples are available in the repository under [`code/information_theory.py`](https://github.com/okahwaji-tech/llm-learning-guide/blob/main/code/information_theory.py). The implementations include:
 
-    **Advanced Applications and Future Directions:**
-    
-    - **Emergent Capabilities:** Information theory helps analyze and predict new model abilities.
-    - **Multi-Modal Models:** Rely on these principles for effective data integration.
-    - **Federated Learning:** Benefits from information-theoretic privacy measures.
-    - **Interpretability/Explainability:** These tools are increasingly used for understanding model behavior.
+    === "🔧 Core Implementations"
+        **Essential classes and functions:**
 
-    **Practical Recommendations for LLM Practitioners:**
-    
-    - **Monitor Metrics:** Regularly track entropy, perplexity, and KL divergence.
-    - **Use Uncertainty Quantification:** Especially in high-stakes scenarios.
-    - **Optimize Cross-Entropy:** Employ numerically stable implementations.
-    - **Apply KL Constraints Carefully:** Balance adaptation with capability preservation.
-    - **Leverage Mutual Information:** For feature, attention, and integration analysis.
-    - **Validate with Information Theory:** Especially for safety-critical applications.
+        - **`InformationContent`** - Calculate information content (self-information) for tokens and sequences
+        - **`Entropy`** - Shannon entropy calculation with support for conditional entropy
+        - **`CrossEntropy`** - Cross-entropy loss implementation with numerical stability
+        - **`KLDivergence`** - KL divergence calculation with multiple reduction options
+        - **`MutualInformation`** - Mutual information estimation using multiple methods
+        - **`Perplexity`** - Comprehensive perplexity calculation with sequence-level analysis
 
-    **Final Thoughts:**
-    Information theory provides essential mathematical foundations and practical tools for understanding, improving, and responsibly deploying large language models. As LLMs become more sophisticated and integrated into critical domains like healthcare, these principles are paramount for building powerful, safe, reliable, and trustworthy AI systems. Mastering these concepts is key to developing a deeper intuition for information behavior and harnessing its principles for more intelligent AI systems.
+    === "🏥 Healthcare Examples"
+        **Domain-specific demonstrations:**
 
-    Whether you're developing clinical decision support systems, optimizing model training procedures, or designing new architectures for multi-modal AI, the principles and implementations covered in this guide provide the tools you need to build more effective, reliable, and impactful AI systems. The intersection of information theory and language modeling represents one of the most exciting and important frontiers in modern artificial intelligence, and understanding these concepts positions you to contribute meaningfully to this rapidly evolving field.
+        - **Medical vocabulary analysis** with varying information content
+        - **Clinical decision support** uncertainty quantification
+        - **Diagnostic entropy** analysis for model confidence assessment
+        - **Medical text complexity** evaluation using perplexity
+        - **Multi-modal healthcare** data integration using mutual information
+
+    === "⚡ Advanced Features"
+        **Production-ready implementations:**
+
+        - **Numerical stability** with epsilon handling and log-space arithmetic
+        - **Batch processing** for efficient large-scale analysis
+        - **Memory optimization** for large vocabularies and long sequences
+        - **GPU acceleration** using PyTorch's built-in functions
+        - **Comprehensive error handling** and input validation
+
+!!! example "🚀 Quick Start Example"
+    **Get started with information theory analysis in just a few lines:**
+
+    ```python
+    import torch
+    from information_theory import (
+        InformationContent, Entropy, CrossEntropy,
+        KLDivergence, MutualInformation, Perplexity
+    )
+
+    # Initialize calculators
+    ic_calc = InformationContent(base='2')  # bits
+    entropy_calc = Entropy(base='2')
+    ppl_calc = Perplexity(base='e')
+
+    # Example: Analyze model predictions
+    logits = torch.randn(4, 20, 1000)  # [batch, seq_len, vocab]
+    true_tokens = torch.randint(0, 1000, (4, 20))
+
+    # Calculate metrics
+    probs = torch.softmax(logits, dim=-1)
+    entropy = entropy_calc.calculate(probs)
+    perplexity = ppl_calc.calculate(logits, true_tokens)
+
+    print(f"Average entropy: {entropy.mean():.3f} bits")
+    print(f"Perplexity: {perplexity:.2f}")
+    ```
+
+!!! tip "🔗 Integration with Your Projects"
+    **How to use these implementations in your LLM projects:**
+
+    === "📊 Model Evaluation"
+        **Add information theory metrics to your evaluation pipeline:**
+
+        ```python
+        def evaluate_model_with_info_theory(model, dataloader):
+            ppl_calc = Perplexity()
+            entropy_calc = Entropy()
+
+            total_perplexity = 0
+            total_entropy = 0
+
+            for batch in dataloader:
+                logits = model(batch['input_ids'])
+                ppl = ppl_calc.calculate(logits, batch['labels'])
+                ent = entropy_calc.from_logits(logits)
+
+                total_perplexity += ppl.item()
+                total_entropy += ent.mean().item()
+
+            return {
+                'perplexity': total_perplexity / len(dataloader),
+                'entropy': total_entropy / len(dataloader)
+            }
+        ```
+
+    === "🎯 Training Monitoring"
+        **Monitor training progress with information theory:**
+
+        ```python
+        def training_step_with_monitoring(model, batch, optimizer):
+            logits = model(batch['input_ids'])
+
+            # Standard cross-entropy loss
+            ce_calc = CrossEntropy()
+            loss = ce_calc.sparse_cross_entropy(batch['labels'], logits)
+
+            # Additional monitoring
+            entropy_calc = Entropy()
+            avg_entropy = entropy_calc.from_logits(logits).mean()
+
+            # Log metrics
+            wandb.log({
+                'loss': loss.item(),
+                'entropy': avg_entropy.item(),
+                'perplexity': torch.exp(loss).item()
+            })
+
+            # Backward pass
+            loss.backward()
+            optimizer.step()
+            optimizer.zero_grad()
+        ```
+
+    === "🔍 Model Analysis"
+        **Analyze model behavior and attention patterns:**
+
+        ```python
+        def analyze_attention_with_mutual_info(model, text_batch):
+            mi_calc = MutualInformation()
+
+            # Get attention weights
+            outputs = model(text_batch, output_attentions=True)
+            attention_weights = outputs.attentions[-1]  # Last layer
+
+            # Analyze information flow
+            for head_idx in range(attention_weights.shape[1]):
+                head_attention = attention_weights[:, head_idx, :, :]
+
+                # Calculate mutual information between positions
+                mi_matrix = compute_attention_mutual_info(
+                    head_attention, mi_calc
+                )
+
+                print(f"Head {head_idx} MI: {mi_matrix.mean():.4f}")
+        ```
+
+!!! note "📚 Complete Documentation"
+    **Detailed documentation and examples:**
+
+    The complete code file includes:
+    - **Comprehensive docstrings** for all classes and methods
+    - **Healthcare-specific examples** demonstrating real-world applications
+    - **Numerical stability considerations** and best practices
+    - **Performance optimization** techniques for large-scale applications
+    - **Integration examples** with popular frameworks like Transformers and PyTorch Lightning
+
+    **Code Example**: [`information_theory.py`](https://github.com/okahwaji-tech/llm-learning-guide/blob/main/code/information_theory.py)
+
+---
+
+## 📁 Code References
+
+!!! example "**Information Theory Calculator - Complete Implementation**"
+    📁 **File**: [information_theory.py](https://github.com/okahwaji-tech/llm-learning-guide/blob/main/code/information_theory.py)
+
+    **Features**: Comprehensive information theory implementation with Google-style docstrings and class-based design
+
+    === "🏗️ **Architecture**"
+        - **`BaseInformationTheory`** - Abstract base class with common functionality
+        - **`InformationTheoryCalculator`** - Unified calculator for all metrics
+        - **`LogarithmBase` & `ReductionType`** - Type-safe enums for configuration
+        - **`HealthcareInformationTheoryDemo`** - Medical AI demonstrations
+
+    === "🔧 **Core Classes**"
+        - **`InformationContent`** - Self-information calculation with surprise thresholds
+        - **`Entropy`** - Shannon entropy with conditional entropy support
+        - **Individual calculators** - Backward-compatible legacy classes
+        - **Numerical stability** - Robust epsilon handling throughout
+
+    === "🏥 **Healthcare Applications**"
+        - **Medical vocabulary analysis** - Information content of rare medical terms
+        - **Diagnostic uncertainty** - Entropy-based confidence assessment
+        - **Clinical decision support** - Uncertainty quantification for safety
+        - **Medical model training** - Cross-entropy optimization examples
+
+    === "📊 **Advanced Features**"
+        - **Comprehensive analysis** - `analyze_predictions()` for complete model evaluation
+        - **Uncertainty analysis** - `uncertainty_analysis()` for safety-critical applications
+        - **Perplexity calculation** - Sequence-level evaluation with masking support
+        - **Mutual information** - Both discrete and continuous estimation methods
+
+    === "💻 **Usage Examples**"
+        ```python
+        from information_theory import InformationTheoryCalculator, LogarithmBase
+
+        # Initialize unified calculator
+        calc = InformationTheoryCalculator(base=LogarithmBase.BINARY)
+
+        # Comprehensive model analysis
+        results = calc.analyze_predictions(logits, tokens)
+        print(f"Perplexity: {results['perplexity']:.2f}")
+        print(f"Confidence: {results['confidence']:.1%}")
+
+        # Healthcare demonstrations
+        from information_theory import HealthcareInformationTheoryDemo
+        demo = HealthcareInformationTheoryDemo()
+        demo.run_all_demonstrations()
+        ```
+
+---
+
+## 📚 Key Takeaways
+
+!!! success "🎯 Mastery Achieved: Information Theory for LLMs"
+    **Transform your understanding of Large Language Models through mathematical foundations that power modern AI:**
+
+    This comprehensive study guide has explored the fundamental concepts of information theory and their critical applications in large language model development, training, and evaluation. You now possess the mathematical tools and practical knowledge to build more effective, reliable, and interpretable AI systems.
+
+!!! abstract "🧮 Fundamental Concepts Mastered"
+    **Core mathematical concepts that form the foundation of modern LLM development:**
+
+    === "📊 Information Content & Surprise"
+        **Quantifying uncertainty and surprise in probabilistic systems:**
+
+        - **Mathematical foundation**: $I(x) = -\log P(x)$ measures surprise
+        - **Practical application**: Identify important tokens and unusual patterns
+        - **Healthcare impact**: Flag rare medical conditions requiring attention
+        - **Implementation**: Robust calculation with numerical stability
+
+    === "🌀 Entropy & Uncertainty"
+        **Measuring average uncertainty in probability distributions:**
+
+        - **Mathematical foundation**: $H(X) = -\sum P(x) \log P(x)$ quantifies uncertainty
+        - **Practical application**: Assess model confidence and text complexity
+        - **Healthcare impact**: Identify uncertain diagnoses requiring expert review
+        - **Implementation**: Efficient batch processing for large vocabularies
+
+    === "⚡ Cross-Entropy & Training"
+        **The cornerstone loss function for language model optimization:**
+
+        - **Mathematical foundation**: $H(P,Q) = -\sum P(x) \log Q(x)$ measures distribution differences
+        - **Practical application**: Primary training objective for all modern LLMs
+        - **Healthcare impact**: Optimize models for medical text understanding
+        - **Implementation**: Numerically stable computation using PyTorch functions
+
+    === "🔄 KL Divergence & Alignment"
+        **Measuring differences between probability distributions:**
+
+        - **Mathematical foundation**: $D_{KL}(P||Q) = \sum P(x) \log \frac{P(x)}{Q(x)}$ quantifies divergence
+        - **Practical application**: Essential for RLHF, knowledge distillation, and model alignment
+        - **Healthcare impact**: Ensure safe model adaptation while preserving capabilities
+        - **Implementation**: Asymmetric measure requiring careful direction choice
+
+    === "🔗 Mutual Information & Relationships"
+        **Understanding shared information between variables:**
+
+        - **Mathematical foundation**: $I(X;Y) = H(X) - H(X|Y)$ measures information sharing
+        - **Practical application**: Analyze attention patterns and feature importance
+        - **Healthcare impact**: Optimize multi-modal medical data integration
+        - **Implementation**: Multiple estimation methods for different data types
+
+    === "📈 Perplexity & Evaluation"
+        **The standard metric for language model performance:**
+
+        - **Mathematical foundation**: $\text{PPL} = \exp(H(P,Q))$ measures model surprise
+        - **Practical application**: Intuitive evaluation metric for model comparison
+        - **Healthcare impact**: Monitor model performance on medical text
+        - **Implementation**: Sequence-level and sliding window analysis
+
+!!! tip "🏥 Healthcare Applications Mastered"
+    **Critical applications for safe and effective medical AI systems:**
+
+    === "🩺 Clinical Decision Support"
+        **Building uncertainty-aware medical AI systems:**
+
+        - **Entropy thresholds** for flagging uncertain diagnoses
+        - **Information content analysis** for identifying critical medical terms
+        - **Perplexity monitoring** for detecting out-of-distribution cases
+        - **Cross-entropy optimization** for medical text understanding
+
+    === "🔒 Safety & Compliance"
+        **Meeting healthcare AI validation requirements:**
+
+        - **KL divergence constraints** for safe model adaptation
+        - **Mutual information analysis** for bias detection
+        - **Information-theoretic metrics** for regulatory submissions
+        - **Uncertainty quantification** for risk assessment
+
+    === "🔗 Multi-Modal Integration"
+        **Optimizing combination of diverse medical data types:**
+
+        - **Mutual information** between text and imaging data
+        - **Cross-modal entropy** analysis for integration quality
+        - **Information bottleneck** optimization for efficient processing
+        - **Joint probability** modeling for comprehensive understanding
+
+!!! example "🚀 Advanced Applications & Future Directions"
+    **Cutting-edge developments in information theory for LLMs:**
+
+    === "🧠 Emergent Capabilities"
+        **Understanding and predicting new model abilities:**
+
+        - **Information-theoretic scaling laws** for capability prediction
+        - **Phase transition analysis** using entropy measures
+        - **Mutual information scaling** for context integration abilities
+        - **Capability emergence** through information processing capacity
+
+    === "🤝 Federated Learning"
+        **Privacy-preserving AI with information-theoretic measures:**
+
+        - **Mutual information privacy** bounds for data protection
+        - **Information-theoretic communication** efficiency
+        - **Differential privacy** combined with information theory
+        - **Distributed optimization** with information constraints
+
+    === "🔍 Interpretability & Explainability"
+        **Understanding model behavior through information analysis:**
+
+        - **Information flow tracking** through model layers
+        - **Attention pattern analysis** using mutual information
+        - **Feature attribution** through information-theoretic measures
+        - **Model behavior explanation** via entropy and divergence analysis
+
+!!! note "⚡ Practical Implementation Mastery"
+    **Production-ready techniques for robust information theory applications:**
+
+    === "🛡️ Numerical Stability"
+        **Essential techniques for robust systems:**
+
+        - **Epsilon stabilization** for log(0) prevention
+        - **Log-space arithmetic** for numerical precision
+        - **Gradient clipping** for training stability
+        - **PyTorch built-ins** for optimized computation
+
+    === "🚀 Computational Efficiency"
+        **Scaling to large models and datasets:**
+
+        - **Vectorized operations** for batch processing
+        - **Memory optimization** for large vocabularies
+        - **GPU acceleration** using PyTorch functions
+        - **Approximation methods** for very large scales
+
+    === "📊 Monitoring & Evaluation"
+        **Comprehensive model assessment:**
+
+        - **Real-time entropy** monitoring during training
+        - **Perplexity tracking** for performance assessment
+        - **KL divergence** monitoring for model drift detection
+        - **Mutual information** analysis for feature importance
+
+!!! success "🎯 Your Path Forward"
+    **Actionable recommendations for LLM practitioners:**
+
+    **Immediate Actions:**
+    - **✅ Implement monitoring** - Add entropy and perplexity tracking to your training pipelines
+    - **✅ Apply uncertainty quantification** - Use entropy thresholds for high-stakes applications
+    - **✅ Optimize cross-entropy** - Ensure numerically stable loss function implementations
+    - **✅ Monitor KL divergence** - Track model behavior changes during fine-tuning
+
+    **Advanced Applications:**
+    - **🔬 Analyze attention patterns** - Use mutual information to understand model focus
+    - **🔄 Implement RLHF safely** - Apply KL constraints for responsible model alignment
+    - **🏥 Build healthcare AI** - Leverage uncertainty quantification for medical applications
+    - **🔍 Enhance interpretability** - Use information theory for model explanation
+
+    **Long-term Mastery:**
+    - **📚 Continue learning** - Stay updated with latest information-theoretic developments
+    - **🤝 Collaborate** - Share insights with the community and contribute to open research
+    - **🔬 Experiment** - Apply these concepts to novel problems and domains
+    - **🎯 Innovate** - Develop new applications of information theory in AI
+
+!!! quote "🌟 Final Thoughts"
+    **The intersection of information theory and language modeling represents one of the most exciting frontiers in AI:**
+
+    Information theory provides essential mathematical foundations and practical tools for understanding, improving, and responsibly deploying large language models. As LLMs become more sophisticated and integrated into critical domains like healthcare, these principles become paramount for building powerful, safe, reliable, and trustworthy AI systems.
+
+    **Whether you're:**
+    - **🏥 Developing clinical decision support systems**
+    - **⚡ Optimizing model training procedures**
+    - **🔧 Designing new architectures for multi-modal AI**
+    - **🔒 Ensuring AI safety and alignment**
+
+    **The principles and implementations covered in this guide provide the tools you need to build more effective, reliable, and impactful AI systems.**
+
+    Mastering these concepts positions you to contribute meaningfully to this rapidly evolving field and develop AI systems that truly understand and process information with mathematical precision and practical effectiveness.
 
 ---

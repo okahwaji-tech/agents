@@ -191,8 +191,7 @@ nav:
       - 🟡 Core RL Concepts:
         - Reinforcement Learning: materials/ml/reinforcement-learning.md
         - Markov Decision Processes: materials/ml/mdp.md
-      - 🔴 Advanced Topics:
-        - RL-LLM Connections: materials/ml/rl-llm-foundation.md
+
     - 🧠 LLM Fundamentals:
       - Overview: materials/llm/index.md
       - 🟢 Getting Started:

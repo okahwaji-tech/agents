@@ -2,10 +2,11 @@
 
 window.MathJax = {
   tex: {
-    inlineMath: [["\\(", "\\)"], ["$", "$"]],
-    displayMath: [["\\[", "\\]"], ["$$", "$$"]],
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
     processEscapes: true,
     processEnvironments: true,
+    processRefs: true,
     packages: {
       '[+]': ['ams', 'newcommand', 'configmacros']
     },
@@ -107,6 +108,29 @@ window.MathJax = {
   },
   loader: {
     load: ['[tex]/ams', '[tex]/newcommand', '[tex]/configmacros']
+  },
+  startup: {
+    ready: () => {
+      console.log('MathJax startup ready');
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        console.log('MathJax initial typesetting complete');
+        // Debug: Check for math elements
+        const mathElements = document.querySelectorAll('.arithmatex');
+        console.log('Found arithmatex elements:', mathElements.length);
+        const displayMath = document.querySelectorAll('div.arithmatex');
+        console.log('Found display math elements:', displayMath.length);
+        const inlineMath = document.querySelectorAll('span.arithmatex');
+        console.log('Found inline math elements:', inlineMath.length);
+
+        // Debug: Check for any stray \( or \) characters
+        const bodyText = document.body.textContent;
+        const strayParens = bodyText.match(/\\\(|\\\)/g);
+        if (strayParens) {
+          console.warn('Found stray \\( or \\) characters:', strayParens.length);
+        }
+      });
+    }
   }
 };
 

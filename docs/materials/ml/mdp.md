@@ -1,5 +1,7 @@
 # 🎯 Markov Decision Processes: From Fundamentals to Advanced Applications
 
+<!-- Enhanced equation rendering with improved CSS styling -->
+
 !!! info "🎯 Learning Objectives"
     By the end of this comprehensive guide, you will master:
 
@@ -145,7 +147,7 @@ The mathematical framework of MDPs provides tools to find these optimal strategi
 !!! note "Formal Definition"
     A Markov Decision Process is formally defined as a tuple:
 
-    $$\text{MDP} = (S, A, P, R, \gamma)$$
+    \[\text{MDP} = (S, A, P, R, \gamma)\]
 
     where each component has precise mathematical meaning and properties. This mathematical formalization allows us to apply rigorous analytical techniques and develop algorithms with provable guarantees.
 
@@ -191,9 +193,9 @@ The transition probability function $P: S \times A \times S \rightarrow [0,1]$ d
 
 **Probability Axioms:**
 
-$$P(s'|s,a) \geq 0 \quad \forall s, s' \in S, a \in A$$
+\[P(s'|s,a) \geq 0 \quad \forall s, s' \in S, a \in A\]
 
-$$\sum_{s' \in S} P(s'|s,a) = 1 \quad \forall s \in S, a \in A(s)$$
+\[\sum_{s' \in S} P(s'|s,a) = 1 \quad \forall s \in S, a \in A(s)\]
 
 **Extensions:**
 - **Continuous state spaces:** $P$ becomes a probability density function, summation → integration
@@ -202,7 +204,7 @@ $$\sum_{s' \in S} P(s'|s,a) = 1 \quad \forall s \in S, a \in A(s)$$
 !!! warning "The Markov Property"
     The fundamental assumption embedded in this formulation:
 
-    $$P(s_{t+1} | s_t, a_t, s_{t-1}, a_{t-1}, \ldots, s_0, a_0) = P(s_{t+1} | s_t, a_t)$$
+    \[P(s_{t+1} | s_t, a_t, s_{t-1}, a_{t-1}, \ldots, s_0, a_0) = P(s_{t+1} | s_t, a_t)\]
 
     **Meaning:** The probability of the next state depends only on the current state and action, not on the entire history.
 
@@ -216,17 +218,17 @@ The reward function quantifies the immediate value of taking specific actions in
     **Three main formulations are common in the literature:**
 
     === "State-Action Rewards"
-        $$R: S \times A \rightarrow \mathbb{R}$$
+        \[R: S \times A \rightarrow \mathbb{R}\]
 
         Reward depends on state and action
 
     === "Transition Rewards"
-        $$R: S \times A \times S \rightarrow \mathbb{R}$$
+        \[R: S \times A \times S \rightarrow \mathbb{R}\]
 
         Reward depends on state, action, and next state (most general)
 
     === "State Rewards"
-        $$R: S \rightarrow \mathbb{R}$$
+        \[R: S \rightarrow \mathbb{R}\]
 
         Reward depends only on state
 
@@ -234,7 +236,7 @@ The reward function quantifies the immediate value of taking specific actions in
 
 The most general formulation is $R(s,a,s')$, representing the immediate reward received when transitioning from state $s$ to state $s'$ via action $a$. In practice, we often work with the expected immediate reward:
 
-$$r(s,a) = \mathbb{E}[R(s,a,s')] = \sum_{s' \in S} P(s'|s,a)R(s,a,s')$$
+\[r(s,a) = \mathbb{E}[R(s,a,s')] = \sum_{s' \in S} P(s'|s,a)R(s,a,s')\]
 
 **Healthcare Applications:**
 - Quality-adjusted life years (QALYs)
@@ -270,7 +272,9 @@ The discount factor $\gamma \in [0,1]$ determines how much future rewards are va
 The mathematical framework of MDPs relies on several key assumptions and properties that enable rigorous analysis:
 
 **Markov Property**: The fundamental assumption that
-$$ P(s_{t+1} | s_t, a_t, s_{t-1}, a_{t-1}, \dots) = P(s_{t+1} | s_t, a_t) $$
+
+\[P(s_{t+1} | s_t, a_t, s_{t-1}, a_{t-1}, \dots) = P(s_{t+1} | s_t, a_t)\]
+
 is what makes the process "Markovian." This memoryless property is crucial for the mathematical tractability of MDPs. In practice, this assumption can be satisfied by including sufficient information in the state representation, though this may lead to larger state spaces.
 
 **Stationarity**: Most MDP theory assumes that the transition probabilities and reward function do not change over time. This allows us to find stationary optimal policies that don't depend on the time step. In healthcare, this assumption might be violated by factors like disease progression, aging, or changing treatment protocols, requiring extensions to time-varying MDPs.
@@ -288,8 +292,11 @@ A policy π represents a complete strategy for decision-making in an MDP. Formal
 
 **Deterministic Policies**: A deterministic policy $ \pi: S \rightarrow A $ assigns exactly one action to each state. For any state s, π(s) specifies the unique action to take. In healthcare, a deterministic policy might be a treatment protocol that specifies exactly which medication to prescribe based on a patient's current symptoms and test results.
 
-**Stochastic Policies**: A stochastic policy $ \pi: S \times A \rightarrow [0,1] $ assigns a probability distribution over actions for each state. We write $ \pi(a|s) $ as the probability of taking action a in state s, with the constraint that 
-$$ \sum_{a \in A(s)} \pi(a|s) = 1 \quad \forall s \in S $$ Stochastic policies can be beneficial when multiple actions have similar expected values or when exploration is desired.
+**Stochastic Policies**: A stochastic policy $ \pi: S \times A \rightarrow [0,1] $ assigns a probability distribution over actions for each state. We write $ \pi(a|s) $ as the probability of taking action a in state s, with the constraint that
+
+\[\sum_{a \in A(s)} \pi(a|s) = 1 \quad \forall s \in S\]
+
+Stochastic policies can be beneficial when multiple actions have similar expected values or when exploration is desired.
 
 **Stationary vs. Non-stationary Policies**: A stationary policy does not change over time - the same mapping from states to actions is used at every time step. A non-stationary policy $\pi_t$ can vary with time, potentially using different strategies at different time steps. For infinite-horizon MDPs, there always exists an optimal stationary policy, which significantly simplifies the search for optimal strategies.
 
@@ -308,47 +315,56 @@ An episode or trajectory in an MDP is a sequence of states, actions, and rewards
 ### Return and Value Concepts
 
 The return $G_t$ represents the total discounted reward obtained from time step t onward:
-$$ G_t = R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \dots = \sum_{k=0}^{\infty} \gamma^k R_{t+k+1} $$
+
+\[G_t = R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \dots = \sum_{k=0}^{\infty} \gamma^k R_{t+k+1}\]
 
 This formulation captures the fundamental trade-off between immediate and future rewards. The discount factor γ determines how much weight is given to future rewards relative to immediate ones. In healthcare contexts, this might represent the trade-off between immediate symptom relief and long-term health outcomes.
 
 **Finite-Horizon Return**: For finite-horizon problems with horizon H:
-$$ G_t = R_{t+1} + \gamma R_{t+2} + \dots + \gamma^{H-t-1} R_H = \sum_{k=0}^{H-t-1} \gamma^k R_{t+k+1} $$
+
+\[G_t = R_{t+1} + \gamma R_{t+2} + \dots + \gamma^{H-t-1} R_H = \sum_{k=0}^{H-t-1} \gamma^k R_{t+k+1}\]
 
 **Average Return**: An alternative to discounted return is the average return per time step:
-$$ \rho = \lim_{T\to\infty} \frac{1}{T} \mathbb{E}\left[\sum_{t=0}^{T-1} R_{t+1}\right] $$
+
+\[\rho = \lim_{T\to\infty} \frac{1}{T} \mathbb{E}\left[\sum_{t=0}^{T-1} R_{t+1}\right]\]
 
 This formulation is useful when we want to optimize long-term average performance rather than discounted cumulative reward.
 
 ### State Value Functions
 
 The state value function $V^p(s)$ represents the expected return when starting in state $s$ and following policy $p$ thereafter:
-$$ V^p(s) = \mathbb{E}_p[G_t | S_t = s] = \mathbb{E}_p\left[\sum_{k=0}^{\infty} \gamma^k R_{t+k+1} | S_t = s\right] $$
+
+\[V^p(s) = \mathbb{E}_p[G_t | S_t = s] = \mathbb{E}_p\left[\sum_{k=0}^{\infty} \gamma^k R_{t+k+1} | S_t = s\right]\]
 
 This function provides a measure of how "good" it is to be in a particular state under a given policy. In healthcare, the value function might represent the expected quality-adjusted life years remaining for a patient in a particular health state following a specific treatment protocol.
 
 The optimal state value function $V^*(s)$ represents the maximum expected return achievable from state $s$:
-$$ V^*(s) = \max_{\pi} V^\pi(s) $$
+
+\[V^*(s) = \max_{\pi} V^\pi(s)\]
 
 This represents the best possible outcome achievable from each state, providing an upper bound on performance and a target for optimization algorithms.
 
 ### Action Value Functions
 
 The action value function (or Q-function) $Q^p(s,a)$ represents the expected return when taking action $a$ in state $s$ and then following policy $p$:
-$$ Q^p(s,a) = \mathbb{E}_p[G_t | S_t = s, A_t = a] = \mathbb{E}_p\left[\sum_{k=0}^{\infty} \gamma^k R_{t+k+1} | S_t = s, A_t = a\right] $$
 
-The Q-function is particularly useful because it directly encodes the value of taking specific actions, making it straightforward to derive optimal policies: 
-$$ \pi^*(s) = \arg\max_a Q^*(s,a) $$
+\[Q^p(s,a) = \mathbb{E}_p[G_t | S_t = s, A_t = a] = \mathbb{E}_p\left[\sum_{k=0}^{\infty} \gamma^k R_{t+k+1} | S_t = s, A_t = a\right]\]
+
+The Q-function is particularly useful because it directly encodes the value of taking specific actions, making it straightforward to derive optimal policies:
+
+\[\pi^*(s) = \arg\max_a Q^*(s,a)\]
 
 The optimal action value function $Q^*(s,a)$ represents the maximum expected return achievable by taking action $a$ in state $s$ and then acting optimally thereafter:
-$$ Q^*(s,a) = \max_{\pi} Q^\pi(s,a) $$
+
+\[Q^*(s,a) = \max_{\pi} Q^\pi(s,a)\]
 
 ### Relationship Between Value Functions
 
 The state and action value functions are related through the policy and transition dynamics:
 
-$$ V^p(s) = \sum_a \pi(a|s) Q^p(s,a) $$
-$$ Q^p(s,a) = \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma V^p(s')] $$
+\[V^p(s) = \sum_a \pi(a|s) Q^p(s,a)\]
+
+\[Q^p(s,a) = \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma V^p(s')]\]
 
 These relationships form the foundation for many solution algorithms and provide insight into how values propagate through the state space based on the policy and dynamics of the system.
 
@@ -372,12 +388,14 @@ The Bellman equations represent one of the most fundamental results in dynamic p
 For any policy π, the value functions satisfy the Bellman expectation equations, which express the consistency conditions that must hold for value functions under that policy.
 
 **State Value Bellman Expectation Equation**:
-$$ V^p(s) = \sum_a \pi(a|s) \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma V^p(s')] $$
+
+\[V^p(s) = \sum_a \pi(a|s) \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma V^p(s')]\]
 
 This equation states that the value of a state under policy π equals the expected immediate reward plus the discounted expected value of the successor state. The expectation is taken over both the stochastic policy π and the stochastic transition dynamics P.
 
 **Action Value Bellman Expectation Equation**:
-$$ Q^p(s,a) = \sum_{s'} P(s'|s,a)\left[R(s,a,s') + \gamma \sum_{a'} \pi(a'|s')Q^p(s',a')\right] $$
+
+\[Q^p(s,a) = \sum_{s'} P(s'|s,a)\left[R(s,a,s') + \gamma \sum_{a'} \pi(a'|s')Q^p(s',a')\right]\]
 
 This equation expresses the action value as the expected immediate reward plus the discounted expected value of the next state-action pair under the policy.
 
@@ -388,12 +406,14 @@ In healthcare contexts, these equations capture how the value of a patient's cur
 The Bellman optimality equations characterize the optimal value functions and provide the foundation for computing optimal policies.
 
 **State Value Bellman Optimality Equation**:
-$$ V^*(s) = \max_a \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma V^*(s')] $$
+
+\[V^*(s) = \max_a \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma V^*(s')]\]
 
 This equation states that the optimal value of a state equals the maximum over all actions of the expected immediate reward plus the discounted optimal value of the successor state. The maximization operation reflects the optimal choice of action in each state.
 
 **Action Value Bellman Optimality Equation**:
-$$ Q^*(s,a) = \sum_{s'} P(s'|s,a)\left[R(s,a,s') + \gamma \max_{a'} Q^*(s',a')\right] $$
+
+\[Q^*(s,a) = \sum_{s'} P(s'|s,a)\left[R(s,a,s') + \gamma \max_{a'} Q^*(s',a')\right]\]
 
 This equation expresses the optimal action value as the expected immediate reward plus the discounted maximum value over all actions in the successor state.
 
@@ -405,15 +425,17 @@ The Bellman equations possess several important mathematical properties that ena
 
 **Fixed Point Property**: The Bellman equations can be viewed as fixed point equations. The Bellman expectation operator Tᵖ and Bellman optimality operator T are defined as:
 
-$$ (T^pV)(s) = \sum_a \pi(a|s) \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma V(s')] $$
-$$ (TV)(s) = \max_a \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma V(s')] $$
+\[(T^pV)(s) = \sum_a \pi(a|s) \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma V(s')]\]
+
+\[(TV)(s) = \max_a \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma V(s')]\]
 
 The value functions are fixed points of these operators: $V^p = T^p V^p$ and $V^* = T V^*$.
 
 **Contraction Property**: Under the assumption that γ < 1, both operators are contractions in the supremum norm. This means:
 
-$$ \|T^pV_1 - T^pV_2\|_{\infty} \leq \gamma \|V_1 - V_2\|_{\infty} $$
-$$ \|TV_1 - TV_2\|_{\infty} \leq \gamma \|V_1 - V_2\|_{\infty} $$
+\[\|T^pV_1 - T^pV_2\|_{\infty} \leq \gamma \|V_1 - V_2\|_{\infty}\]
+
+\[\|TV_1 - TV_2\|_{\infty} \leq \gamma \|V_1 - V_2\|_{\infty}\]
 
 The contraction property, combined with the Banach fixed point theorem, guarantees that iterative application of these operators converges to the unique fixed point (the true value function) at a geometric rate.
 
@@ -423,10 +445,11 @@ For finite MDPs, the Bellman expectation equations can be expressed in matrix fo
 
 Let V be the vector of state values, R^π be the vector of expected immediate rewards under policy π, and P^π be the transition probability matrix under policy π. Then:
 
-$$ \mathbf{V}^\pi = \mathbf{R}^\pi + \gamma \mathbf{P}^\pi \mathbf{V}^\pi $$
+\[\mathbf{V}^\pi = \mathbf{R}^\pi + \gamma \mathbf{P}^\pi \mathbf{V}^\pi\]
 
 This can be solved directly as:
-$$ \mathbf{V}^\pi = (\mathbf{I} - \gamma \mathbf{P}^\pi)^{-1} \mathbf{R}^\pi $$
+
+\[\mathbf{V}^\pi = (\mathbf{I} - \gamma \mathbf{P}^\pi)^{-1} \mathbf{R}^\pi\]
 
 provided that the matrix (I - γP^π) is invertible, which is guaranteed when γ < 1.
 
@@ -434,11 +457,11 @@ provided that the matrix (I - γP^π) is invertible, which is guaranteed when γ
 
 The Bellman equations provide the foundation for policy improvement, a key concept in solving MDPs. Given the value function $V^\pi$ for a policy $\pi$, we can construct an improved policy $\pi'$ by acting greedily with respect to $V^\pi$:
 
-$$\pi'(s) = \arg\max_a \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma V^\pi(s')]$$
+\[\pi'(s) = \arg\max_a \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma V^\pi(s')]\]
 
 The Policy Improvement Theorem states that this greedy policy $\pi'$ is at least as good as the original policy $\pi$, and strictly better unless $\pi$ is already optimal:
 
-$$V^{\pi'}(s) \geq V^\pi(s) \text{ for all } s \in S$$
+\[V^{\pi'}(s) \geq V^\pi(s) \text{ for all } s \in S\]
 
 with equality if and only if $\pi$ is optimal.
 
@@ -446,19 +469,19 @@ with equality if and only if $\pi$ is optimal.
 
 **Finite Horizon MDPs**: For finite horizon problems, the Bellman equations become time-dependent:
 
-$$V_t^\pi(s) = \sum_a \pi(a|s) \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma V_{t+1}^\pi(s')]$$
+\[V_t^\pi(s) = \sum_a \pi(a|s) \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma V_{t+1}^\pi(s')]\]
 
 with boundary condition V_H^π(s) = 0 for all s (assuming the episode terminates at time H).
 
 **Average Reward MDPs**: For average reward criteria, the Bellman equations take the form:
 
-$$\rho^\pi + h^\pi(s) = \sum_a \pi(a|s) \sum_{s'} P(s'|s,a)[R(s,a,s') + h^\pi(s')]$$
+\[\rho^\pi + h^\pi(s) = \sum_a \pi(a|s) \sum_{s'} P(s'|s,a)[R(s,a,s') + h^\pi(s')]\]
 
 where ρ^π is the average reward under policy π and h^π(s) is the differential value function representing the relative value of state s.
 
 **Continuous State/Action Spaces**: For continuous spaces, summations are replaced by integrals:
 
-V^π(s) = ∫ π(a|s) ∫ P(s'|s,a)[R(s,a,s') + γV^π(s')] ds' da
+\[V^π(s) = ∫ π(a|s) ∫ P(s'|s,a)[R(s,a,s') + γV^π(s')] ds' da\]
 
 ### Computational Implications
 
@@ -499,8 +522,12 @@ Value iteration is perhaps the most intuitive dynamic programming algorithm for 
 **Algorithm Description**:
 1. Initialize V₀(s) arbitrarily for all s ∈ S (commonly V₀(s) = 0)
 2. For k = 0, 1, 2, ... until convergence:
-   Vₖ₊₁(s) ← max_a Σₛ' P(s'|s,a)[R(s,a,s') + γVₖ(s')] for all s ∈ S
-3. Extract optimal policy: π*(s) = argmax_a Σₛ' P(s'|s,a)[R(s,a,s') + γV*(s')]
+
+   \[V_{k+1}(s) \leftarrow \max_a \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma V_k(s')] \text{ for all } s \in S\]
+
+3. Extract optimal policy:
+
+   \[\pi^*(s) = \arg\max_a \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma V^*(s')]\]
 
 **Convergence Properties**: Value iteration converges to the optimal value function V* at a geometric rate. Specifically, ||Vₖ - V*||∞ ≤ γᵏ||V₀ - V*||∞, where γ is the discount factor. This provides both a convergence guarantee and a bound on the approximation error after k iterations.
 
@@ -515,8 +542,14 @@ Policy iteration takes a different approach, alternating between policy evaluati
 **Algorithm Description**:
 1. Initialize π₀ arbitrarily
 2. For k = 0, 1, 2, ... until convergence:
-   a. Policy Evaluation: Solve Vᵖᵏ(s) = Σₐ πₖ(a|s) Σₛ' P(s'|s,a)[R(s,a,s') + γVᵖᵏ(s')]
-   b. Policy Improvement: πₖ₊₁(s) = argmax_a Σₛ' P(s'|s,a)[R(s,a,s') + γVᵖᵏ(s')]
+
+   a. **Policy Evaluation**: Solve
+
+   \[V^{\pi_k}(s) = \sum_a \pi_k(a|s) \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma V^{\pi_k}(s')]\]
+
+   b. **Policy Improvement**:
+
+   \[\pi_{k+1}(s) = \arg\max_a \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma V^{\pi_k}(s')]\]
 3. Return the converged policy π*
 
 **Policy Evaluation Step**: This involves solving a system of linear equations or using iterative methods. For finite MDPs, the exact solution is Vᵖ = (I - γPᵖ)⁻¹Rᵖ, where Pᵖ is the transition matrix under policy π and Rᵖ is the reward vector.
@@ -532,8 +565,12 @@ Modified policy iteration combines elements of both value iteration and policy i
 **Algorithm Description**:
 1. Initialize π₀ arbitrarily and V₀ arbitrarily
 2. For k = 0, 1, 2, ... until convergence:
-   a. Partial Policy Evaluation: Perform m steps of value iteration using πₖ
-   b. Policy Improvement: πₖ₊₁(s) = argmax_a Σₛ' P(s'|s,a)[R(s,a,s') + γVₖ(s')]
+
+   a. **Partial Policy Evaluation**: Perform m steps of value iteration using πₖ
+
+   b. **Policy Improvement**:
+
+   \[\pi_{k+1}(s) = \arg\max_a \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma V_k(s')]\]
 
 This approach provides a tunable trade-off between the computational cost per iteration and the number of iterations required for convergence.
 
@@ -542,13 +579,19 @@ This approach provides a tunable trade-off between the computational cost per it
 The Bellman optimality equations can be formulated as a linear programming problem, providing an alternative solution method with different computational characteristics.
 
 **Primal Formulation**:
-Minimize: Σₛ V(s)
-Subject to: V(s) ≥ Σₛ' P(s'|s,a)[R(s,a,s') + γV(s')] for all s ∈ S, a ∈ A(s)
+
+$$\begin{align}
+\text{Minimize:} \quad & \sum_s V(s) \\
+\text{Subject to:} \quad & V(s) \geq \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma V(s')] \text{ for all } s \in S, a \in A(s)
+\end{align}$$
 
 **Dual Formulation**:
-Maximize: Σₛ,ₐ R(s,a)x(s,a)
-Subject to: Σₐ x(s,a) - γ Σₛ',ₐ P(s|s',a)x(s',a) = α(s) for all s ∈ S
-           x(s,a) ≥ 0 for all s ∈ S, a ∈ A(s)
+
+$$\begin{align}
+\text{Maximize:} \quad & \sum_{s,a} R(s,a)x(s,a) \\
+\text{Subject to:} \quad & \sum_a x(s,a) - \gamma \sum_{s',a} P(s|s',a)x(s',a) = \alpha(s) \text{ for all } s \in S \\
+& x(s,a) \geq 0 \text{ for all } s \in S, a \in A(s)
+\end{align}$$
 
 where α(s) represents the initial state distribution and x(s,a) represents the expected discounted number of times action a is taken in state s.
 
@@ -565,7 +608,8 @@ When exact dynamic programming becomes computationally intractable due to large 
 Function approximation replaces the tabular representation of value functions with parameterized approximations, such as linear combinations of basis functions or neural networks.
 
 **Linear Function Approximation**:
-V(s) ≈ Σᵢ θᵢφᵢ(s) = θᵀφ(s)
+
+\[V(s) \approx \sum_i \theta_i \phi_i(s) = \theta^T \phi(s)\]
 
 where φ(s) is a feature vector representing state s and θ is a parameter vector to be learned.
 
@@ -576,8 +620,13 @@ where fθ is a neural network with parameters θ.
 
 **Fitted Value Iteration**: This approach applies value iteration updates to the function approximation:
 1. Generate a set of sample states S' ⊆ S
-2. For each s ∈ S', compute target values: yₛ = max_a Σₛ' P(s'|s,a)[R(s,a,s') + γV(s')]
-3. Update parameters θ to minimize Σₛ∈S' (V(s) - yₛ)²
+2. For each s ∈ S', compute target values:
+
+   \[y_s = \max_a \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma V(s')]\]
+
+3. Update parameters θ to minimize:
+
+   \[\sum_{s \in S'} (V(s) - y_s)^2\]
 
 ### State Space Reduction Techniques
 
@@ -636,17 +685,30 @@ The temporal scope of decision-making fundamentally affects both the mathematica
 Finite-horizon MDPs involve decision-making over a predetermined number of time steps H. The mathematical formulation requires time-dependent value functions and policies, as the optimal strategy may change based on the remaining time horizon.
 
 **Mathematical Formulation**: The value functions become time-dependent:
-Vₜ(s) = max_a E[Rₜ₊₁ + γVₜ₊₁(S_{t+1}) | Sₜ = s, Aₜ = a]
 
-with boundary condition V_H(s) = 0 for all s ∈ S (assuming no terminal rewards).
+\[V_t(s) = \max_a \mathbb{E}[R_{t+1} + \gamma V_{t+1}(S_{t+1}) | S_t = s, A_t = a]\]
+
+with boundary condition:
+
+\[V_H(s) = 0 \text{ for all } s \in S \text{ (assuming no terminal rewards)}\]
 
 **Optimal Policy Structure**: The optimal policy $\pi_t^*(s)$ may depend on both the current state $s$ and the time step $t$. This time-dependence arises because the remaining opportunity for future rewards decreases as the horizon approaches.
 
 **Solution Methods**: Finite-horizon problems are typically solved using backward induction:
-1. Set V_H(s) = 0 for all s ∈ S
+
+1. Set:
+
+\[V_H(s) = 0 \text{ for all } s \in S\]
+
 2. For t = H-1, H-2, ..., 0:
-   - Compute Vₜ(s) = max_a Σₛ' P(s'|s,a)[R(s,a,s') + γVₜ₊₁(s')]
-   - Set $\pi_t^*(s) = \arg\max_a \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma V_{t+1}(s')]$
+
+   - Compute:
+
+   \[V_t(s) = \max_a \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma V_{t+1}(s')]\]
+
+   - Set:
+
+   \[\pi_t^*(s) = \arg\max_a \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma V_{t+1}(s')]\]
 
 **Healthcare Applications**: Finite-horizon formulations are natural for medical scenarios with defined endpoints, such as:
 - Surgical recovery protocols with predetermined recovery periods
@@ -661,7 +723,8 @@ with boundary condition V_H(s) = 0 for all s ∈ S (assuming no terminal rewards
 Infinite-horizon MDPs model ongoing decision-making processes without predetermined endpoints. These formulations are mathematically more elegant and often more realistic for chronic conditions or long-term management scenarios.
 
 **Mathematical Formulation**: Value functions are time-independent (stationary):
-V(s) = max_a E[R_{t+1} + γV(S_{t+1}) | Sₜ = s, Aₜ = a]
+
+\[V(s) = \max_a \mathbb{E}[R_{t+1} + \gamma V(S_{t+1}) | S_t = s, A_t = a]\]
 
 **Stationarity Property**: For infinite-horizon discounted MDPs, there exists an optimal stationary policy π* that is independent of time. This fundamental result significantly simplifies the search for optimal policies.
 
@@ -687,7 +750,10 @@ The treatment of future rewards relative to immediate rewards fundamentally affe
 Discounted MDPs use a discount factor γ ∈ [0,1) to weight future rewards less than immediate rewards. This formulation has several important properties and interpretations.
 
 **Mathematical Properties**:
-- Ensures convergence of infinite sums: E[Σₜ₌₀^∞ γᵗRₜ₊₁] < ∞
+- Ensures convergence of infinite sums:
+
+  \[\mathbb{E}\left[\sum_{t=0}^{\infty} \gamma^t R_{t+1}\right] < \infty\]
+
 - Creates contraction mappings that guarantee unique solutions
 - Provides geometric convergence rates for iterative algorithms
 
@@ -719,10 +785,11 @@ Undiscounted MDPs treat all future rewards equally with immediate rewards (γ = 
 
 Average reward MDPs optimize the long-run average reward per time step rather than cumulative discounted reward:
 
-ρ* = max_π lim_{T→∞} (1/T) E_π[Σₜ₌₀^{T-1} Rₜ₊₁]
+\[\rho^* = \max_\pi \lim_{T\to\infty} \frac{1}{T} \mathbb{E}_\pi\left[\sum_{t=0}^{T-1} R_{t+1}\right]\]
 
 **Mathematical Formulation**: The average reward Bellman equation is:
-ρ* + h*(s) = max_a Σₛ' P(s'|s,a)[R(s,a,s') + h*(s')]
+
+\[\rho^* + h^*(s) = \max_a \sum_{s'} P(s'|s,a)[R(s,a,s') + h^*(s')]\]
 
 where ρ* is the optimal average reward and h*(s) is the differential value function.
 
@@ -800,7 +867,8 @@ POMDPs model situations where the decision-maker receives only partial informati
 **Belief States**: The agent maintains a belief state b(s) representing the probability distribution over possible true states given the observation history.
 
 **Belief Update**: After taking action a and observing o, the belief state updates according to Bayes' rule:
-b'(s') = η O(o|s',a) Σₛ P(s'|s,a)b(s)
+
+\[b'(s') = \eta O(o|s',a) \sum_s P(s'|s,a)b(s)\]
 
 where η is a normalization constant.
 
@@ -842,7 +910,8 @@ Discrete state and action spaces enable exact tabular representations and guaran
 Continuous state and action spaces provide more natural representations for many physical systems but require approximation methods.
 
 **Mathematical Formulation**: Summations in Bellman equations are replaced by integrals:
-V(s) = max_a ∫ P(s'|s,a)[R(s,a,s') + γV(s')] ds'
+
+\[V(s) = \max_a \int P(s'|s,a)[R(s,a,s') + \gamma V(s')] ds'\]
 
 **Solution Approaches**:
 - Function approximation (linear, neural networks)
@@ -942,7 +1011,10 @@ Q(s,a) ← Q(s,a) + α[r + γ max_{a'} Q(s',a') - Q(s,a)]
 
 **Convergence Conditions**:
 1. All state-action pairs are visited infinitely often
-2. Learning rate α satisfies Σₜ αₜ = ∞ and Σₜ αₜ² < ∞
+2. Learning rate α satisfies:
+
+   \[\sum_t \alpha_t = \infty \text{ and } \sum_t \alpha_t^2 < \infty\]
+
 3. Rewards are bounded
 
 **Healthcare Implementation Example**: Consider a medication dosing problem where:
@@ -977,12 +1049,15 @@ where a' is the action actually taken in state s' according to the current polic
 
 Policy gradient methods directly parameterize and optimize policies rather than learning value functions, offering advantages for continuous action spaces and stochastic policies.
 
-**Mathematical Foundation**: Policy gradient methods optimize the expected return J(θ) = E_π[G_t] with respect to policy parameters θ using gradient ascent:
+**Mathematical Foundation**: Policy gradient methods optimize the expected return with respect to policy parameters θ using gradient ascent:
 
-θ ← θ + α ∇_θ J(θ)
+\[J(\theta) = \mathbb{E}_\pi[G_t]\]
+
+\[\theta \leftarrow \theta + \alpha \nabla_\theta J(\theta)\]
 
 **Policy Gradient Theorem**: The gradient of expected return can be expressed as:
-∇_θ J(θ) = E_π[∇_θ log π(a|s,θ) Q^π(s,a)]
+
+\[\nabla_\theta J(\theta) = \mathbb{E}_\pi[\nabla_\theta \log \pi(a|s,\theta) Q^\pi(s,a)]\]
 
 This fundamental result enables practical policy gradient algorithms by providing an unbiased estimator of the policy gradient.
 
@@ -1334,18 +1409,24 @@ While standard MDPs assume complete observability of the system state, many real
 **Belief States**: Since the true state is not directly observable, the agent must maintain a belief state $b(s)$ representing the probability distribution over possible states given the observation history. The belief state becomes the sufficient statistic for optimal decision-making in POMDPs.
 
 **Belief Update**: After taking action $a$ and observing $o$, the belief state updates according to Bayes' rule:
-$$ b'(s') = \eta O(o|s',a) \sum_{s} P(s'|s,a)b(s) $$
+
+\[b'(s') = \eta O(o|s',a) \sum_{s} P(s'|s,a)b(s)\]
 
 where $\eta$ is a normalization constant ensuring:
-$$ \sum_{s'} b'(s') = 1 $$
+
+\[\sum_{s'} b'(s') = 1\]
 
 **Value Functions**: The value function is defined over belief states rather than physical states:
-$$ V(b) = \max_a \left[ R(b,a) + \gamma \sum_{o} P(o|b,a)V(b') \right] $$
+
+\[V(b) = \max_a \left[ R(b,a) + \gamma \sum_{o} P(o|b,a)V(b') \right]\]
 
 where:
-$$ R(b,a) = \sum_{s} b(s)R(s,a) $$
+
+\[R(b,a) = \sum_{s} b(s)R(s,a)\]
+
 and
-$$ P(o|b,a) = \sum_{s,s'} b(s)P(s'|s,a)O(o|s',a) $$
+
+\[P(o|b,a) = \sum_{s,s'} b(s)P(s'|s,a)O(o|s',a)\]
 
 **Computational Complexity**: POMDPs are PSPACE-complete in general, making exact solutions intractable for all but the smallest problems. The continuous nature of the belief space compounds the computational challenges.
 
@@ -1418,12 +1499,14 @@ Risk-sensitive formulations modify the objective function to account for risk pr
 CVaR_α(G) = E[G | G ≤ VaR_α(G)]
 
 **Exponential Utility**: Use exponential utility functions to capture risk aversion:
-U(G) = -exp(-ρG)/ρ
+
+\[U(G) = -\frac{\exp(-\rho G)}{\rho}\]
 
 where ρ > 0 represents risk aversion.
 
 **Mean-Variance Optimization**: Balance expected return with variance:
-J(π) = E[G] - λVar(G)
+
+\[J(\pi) = \mathbb{E}[G] - \lambda \text{Var}(G)\]
 
 where λ represents risk aversion.
 
@@ -1437,7 +1520,8 @@ Robust MDPs address uncertainty about model parameters by optimizing worst-case 
 - **Budget-constrained uncertainty**: Limited total deviation from nominal model
 
 **Robust Bellman Equation**:
-V(s) = max_a min_{P∈U_P, R∈U_R} [R(s,a) + γ Σₛ' P(s'|s,a)V(s')]
+
+\[V(s) = \max_a \min_{P \in U_P, R \in U_R} \left[R(s,a) + \gamma \sum_{s'} P(s'|s,a)V(s')\right]\]
 
 where U_P and U_R are uncertainty sets for transitions and rewards.
 
@@ -1453,8 +1537,10 @@ Healthcare applications often involve hard constraints that must be satisfied re
 
 **Mathematical Formulation**: Constrained MDPs include constraint functions C_i: S × A → ℝ and constraint thresholds c_i:
 
-maximize E[Σₜ γᵗR(sₜ,aₜ)]
-subject to E[Σₜ γᵗC_i(sₜ,aₜ)] ≤ c_i for i = 1,...,m
+$$\begin{align}
+\text{maximize} \quad & \mathbb{E}\left[\sum_t \gamma^t R(s_t,a_t)\right] \\
+\text{subject to} \quad & \mathbb{E}\left[\sum_t \gamma^t C_i(s_t,a_t)\right] \leq c_i \text{ for } i = 1,\ldots,m
+\end{align}$$
 
 **Solution Methods**:
 - **Lagrangian relaxation**: Convert constraints to penalty terms

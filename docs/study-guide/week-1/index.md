@@ -70,7 +70,7 @@ Understanding the mathematical concepts that power language modeling is crucial 
 - **Connection between sequential decision making in RL and token prediction**
 
 **Resources:**
-- [RL-LLM Foundations](../../materials/ml/rl-llm-foundation.md)
+- [Reinforcement Learning for LLMs](../../materials/ml/reinforcement-learning.md)
 - [Markov Decision Processes](../../materials/ml/mdp.md)
 
 ## 📚 Key Readings
@@ -252,7 +252,7 @@ Track your learning progress with this comprehensive table:
 | Probability Theory Fundamentals | Mathematical Foundations | Textbooks + Practice | ⏳ Pending | [Materials](../../materials/math/probability-theory.md) |
 | Information Theory Basics | Mathematical Foundations | Textbooks + Practice | ⏳ Pending | [Materials](../../materials/math/information-theory.md) |
 | Linear Algebra Review | Mathematical Foundations | Textbooks + Practice | ⏳ Pending | [Materials](../../materials/math/linear-algebra.md) |
-| Reinforcement Learning Introduction | Mathematical Foundations | Stanford CS234 | ⏳ Pending | [Materials](../../materials/ml/rl-llm-foundation.md) |
+| Reinforcement Learning Introduction | Mathematical Foundations | Stanford CS234 | ⏳ Pending | [Materials](../../materials/ml/reinforcement-learning.md) |
 | Understanding Large Language Models | Key Readings | Blog Post | ⏳ Pending | [Materials](../../materials/llm/llm-fundamentals.md) |
 | NLP with Deep Learning Introduction | Key Readings | Stanford CS224n | ⏳ Pending | [Materials](../../materials/llm/word-embeddings.md) |
 | First LLM Program | Hands-On Deliverable | Implementation | ⏳ Pending | [Code Examples](../../code-examples/index.md) |

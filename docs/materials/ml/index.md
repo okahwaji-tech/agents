@@ -9,9 +9,8 @@ This section covers machine learning fundamentals, with particular emphasis on r
 ## 📚 Topics Covered
 
 ### Reinforcement Learning
-- **[Reinforcement Learning](reinforcement-learning.md)** - Introduction to RL concepts
+- **[Reinforcement Learning](reinforcement-learning.md)** - Introduction to RL concepts and applications to language models
 - **[Markov Decision Processes](mdp.md)** - Mathematical framework for sequential decisions
-- **[RL-LLM Connections](rl-llm-foundation.md)** - How RL applies to language models
 
 ## 🔗 Why RL Matters for LLMs
 
@@ -47,9 +46,8 @@ Understanding these RL concepts is essential for:
 
 **Recommended Order:**
 
-1. **[Reinforcement Learning](reinforcement-learning.md)** - Start with basic concepts
+1. **[Reinforcement Learning](reinforcement-learning.md)** - Start with basic concepts and LLM applications
 2. **[Markov Decision Processes](mdp.md)** - Mathematical foundations
-3. **[RL-LLM Connections](rl-llm-foundation.md)** - Apply to language models
 
 **Time Investment:** 2-3 hours for core concepts
 

@@ -39,8 +39,8 @@ Track your progress through Week 1's learning materials. Check off each item as 
  - [ ] Study [RL Materials](../../materials/ml/reinforcement-learning.md)
  - [ ] Connect RL concepts to language modeling
 
-- [ ] **RL-LLM Connections** (3 hours)
- - [ ] Read [RL-LLM Foundation](../../materials/ml/rl-llm-foundation.md)
+- [ ] **RL for Language Models** (3 hours)
+ - [ ] Study advanced sections of [Reinforcement Learning](../../materials/ml/reinforcement-learning.md)
  - [ ] Understand language modeling as sequential decision-making
 
 ## 🧠 LLM Fundamentals

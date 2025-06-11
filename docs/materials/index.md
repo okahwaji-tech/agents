@@ -73,7 +73,7 @@
         - [Word Embeddings](llm/word-embeddings.md) 🟢
 
     3. **Finally**: [Machine Learning](ml/index.md)
-        - [RL-LLM Connections](ml/rl-llm-foundation.md) 🟡
+        - [Reinforcement Learning](ml/reinforcement-learning.md) 🟡
 
 === "⚡ Intermediate Path"
 
@@ -102,7 +102,7 @@
         - [Evaluation Methods](llm/evaluation.md) 🟡
 
     3. **Specialization**: [RL for LLMs](ml/index.md)
-        - [RL-LLM Connections](ml/rl-llm-foundation.md) 🔴
+        - [Reinforcement Learning](ml/reinforcement-learning.md) 🔴
 
 ## 📊 Materials by Category & Difficulty
 
@@ -221,19 +221,20 @@
 
     [:octicons-arrow-right-24: Master MDPs](ml/mdp.md)
 
--   **🔴 RL-LLM Connections**
+-   **🔴 Reinforcement Learning for LLMs**
 
     ---
 
-    **Advanced: RL techniques for LLMs**
+    **Advanced: RL techniques for language models**
 
     - RLHF (Reinforcement Learning from Human Feedback)
     - Policy gradient methods
     - Constitutional AI
+    - Sequential decision making in text generation
 
-    **Time**: 3-4 hours | **Prerequisites**: RL basics, LLM basics
+    **Time**: 4-5 hours | **Prerequisites**: RL basics, LLM basics
 
-    [:octicons-arrow-right-24: Explore RL-LLM](ml/rl-llm-foundation.md)
+    [:octicons-arrow-right-24: Master RL for LLMs](ml/reinforcement-learning.md)
 
 </div>
 

@@ -46,6 +46,7 @@ mjx-container[display="true"] {
     display: block !important;
     margin: 1.5em auto !important; /* This centers the block on the page */
     padding: 0.5em 0 !important;
+    text-align: center !important;
 }
 
 /* Inline math styling */
@@ -58,6 +59,40 @@ mjx-container[display="false"] {
 .md-content p:has(mjx-container[display="true"]) {
     text-align: center;
     margin: 1.5em 0;
+}
+
+/* Force center alignment for all math containers - Updated for better rendering */
+mjx-container {
+    text-align: center !important;
+    display: block !important;
+    margin: 1.5em auto !important;
+}
+
+/* Center all math display blocks */
+.md-content__inner mjx-container[display="true"] {
+    display: block !important;
+    margin: 1.5em auto !important;
+    text-align: center !important;
+    width: 100% !important;
+}
+
+/* Center paragraphs containing only math */
+.md-content__inner p:has(mjx-container[display="true"]:only-child) {
+    text-align: center !important;
+    margin: 1.5em 0 !important;
+}
+
+/* Additional MathJax centering rules */
+.MathJax_Display {
+    text-align: center !important;
+    margin: 1.5em auto !important;
+}
+
+/* Force centering for all mathematical expressions */
+mjx-math {
+    display: block !important;
+    text-align: center !important;
+    margin: 0 auto !important;
 }
 
 /* Equation numbering support */
