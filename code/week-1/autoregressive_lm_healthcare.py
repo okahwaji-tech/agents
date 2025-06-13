@@ -1,10 +1,13 @@
 """
-Comprehensive PyTorch Implementation: Autoregressive Language Modeling
-====================================================================
+autoregressive_lm_healthcare.py
 
-This module provides a complete implementation of autoregressive language modeling
-using the chain rule of probability, with healthcare applications and examples.
-Focus: Chain Rule and Autoregressive Modeling in Healthcare LLMs
+Comprehensive PyTorch implementation of an autoregressive language model
+focused on healthcare applications and chain-rule probability modeling.
+
+This module defines:
+  - HealthcareAutoregressiveLM: Transformer-based autoregressive LM
+  - HealthcareLMTrainer: Trainer with teacher forcing
+  - Utility functions for demonstration and analysis
 """
 
 import torch
@@ -19,8 +22,23 @@ import json
 
 class HealthcareAutoregressiveLM(nn.Module):
     """
-    A comprehensive autoregressive language model implementation
-    focused on healthcare applications and chain rule demonstration.
+    Transformer-based autoregressive language model for healthcare text.
+
+    Args:
+        vocab_size (int): Size of the token vocabulary.
+        embedding_dim (int): Dimension of token and position embeddings.
+        hidden_dim (int): Feed-forward network hidden size.
+        num_layers (int): Number of Transformer encoder layers.
+        num_heads (int): Number of attention heads per layer.
+        max_seq_len (int): Maximum sequence length for position embeddings.
+        dropout (float): Dropout probability.
+
+    Attributes:
+        token_embedding (nn.Embedding): Token embedding lookup.
+        position_embedding (nn.Embedding): Positional embedding lookup.
+        transformer_layers (ModuleList): List of TransformerEncoderLayer modules.
+        output_projection (nn.Linear): Final projection to vocabulary logits.
+        medical_vocab (Dict[int, str]): Demonstration medical vocabulary.
     """
     
     def __init__(self, 
@@ -31,6 +49,11 @@ class HealthcareAutoregressiveLM(nn.Module):
                  num_heads: int = 8,
                  max_seq_len: int = 512,
                  dropout: float = 0.1):
+        """
+        Initialize the autoregressive LM components and weights.
+
+        See class docstring for argument descriptions.
+        """
         super().__init__()
         
         self.vocab_size = vocab_size
@@ -65,7 +88,13 @@ class HealthcareAutoregressiveLM(nn.Module):
         self.medical_vocab = self._create_medical_vocabulary()
     
     def _init_weights(self):
-        """Initialize model weights using appropriate distributions."""
+        """
+        Initialize weights for Linear and Embedding modules.
+
+        Linear weights: normal(mean=0.0, std=0.02)
+        Biases: zeros
+        Embedding weights: normal(mean=0.0, std=0.02)
+        """
         for module in self.modules():
             if isinstance(module, nn.Linear):
                 nn.init.normal_(module.weight, mean=0.0, std=0.02)
@@ -75,7 +104,12 @@ class HealthcareAutoregressiveLM(nn.Module):
                 nn.init.normal_(module.weight, mean=0.0, std=0.02)
     
     def _create_medical_vocabulary(self) -> Dict[int, str]:
-        """Create a comprehensive medical vocabulary."""
+        """
+        Build a demonstration medical vocabulary mapping indices to terms.
+
+        Returns:
+            Dict[int, str]: Index-to-token mapping for medical terms.
+        """
         medical_terms = [
             # Basic tokens
             "<PAD>", "<UNK>", "<BOS>", "<EOS>",
@@ -123,14 +157,14 @@ class HealthcareAutoregressiveLM(nn.Module):
                 input_ids: torch.Tensor, 
                 attention_mask: Optional[torch.Tensor] = None) -> torch.Tensor:
         """
-        Forward pass implementing autoregressive language modeling.
-        
+        Forward pass through the autoregressive LM.
+
         Args:
-            input_ids: Token indices of shape (batch_size, seq_len)
-            attention_mask: Attention mask of shape (batch_size, seq_len)
-            
+            input_ids (Tensor): Shape (batch_size, seq_len) input token indices.
+            attention_mask (Tensor, optional): Shape (batch_size, seq_len) mask.
+
         Returns:
-            logits: Output logits of shape (batch_size, seq_len, vocab_size)
+            Tensor: Logits of shape (batch_size, seq_len, vocab_size).
         """
         batch_size, seq_len = input_ids.shape
         
@@ -159,14 +193,13 @@ class HealthcareAutoregressiveLM(nn.Module):
     
     def compute_sequence_log_probability(self, sequence: torch.Tensor) -> torch.Tensor:
         """
-        Compute log probability of a sequence using the chain rule.
-        P(w1, w2, ..., wn) = P(w1) * P(w2|w1) * ... * P(wn|w1,...,wn-1)
-        
+        Compute log-probability of sequences via the chain rule.
+
         Args:
-            sequence: Token sequence of shape (batch_size, seq_len)
-            
+            sequence (Tensor): Shape (batch_size, seq_len) input sequences.
+
         Returns:
-            log_prob: Log probability of shape (batch_size,)
+            Tensor: Shape (batch_size,) log-probabilities for each sequence.
         """
         batch_size, seq_len = sequence.shape
         
@@ -214,12 +247,8 @@ class HealthcareAutoregressiveLM(nn.Module):
         """
         self.eval()
         
-        # Convert prompt to token IDs if needed
-        if isinstance(prompt, str):
-            # Simple tokenization for demonstration
-            prompt_tokens = self._simple_tokenize(prompt)
-        else:
-            prompt_tokens = prompt
+        # Convert prompt to token IDs if string
+        prompt_tokens = self._simple_tokenize(prompt) if isinstance(prompt, str) else prompt
         
         generated = prompt_tokens.copy()
         
@@ -273,7 +302,15 @@ class HealthcareAutoregressiveLM(nn.Module):
         return generated
     
     def _simple_tokenize(self, text: str) -> List[int]:
-        """Simple tokenization for demonstration purposes."""
+        """
+        Simple whitespace tokenizer mapping to medical vocabulary IDs.
+
+        Args:
+            text (str): Raw input text.
+
+        Returns:
+            List[int]: Token ID sequence where unknown words map to the UNK token.
+        """
         # Convert text to lowercase and split
         words = text.lower().split()
         
@@ -291,13 +328,13 @@ class HealthcareAutoregressiveLM(nn.Module):
     
     def analyze_attention_patterns(self, sequence: torch.Tensor) -> Dict:
         """
-        Analyze attention patterns to understand token dependencies.
-        
+        Analyze self-attention distributions across model layers.
+
         Args:
-            sequence: Input sequence of shape (batch_size, seq_len)
-            
+            sequence (Tensor): Shape (batch_size, seq_len) input tokens.
+
         Returns:
-            attention_analysis: Dictionary with attention statistics
+            Dict[str, Any]: Statistics including attention entropy and concentration.
         """
         self.eval()
         
@@ -340,21 +377,19 @@ class HealthcareAutoregressiveLM(nn.Module):
                     analysis['attention_concentration'].append(concentration.mean().item())
         
         finally:
-            # Remove hooks
-            for hook in hooks:
-                hook.remove()
+            [hook.remove() for hook in hooks]
         
         return analysis
     
     def compute_perplexity(self, sequences: torch.Tensor) -> float:
         """
-        Compute perplexity on a batch of sequences.
-        
+        Compute perplexity for a batch of sequences.
+
         Args:
-            sequences: Batch of sequences of shape (batch_size, seq_len)
-            
+            sequences (Tensor): Shape (batch_size, seq_len) input tokens.
+
         Returns:
-            perplexity: Perplexity value
+            float: Perplexity value.
         """
         self.eval()
         
@@ -373,10 +408,21 @@ class HealthcareAutoregressiveLM(nn.Module):
 
 class HealthcareLMTrainer:
     """
-    Trainer class for healthcare language models with chain rule optimization.
+    Trainer for HealthcareAutoregressiveLM using teacher forcing.
+
+    Args:
+        model (HealthcareAutoregressiveLM): Model to train.
+        learning_rate (float): Optimizer learning rate.
+
+    Attributes:
+        optimizer (Optimizer): AdamW optimizer.
+        criterion (nn.CrossEntropyLoss): Loss function ignoring padding token.
     """
     
     def __init__(self, model: HealthcareAutoregressiveLM, learning_rate: float = 1e-4):
+        """
+        Initialize trainer with model, optimizer, and loss.
+        """
         self.model = model
         self.optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate)
         self.criterion = nn.CrossEntropyLoss(ignore_index=0)  # Ignore padding
@@ -413,6 +459,9 @@ class HealthcareLMTrainer:
 def demonstrate_chain_rule_calculation():
     """
     Demonstrate explicit chain rule calculation for medical sequences.
+    
+    Returns:
+        None
     """
     print("=== Chain Rule Calculation Demonstration ===")
     
@@ -465,6 +514,9 @@ def demonstrate_chain_rule_calculation():
 def demonstrate_medical_text_generation():
     """
     Demonstrate medical text generation using autoregressive sampling.
+    
+    Returns:
+        None
     """
     print("\n=== Medical Text Generation ===")
     
@@ -504,6 +556,9 @@ def demonstrate_medical_text_generation():
 def analyze_medical_sequence_probabilities():
     """
     Analyze probabilities of different medical sequences.
+    
+    Returns:
+        None
     """
     print("\n=== Medical Sequence Probability Analysis ===")
     
@@ -545,6 +600,9 @@ def analyze_medical_sequence_probabilities():
 def demonstrate_temperature_effects():
     """
     Demonstrate how temperature affects generation diversity.
+    
+    Returns:
+        None
     """
     print("\n=== Temperature Effects on Generation ===")
     
@@ -570,6 +628,9 @@ def demonstrate_temperature_effects():
 def medical_language_model_training_demo():
     """
     Demonstrate training a medical language model with chain rule optimization.
+    
+    Returns:
+        None
     """
     print("\n=== Medical Language Model Training Demo ===")
     
@@ -621,11 +682,14 @@ def main():
     print("=" * 80)
     
     # Run all demonstrations
-    demonstrate_chain_rule_calculation()
-    demonstrate_medical_text_generation()
-    analyze_medical_sequence_probabilities()
-    demonstrate_temperature_effects()
-    medical_language_model_training_demo()
+    for demo in (
+        demonstrate_chain_rule_calculation,
+        demonstrate_medical_text_generation,
+        analyze_medical_sequence_probabilities,
+        demonstrate_temperature_effects,
+        medical_language_model_training_demo,
+    ):
+        demo()
     
     print("\n" + "=" * 80)
     print("All autoregressive language modeling demonstrations completed!")

@@ -48,6 +48,7 @@ theme:
     - toc.follow
     - toc.integrate
     - announce.dismiss
+    - mathjax
   icon:
     repo: fontawesome/brands/github
     edit: material/pencil
@@ -73,6 +74,8 @@ markdown_extensions:
   - md_in_html
   - pymdownx.arithmatex:
       generic: true
+      inline_syntax: ['dollars']
+      block_syntax: ['dollars']
   - pymdownx.betterem:
       smart_enable: all
   - pymdownx.caret
@@ -156,10 +159,8 @@ extra:
 
 extra_javascript:
   - javascripts/mathjax.js
-
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
   - javascripts/study-components.js
-  - https://polyfill.io/v3/polyfill.min.js?features=es6
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 extra_css:
   - stylesheets/extra.css

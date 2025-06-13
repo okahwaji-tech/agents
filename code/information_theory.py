@@ -3,28 +3,6 @@
 This module provides comprehensive PyTorch implementations for all information theory
 concepts used in large language model development, including information content,
 entropy, cross-entropy, KL divergence, mutual information, and perplexity.
-
-The module follows object-oriented design principles with a unified base class
-and Google-style docstrings for better maintainability and documentation.
-
-Example:
-    Basic usage of the information theory calculators:
-
-    ```python
-    from information_theory import InformationTheoryCalculator
-
-    # Initialize calculator with desired base
-    calc = InformationTheoryCalculator(base='2')  # bits
-
-    # Calculate various metrics
-    probs = torch.tensor([0.5, 0.3, 0.2])
-    info_content = calc.information_content(probs)
-    entropy = calc.entropy(probs)
-    ```
-
-Author: LLM Learning Guide
-Date: 2024
-License: MIT
 """
 
 import torch

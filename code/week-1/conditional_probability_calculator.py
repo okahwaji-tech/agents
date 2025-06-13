@@ -1,12 +1,12 @@
 """
-Conditional Probability Calculator for Language Modeling
+chain_rule_language_model.py
 
-This module demonstrates key concepts in conditional probability calculations
-for language modeling, including Bayes' theorem applications and medical
-diagnostic reasoning scenarios.
+Implementation of conditional probability calculations for language modeling,
+including Bayes’ theorem applications and sampling strategies in healthcare contexts.
 
-Author: LLM Learning Guide
-Date: 2024
+Defines:
+  - ConditionalProbabilityCalculator: Core class for conditional and sequence probability.
+  - Utility functions for demonstration of conditional concepts and sampling strategies.
 """
 
 import torch
@@ -19,11 +19,28 @@ import matplotlib.pyplot as plt
 
 class ConditionalProbabilityCalculator:
     """
-    A class for computing and analyzing conditional probabilities in language modeling.
-    Demonstrates key concepts with practical implementations.
+    Core class for computing conditional and sequence probabilities.
+
+    Args:
+        vocab_size (int): Number of tokens in the vocabulary.
+        embedding_dim (int): Dimensionality of token embeddings.
+        hidden_dim (int): Hidden state size for the LSTM.
+
+    Attributes:
+        embedding (nn.Embedding): Token embedding layer.
+        lstm (nn.LSTM): LSTM encoder for context.
+        output_projection (nn.Linear): Projects hidden state to token logits.
     """
     
     def __init__(self, vocab_size, embedding_dim=128, hidden_dim=256):
+        """
+        Initialize the embedding, LSTM encoder, and output projection layers.
+
+        Args:
+            vocab_size (int): Vocabulary size.
+            embedding_dim (int): Embedding vector size.
+            hidden_dim (int): Hidden layer size for the LSTM.
+        """
         self.vocab_size = vocab_size
         self.embedding_dim = embedding_dim
         self.hidden_dim = hidden_dim
@@ -35,26 +52,27 @@ class ConditionalProbabilityCalculator:
         
     def compute_conditional_probabilities(self, context_tokens):
         """
-        Compute P(next_token | context) for all possible next tokens.
-        
+        Compute conditional distribution for next-token prediction.
+
         Args:
-            context_tokens: Tensor of shape (batch_size, sequence_length)
-            
+            context_tokens (Tensor): Shape (batch_size, seq_len) input context.
+
         Returns:
-            probabilities: Tensor of shape (batch_size, vocab_size)
-            log_probabilities: Tensor of shape (batch_size, vocab_size)
+            Tuple[Tensor, Tensor]: 
+                probabilities (batch_size, vocab_size), 
+                log_probabilities (batch_size, vocab_size).
         """
-        # Embed the context tokens
+        # Embed context tokens
         embeddings = self.embedding(context_tokens)
         
-        # Process through LSTM to get contextual representations
+        # Encode context with LSTM
         lstm_output, (hidden, cell) = self.lstm(embeddings)
         
-        # Use the final hidden state to predict next token probabilities
+        # Project to vocabulary logits
         final_hidden = hidden[-1]  # Shape: (batch_size, hidden_dim)
         logits = self.output_projection(final_hidden)  # Shape: (batch_size, vocab_size)
         
-        # Convert logits to probabilities using softmax
+        # Compute probabilities and log-probabilities
         probabilities = F.softmax(logits, dim=-1)
         log_probabilities = F.log_softmax(logits, dim=-1)
         
@@ -62,14 +80,13 @@ class ConditionalProbabilityCalculator:
     
     def compute_sequence_probability(self, sequence_tokens):
         """
-        Compute the probability of an entire sequence using the chain rule:
-        P(w1, w2, ..., wn) = P(w1) * P(w2|w1) * P(w3|w1,w2) * ... * P(wn|w1,...,wn-1)
-        
+        Compute log-probability of full sequences via the chain rule.
+
         Args:
-            sequence_tokens: Tensor of shape (batch_size, sequence_length)
-            
+            sequence_tokens (Tensor): Shape (batch_size, seq_len).
+
         Returns:
-            sequence_log_prob: Tensor of shape (batch_size,)
+            Tensor: Shape (batch_size,) total log-probability per sequence.
         """
         batch_size, seq_len = sequence_tokens.shape
         total_log_prob = torch.zeros(batch_size)
@@ -91,17 +108,16 @@ class ConditionalProbabilityCalculator:
     
     def sample_next_token(self, context_tokens, temperature=1.0, top_k=None, top_p=None):
         """
-        Sample the next token using various strategies.
-        
+        Sample the next token given context using temperature, top-k, and top-p.
+
         Args:
-            context_tokens: Tensor of shape (batch_size, sequence_length)
-            temperature: Temperature for scaling logits (higher = more random)
-            top_k: If specified, only consider top k tokens
-            top_p: If specified, use nucleus sampling
-            
+            context_tokens (Tensor): Shape (batch_size, seq_len) input context.
+            temperature (float): Sampling temperature.
+            top_k (int, optional): Limits sampling to top-k tokens.
+            top_p (float, optional): Nucleus sampling threshold.
+
         Returns:
-            next_token: Tensor of shape (batch_size,)
-            token_prob: Tensor of shape (batch_size,)
+            Tuple[Tensor, Tensor]: next_token IDs and their probabilities.
         """
         with torch.no_grad():
             # Get conditional probabilities
@@ -152,6 +168,9 @@ class ConditionalProbabilityCalculator:
 def demonstrate_conditional_probability_concepts():
     """
     Demonstrate key conditional probability concepts with concrete examples.
+
+    Returns:
+        None
     """
     # Set up a simple example
     vocab_size = 1000
@@ -204,6 +223,9 @@ def demonstrate_conditional_probability_concepts():
 def demonstrate_bayes_theorem_application():
     """
     Demonstrate how Bayes' theorem applies to language modeling scenarios.
+
+    Returns:
+        None
     """
     print("\n=== Bayes' Theorem in Language Modeling ===")
     
@@ -267,6 +289,9 @@ def demonstrate_bayes_theorem_application():
 def analyze_conditional_independence():
     """
     Analyze conditional independence assumptions in language modeling.
+
+    Returns:
+        None
     """
     print("\n=== Conditional Independence Analysis ===")
 
@@ -308,6 +333,9 @@ def analyze_conditional_independence():
 def medical_term_prediction_example():
     """
     Demonstrate conditional probability in medical term prediction.
+
+    Returns:
+        None
     """
     print("\n=== Medical Term Prediction Example ===")
 
@@ -375,8 +403,10 @@ def medical_term_prediction_example():
 
 
 if __name__ == "__main__":
-    # Run all demonstrations
-    demonstrate_conditional_probability_concepts()
-    demonstrate_bayes_theorem_application()
-    analyze_conditional_independence()
-    medical_term_prediction_example()
+    for demo in (
+        demonstrate_conditional_probability_concepts,
+        demonstrate_bayes_theorem_application,
+        analyze_conditional_independence,
+        medical_term_prediction_example,
+    ):
+        demo()

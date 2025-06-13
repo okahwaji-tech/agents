@@ -1,13 +1,16 @@
 """
-Comprehensive PyTorch Implementation: Continuous Probability Distributions for LLMs
-=================================================================================
+continuous_distributions_healthcare.py
 
-This module provides practical implementations of continuous probability distributions
-used in neural language models, with applications to healthcare AI systems.
+Implementation of continuous probability distributions for language models
+with healthcare applications.
 
-Focus: LLM Applications in Healthcare
+Defines:
+  - ContinuousDistributionsLM: Class demonstrating continuous distributions
+  - Utility methods for Normal, MultivariateNormal, Exponential, Gamma, Beta distributions
+  - Advanced demonstrations including uncertainty quantification and dosage modeling
 """
 
+import math
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -16,21 +19,33 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from typing import List, Dict, Tuple, Optional
-import math
 
 class ContinuousDistributionsLM:
     """
-    A comprehensive class for working with continuous probability distributions
-    in neural language models and healthcare applications.
+    Class for demonstrating continuous probability distributions in LM applications.
+
+    Args:
+        device (str): Device identifier, e.g., "cpu" or "cuda".
+
+    Attributes:
+        device (str): Device for tensor computation.
     """
     
     def __init__(self, device: str = "cpu"):
+        """
+        Initialize the distribution demonstration class.
+
+        Args:
+            device (str): Device to run computations on.
+        """
         self.device = device
         
-    def demonstrate_normal_distribution(self):
+    def demonstrate_normal_distribution(self) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
         """
-        Demonstrate Normal distribution in neural network weight initialization
-        and activation analysis.
+        Demonstrate Normal distribution for weight initialization and activations.
+
+        Returns:
+            Tuple[Tensor, Tensor, Tensor]: Xavier weights, He weights, final activations.
         """
         print("=== Normal Distribution: Neural Network Applications ===")
         
@@ -82,10 +97,12 @@ class ContinuousDistributionsLM:
         
         return xavier_weights, he_weights, current_activations
     
-    def demonstrate_multivariate_normal(self):
+    def demonstrate_multivariate_normal(self) -> Tuple[torch.Tensor, torch.Tensor]:
         """
-        Demonstrate Multivariate Normal distribution for modeling
-        correlated embeddings and attention patterns.
+        Demonstrate Multivariate Normal distribution for correlated embeddings and attention patterns.
+
+        Returns:
+            Tuple[Tensor, Tensor]: Embeddings tensor and correlation matrix.
         """
         print("\n=== Multivariate Normal: Correlated Embeddings ===")
         
@@ -140,10 +157,12 @@ class ContinuousDistributionsLM:
         
         return embeddings, correlation_matrix
     
-    def demonstrate_exponential_distribution(self):
+    def demonstrate_exponential_distribution(self) -> Tuple[torch.Tensor, torch.Tensor]:
         """
-        Demonstrate Exponential distribution for modeling attention decay
-        and temporal patterns in medical sequences.
+        Demonstrate Exponential distribution for attention decay and temporal patterns.
+
+        Returns:
+            Tuple[Tensor, Tensor]: Attention weights and inter-event times.
         """
         print("\n=== Exponential Distribution: Attention Decay ===")
         
@@ -188,10 +207,12 @@ class ContinuousDistributionsLM:
         
         return attention_weights, inter_event_times
     
-    def demonstrate_gamma_distribution(self):
+    def demonstrate_gamma_distribution(self) -> Tuple[Dict[str, torch.Tensor], torch.Tensor]:
         """
-        Demonstrate Gamma distribution for modeling medical measurements
-        and neural network regularization.
+        Demonstrate Gamma distribution for medical measurements and regularization.
+
+        Returns:
+            Tuple[Dict[str, Tensor], Tensor]: Dict of samples for each measurement, precisions tensor.
         """
         print("\n=== Gamma Distribution: Medical Measurements ===")
         
@@ -201,54 +222,39 @@ class ContinuousDistributionsLM:
             "reaction_times": {"shape": 1.5, "rate": 1.0},     # More skewed
             "recovery_periods": {"shape": 3.0, "rate": 0.3}    # Less skewed
         }
-        
-        for measurement, params in measurements.items():
-            shape, rate = params["shape"], params["rate"]
+        samples_dict = {}
+        for measurement, (shape, rate) in [(k, (v["shape"], v["rate"])) for k, v in measurements.items()]:
             gamma_dist = Gamma(concentration=shape, rate=rate)
-            
-            # Generate samples
             samples = gamma_dist.sample((1000,))
-            
-            # Theoretical statistics
+            samples_dict[measurement] = samples
             theoretical_mean = shape / rate
             theoretical_var = shape / (rate ** 2)
-            
-            # Empirical statistics
             empirical_mean = samples.mean().item()
             empirical_var = samples.var().item()
-            
             print(f"\n{measurement.replace('_', ' ').title()}:")
             print(f"  Shape: {shape}, Rate: {rate}")
             print(f"  Mean - theoretical: {theoretical_mean:.3f}, empirical: {empirical_mean:.3f}")
             print(f"  Variance - theoretical: {theoretical_var:.3f}, empirical: {empirical_var:.3f}")
-            
-            # Analyze distribution shape
             mode = (shape - 1) / rate if shape > 1 else 0
             print(f"  Mode: {mode:.3f}")
             print(f"  Skewness: {(2 / math.sqrt(shape)):.3f}")
-        
-        # Demonstrate Gamma as prior for precision parameters
         print(f"\nGamma as precision prior in Bayesian neural networks:")
-        
-        # Precision (inverse variance) for weight distributions
         precision_shape = 2.0
         precision_rate = 1.0
         precision_dist = Gamma(concentration=precision_shape, rate=precision_rate)
-        
-        # Sample precisions and corresponding weight variances
         precisions = precision_dist.sample((100,))
         weight_variances = 1.0 / precisions
-        
         print(f"  Precision mean: {precisions.mean():.3f}")
         print(f"  Weight variance mean: {weight_variances.mean():.3f}")
         print(f"  Weight std mean: {torch.sqrt(weight_variances).mean():.3f}")
-        
-        return samples, precisions
+        return samples_dict, precisions
     
-    def demonstrate_beta_distribution(self):
+    def demonstrate_beta_distribution(self) -> Tuple[Dict[str, torch.Tensor], torch.Tensor]:
         """
-        Demonstrate Beta distribution for modeling probabilities and
-        attention weights in neural networks.
+        Demonstrate Beta distribution for modeling probabilities and attention weights.
+
+        Returns:
+            Tuple[Dict[str, Tensor], Tensor]: Dict of samples for each scenario, posterior distribution.
         """
         print("\n=== Beta Distribution: Probability Modeling ===")
         
@@ -259,28 +265,19 @@ class ContinuousDistributionsLM:
             "treatment_success": {"alpha": 3, "beta": 3},      # Moderate success (symmetric)
             "uncertain_outcome": {"alpha": 0.5, "beta": 0.5}   # U-shaped (very uncertain)
         }
-        
-        for scenario, params in probability_scenarios.items():
-            alpha, beta = params["alpha"], params["beta"]
+        samples_dict = {}
+        for scenario, (alpha, beta) in [(k, (v["alpha"], v["beta"])) for k, v in probability_scenarios.items()]:
             beta_dist = Beta(concentration1=alpha, concentration0=beta)
-            
-            # Generate samples
             samples = beta_dist.sample((1000,))
-            
-            # Theoretical statistics
+            samples_dict[scenario] = samples
             theoretical_mean = alpha / (alpha + beta)
             theoretical_var = (alpha * beta) / ((alpha + beta) ** 2 * (alpha + beta + 1))
-            
-            # Empirical statistics
             empirical_mean = samples.mean().item()
             empirical_var = samples.var().item()
-            
             print(f"\n{scenario.replace('_', ' ').title()}:")
             print(f"  Alpha: {alpha}, Beta: {beta}")
             print(f"  Mean - theoretical: {theoretical_mean:.3f}, empirical: {empirical_mean:.3f}")
             print(f"  Variance - theoretical: {theoretical_var:.3f}, empirical: {empirical_var:.3f}")
-            
-            # Analyze distribution shape
             if alpha > 1 and beta > 1:
                 mode = (alpha - 1) / (alpha + beta - 2)
                 print(f"  Mode: {mode:.3f}")
@@ -290,42 +287,31 @@ class ContinuousDistributionsLM:
                 print(f"  Mode at 0")
             elif beta < 1:
                 print(f"  Mode at 1")
-        
-        # Demonstrate Beta-Binomial conjugacy
         print(f"\nBeta-Binomial Conjugacy Example:")
         print(f"Estimating treatment success rate with Bayesian updating")
-        
-        # Prior belief about treatment success
         prior_alpha, prior_beta = 2, 2  # Weak prior, slightly optimistic
         prior_dist = Beta(concentration1=prior_alpha, concentration0=prior_beta)
-        
         print(f"Prior: Beta({prior_alpha}, {prior_beta})")
         print(f"Prior mean success rate: {prior_alpha / (prior_alpha + prior_beta):.3f}")
-        
-        # Observe clinical trial data
         n_patients = 20
         n_successes = 14
         n_failures = n_patients - n_successes
-        
-        # Posterior after observing data
         posterior_alpha = prior_alpha + n_successes
         posterior_beta = prior_beta + n_failures
         posterior_dist = Beta(concentration1=posterior_alpha, concentration0=posterior_beta)
-        
         print(f"\nObserved: {n_successes} successes out of {n_patients} patients")
         print(f"Posterior: Beta({posterior_alpha}, {posterior_beta})")
         print(f"Posterior mean success rate: {posterior_alpha / (posterior_alpha + posterior_beta):.3f}")
-        
-        # Compare with maximum likelihood estimate
         mle_estimate = n_successes / n_patients
         print(f"MLE estimate: {mle_estimate:.3f}")
-        
-        return samples, prior_dist, posterior_dist
+        return samples_dict, posterior_dist
     
-    def neural_network_uncertainty_quantification(self):
+    def neural_network_uncertainty_quantification(self) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
         """
-        Demonstrate how continuous distributions enable uncertainty quantification
-        in neural language models.
+        Demonstrate how continuous distributions enable uncertainty quantification in neural language models.
+
+        Returns:
+            Tuple[Tensor, Tensor, Tensor]: Sampled outputs, predictive mean, predictive std.
         """
         print("\n=== Neural Network Uncertainty Quantification ===")
         
@@ -383,10 +369,12 @@ class ContinuousDistributionsLM:
         
         return outputs, predictive_mean, predictive_std
     
-    def medical_dosage_modeling(self):
+    def medical_dosage_modeling(self) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
         """
-        Demonstrate continuous distributions for medical dosage recommendations
-        with uncertainty quantification.
+        Demonstrate continuous distributions for medical dosage recommendations with uncertainty quantification.
+
+        Returns:
+            Tuple[Tensor, Tensor, Tensor]: Patient features, dosage predictions, and beta coefficients.
         """
         print("\n=== Medical Dosage Modeling with Continuous Distributions ===")
         
@@ -464,19 +452,17 @@ def main():
     """
     print("Healthcare Language Modeling: Continuous Probability Distributions")
     print("=" * 75)
-    
-    # Initialize the demonstration class
     demo = ContinuousDistributionsLM()
-    
-    # Run all demonstrations
-    demo.demonstrate_normal_distribution()
-    demo.demonstrate_multivariate_normal()
-    demo.demonstrate_exponential_distribution()
-    demo.demonstrate_gamma_distribution()
-    demo.demonstrate_beta_distribution()
-    demo.neural_network_uncertainty_quantification()
-    demo.medical_dosage_modeling()
-    
+    for fn in [
+        demo.demonstrate_normal_distribution,
+        demo.demonstrate_multivariate_normal,
+        demo.demonstrate_exponential_distribution,
+        demo.demonstrate_gamma_distribution,
+        demo.demonstrate_beta_distribution,
+        demo.neural_network_uncertainty_quantification,
+        demo.medical_dosage_modeling,
+    ]:
+        fn()
     print("\n" + "=" * 75)
     print("All continuous distribution demonstrations completed!")
 

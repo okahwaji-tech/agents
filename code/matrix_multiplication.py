@@ -3,28 +3,6 @@
 This module provides comprehensive PyTorch and NumPy implementations for matrix
 multiplication operations fundamental to large language model development, including
 basic operations, batch processing, GPU acceleration, and healthcare applications.
-
-The module follows object-oriented design principles with a unified base class
-and Google-style docstrings for better maintainability and documentation.
-
-Example:
-    Basic usage of the matrix multiplication calculators:
-
-    ```python
-    from matrix_multiplication import MatrixMultiplicationCalculator
-    
-    # Initialize calculator
-    calc = MatrixMultiplicationCalculator(device='cuda')
-    
-    # Basic matrix multiplication
-    A = torch.randn(100, 200)
-    B = torch.randn(200, 150)
-    C = calc.multiply(A, B)
-    ```
-
-Author: LLM Learning Guide
-Date: 2024
-License: MIT
 """
 
 import torch

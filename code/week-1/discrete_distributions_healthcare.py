@@ -1,36 +1,56 @@
 """
-Comprehensive PyTorch Implementation: Discrete Probability Distributions for LLMs
-==============================================================================
+discrete_distributions_healthcare.py
 
-This module provides practical implementations of discrete probability distributions
-commonly used in language modeling, with a focus on healthcare applications.
+Implementation of discrete probability distributions for language models
+with healthcare applications.
 
-Focus: LLM Applications in Healthcare
+Defines:
+  - HealthcareLMDistributions: Core class for discrete distributions
+  - Utility methods for Bernoulli, Binomial, Multinomial, Categorical, and sequence modeling
 """
+
+import math
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch.distributions import Bernoulli, Binomial, Multinomial, Categorical
+
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-from collections import Counter, defaultdict
-from typing import List, Dict, Tuple, Optional
-import math
+
+from typing import Dict, List, Tuple
 
 class HealthcareLMDistributions:
     """
-    A comprehensive class for working with discrete probability distributions
-    in healthcare language modeling contexts.
+    Core class for discrete probability distributions in healthcare language modeling.
+
+    Args:
+        vocab_size (int): Vocabulary size for demonstration.
+
+    Attributes:
+        vocab_size (int): Vocabulary size.
+        medical_vocab (Dict[int, str]): Mapping from token indices to medical terms.
     """
     
     def __init__(self, vocab_size: int = 10000):
+        """
+        Initialize with a medical vocabulary.
+
+        Args:
+            vocab_size (int): Size of the vocabulary.
+        """
         self.vocab_size = vocab_size
         self.medical_vocab = self._create_medical_vocabulary()
         
     def _create_medical_vocabulary(self) -> Dict[int, str]:
-        """Create a sample medical vocabulary for demonstrations."""
+        """
+        Build a sample medical vocabulary mapping indices to terms.
+
+        Returns:
+            Dict[int, str]: Index-to-term mapping.
+        """
         medical_terms = [
             "patient", "diagnosis", "treatment", "symptoms", "examination",
             "chest", "pain", "heart", "attack", "blood", "pressure",
@@ -51,10 +71,12 @@ class HealthcareLMDistributions:
         
         return vocab
     
-    def demonstrate_bernoulli_distribution(self):
+    def demonstrate_bernoulli_distribution(self) -> torch.Tensor:
         """
         Demonstrate Bernoulli distribution for binary medical outcomes.
-        Example: Presence/absence of a symptom
+
+        Returns:
+            Tensor: Samples of symptom presence/absence.
         """
         print("=== Bernoulli Distribution: Symptom Presence ===")
         
@@ -81,10 +103,12 @@ class HealthcareLMDistributions:
         
         return samples
     
-    def demonstrate_binomial_distribution(self):
+    def demonstrate_binomial_distribution(self) -> torch.Tensor:
         """
         Demonstrate Binomial distribution for counting medical events.
-        Example: Number of patients with adverse reactions in a trial
+
+        Returns:
+            Tensor: Samples of adverse drug reaction counts.
         """
         print("\n=== Binomial Distribution: Adverse Drug Reactions ===")
         
@@ -109,16 +133,18 @@ class HealthcareLMDistributions:
         unique_counts, frequencies = torch.unique(samples, return_counts=True)
         
         print(f"\nDistribution of adverse reactions across {len(samples)} trials:")
-        for count, freq in zip(unique_counts[:10], frequencies[:10]):  # Show top 10
+        for count, freq in zip(unique_counts, frequencies):
             probability = freq.item() / len(samples)
             print(f"  {count.item()} reactions: {probability:.3f} probability")
         
         return samples
     
-    def demonstrate_multinomial_distribution(self):
+    def demonstrate_multinomial_distribution(self) -> Tuple[torch.Tensor, List[str]]:
         """
         Demonstrate Multinomial distribution for medical category classification.
-        Example: Distribution of diagnoses in emergency department
+
+        Returns:
+            Tuple[Tensor, List[str]]: Samples tensor and list of category labels.
         """
         print("\n=== Multinomial Distribution: Emergency Department Diagnoses ===")
         
@@ -157,10 +183,12 @@ class HealthcareLMDistributions:
         
         return samples, diagnoses
     
-    def demonstrate_categorical_distribution(self):
+    def demonstrate_categorical_distribution(self) -> Tuple[torch.Tensor, List[str]]:
         """
         Demonstrate Categorical distribution for next-token prediction.
-        Example: Predicting next medical term given context
+
+        Returns:
+            Tuple[Tensor, List[str]]: Sample indices and list of next-word options.
         """
         print("\n=== Categorical Distribution: Medical Term Prediction ===")
         
@@ -202,9 +230,12 @@ class HealthcareLMDistributions:
         
         return samples, next_words
     
-    def medical_text_generation_example(self):
+    def medical_text_generation_example(self) -> None:
         """
-        Demonstrate how discrete distributions work together in medical text generation.
+        Demonstrate medical text generation using discrete distributions.
+
+        Returns:
+            None
         """
         print("\n=== Medical Text Generation with Discrete Distributions ===")
         
@@ -260,9 +291,12 @@ class HealthcareLMDistributions:
             
             print(f"  {i+1}. '{sentence}' (P = {joint_prob:.4f})")
     
-    def analyze_medical_vocabulary_distribution(self):
+    def analyze_medical_vocabulary_distribution(self) -> Tuple[torch.Tensor, List[str]]:
         """
         Analyze the distribution of medical terms in a simulated corpus.
+
+        Returns:
+            Tuple[Tensor, List[str]]: Sampled corpus tokens and list of medical terms.
         """
         print("\n=== Medical Vocabulary Distribution Analysis ===")
         
@@ -313,9 +347,12 @@ class HealthcareLMDistributions:
         
         return corpus_samples, medical_terms
     
-    def demonstrate_temperature_scaling(self):
+    def demonstrate_temperature_scaling(self) -> None:
         """
-        Demonstrate how temperature scaling affects categorical distributions.
+        Demonstrate effects of temperature scaling on categorical distributions.
+
+        Returns:
+            None
         """
         print("\n=== Temperature Scaling in Medical Text Generation ===")
         
@@ -353,9 +390,12 @@ class HealthcareLMDistributions:
             ):
                 print(f"  {condition}: P={prob:.3f}, empirical={emp_prob:.3f}")
     
-    def medical_sequence_probability_calculation(self):
+    def medical_sequence_probability_calculation(self) -> None:
         """
-        Demonstrate sequence probability calculation for medical text.
+        Demonstrate sequence probability calculation via the chain rule.
+
+        Returns:
+            None
         """
         print("\n=== Medical Sequence Probability Calculation ===")
         
@@ -404,16 +444,18 @@ def main():
     # Initialize the demonstration class
     demo = HealthcareLMDistributions()
     
-    # Run all demonstrations
-    demo.demonstrate_bernoulli_distribution()
-    demo.demonstrate_binomial_distribution()
-    demo.demonstrate_multinomial_distribution()
-    demo.demonstrate_categorical_distribution()
-    demo.medical_text_generation_example()
-    demo.analyze_medical_vocabulary_distribution()
-    demo.demonstrate_temperature_scaling()
-    demo.medical_sequence_probability_calculation()
-    
+    for fn in [
+        demo.demonstrate_bernoulli_distribution,
+        demo.demonstrate_binomial_distribution,
+        demo.demonstrate_multinomial_distribution,
+        demo.demonstrate_categorical_distribution,
+        demo.medical_text_generation_example,
+        demo.analyze_medical_vocabulary_distribution,
+        demo.demonstrate_temperature_scaling,
+        demo.medical_sequence_probability_calculation,
+    ]:
+        fn()
+
     print("\n" + "=" * 70)
     print("All discrete distribution demonstrations completed!")
 

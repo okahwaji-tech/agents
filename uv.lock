@@ -9,6 +9,15 @@ resolution-markers = [
 ]
 
 [[package]]
+name = "absl-py"
+version = "2.3.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/03/15/18693af986560a5c3cc0b84a8046b536ffb2cdb536e03cce897f2759e284/absl_py-2.3.0.tar.gz", hash = "sha256:d96fda5c884f1b22178852f30ffa85766d50b99e00775ea626c23304f582fc4f", size = 116400, upload-time = "2025-05-27T09:15:50.143Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/87/04/9d75e1d3bb4ab8ec67ff10919476ccdee06c098bcfcf3a352da5f985171d/absl_py-2.3.0-py3-none-any.whl", hash = "sha256:9824a48b654a306168f63e0d97714665f8490b8d89ec7bf2efc24bf67cf579b3", size = 135657, upload-time = "2025-05-27T09:15:48.742Z" },
+]
+
+[[package]]
 name = "accelerate"
 version = "1.7.0"
 source = { registry = "https://pypi.org/simple" }
@@ -47,6 +56,7 @@ dependencies = [
     { name = "mkdocs-minify-plugin" },
     { name = "openai" },
     { name = "pytorch-lightning" },
+    { name = "rouge-score" },
     { name = "scikit-learn" },
     { name = "seaborn" },
     { name = "tokenizers" },
@@ -107,6 +117,7 @@ requires-dist = [
     { name = "pymdown-extensions", marker = "extra == 'docs'", specifier = ">=10.0.0" },
     { name = "pytest", marker = "extra == 'dev'" },
     { name = "pytorch-lightning" },
+    { name = "rouge-score", specifier = ">=0.1.2" },
     { name = "ruff", marker = "extra == 'dev'" },
     { name = "scikit-learn" },
     { name = "seaborn", specifier = ">=0.13.2" },
@@ -923,6 +934,9 @@ dependencies = [
     { name = "uritemplate" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/35/99/237cd2510aecca9fabb54007e58553274cc43cb3c18512ee1ea574d11b87/google_api_python_client-2.171.0.tar.gz", hash = "sha256:057a5c08d28463c6b9eb89746355de5f14b7ed27a65c11fdbf1d06c66bb66b23", size = 13028937, upload-time = "2025-06-03T18:57:38.732Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/79/db/c397e3eb3ea18f423855479d0a5852bdc9c3f644e3d4194931fa664a70b4/google_api_python_client-2.171.0-py3-none-any.whl", hash = "sha256:c9c9b76f561e9d9ac14e54a9e2c0842876201d5b96e69e48f967373f0784cbe9", size = 13547393, upload-time = "2025-06-10T02:14:38.225Z" },
+]
 
 [[package]]
 name = "google-auth"
@@ -2297,6 +2311,21 @@ wheels = [
 ]
 
 [[package]]
+name = "nltk"
+version = "3.9.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "click" },
+    { name = "joblib" },
+    { name = "regex" },
+    { name = "tqdm" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/3c/87/db8be88ad32c2d042420b6fd9ffd4a149f9a0d7f0e86b3f543be2eeeedd2/nltk-3.9.1.tar.gz", hash = "sha256:87d127bd3de4bd89a4f81265e5fa59cb1b199b27440175370f7417d2bc7ae868", size = 2904691, upload-time = "2024-08-18T19:48:37.769Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/4d/66/7d9e26593edda06e8cb531874633f7c2372279c3b0f46235539fe546df8b/nltk-3.9.1-py3-none-any.whl", hash = "sha256:4fa26829c5b00715afe3061398a8989dc643b92ce7dd93fb4585a70930d168a1", size = 1505442, upload-time = "2024-08-18T19:48:21.909Z" },
+]
+
+[[package]]
 name = "notebook-shim"
 version = "0.2.4"
 source = { registry = "https://pypi.org/simple" }
@@ -3416,6 +3445,18 @@ sdist = { url = "https://files.pythonhosted.org/packages/da/88/f270de456dd7d11dc
 wheels = [
     { url = "https://files.pythonhosted.org/packages/9e/51/17023c0f8f1869d8806b979a2bffa3f861f26a3f1a66b094288323fba52f/rfc3986_validator-0.1.1-py2.py3-none-any.whl", hash = "sha256:2f235c432ef459970b4306369336b9d5dbdda31b510ca1e327636e01f528bfa9", size = 4242, upload-time = "2019-10-28T16:00:13.976Z" },
 ]
+
+[[package]]
+name = "rouge-score"
+version = "0.1.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "absl-py" },
+    { name = "nltk" },
+    { name = "numpy" },
+    { name = "six" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/e2/c5/9136736c37022a6ad27fea38f3111eb8f02fe75d067f9a985cc358653102/rouge_score-0.1.2.tar.gz", hash = "sha256:c7d4da2683e68c9abf0135ef915d63a46643666f848e558a1b9f7ead17ff0f04", size = 17400, upload-time = "2022-07-22T22:46:22.909Z" }
 
 [[package]]
 name = "rpds-py"

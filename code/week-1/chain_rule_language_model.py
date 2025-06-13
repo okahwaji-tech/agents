@@ -1,12 +1,13 @@
 """
-Chain Rule Language Model Implementation
+chain_rule_language_model.py
 
-This module demonstrates the practical application of the chain rule of probability
-in language modeling, with comprehensive implementations of autoregressive models
-and healthcare-specific applications.
+Implementation of autoregressive language modeling using the chain rule of probability,
+with support for LSTM, GRU, and Transformer architectures and healthcare-specific examples.
 
-Author: LLM Learning Guide
-Date: 2024
+Defines:
+  - ChainRuleLanguageModel: Core model class
+  - Training and evaluation utilities for sequence probability, generation, and analysis
+  - Demonstration functions for chain rule applications in healthcare contexts
 """
 
 import torch
@@ -22,13 +23,28 @@ import time
 
 class ChainRuleLanguageModel(nn.Module):
     """
-    A comprehensive implementation of autoregressive language modeling
-    using the chain rule of probability.
+    Autoregressive language model leveraging the chain rule for next-token prediction.
+
+    Args:
+        vocab_size (int): Number of tokens in the vocabulary.
+        embedding_dim (int): Embedding dimensionality.
+        hidden_dim (int): Hidden state dimensionality for RNNs or FF dim for Transformers.
+        num_layers (int): Number of encoder layers.
+        model_type (str): One of "lstm", "gru", or "transformer".
+
+    Attributes:
+        embedding (nn.Embedding): Token embedding layer.
+        position_embedding (nn.Embedding, optional): Positional embeddings (Transformer only).
+        encoder (nn.Module): RNN or Transformer encoder.
+        output_projection (nn.Linear): Projects hidden states to vocabulary logits.
     """
     
     def __init__(self, vocab_size: int, embedding_dim: int = 256, 
                  hidden_dim: int = 512, num_layers: int = 2, 
                  model_type: str = "lstm"):
+        """
+        Initialize model parameters and submodules.
+        """
         super().__init__()
         
         self.vocab_size = vocab_size
@@ -72,7 +88,11 @@ class ChainRuleLanguageModel(nn.Module):
         self.init_weights()
     
     def init_weights(self):
-        """Initialize model weights."""
+        """
+        Apply custom initialization to Linear and Embedding parameters.
+        Linear weights: normal(mean=0.0, std=0.02); biases: zero.
+        Embedding weights: normal(mean=0.0, std=0.02).
+        """
         for name, param in self.named_parameters():
             if 'weight' in name:
                 nn.init.normal_(param, mean=0.0, std=0.02)
@@ -82,15 +102,14 @@ class ChainRuleLanguageModel(nn.Module):
     def forward(self, input_ids: torch.Tensor, 
                 hidden: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor, torch.Tensor]:
         """
-        Forward pass implementing the chain rule.
-        
+        Compute logits and hidden states for input sequences.
+
         Args:
-            input_ids: Token indices of shape (batch_size, seq_len)
-            hidden: Hidden state for RNN models
-            
+            input_ids (Tensor): Shape (batch_size, seq_len).
+            hidden (Tensor, optional): Previous hidden state for RNNs.
+
         Returns:
-            logits: Output logits of shape (batch_size, seq_len, vocab_size)
-            hidden: Updated hidden state (for RNN models)
+            Tuple[Tensor, Tensor]: (logits, hidden). Logits shape (batch_size, seq_len, vocab_size).
         """
         batch_size, seq_len = input_ids.shape
         
@@ -121,14 +140,13 @@ class ChainRuleLanguageModel(nn.Module):
     
     def compute_sequence_probability(self, sequence: torch.Tensor) -> torch.Tensor:
         """
-        Compute the probability of a sequence using the chain rule.
-        P(w1, w2, ..., wn) = P(w1) * P(w2|w1) * P(w3|w1,w2) * ... * P(wn|w1,...,wn-1)
-        
+        Compute log-probabilities of input sequences via the chain rule.
+
         Args:
-            sequence: Token sequence of shape (batch_size, seq_len)
-            
+            sequence (Tensor): Shape (batch_size, seq_len) of token indices.
+
         Returns:
-            log_prob: Log probability of the sequence
+            Tensor: Shape (batch_size,) of sequence log-probabilities.
         """
         batch_size, seq_len = sequence.shape
         total_log_prob = torch.zeros(batch_size, device=sequence.device)
@@ -164,17 +182,17 @@ class ChainRuleLanguageModel(nn.Module):
                          temperature: float = 1.0, top_k: Optional[int] = None,
                          top_p: Optional[float] = None) -> List[int]:
         """
-        Generate a sequence using the chain rule (autoregressive generation).
-        
+        Autoregressively generate a token sequence.
+
         Args:
-            start_token: Starting token ID
-            max_length: Maximum sequence length
-            temperature: Sampling temperature
-            top_k: Top-k sampling parameter
-            top_p: Nucleus sampling parameter
-            
+            start_token (int): Initial token ID.
+            max_length (int): Maximum tokens to generate.
+            temperature (float): Sampling temperature.
+            top_k (int, optional): Limits sampling to top-k tokens.
+            top_p (float, optional): Nucleus sampling threshold.
+
         Returns:
-            generated_sequence: List of generated token IDs
+            List[int]: Generated token IDs.
         """
         self.eval()
         generated = [start_token]
@@ -233,13 +251,13 @@ class ChainRuleLanguageModel(nn.Module):
     
     def compute_perplexity(self, sequences: torch.Tensor) -> float:
         """
-        Compute perplexity on a batch of sequences.
-        
+        Evaluate model perplexity on a batch of sequences.
+
         Args:
-            sequences: Batch of sequences of shape (batch_size, seq_len)
-            
+            sequences (Tensor): Shape (batch_size, seq_len).
+
         Returns:
-            perplexity: Perplexity value
+            float: Computed perplexity.
         """
         self.eval()
         total_log_prob = 0.0
@@ -269,6 +287,9 @@ class ChainRuleLanguageModel(nn.Module):
 def demonstrate_chain_rule_concepts():
     """
     Demonstrate chain rule concepts with practical examples.
+
+    Returns:
+        None
     """
     print("=== Chain Rule Language Modeling Demonstration ===")
     
@@ -328,6 +349,9 @@ def demonstrate_chain_rule_concepts():
 def medical_chain_rule_example():
     """
     Demonstrate chain rule application to medical text generation.
+
+    Returns:
+        None
     """
     print("\n=== Medical Text Chain Rule Example ===")
 
@@ -367,6 +391,9 @@ def medical_chain_rule_example():
 def analyze_conditional_dependencies():
     """
     Analyze how conditional dependencies change throughout a sequence.
+
+    Returns:
+        None
     """
     print("\n=== Conditional Dependency Analysis ===")
 
@@ -409,6 +436,9 @@ def analyze_conditional_dependencies():
 def compare_model_architectures():
     """
     Compare different architectures for implementing the chain rule.
+
+    Returns:
+        None
     """
     print("\n=== Architecture Comparison ===")
 
@@ -450,6 +480,9 @@ def compare_model_architectures():
 def healthcare_sequence_probability():
     """
     Demonstrate sequence probability calculation for healthcare scenarios.
+
+    Returns:
+        None
     """
     print("\n=== Healthcare Sequence Probability Analysis ===")
 
@@ -500,8 +533,11 @@ def healthcare_sequence_probability():
 
 if __name__ == "__main__":
     # Run all demonstrations
-    demonstrate_chain_rule_concepts()
-    medical_chain_rule_example()
-    analyze_conditional_dependencies()
-    compare_model_architectures()
-    healthcare_sequence_probability()
+    for demo in (
+        demonstrate_chain_rule_concepts,
+        medical_chain_rule_example,
+        analyze_conditional_dependencies,
+        compare_model_architectures,
+        healthcare_sequence_probability,
+    ):
+        demo()
